@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Lussis_WcfService.Service" CodeBehind="Service.svc.cs" %>
