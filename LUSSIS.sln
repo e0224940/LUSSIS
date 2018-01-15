@@ -10,6 +10,7 @@ EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "LUSSIS", "LUSSIS\", "{B82F9103-719C-45C9-95B0-D60A925535E5}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.2"
+		ProjectReferences = "{f429be15-ef6e-4404-8767-4245b7e4f8bf}|LUSSIS Backend.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_15912"
 		Debug.AspNetCompiler.PhysicalPath = "LUSSIS\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_15912\"
@@ -25,6 +26,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "LUSSIS", "LUSSIS\", "{B82F9
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "15912"
+		SlnRelativePath = "LUSSIS\"
 	EndProjectSection
 EndProject
 Global
