@@ -35,7 +35,32 @@
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4">
                         <form id="form1" runat="server">
-                            <h3>Create new Account</h3>
+                            <h3>Create New User</h3>
+
+                            <div>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="Username" placeholder="Username"></asp:TextBox>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="Password" placeholder="Password"></asp:TextBox>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="Name" placeholder="Name"></asp:TextBox>
+                                <asp:DropDownList runat="server" CssClass="form-control" ID="Department" ToolTip="Select Department"></asp:DropDownList>
+                            </div>
+
+                            <div class="form-group"></div>
+                            <asp:CheckBoxList runat="server">
+                                <asp:ListItem Text="Department Head" Value="DepartmentHead" />
+                                <asp:ListItem Text="Department Head Deputy" Value="DepartmentHeadDeputy" />
+                                <asp:ListItem Text="Department Employee" Value="DepartmentEmployee" />
+                                <asp:ListItem Text="Department Representative" Value="DepartmentRepresentative" />
+                                <asp:ListItem Text="Store Supervisor" Value="StoreSupervisor" />
+                                <asp:ListItem Text="Store Manager" Value="StoreManager" />
+                                <asp:ListItem Text="Store Clerk" Value="StoreClerk" />
+                            </asp:CheckBoxList>
+                            <div class="form-group"></div>
+
+                            <asp:Button runat="server" CssClass="btn btn-primary btn-block" ID="NewUserButton" Text="Create User" OnClick="NewUserButton_Click" />
+
+                            <div style="color: black;">
+                                <asp:Literal ID="StatusText" runat="server" EnableViewState="False"></asp:Literal>
+                            </div>
                         </form>
                     </div>
                 </div>

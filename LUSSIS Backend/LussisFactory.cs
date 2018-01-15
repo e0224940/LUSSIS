@@ -15,10 +15,10 @@ namespace LUSSIS_Backend
      * If you want mnore functionality from the backend, contact backend developpers
      * and have them add it to the 
      */ 
-    class LussisFactory
+    public class LussisFactory
     {
         private static LussisImpl backend = null;
-        static ILussis GetBackend()
+        public static ILussis GetBackend()
         {
             if(backend == null)
             {
