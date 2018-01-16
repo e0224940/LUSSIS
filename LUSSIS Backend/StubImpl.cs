@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace LUSSIS_Backend
 {
-    public interface ILussis
+    // Stub class to send some data back to the user
+    public class StubImpl : ILussis
     {
-        // TODO : Add all required functionality required from Sequence Diagrams Here.
+        
     }
 }

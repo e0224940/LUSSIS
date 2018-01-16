@@ -97,6 +97,7 @@
       <DependentUpon>LussisModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StubImpl.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="LussisModel.edmx">

@@ -12,17 +12,18 @@ namespace LUSSIS_Backend
      * ILussis backend = LussisFactory.GetBackend(); 
      * backend.doSomething();
      * 
-     * If you want mnore functionality from the backend, contact backend developpers
-     * and have them add it to the 
+     * If you want more functionality from the backend, contact backend developpers
+     * and have them add it to the ILussis Interface
      */ 
     public class LussisFactory
     {
-        private static LussisImpl backend = null;
+        private static ILussis backend = null;
         public static ILussis GetBackend()
         {
             if(backend == null)
             {
-                backend = new LussisImpl();
+                // TODO : Change from Stub to Actual Implementation in the final stages of the project
+                backend = new StubImpl();
             }
 
             return backend;
