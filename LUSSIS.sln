@@ -29,6 +29,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "LUSSIS", "LUSSIS\", "{B82F9
 		SlnRelativePath = "LUSSIS\"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Email Backend", "Email Backend\Email Backend.csproj", "{A9D5B1C9-69DB-49B3-A4B8-6F207234EBD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{B82F9103-719C-45C9-95B0-D60A925535E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B82F9103-719C-45C9-95B0-D60A925535E5}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{B82F9103-719C-45C9-95B0-D60A925535E5}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{A9D5B1C9-69DB-49B3-A4B8-6F207234EBD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9D5B1C9-69DB-49B3-A4B8-6F207234EBD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9D5B1C9-69DB-49B3-A4B8-6F207234EBD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9D5B1C9-69DB-49B3-A4B8-6F207234EBD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
