@@ -29,7 +29,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "LUSSIS", "LUSSIS\", "{B82F9
 		SlnRelativePath = "LUSSIS\"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Email Backend", "Email Backend\Email Backend.csproj", "{A9D5B1C9-69DB-49B3-A4B8-6F207234EBD8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LUSSIS Email Backend", "Email Backend\LUSSIS Email Backend.csproj", "{A9D5B1C9-69DB-49B3-A4B8-6F207234EBD8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

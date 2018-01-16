@@ -40,19 +40,18 @@
                             <div>
                                 <asp:TextBox runat="server" CssClass="form-control" ID="Username" placeholder="Username"></asp:TextBox>
                                 <asp:TextBox runat="server" CssClass="form-control" ID="Password" placeholder="Password"></asp:TextBox>
-                                <asp:TextBox runat="server" CssClass="form-control" ID="Name" placeholder="Name"></asp:TextBox>
-                                <asp:DropDownList runat="server" CssClass="form-control" ID="Department" ToolTip="Select Department"></asp:DropDownList>
+                                <asp:TextBox runat="server" CssClass="form-control" ID="EmployeeID" placeholder="EmployeeID to Map To"></asp:TextBox>                                
                             </div>
 
                             <div class="form-group"></div>
-                            <asp:CheckBoxList runat="server">
-                                <asp:ListItem Text="Department Head" Value="DepartmentHead" />
-                                <asp:ListItem Text="Department Head Deputy" Value="DepartmentHeadDeputy" />
-                                <asp:ListItem Text="Department Employee" Value="DepartmentEmployee" />
-                                <asp:ListItem Text="Department Representative" Value="DepartmentRepresentative" />
-                                <asp:ListItem Text="Store Supervisor" Value="StoreSupervisor" />
-                                <asp:ListItem Text="Store Manager" Value="StoreManager" />
-                                <asp:ListItem Text="Store Clerk" Value="StoreClerk" />
+                            <asp:CheckBoxList ID="AssignedRoles" runat="server">
+                                <asp:ListItem Text="DepartmentHead" Value="DepartmentHead" />
+                                <asp:ListItem Text="DepartmentDeputy" Value="DepartmentDeputy" />
+                                <asp:ListItem Text="DepartmentEmployee" Value="DepartmentEmployee" />
+                                <asp:ListItem Text="DepartmentRepresentative" Value="DepartmentRepresentative" />
+                                <asp:ListItem Text="StoreSupervisor" Value="StoreSupervisor" />
+                                <asp:ListItem Text="StoreManager" Value="StoreManager" />
+                                <asp:ListItem Text="StoreClerk" Value="StoreClerk" />
                             </asp:CheckBoxList>
                             <div class="form-group"></div>
 

@@ -35,7 +35,7 @@
                 <div class="row">
                     <div class="col-md-5 col-md-offset-3">
                         <form id="form1" runat="server">
-                            <asp:Login ID="Login1" runat="server">
+                            <asp:Login ID="LoginForm" runat="server" OnLoggedIn="LoginForm_LoggedIn">
                                 <LayoutTemplate>
                                     <h2>LUSSIS</h2>
                                     <div class="form-inline">
