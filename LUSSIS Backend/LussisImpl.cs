@@ -8,5 +8,14 @@ namespace LUSSIS_Backend
 {
     public class LussisImpl : ILussis
     {
+        public int GenerateAndroidSession(int employeeID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CheckAndroidSession(int employeeID, int sessionID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
