@@ -22,7 +22,8 @@ public partial class Admin_NewAccount : System.Web.UI.Page
             String employeeID = EmployeeID.Text;
 
             // Create Login
-            MembershipUser newUser = Membership.CreateUser(username, password);
+            MembershipCreateStatus result;
+            MembershipUser newUser = Membership.CreateUser(username, password, "", "?", "!", true, out result);
 
             // Get the Profile of the newly created User
             ProfileCommon p = (ProfileCommon)ProfileCommon.Create(username, true);
@@ -43,7 +44,14 @@ public partial class Admin_NewAccount : System.Web.UI.Page
             }
 
             // Update Account Creation Status
-            StatusText.Text = "[Account Created Sucessfully]";
+            if (result == MembershipCreateStatus.Success)
+            {
+                StatusText.Text = "[Account Created Sucessfully]";
+            }
+            else
+            {
+                StatusText.Text = "[Account Creation Failed]" + "<br/>" + result.ToString();
+            }
         }
         catch (Exception exception)
         {

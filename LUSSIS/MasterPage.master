@@ -37,7 +37,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!--#include file="mainmenu.aspx"-->
                         <li>
-                                <asp:LoginStatus runat="server"></asp:LoginStatus>
+                            <asp:LoginStatus runat="server"></asp:LoginStatus>
                         </li>
                     </ul>
                 </div>
