@@ -12,7 +12,7 @@ namespace LUSSIS_Backend
      * ILussis backend = LussisFactory.GetBackend(); 
      * backend.doSomething();
      * 
-     * If you want more functionality from the backend, contact backend developpers
+     * If you want more functionality from the backend, contact backend developers
      * and have them add it to the ILussis Interface
      */ 
     public class LussisFactory
