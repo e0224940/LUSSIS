@@ -20,7 +20,7 @@ public partial class Admin_NewAccount : System.Web.UI.Page
             String username = Username.Text;
             String password = Password.Text;
             String employeeID = EmployeeID.Text;
-            
+
             // Create Login
             MembershipCreateStatus result;
             MembershipUser newUser = Membership.CreateUser(username, password, "", "?", "!", true, out result);
@@ -35,10 +35,16 @@ public partial class Admin_NewAccount : System.Web.UI.Page
             p.Save();
 
             // Add The User Roles Assigned
-            foreach(ListItem item in AssignedRoles.Items)
+            foreach (ListItem item in AssignedRoles.Items)
             {
                 if (item.Selected)
                 {
+                    // TODO : SETUP ROLES IN DATABASE BY DEFAULT
+                    if(!Roles.GetAllRoles().Contains(item.Value))
+                    {
+                        Roles.CreateRole(item.Value);
+                    }
+
                     Roles.AddUserToRole(username, item.Value);
                 }
             }
