@@ -35,5 +35,24 @@ namespace LUSSIS_Backend
         public DbSet<aspnet_SchemaVersions> aspnet_SchemaVersions { get; set; }
         public DbSet<aspnet_Users> aspnet_Users { get; set; }
         public DbSet<aspnet_WebEvent_Events> aspnet_WebEvent_Events { get; set; }
+        public DbSet<AdjustmentVoucher> AdjustmentVouchers { get; set; }
+        public DbSet<AdjustmentVoucherDetail> AdjustmentVoucherDetails { get; set; }
+        public DbSet<BackLog> BackLogs { get; set; }
+        public DbSet<CollectionPoint> CollectionPoints { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Deputy> Deputies { get; set; }
+        public DbSet<Disbursement> Disbursements { get; set; }
+        public DbSet<DisbursementDetail> DisbursementDetails { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
+        public DbSet<PurchaseOrderDetail> PurchaseOrderDetails { get; set; }
+        public DbSet<Requisition> Requisitions { get; set; }
+        public DbSet<RequisitionDetail> RequisitionDetails { get; set; }
+        public DbSet<Retrieval> Retrievals { get; set; }
+        public DbSet<RetrievalDetail> RetrievalDetails { get; set; }
+        public DbSet<StationeryCatalogue> StationeryCatalogues { get; set; }
+        public DbSet<StockTxnDetail> StockTxnDetails { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<SupplyTender> SupplyTenders { get; set; }
     }
 }

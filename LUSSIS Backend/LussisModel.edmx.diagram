@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c8ca0ba4d1dc45cbacc3dbd8694d1f25" Name="Diagram1">
+      <Diagram DiagramId="c8ca0ba4d1dc45cbacc3dbd8694d1f25" Name="Diagram1" ZoomLevel="81">
         <EntityTypeShape EntityType="LussisModel.aspnet_Applications" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="LussisModel.aspnet_Membership" Width="1.5" PointX="6" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="LussisModel.aspnet_Paths" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
@@ -25,6 +25,61 @@
         <AssociationConnector Association="LussisModel.FK__aspnet_Pe__UserI__6383C8BA" ManuallyRouted="false" />
         <AssociationConnector Association="LussisModel.FK__aspnet_Pr__UserI__3C69FB99" ManuallyRouted="false" />
         <AssociationConnector Association="LussisModel.aspnet_UsersInRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="LussisModel.AdjustmentVoucher" Width="1.5" PointX="20.125" PointY="23.625" />
+        <EntityTypeShape EntityType="LussisModel.AdjustmentVoucherDetail" Width="1.5" PointX="22.375" PointY="23.75" />
+        <EntityTypeShape EntityType="LussisModel.BackLog" Width="1.5" PointX="20.875" PointY="12.625" />
+        <EntityTypeShape EntityType="LussisModel.CollectionPoint" Width="1.5" PointX="13.375" PointY="12.75" />
+        <EntityTypeShape EntityType="LussisModel.Department" Width="1.5" PointX="15.625" PointY="11.375" />
+        <EntityTypeShape EntityType="LussisModel.Deputy" Width="1.5" PointX="23.125" PointY="19.125" />
+        <EntityTypeShape EntityType="LussisModel.Disbursement" Width="1.5" PointX="20.125" PointY="18.625" />
+        <EntityTypeShape EntityType="LussisModel.DisbursementDetail" Width="1.5" PointX="22.375" PointY="16" />
+        <EntityTypeShape EntityType="LussisModel.Employee" Width="1.5" PointX="17.875" PointY="24.5" />
+        <EntityTypeShape EntityType="LussisModel.PurchaseOrder" Width="1.5" PointX="23.125" PointY="27" />
+        <EntityTypeShape EntityType="LussisModel.PurchaseOrderDetail" Width="1.5" PointX="25.375" PointY="27.75" />
+        <EntityTypeShape EntityType="LussisModel.Requisition" Width="1.5" PointX="20.125" PointY="31" />
+        <EntityTypeShape EntityType="LussisModel.RequisitionDetail" Width="1.5" PointX="22.375" PointY="31.5" />
+        <EntityTypeShape EntityType="LussisModel.Retrieval" Width="1.5" PointX="15.625" PointY="16.875" />
+        <EntityTypeShape EntityType="LussisModel.RetrievalDetail" Width="1.5" PointX="17.875" PointY="12.25" />
+        <EntityTypeShape EntityType="LussisModel.StationeryCatalogue" Width="1.5" PointX="18.625" PointY="5.125" />
+        <EntityTypeShape EntityType="LussisModel.StockTxnDetail" Width="1.5" PointX="20.875" PointY="9.25" />
+        <EntityTypeShape EntityType="LussisModel.Supplier" Width="1.5" PointX="16.375" PointY="6" />
+        <EntityTypeShape EntityType="LussisModel.SupplyTender" Width="1.5" PointX="20.875" PointY="5.625" />
+        <AssociationConnector Association="LussisModel.FK_AdjustmentVoucher_Employee" />
+        <AssociationConnector Association="LussisModel.FK_AdjustmentVoucher_Employee1" />
+        <AssociationConnector Association="LussisModel.FK_AdjustmentVoucherDetail_AdjustmentVoucher" />
+        <AssociationConnector Association="LussisModel.FK_AdjustmentVoucherDetail_StationeryCatalogue" />
+        <AssociationConnector Association="LussisModel.FK_BackLog_Department" />
+        <AssociationConnector Association="LussisModel.FK_BackLog_StationeryCatalogue" />
+        <AssociationConnector Association="LussisModel.FK_Department_Department" />
+        <AssociationConnector Association="LussisModel.FK_Disbursement_CollectionPoint" />
+        <AssociationConnector Association="LussisModel.FK_Department_Employee" />
+        <AssociationConnector Association="LussisModel.FK_Department_Employee1" />
+        <AssociationConnector Association="LussisModel.FK_Department_Employee2" />
+        <AssociationConnector Association="LussisModel.FK_Deputy_Department" />
+        <AssociationConnector Association="LussisModel.FK_Disbursement_Department" />
+        <AssociationConnector Association="LussisModel.FK_Employee_Department" />
+        <AssociationConnector Association="LussisModel.FK_RetrievalDetail_Department" />
+        <AssociationConnector Association="LussisModel.FK_Deputy_Employee" />
+        <AssociationConnector Association="LussisModel.FK_Disbursement_Employee" />
+        <AssociationConnector Association="LussisModel.FK_DisbursementDetail_Disbursement" />
+        <AssociationConnector Association="LussisModel.FK_DisbursementDetail_StationeryCatalogue" />
+        <AssociationConnector Association="LussisModel.FK_PurchaseOrder_Employee" />
+        <AssociationConnector Association="LussisModel.FK_PurchaseOrder_Employee1" />
+        <AssociationConnector Association="LussisModel.FK_Requisition_Employee1" />
+        <AssociationConnector Association="LussisModel.FK_Requisition_Employee2" />
+        <AssociationConnector Association="LussisModel.FK_PurchaseOrder_Supplier" />
+        <AssociationConnector Association="LussisModel.FK_PurchaseOrderDetail_PurchaseOrder" />
+        <AssociationConnector Association="LussisModel.FK_PurchaseOrderDetail_StationeryCatalogue" />
+        <AssociationConnector Association="LussisModel.FK_RequisitionDetail_Requisition" />
+        <AssociationConnector Association="LussisModel.FK_RequisitionDetail_StationeryCatalogue" />
+        <AssociationConnector Association="LussisModel.FK_RetrievalDetail_Retrieval" />
+        <AssociationConnector Association="LussisModel.FK_RetrievalDetail_StationeryCatalogue" />
+        <AssociationConnector Association="LussisModel.FK_StationeryCatalogue_Supplier" />
+        <AssociationConnector Association="LussisModel.FK_StationeryCatalogue_Supplier1" />
+        <AssociationConnector Association="LussisModel.FK_StationeryCatalogue_Supplier2" />
+        <AssociationConnector Association="LussisModel.FK_StockTxnDetail_StationeryCatalogue" />
+        <AssociationConnector Association="LussisModel.FK_SupplyTender_SupplyTender" />
+        <AssociationConnector Association="LussisModel.FK_SupplyTender_Supplier" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

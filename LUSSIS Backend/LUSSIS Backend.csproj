@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdjustmentVoucher.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdjustmentVoucherDetail.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="aspnet_Applications.cs">
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
@@ -78,6 +84,27 @@
     <Compile Include="aspnet_WebEvent_Events.cs">
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="BackLog.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CollectionPoint.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Department.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Deputy.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Disbursement.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DisbursementDetail.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ILussis.cs" />
     <Compile Include="LussisImpl.cs" />
     <Compile Include="LussisFactory.cs" />
@@ -97,7 +124,37 @@
       <DependentUpon>LussisModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PurchaseOrder.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseOrderDetail.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Requisition.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RequisitionDetail.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Retrieval.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RetrievalDetail.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StationeryCatalogue.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StockTxnDetail.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="StubImpl.cs" />
+    <Compile Include="Supplier.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SupplyTender.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="LussisModel.edmx">

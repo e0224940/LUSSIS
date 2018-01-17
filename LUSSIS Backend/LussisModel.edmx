@@ -4,7 +4,27 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LussisModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LussisModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdjustmentVoucher">
+          <Key>
+            <PropertyRef Name="AvNo" />
+          </Key>
+          <Property Name="AvNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateIssued" Type="date" />
+          <Property Name="IssueEmpNo" Type="int" />
+          <Property Name="ApproveEmpNo" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AdjustmentVoucherDetail">
+          <Key>
+            <PropertyRef Name="AvNo" />
+            <PropertyRef Name="ItemNo" />
+          </Key>
+          <Property Name="AvNo" Type="int" Nullable="false" />
+          <Property Name="ItemNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="Reason" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="aspnet_Applications">
           <Key>
             <PropertyRef Name="ApplicationId" />
@@ -136,7 +156,190 @@
           <Property Name="ExceptionType" Type="nvarchar" MaxLength="256" />
           <Property Name="Details" Type="ntext" />
         </EntityType>
-        <Association Name="FK__aspnet_Me__Appli__276EDEB3">
+        <EntityType Name="BackLog">
+          <Key>
+            <PropertyRef Name="DeptCode" />
+            <PropertyRef Name="ItemNo" />
+          </Key>
+          <Property Name="DeptCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BackLogQty" Type="int" />
+        </EntityType>
+        <EntityType Name="CollectionPoint">
+          <Key>
+            <PropertyRef Name="CollectionPointNo" />
+          </Key>
+          <Property Name="CollectionPointNo" Type="int" Nullable="false" />
+          <Property Name="CollectionPointDetails" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DeptCode" />
+          </Key>
+          <Property Name="DeptCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DeptName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoneNo" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="FaxNo" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="HeadEmpNo" Type="int" />
+          <Property Name="CollectionPointNo" Type="int" />
+          <Property Name="RepEmpNo" Type="int" />
+          <Property Name="DeputyEmpNo" Type="int" />
+        </EntityType>
+        <EntityType Name="Deputy">
+          <Key>
+            <PropertyRef Name="DeptCode" />
+          </Key>
+          <Property Name="DeptCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DeputyEmpNo" Type="int" />
+          <Property Name="FromDate" Type="date" />
+          <Property Name="ToDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Disbursement">
+          <Key>
+            <PropertyRef Name="DisbursementNo" />
+          </Key>
+          <Property Name="DisbursementNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeptCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="DisbursementDate" Type="date" />
+          <Property Name="RepEmpNo" Type="int" />
+          <Property Name="CollectionPointNo" Type="int" />
+          <Property Name="Pin" Type="numeric" Precision="5" Scale="0" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DisbursementDetail">
+          <Key>
+            <PropertyRef Name="DisbursementNo" />
+            <PropertyRef Name="ItemNo" />
+          </Key>
+          <Property Name="DisbursementNo" Type="int" Nullable="false" />
+          <Property Name="ItemNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Needed" Type="int" />
+          <Property Name="Promised" Type="int" />
+          <Property Name="Received" Type="int" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmpNo" />
+          </Key>
+          <Property Name="EmpNo" Type="int" Nullable="false" />
+          <Property Name="EmpName" Type="nvarchar" MaxLength="50" />
+          <Property Name="DeptCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="SessionNo" Type="numeric" Precision="5" Scale="0" />
+          <Property Name="SessionExpiry" Type="date" />
+        </EntityType>
+        <EntityType Name="PurchaseOrder">
+          <Key>
+            <PropertyRef Name="PONo" />
+          </Key>
+          <Property Name="PONo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SupplierCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="OrderedBy" Type="int" />
+          <Property Name="DateIssued" Type="date" />
+          <Property Name="ApprovedBy" Type="int" />
+          <Property Name="DateReviewed" Type="date" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderDetail">
+          <Key>
+            <PropertyRef Name="PONo" />
+            <PropertyRef Name="ItemNo" />
+          </Key>
+          <Property Name="PONo" Type="int" Nullable="false" />
+          <Property Name="ItemNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Qty" Type="int" />
+        </EntityType>
+        <EntityType Name="Requisition">
+          <Key>
+            <PropertyRef Name="ReqNo" />
+          </Key>
+          <Property Name="ReqNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IssuedBy" Type="int" />
+          <Property Name="DateIssued" Type="date" />
+          <Property Name="ApprovedBy" Type="int" />
+          <Property Name="DateReviewed" Type="date" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="RequisitionDetail">
+          <Key>
+            <PropertyRef Name="ReqNo" />
+            <PropertyRef Name="ItemNo" />
+          </Key>
+          <Property Name="ReqNo" Type="int" Nullable="false" />
+          <Property Name="ItemNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Qty" Type="int" />
+        </EntityType>
+        <EntityType Name="Retrieval">
+          <Key>
+            <PropertyRef Name="RetrievalNo" />
+          </Key>
+          <Property Name="RetrievalNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="RetrievalDetail">
+          <Key>
+            <PropertyRef Name="RetrievalNo" />
+            <PropertyRef Name="DeptCode" />
+            <PropertyRef Name="ItemNo" />
+          </Key>
+          <Property Name="RetrievalNo" Type="int" Nullable="false" />
+          <Property Name="DeptCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Needed" Type="int" />
+          <Property Name="BackLogQty" Type="int" />
+          <Property Name="Actual" Type="int" />
+        </EntityType>
+        <EntityType Name="StationeryCatalogue">
+          <Key>
+            <PropertyRef Name="ItemNo" />
+          </Key>
+          <Property Name="ItemNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" />
+          <Property Name="Uom" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReorderQty" Type="int" />
+          <Property Name="ReorderLevel" Type="int" />
+          <Property Name="CurrentQty" Type="int" />
+          <Property Name="Supplier1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Supplier2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Supplier3" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StockTxnDetail">
+          <Key>
+            <PropertyRef Name="StockTxnDetail" />
+          </Key>
+          <Property Name="StockTxnDetail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="date" />
+          <Property Name="AdjustQty" Type="int" />
+          <Property Name="RecordedQty" Type="int" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="SupplierCode" />
+          </Key>
+          <Property Name="SupplierCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SupplierName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoneNo" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="FaxNo" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="Address" Type="nvarchar" MaxLength="200" />
+          <Property Name="GstNo" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SupplyTender">
+          <Key>
+            <PropertyRef Name="ItemNo" />
+            <PropertyRef Name="SupplierCode" />
+          </Key>
+          <Property Name="ItemNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SupplierCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UnitPrice" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <Association Name="FK__aspnet_Me__Appli__6E01572D">
           <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
           <End Role="aspnet_Membership" Type="Self.aspnet_Membership" Multiplicity="*" />
           <ReferentialConstraint>
@@ -148,7 +351,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Me__UserI__286302EC">
+        <Association Name="FK__aspnet_Me__UserI__6EF57B66">
           <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
           <End Role="aspnet_Membership" Type="Self.aspnet_Membership" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -160,7 +363,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Pa__Appli__59063A47">
+        <Association Name="FK__aspnet_Pa__Appli__1F98B2C1">
           <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
           <End Role="aspnet_Paths" Type="Self.aspnet_Paths" Multiplicity="*" />
           <ReferentialConstraint>
@@ -172,7 +375,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Pe__PathI__5EBF139D">
+        <Association Name="FK__aspnet_Pe__PathI__25518C17">
           <End Role="aspnet_Paths" Type="Self.aspnet_Paths" Multiplicity="1" />
           <End Role="aspnet_PersonalizationAllUsers" Type="Self.aspnet_PersonalizationAllUsers" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -184,7 +387,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Pe__PathI__628FA481">
+        <Association Name="FK__aspnet_Pe__PathI__29221CFB">
           <End Role="aspnet_Paths" Type="Self.aspnet_Paths" Multiplicity="0..1" />
           <End Role="aspnet_PersonalizationPerUser" Type="Self.aspnet_PersonalizationPerUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -196,7 +399,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Pe__UserI__6383C8BA">
+        <Association Name="FK__aspnet_Pe__UserI__2A164134">
           <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="0..1" />
           <End Role="aspnet_PersonalizationPerUser" Type="Self.aspnet_PersonalizationPerUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -208,7 +411,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Pr__UserI__3C69FB99">
+        <Association Name="FK__aspnet_Pr__UserI__02FC7413">
           <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
           <End Role="aspnet_Profile" Type="Self.aspnet_Profile" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -220,7 +423,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Ro__Appli__45F365D3">
+        <Association Name="FK__aspnet_Ro__Appli__0C85DE4D">
           <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
           <End Role="aspnet_Roles" Type="Self.aspnet_Roles" Multiplicity="*" />
           <ReferentialConstraint>
@@ -232,7 +435,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Us__Appli__173876EA">
+        <Association Name="FK__aspnet_Us__Appli__5DCAEF64">
           <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
           <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="*" />
           <ReferentialConstraint>
@@ -244,7 +447,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Us__RoleI__4AB81AF0">
+        <Association Name="FK__aspnet_Us__RoleI__114A936A">
           <End Role="aspnet_Roles" Type="Self.aspnet_Roles" Multiplicity="1" />
           <End Role="aspnet_UsersInRoles" Type="Self.aspnet_UsersInRoles" Multiplicity="*" />
           <ReferentialConstraint>
@@ -256,7 +459,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Us__UserI__49C3F6B7">
+        <Association Name="FK__aspnet_Us__UserI__10566F31">
           <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
           <End Role="aspnet_UsersInRoles" Type="Self.aspnet_UsersInRoles" Multiplicity="*" />
           <ReferentialConstraint>
@@ -268,7 +471,441 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_AdjustmentVoucher_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="AdjustmentVoucher" Type="Self.AdjustmentVoucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="AdjustmentVoucher">
+              <PropertyRef Name="ApproveEmpNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdjustmentVoucher_Employee1">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="AdjustmentVoucher" Type="Self.AdjustmentVoucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="AdjustmentVoucher">
+              <PropertyRef Name="IssueEmpNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdjustmentVoucherDetail_AdjustmentVoucher">
+          <End Role="AdjustmentVoucher" Type="Self.AdjustmentVoucher" Multiplicity="1" />
+          <End Role="AdjustmentVoucherDetail" Type="Self.AdjustmentVoucherDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdjustmentVoucher">
+              <PropertyRef Name="AvNo" />
+            </Principal>
+            <Dependent Role="AdjustmentVoucherDetail">
+              <PropertyRef Name="AvNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdjustmentVoucherDetail_StationeryCatalogue">
+          <End Role="StationeryCatalogue" Type="Self.StationeryCatalogue" Multiplicity="1" />
+          <End Role="AdjustmentVoucherDetail" Type="Self.AdjustmentVoucherDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StationeryCatalogue">
+              <PropertyRef Name="ItemNo" />
+            </Principal>
+            <Dependent Role="AdjustmentVoucherDetail">
+              <PropertyRef Name="ItemNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BackLog_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="BackLog" Type="Self.BackLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DeptCode" />
+            </Principal>
+            <Dependent Role="BackLog">
+              <PropertyRef Name="DeptCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BackLog_StationeryCatalogue">
+          <End Role="StationeryCatalogue" Type="Self.StationeryCatalogue" Multiplicity="1" />
+          <End Role="BackLog" Type="Self.BackLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StationeryCatalogue">
+              <PropertyRef Name="ItemNo" />
+            </Principal>
+            <Dependent Role="BackLog">
+              <PropertyRef Name="ItemNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_Department">
+          <End Role="CollectionPoint" Type="Self.CollectionPoint" Multiplicity="0..1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CollectionPoint">
+              <PropertyRef Name="CollectionPointNo" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="CollectionPointNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="HeadEmpNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_Employee1">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="RepEmpNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_Employee2">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="DeputyEmpNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deputy_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="Deputy" Type="Self.Deputy" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DeptCode" />
+            </Principal>
+            <Dependent Role="Deputy">
+              <PropertyRef Name="DeptCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deputy_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Deputy" Type="Self.Deputy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="Deputy">
+              <PropertyRef Name="DeputyEmpNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursement_CollectionPoint">
+          <End Role="CollectionPoint" Type="Self.CollectionPoint" Multiplicity="0..1" />
+          <End Role="Disbursement" Type="Self.Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CollectionPoint">
+              <PropertyRef Name="CollectionPointNo" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="CollectionPointNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursement_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Disbursement" Type="Self.Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DeptCode" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="DeptCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursement_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Disbursement" Type="Self.Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="RepEmpNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementDetail_Disbursement">
+          <End Role="Disbursement" Type="Self.Disbursement" Multiplicity="1" />
+          <End Role="DisbursementDetail" Type="Self.DisbursementDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disbursement">
+              <PropertyRef Name="DisbursementNo" />
+            </Principal>
+            <Dependent Role="DisbursementDetail">
+              <PropertyRef Name="DisbursementNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementDetail_StationeryCatalogue">
+          <End Role="StationeryCatalogue" Type="Self.StationeryCatalogue" Multiplicity="1" />
+          <End Role="DisbursementDetail" Type="Self.DisbursementDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StationeryCatalogue">
+              <PropertyRef Name="ItemNo" />
+            </Principal>
+            <Dependent Role="DisbursementDetail">
+              <PropertyRef Name="ItemNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DeptCode" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DeptCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrder_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="PurchaseOrder">
+              <PropertyRef Name="ApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrder_Employee1">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="PurchaseOrder">
+              <PropertyRef Name="OrderedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrder_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierCode" />
+            </Principal>
+            <Dependent Role="PurchaseOrder">
+              <PropertyRef Name="SupplierCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderDetail_PurchaseOrder">
+          <End Role="PurchaseOrder" Type="Self.PurchaseOrder" Multiplicity="1" />
+          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrder">
+              <PropertyRef Name="PONo" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetail">
+              <PropertyRef Name="PONo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderDetail_StationeryCatalogue">
+          <End Role="StationeryCatalogue" Type="Self.StationeryCatalogue" Multiplicity="1" />
+          <End Role="PurchaseOrderDetail" Type="Self.PurchaseOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StationeryCatalogue">
+              <PropertyRef Name="ItemNo" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetail">
+              <PropertyRef Name="ItemNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requisition_Employee1">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Requisition" Type="Self.Requisition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="Requisition">
+              <PropertyRef Name="IssuedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requisition_Employee2">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Requisition" Type="Self.Requisition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="Requisition">
+              <PropertyRef Name="ApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequisitionDetail_Requisition">
+          <End Role="Requisition" Type="Self.Requisition" Multiplicity="1" />
+          <End Role="RequisitionDetail" Type="Self.RequisitionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Requisition">
+              <PropertyRef Name="ReqNo" />
+            </Principal>
+            <Dependent Role="RequisitionDetail">
+              <PropertyRef Name="ReqNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequisitionDetail_StationeryCatalogue">
+          <End Role="StationeryCatalogue" Type="Self.StationeryCatalogue" Multiplicity="1" />
+          <End Role="RequisitionDetail" Type="Self.RequisitionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StationeryCatalogue">
+              <PropertyRef Name="ItemNo" />
+            </Principal>
+            <Dependent Role="RequisitionDetail">
+              <PropertyRef Name="ItemNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RetrievalDetail_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="RetrievalDetail" Type="Self.RetrievalDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DeptCode" />
+            </Principal>
+            <Dependent Role="RetrievalDetail">
+              <PropertyRef Name="DeptCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RetrievalDetail_Retrieval">
+          <End Role="Retrieval" Type="Self.Retrieval" Multiplicity="1" />
+          <End Role="RetrievalDetail" Type="Self.RetrievalDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Retrieval">
+              <PropertyRef Name="RetrievalNo" />
+            </Principal>
+            <Dependent Role="RetrievalDetail">
+              <PropertyRef Name="RetrievalNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RetrievalDetail_StationeryCatalogue">
+          <End Role="StationeryCatalogue" Type="Self.StationeryCatalogue" Multiplicity="1" />
+          <End Role="RetrievalDetail" Type="Self.RetrievalDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StationeryCatalogue">
+              <PropertyRef Name="ItemNo" />
+            </Principal>
+            <Dependent Role="RetrievalDetail">
+              <PropertyRef Name="ItemNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StationeryCatalogue_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="StationeryCatalogue" Type="Self.StationeryCatalogue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierCode" />
+            </Principal>
+            <Dependent Role="StationeryCatalogue">
+              <PropertyRef Name="Supplier1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StationeryCatalogue_Supplier1">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="StationeryCatalogue" Type="Self.StationeryCatalogue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierCode" />
+            </Principal>
+            <Dependent Role="StationeryCatalogue">
+              <PropertyRef Name="Supplier2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StationeryCatalogue_Supplier2">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="StationeryCatalogue" Type="Self.StationeryCatalogue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierCode" />
+            </Principal>
+            <Dependent Role="StationeryCatalogue">
+              <PropertyRef Name="Supplier3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockTxnDetail_StationeryCatalogue">
+          <End Role="StationeryCatalogue" Type="Self.StationeryCatalogue" Multiplicity="0..1" />
+          <End Role="StockTxnDetail" Type="Self.StockTxnDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StationeryCatalogue">
+              <PropertyRef Name="ItemNo" />
+            </Principal>
+            <Dependent Role="StockTxnDetail">
+              <PropertyRef Name="ItemNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplyTender_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+          <End Role="SupplyTender" Type="Self.SupplyTender" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierCode" />
+            </Principal>
+            <Dependent Role="SupplyTender">
+              <PropertyRef Name="SupplierCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplyTender_SupplyTender">
+          <End Role="StationeryCatalogue" Type="Self.StationeryCatalogue" Multiplicity="1" />
+          <End Role="SupplyTender" Type="Self.SupplyTender" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StationeryCatalogue">
+              <PropertyRef Name="ItemNo" />
+            </Principal>
+            <Dependent Role="SupplyTender">
+              <PropertyRef Name="ItemNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="LussisModelStoreContainer">
+          <EntitySet Name="AdjustmentVoucher" EntityType="Self.AdjustmentVoucher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdjustmentVoucherDetail" EntityType="Self.AdjustmentVoucherDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aspnet_Applications" EntityType="Self.aspnet_Applications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aspnet_Membership" EntityType="Self.aspnet_Membership" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aspnet_Paths" EntityType="Self.aspnet_Paths" Schema="dbo" store:Type="Tables" />
@@ -280,53 +917,213 @@
           <EntitySet Name="aspnet_Users" EntityType="Self.aspnet_Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aspnet_UsersInRoles" EntityType="Self.aspnet_UsersInRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aspnet_WebEvent_Events" EntityType="Self.aspnet_WebEvent_Events" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__aspnet_Me__Appli__276EDEB3" Association="Self.FK__aspnet_Me__Appli__276EDEB3">
+          <EntitySet Name="BackLog" EntityType="Self.BackLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CollectionPoint" EntityType="Self.CollectionPoint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Deputy" EntityType="Self.Deputy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Disbursement" EntityType="Self.Disbursement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DisbursementDetail" EntityType="Self.DisbursementDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseOrder" EntityType="Self.PurchaseOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseOrderDetail" EntityType="Self.PurchaseOrderDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Requisition" EntityType="Self.Requisition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequisitionDetail" EntityType="Self.RequisitionDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Retrieval" EntityType="Self.Retrieval" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RetrievalDetail" EntityType="Self.RetrievalDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StationeryCatalogue" EntityType="Self.StationeryCatalogue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StockTxnDetail" EntityType="Self.StockTxnDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplyTender" EntityType="Self.SupplyTender" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__aspnet_Me__Appli__6E01572D" Association="Self.FK__aspnet_Me__Appli__6E01572D">
             <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
             <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Me__UserI__286302EC" Association="Self.FK__aspnet_Me__UserI__286302EC">
+          <AssociationSet Name="FK__aspnet_Me__UserI__6EF57B66" Association="Self.FK__aspnet_Me__UserI__6EF57B66">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Pa__Appli__59063A47" Association="Self.FK__aspnet_Pa__Appli__59063A47">
+          <AssociationSet Name="FK__aspnet_Pa__Appli__1F98B2C1" Association="Self.FK__aspnet_Pa__Appli__1F98B2C1">
             <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
             <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Pe__PathI__5EBF139D" Association="Self.FK__aspnet_Pe__PathI__5EBF139D">
+          <AssociationSet Name="FK__aspnet_Pe__PathI__25518C17" Association="Self.FK__aspnet_Pe__PathI__25518C17">
             <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
             <End Role="aspnet_PersonalizationAllUsers" EntitySet="aspnet_PersonalizationAllUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Pe__PathI__628FA481" Association="Self.FK__aspnet_Pe__PathI__628FA481">
+          <AssociationSet Name="FK__aspnet_Pe__PathI__29221CFB" Association="Self.FK__aspnet_Pe__PathI__29221CFB">
             <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
             <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Pe__UserI__6383C8BA" Association="Self.FK__aspnet_Pe__UserI__6383C8BA">
+          <AssociationSet Name="FK__aspnet_Pe__UserI__2A164134" Association="Self.FK__aspnet_Pe__UserI__2A164134">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Pr__UserI__3C69FB99" Association="Self.FK__aspnet_Pr__UserI__3C69FB99">
+          <AssociationSet Name="FK__aspnet_Pr__UserI__02FC7413" Association="Self.FK__aspnet_Pr__UserI__02FC7413">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="aspnet_Profile" EntitySet="aspnet_Profile" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Ro__Appli__45F365D3" Association="Self.FK__aspnet_Ro__Appli__45F365D3">
+          <AssociationSet Name="FK__aspnet_Ro__Appli__0C85DE4D" Association="Self.FK__aspnet_Ro__Appli__0C85DE4D">
             <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
             <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Us__Appli__173876EA" Association="Self.FK__aspnet_Us__Appli__173876EA">
+          <AssociationSet Name="FK__aspnet_Us__Appli__5DCAEF64" Association="Self.FK__aspnet_Us__Appli__5DCAEF64">
             <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Us__RoleI__4AB81AF0" Association="Self.FK__aspnet_Us__RoleI__4AB81AF0">
+          <AssociationSet Name="FK__aspnet_Us__RoleI__114A936A" Association="Self.FK__aspnet_Us__RoleI__114A936A">
             <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
             <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Us__UserI__49C3F6B7" Association="Self.FK__aspnet_Us__UserI__49C3F6B7">
+          <AssociationSet Name="FK__aspnet_Us__UserI__10566F31" Association="Self.FK__aspnet_Us__UserI__10566F31">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdjustmentVoucher_Employee" Association="Self.FK_AdjustmentVoucher_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="AdjustmentVoucher" EntitySet="AdjustmentVoucher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdjustmentVoucher_Employee1" Association="Self.FK_AdjustmentVoucher_Employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="AdjustmentVoucher" EntitySet="AdjustmentVoucher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdjustmentVoucherDetail_AdjustmentVoucher" Association="Self.FK_AdjustmentVoucherDetail_AdjustmentVoucher">
+            <End Role="AdjustmentVoucher" EntitySet="AdjustmentVoucher" />
+            <End Role="AdjustmentVoucherDetail" EntitySet="AdjustmentVoucherDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdjustmentVoucherDetail_StationeryCatalogue" Association="Self.FK_AdjustmentVoucherDetail_StationeryCatalogue">
+            <End Role="StationeryCatalogue" EntitySet="StationeryCatalogue" />
+            <End Role="AdjustmentVoucherDetail" EntitySet="AdjustmentVoucherDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BackLog_Department" Association="Self.FK_BackLog_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="BackLog" EntitySet="BackLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BackLog_StationeryCatalogue" Association="Self.FK_BackLog_StationeryCatalogue">
+            <End Role="StationeryCatalogue" EntitySet="StationeryCatalogue" />
+            <End Role="BackLog" EntitySet="BackLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_Department" Association="Self.FK_Department_Department">
+            <End Role="CollectionPoint" EntitySet="CollectionPoint" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_Employee" Association="Self.FK_Department_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_Employee1" Association="Self.FK_Department_Employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_Employee2" Association="Self.FK_Department_Employee2">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deputy_Department" Association="Self.FK_Deputy_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Deputy" EntitySet="Deputy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deputy_Employee" Association="Self.FK_Deputy_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Deputy" EntitySet="Deputy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursement_CollectionPoint" Association="Self.FK_Disbursement_CollectionPoint">
+            <End Role="CollectionPoint" EntitySet="CollectionPoint" />
+            <End Role="Disbursement" EntitySet="Disbursement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursement_Department" Association="Self.FK_Disbursement_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Disbursement" EntitySet="Disbursement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursement_Employee" Association="Self.FK_Disbursement_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Disbursement" EntitySet="Disbursement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisbursementDetail_Disbursement" Association="Self.FK_DisbursementDetail_Disbursement">
+            <End Role="Disbursement" EntitySet="Disbursement" />
+            <End Role="DisbursementDetail" EntitySet="DisbursementDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisbursementDetail_StationeryCatalogue" Association="Self.FK_DisbursementDetail_StationeryCatalogue">
+            <End Role="StationeryCatalogue" EntitySet="StationeryCatalogue" />
+            <End Role="DisbursementDetail" EntitySet="DisbursementDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Department" Association="Self.FK_Employee_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrder_Employee" Association="Self.FK_PurchaseOrder_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrder_Employee1" Association="Self.FK_PurchaseOrder_Employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrder_Supplier" Association="Self.FK_PurchaseOrder_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderDetail_PurchaseOrder" Association="Self.FK_PurchaseOrderDetail_PurchaseOrder">
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrder" />
+            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderDetail_StationeryCatalogue" Association="Self.FK_PurchaseOrderDetail_StationeryCatalogue">
+            <End Role="StationeryCatalogue" EntitySet="StationeryCatalogue" />
+            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requisition_Employee1" Association="Self.FK_Requisition_Employee1">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Requisition" EntitySet="Requisition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requisition_Employee2" Association="Self.FK_Requisition_Employee2">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Requisition" EntitySet="Requisition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequisitionDetail_Requisition" Association="Self.FK_RequisitionDetail_Requisition">
+            <End Role="Requisition" EntitySet="Requisition" />
+            <End Role="RequisitionDetail" EntitySet="RequisitionDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequisitionDetail_StationeryCatalogue" Association="Self.FK_RequisitionDetail_StationeryCatalogue">
+            <End Role="StationeryCatalogue" EntitySet="StationeryCatalogue" />
+            <End Role="RequisitionDetail" EntitySet="RequisitionDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RetrievalDetail_Department" Association="Self.FK_RetrievalDetail_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="RetrievalDetail" EntitySet="RetrievalDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RetrievalDetail_Retrieval" Association="Self.FK_RetrievalDetail_Retrieval">
+            <End Role="Retrieval" EntitySet="Retrieval" />
+            <End Role="RetrievalDetail" EntitySet="RetrievalDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RetrievalDetail_StationeryCatalogue" Association="Self.FK_RetrievalDetail_StationeryCatalogue">
+            <End Role="StationeryCatalogue" EntitySet="StationeryCatalogue" />
+            <End Role="RetrievalDetail" EntitySet="RetrievalDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StationeryCatalogue_Supplier" Association="Self.FK_StationeryCatalogue_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="StationeryCatalogue" EntitySet="StationeryCatalogue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StationeryCatalogue_Supplier1" Association="Self.FK_StationeryCatalogue_Supplier1">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="StationeryCatalogue" EntitySet="StationeryCatalogue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StationeryCatalogue_Supplier2" Association="Self.FK_StationeryCatalogue_Supplier2">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="StationeryCatalogue" EntitySet="StationeryCatalogue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockTxnDetail_StationeryCatalogue" Association="Self.FK_StockTxnDetail_StationeryCatalogue">
+            <End Role="StationeryCatalogue" EntitySet="StationeryCatalogue" />
+            <End Role="StockTxnDetail" EntitySet="StockTxnDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplyTender_Supplier" Association="Self.FK_SupplyTender_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="SupplyTender" EntitySet="SupplyTender" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplyTender_SupplyTender" Association="Self.FK_SupplyTender_SupplyTender">
+            <End Role="StationeryCatalogue" EntitySet="StationeryCatalogue" />
+            <End Role="SupplyTender" EntitySet="SupplyTender" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LussisModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -636,7 +1433,877 @@
             <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
           </AssociationSet>
+          <EntitySet Name="AdjustmentVouchers" EntityType="LussisModel.AdjustmentVoucher" />
+          <EntitySet Name="AdjustmentVoucherDetails" EntityType="LussisModel.AdjustmentVoucherDetail" />
+          <EntitySet Name="BackLogs" EntityType="LussisModel.BackLog" />
+          <EntitySet Name="CollectionPoints" EntityType="LussisModel.CollectionPoint" />
+          <EntitySet Name="Departments" EntityType="LussisModel.Department" />
+          <EntitySet Name="Deputies" EntityType="LussisModel.Deputy" />
+          <EntitySet Name="Disbursements" EntityType="LussisModel.Disbursement" />
+          <EntitySet Name="DisbursementDetails" EntityType="LussisModel.DisbursementDetail" />
+          <EntitySet Name="Employees" EntityType="LussisModel.Employee" />
+          <EntitySet Name="PurchaseOrders" EntityType="LussisModel.PurchaseOrder" />
+          <EntitySet Name="PurchaseOrderDetails" EntityType="LussisModel.PurchaseOrderDetail" />
+          <EntitySet Name="Requisitions" EntityType="LussisModel.Requisition" />
+          <EntitySet Name="RequisitionDetails" EntityType="LussisModel.RequisitionDetail" />
+          <EntitySet Name="Retrievals" EntityType="LussisModel.Retrieval" />
+          <EntitySet Name="RetrievalDetails" EntityType="LussisModel.RetrievalDetail" />
+          <EntitySet Name="StationeryCatalogues" EntityType="LussisModel.StationeryCatalogue" />
+          <EntitySet Name="StockTxnDetails" EntityType="LussisModel.StockTxnDetail" />
+          <EntitySet Name="Suppliers" EntityType="LussisModel.Supplier" />
+          <EntitySet Name="SupplyTenders" EntityType="LussisModel.SupplyTender" />
+          <AssociationSet Name="FK_AdjustmentVoucher_Employee" Association="LussisModel.FK_AdjustmentVoucher_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="AdjustmentVoucher" EntitySet="AdjustmentVouchers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdjustmentVoucher_Employee1" Association="LussisModel.FK_AdjustmentVoucher_Employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="AdjustmentVoucher" EntitySet="AdjustmentVouchers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdjustmentVoucherDetail_AdjustmentVoucher" Association="LussisModel.FK_AdjustmentVoucherDetail_AdjustmentVoucher">
+            <End Role="AdjustmentVoucher" EntitySet="AdjustmentVouchers" />
+            <End Role="AdjustmentVoucherDetail" EntitySet="AdjustmentVoucherDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdjustmentVoucherDetail_StationeryCatalogue" Association="LussisModel.FK_AdjustmentVoucherDetail_StationeryCatalogue">
+            <End Role="StationeryCatalogue" EntitySet="StationeryCatalogues" />
+            <End Role="AdjustmentVoucherDetail" EntitySet="AdjustmentVoucherDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BackLog_Department" Association="LussisModel.FK_BackLog_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="BackLog" EntitySet="BackLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BackLog_StationeryCatalogue" Association="LussisModel.FK_BackLog_StationeryCatalogue">
+            <End Role="StationeryCatalogue" EntitySet="StationeryCatalogues" />
+            <End Role="BackLog" EntitySet="BackLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_Department" Association="LussisModel.FK_Department_Department">
+            <End Role="CollectionPoint" EntitySet="CollectionPoints" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursement_CollectionPoint" Association="LussisModel.FK_Disbursement_CollectionPoint">
+            <End Role="CollectionPoint" EntitySet="CollectionPoints" />
+            <End Role="Disbursement" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_Employee" Association="LussisModel.FK_Department_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_Employee1" Association="LussisModel.FK_Department_Employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_Employee2" Association="LussisModel.FK_Department_Employee2">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deputy_Department" Association="LussisModel.FK_Deputy_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Deputy" EntitySet="Deputies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursement_Department" Association="LussisModel.FK_Disbursement_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Disbursement" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Department" Association="LussisModel.FK_Employee_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RetrievalDetail_Department" Association="LussisModel.FK_RetrievalDetail_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="RetrievalDetail" EntitySet="RetrievalDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deputy_Employee" Association="LussisModel.FK_Deputy_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Deputy" EntitySet="Deputies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disbursement_Employee" Association="LussisModel.FK_Disbursement_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Disbursement" EntitySet="Disbursements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisbursementDetail_Disbursement" Association="LussisModel.FK_DisbursementDetail_Disbursement">
+            <End Role="Disbursement" EntitySet="Disbursements" />
+            <End Role="DisbursementDetail" EntitySet="DisbursementDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DisbursementDetail_StationeryCatalogue" Association="LussisModel.FK_DisbursementDetail_StationeryCatalogue">
+            <End Role="StationeryCatalogue" EntitySet="StationeryCatalogues" />
+            <End Role="DisbursementDetail" EntitySet="DisbursementDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrder_Employee" Association="LussisModel.FK_PurchaseOrder_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrder_Employee1" Association="LussisModel.FK_PurchaseOrder_Employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requisition_Employee1" Association="LussisModel.FK_Requisition_Employee1">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Requisition" EntitySet="Requisitions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requisition_Employee2" Association="LussisModel.FK_Requisition_Employee2">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Requisition" EntitySet="Requisitions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrder_Supplier" Association="LussisModel.FK_PurchaseOrder_Supplier">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderDetail_PurchaseOrder" Association="LussisModel.FK_PurchaseOrderDetail_PurchaseOrder">
+            <End Role="PurchaseOrder" EntitySet="PurchaseOrders" />
+            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrderDetail_StationeryCatalogue" Association="LussisModel.FK_PurchaseOrderDetail_StationeryCatalogue">
+            <End Role="StationeryCatalogue" EntitySet="StationeryCatalogues" />
+            <End Role="PurchaseOrderDetail" EntitySet="PurchaseOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequisitionDetail_Requisition" Association="LussisModel.FK_RequisitionDetail_Requisition">
+            <End Role="Requisition" EntitySet="Requisitions" />
+            <End Role="RequisitionDetail" EntitySet="RequisitionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequisitionDetail_StationeryCatalogue" Association="LussisModel.FK_RequisitionDetail_StationeryCatalogue">
+            <End Role="StationeryCatalogue" EntitySet="StationeryCatalogues" />
+            <End Role="RequisitionDetail" EntitySet="RequisitionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RetrievalDetail_Retrieval" Association="LussisModel.FK_RetrievalDetail_Retrieval">
+            <End Role="Retrieval" EntitySet="Retrievals" />
+            <End Role="RetrievalDetail" EntitySet="RetrievalDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RetrievalDetail_StationeryCatalogue" Association="LussisModel.FK_RetrievalDetail_StationeryCatalogue">
+            <End Role="StationeryCatalogue" EntitySet="StationeryCatalogues" />
+            <End Role="RetrievalDetail" EntitySet="RetrievalDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StationeryCatalogue_Supplier" Association="LussisModel.FK_StationeryCatalogue_Supplier">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="StationeryCatalogue" EntitySet="StationeryCatalogues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StationeryCatalogue_Supplier1" Association="LussisModel.FK_StationeryCatalogue_Supplier1">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="StationeryCatalogue" EntitySet="StationeryCatalogues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StationeryCatalogue_Supplier2" Association="LussisModel.FK_StationeryCatalogue_Supplier2">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="StationeryCatalogue" EntitySet="StationeryCatalogues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StockTxnDetail_StationeryCatalogue" Association="LussisModel.FK_StockTxnDetail_StationeryCatalogue">
+            <End Role="StationeryCatalogue" EntitySet="StationeryCatalogues" />
+            <End Role="StockTxnDetail" EntitySet="StockTxnDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplyTender_SupplyTender" Association="LussisModel.FK_SupplyTender_SupplyTender">
+            <End Role="StationeryCatalogue" EntitySet="StationeryCatalogues" />
+            <End Role="SupplyTender" EntitySet="SupplyTenders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplyTender_Supplier" Association="LussisModel.FK_SupplyTender_Supplier">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="SupplyTender" EntitySet="SupplyTenders" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="AdjustmentVoucher">
+          <Key>
+            <PropertyRef Name="AvNo" />
+          </Key>
+          <Property Name="AvNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateIssued" Type="DateTime" Precision="0" />
+          <Property Name="IssueEmpNo" Type="Int32" />
+          <Property Name="ApproveEmpNo" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="LussisModel.FK_AdjustmentVoucher_Employee" FromRole="AdjustmentVoucher" ToRole="Employee" />
+          <NavigationProperty Name="Employee1" Relationship="LussisModel.FK_AdjustmentVoucher_Employee1" FromRole="AdjustmentVoucher" ToRole="Employee" />
+          <NavigationProperty Name="AdjustmentVoucherDetails" Relationship="LussisModel.FK_AdjustmentVoucherDetail_AdjustmentVoucher" FromRole="AdjustmentVoucher" ToRole="AdjustmentVoucherDetail" />
+        </EntityType>
+        <EntityType Name="AdjustmentVoucherDetail">
+          <Key>
+            <PropertyRef Name="AvNo" />
+            <PropertyRef Name="ItemNo" />
+          </Key>
+          <Property Name="AvNo" Type="Int32" Nullable="false" />
+          <Property Name="ItemNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AdjustmentVoucher" Relationship="LussisModel.FK_AdjustmentVoucherDetail_AdjustmentVoucher" FromRole="AdjustmentVoucherDetail" ToRole="AdjustmentVoucher" />
+          <NavigationProperty Name="StationeryCatalogue" Relationship="LussisModel.FK_AdjustmentVoucherDetail_StationeryCatalogue" FromRole="AdjustmentVoucherDetail" ToRole="StationeryCatalogue" />
+        </EntityType>
+        <EntityType Name="BackLog">
+          <Key>
+            <PropertyRef Name="DeptCode" />
+            <PropertyRef Name="ItemNo" />
+          </Key>
+          <Property Name="DeptCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ItemNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BackLogQty" Type="Int32" />
+          <NavigationProperty Name="Department" Relationship="LussisModel.FK_BackLog_Department" FromRole="BackLog" ToRole="Department" />
+          <NavigationProperty Name="StationeryCatalogue" Relationship="LussisModel.FK_BackLog_StationeryCatalogue" FromRole="BackLog" ToRole="StationeryCatalogue" />
+        </EntityType>
+        <EntityType Name="CollectionPoint">
+          <Key>
+            <PropertyRef Name="CollectionPointNo" />
+          </Key>
+          <Property Name="CollectionPointNo" Type="Int32" Nullable="false" />
+          <Property Name="CollectionPointDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Departments" Relationship="LussisModel.FK_Department_Department" FromRole="CollectionPoint" ToRole="Department" />
+          <NavigationProperty Name="Disbursements" Relationship="LussisModel.FK_Disbursement_CollectionPoint" FromRole="CollectionPoint" ToRole="Disbursement" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DeptCode" />
+          </Key>
+          <Property Name="DeptCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeptName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNo" Type="Decimal" Precision="7" Scale="0" />
+          <Property Name="FaxNo" Type="Decimal" Precision="7" Scale="0" />
+          <Property Name="HeadEmpNo" Type="Int32" />
+          <Property Name="CollectionPointNo" Type="Int32" />
+          <Property Name="RepEmpNo" Type="Int32" />
+          <Property Name="DeputyEmpNo" Type="Int32" />
+          <NavigationProperty Name="BackLogs" Relationship="LussisModel.FK_BackLog_Department" FromRole="Department" ToRole="BackLog" />
+          <NavigationProperty Name="CollectionPoint" Relationship="LussisModel.FK_Department_Department" FromRole="Department" ToRole="CollectionPoint" />
+          <NavigationProperty Name="Employee" Relationship="LussisModel.FK_Department_Employee" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="Employee1" Relationship="LussisModel.FK_Department_Employee1" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="Employee2" Relationship="LussisModel.FK_Department_Employee2" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="Deputy" Relationship="LussisModel.FK_Deputy_Department" FromRole="Department" ToRole="Deputy" />
+          <NavigationProperty Name="Disbursements" Relationship="LussisModel.FK_Disbursement_Department" FromRole="Department" ToRole="Disbursement" />
+          <NavigationProperty Name="Employees" Relationship="LussisModel.FK_Employee_Department" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="RetrievalDetails" Relationship="LussisModel.FK_RetrievalDetail_Department" FromRole="Department" ToRole="RetrievalDetail" />
+        </EntityType>
+        <EntityType Name="Deputy">
+          <Key>
+            <PropertyRef Name="DeptCode" />
+          </Key>
+          <Property Name="DeptCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeputyEmpNo" Type="Int32" />
+          <Property Name="FromDate" Type="DateTime" Precision="0" />
+          <Property Name="ToDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Department" Relationship="LussisModel.FK_Deputy_Department" FromRole="Deputy" ToRole="Department" />
+          <NavigationProperty Name="Employee" Relationship="LussisModel.FK_Deputy_Employee" FromRole="Deputy" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Disbursement">
+          <Key>
+            <PropertyRef Name="DisbursementNo" />
+          </Key>
+          <Property Name="DisbursementNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeptCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DisbursementDate" Type="DateTime" Precision="0" />
+          <Property Name="RepEmpNo" Type="Int32" />
+          <Property Name="CollectionPointNo" Type="Int32" />
+          <Property Name="Pin" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CollectionPoint" Relationship="LussisModel.FK_Disbursement_CollectionPoint" FromRole="Disbursement" ToRole="CollectionPoint" />
+          <NavigationProperty Name="Department" Relationship="LussisModel.FK_Disbursement_Department" FromRole="Disbursement" ToRole="Department" />
+          <NavigationProperty Name="Employee" Relationship="LussisModel.FK_Disbursement_Employee" FromRole="Disbursement" ToRole="Employee" />
+          <NavigationProperty Name="DisbursementDetails" Relationship="LussisModel.FK_DisbursementDetail_Disbursement" FromRole="Disbursement" ToRole="DisbursementDetail" />
+        </EntityType>
+        <EntityType Name="DisbursementDetail">
+          <Key>
+            <PropertyRef Name="DisbursementNo" />
+            <PropertyRef Name="ItemNo" />
+          </Key>
+          <Property Name="DisbursementNo" Type="Int32" Nullable="false" />
+          <Property Name="ItemNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Needed" Type="Int32" />
+          <Property Name="Promised" Type="Int32" />
+          <Property Name="Received" Type="Int32" />
+          <NavigationProperty Name="Disbursement" Relationship="LussisModel.FK_DisbursementDetail_Disbursement" FromRole="DisbursementDetail" ToRole="Disbursement" />
+          <NavigationProperty Name="StationeryCatalogue" Relationship="LussisModel.FK_DisbursementDetail_StationeryCatalogue" FromRole="DisbursementDetail" ToRole="StationeryCatalogue" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmpNo" />
+          </Key>
+          <Property Name="EmpNo" Type="Int32" Nullable="false" />
+          <Property Name="EmpName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeptCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SessionNo" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="SessionExpiry" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="AdjustmentVouchers" Relationship="LussisModel.FK_AdjustmentVoucher_Employee" FromRole="Employee" ToRole="AdjustmentVoucher" />
+          <NavigationProperty Name="AdjustmentVouchers1" Relationship="LussisModel.FK_AdjustmentVoucher_Employee1" FromRole="Employee" ToRole="AdjustmentVoucher" />
+          <NavigationProperty Name="Departments" Relationship="LussisModel.FK_Department_Employee" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="Departments1" Relationship="LussisModel.FK_Department_Employee1" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="Departments2" Relationship="LussisModel.FK_Department_Employee2" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="Department" Relationship="LussisModel.FK_Employee_Department" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="Deputies" Relationship="LussisModel.FK_Deputy_Employee" FromRole="Employee" ToRole="Deputy" />
+          <NavigationProperty Name="Disbursements" Relationship="LussisModel.FK_Disbursement_Employee" FromRole="Employee" ToRole="Disbursement" />
+          <NavigationProperty Name="PurchaseOrders" Relationship="LussisModel.FK_PurchaseOrder_Employee" FromRole="Employee" ToRole="PurchaseOrder" />
+          <NavigationProperty Name="PurchaseOrders1" Relationship="LussisModel.FK_PurchaseOrder_Employee1" FromRole="Employee" ToRole="PurchaseOrder" />
+          <NavigationProperty Name="Requisitions" Relationship="LussisModel.FK_Requisition_Employee1" FromRole="Employee" ToRole="Requisition" />
+          <NavigationProperty Name="Requisitions1" Relationship="LussisModel.FK_Requisition_Employee2" FromRole="Employee" ToRole="Requisition" />
+        </EntityType>
+        <EntityType Name="PurchaseOrder">
+          <Key>
+            <PropertyRef Name="PONo" />
+          </Key>
+          <Property Name="PONo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplierCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrderedBy" Type="Int32" />
+          <Property Name="DateIssued" Type="DateTime" Precision="0" />
+          <Property Name="ApprovedBy" Type="Int32" />
+          <Property Name="DateReviewed" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="LussisModel.FK_PurchaseOrder_Employee" FromRole="PurchaseOrder" ToRole="Employee" />
+          <NavigationProperty Name="Employee1" Relationship="LussisModel.FK_PurchaseOrder_Employee1" FromRole="PurchaseOrder" ToRole="Employee" />
+          <NavigationProperty Name="Supplier" Relationship="LussisModel.FK_PurchaseOrder_Supplier" FromRole="PurchaseOrder" ToRole="Supplier" />
+          <NavigationProperty Name="PurchaseOrderDetails" Relationship="LussisModel.FK_PurchaseOrderDetail_PurchaseOrder" FromRole="PurchaseOrder" ToRole="PurchaseOrderDetail" />
+        </EntityType>
+        <EntityType Name="PurchaseOrderDetail">
+          <Key>
+            <PropertyRef Name="PONo" />
+            <PropertyRef Name="ItemNo" />
+          </Key>
+          <Property Name="PONo" Type="Int32" Nullable="false" />
+          <Property Name="ItemNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Qty" Type="Int32" />
+          <NavigationProperty Name="PurchaseOrder" Relationship="LussisModel.FK_PurchaseOrderDetail_PurchaseOrder" FromRole="PurchaseOrderDetail" ToRole="PurchaseOrder" />
+          <NavigationProperty Name="StationeryCatalogue" Relationship="LussisModel.FK_PurchaseOrderDetail_StationeryCatalogue" FromRole="PurchaseOrderDetail" ToRole="StationeryCatalogue" />
+        </EntityType>
+        <EntityType Name="Requisition">
+          <Key>
+            <PropertyRef Name="ReqNo" />
+          </Key>
+          <Property Name="ReqNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IssuedBy" Type="Int32" />
+          <Property Name="DateIssued" Type="DateTime" Precision="0" />
+          <Property Name="ApprovedBy" Type="Int32" />
+          <Property Name="DateReviewed" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="LussisModel.FK_Requisition_Employee1" FromRole="Requisition" ToRole="Employee" />
+          <NavigationProperty Name="Employee1" Relationship="LussisModel.FK_Requisition_Employee2" FromRole="Requisition" ToRole="Employee" />
+          <NavigationProperty Name="RequisitionDetails" Relationship="LussisModel.FK_RequisitionDetail_Requisition" FromRole="Requisition" ToRole="RequisitionDetail" />
+        </EntityType>
+        <EntityType Name="RequisitionDetail">
+          <Key>
+            <PropertyRef Name="ReqNo" />
+            <PropertyRef Name="ItemNo" />
+          </Key>
+          <Property Name="ReqNo" Type="Int32" Nullable="false" />
+          <Property Name="ItemNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Qty" Type="Int32" />
+          <NavigationProperty Name="Requisition" Relationship="LussisModel.FK_RequisitionDetail_Requisition" FromRole="RequisitionDetail" ToRole="Requisition" />
+          <NavigationProperty Name="StationeryCatalogue" Relationship="LussisModel.FK_RequisitionDetail_StationeryCatalogue" FromRole="RequisitionDetail" ToRole="StationeryCatalogue" />
+        </EntityType>
+        <EntityType Name="Retrieval">
+          <Key>
+            <PropertyRef Name="RetrievalNo" />
+          </Key>
+          <Property Name="RetrievalNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="RetrievalDetails" Relationship="LussisModel.FK_RetrievalDetail_Retrieval" FromRole="Retrieval" ToRole="RetrievalDetail" />
+        </EntityType>
+        <EntityType Name="RetrievalDetail">
+          <Key>
+            <PropertyRef Name="RetrievalNo" />
+            <PropertyRef Name="DeptCode" />
+            <PropertyRef Name="ItemNo" />
+          </Key>
+          <Property Name="RetrievalNo" Type="Int32" Nullable="false" />
+          <Property Name="DeptCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ItemNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Needed" Type="Int32" />
+          <Property Name="BackLogQty" Type="Int32" />
+          <Property Name="Actual" Type="Int32" />
+          <NavigationProperty Name="Department" Relationship="LussisModel.FK_RetrievalDetail_Department" FromRole="RetrievalDetail" ToRole="Department" />
+          <NavigationProperty Name="Retrieval" Relationship="LussisModel.FK_RetrievalDetail_Retrieval" FromRole="RetrievalDetail" ToRole="Retrieval" />
+          <NavigationProperty Name="StationeryCatalogue" Relationship="LussisModel.FK_RetrievalDetail_StationeryCatalogue" FromRole="RetrievalDetail" ToRole="StationeryCatalogue" />
+        </EntityType>
+        <EntityType Name="StationeryCatalogue">
+          <Key>
+            <PropertyRef Name="ItemNo" />
+          </Key>
+          <Property Name="ItemNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Uom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReorderQty" Type="Int32" />
+          <Property Name="ReorderLevel" Type="Int32" />
+          <Property Name="CurrentQty" Type="Int32" />
+          <Property Name="Supplier1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Supplier2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Supplier3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AdjustmentVoucherDetails" Relationship="LussisModel.FK_AdjustmentVoucherDetail_StationeryCatalogue" FromRole="StationeryCatalogue" ToRole="AdjustmentVoucherDetail" />
+          <NavigationProperty Name="BackLogs" Relationship="LussisModel.FK_BackLog_StationeryCatalogue" FromRole="StationeryCatalogue" ToRole="BackLog" />
+          <NavigationProperty Name="DisbursementDetails" Relationship="LussisModel.FK_DisbursementDetail_StationeryCatalogue" FromRole="StationeryCatalogue" ToRole="DisbursementDetail" />
+          <NavigationProperty Name="PurchaseOrderDetails" Relationship="LussisModel.FK_PurchaseOrderDetail_StationeryCatalogue" FromRole="StationeryCatalogue" ToRole="PurchaseOrderDetail" />
+          <NavigationProperty Name="RequisitionDetails" Relationship="LussisModel.FK_RequisitionDetail_StationeryCatalogue" FromRole="StationeryCatalogue" ToRole="RequisitionDetail" />
+          <NavigationProperty Name="RetrievalDetails" Relationship="LussisModel.FK_RetrievalDetail_StationeryCatalogue" FromRole="StationeryCatalogue" ToRole="RetrievalDetail" />
+          <NavigationProperty Name="Supplier" Relationship="LussisModel.FK_StationeryCatalogue_Supplier" FromRole="StationeryCatalogue" ToRole="Supplier" />
+          <NavigationProperty Name="Supplier4" Relationship="LussisModel.FK_StationeryCatalogue_Supplier1" FromRole="StationeryCatalogue" ToRole="Supplier" />
+          <NavigationProperty Name="Supplier5" Relationship="LussisModel.FK_StationeryCatalogue_Supplier2" FromRole="StationeryCatalogue" ToRole="Supplier" />
+          <NavigationProperty Name="StockTxnDetails" Relationship="LussisModel.FK_StockTxnDetail_StationeryCatalogue" FromRole="StationeryCatalogue" ToRole="StockTxnDetail" />
+          <NavigationProperty Name="SupplyTenders" Relationship="LussisModel.FK_SupplyTender_SupplyTender" FromRole="StationeryCatalogue" ToRole="SupplyTender" />
+        </EntityType>
+        <EntityType Name="StockTxnDetail">
+          <Key>
+            <PropertyRef Name="StockTxnDetail1" />
+          </Key>
+          <Property Name="StockTxnDetail1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="AdjustQty" Type="Int32" />
+          <Property Name="RecordedQty" Type="Int32" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="StationeryCatalogue" Relationship="LussisModel.FK_StockTxnDetail_StationeryCatalogue" FromRole="StockTxnDetail" ToRole="StationeryCatalogue" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="SupplierCode" />
+          </Key>
+          <Property Name="SupplierCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNo" Type="Decimal" Precision="7" Scale="0" />
+          <Property Name="FaxNo" Type="Decimal" Precision="7" Scale="0" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="GstNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PurchaseOrders" Relationship="LussisModel.FK_PurchaseOrder_Supplier" FromRole="Supplier" ToRole="PurchaseOrder" />
+          <NavigationProperty Name="StationeryCatalogues" Relationship="LussisModel.FK_StationeryCatalogue_Supplier" FromRole="Supplier" ToRole="StationeryCatalogue" />
+          <NavigationProperty Name="StationeryCatalogues1" Relationship="LussisModel.FK_StationeryCatalogue_Supplier1" FromRole="Supplier" ToRole="StationeryCatalogue" />
+          <NavigationProperty Name="StationeryCatalogues2" Relationship="LussisModel.FK_StationeryCatalogue_Supplier2" FromRole="Supplier" ToRole="StationeryCatalogue" />
+          <NavigationProperty Name="SupplyTenders" Relationship="LussisModel.FK_SupplyTender_Supplier" FromRole="Supplier" ToRole="SupplyTender" />
+        </EntityType>
+        <EntityType Name="SupplyTender">
+          <Key>
+            <PropertyRef Name="ItemNo" />
+            <PropertyRef Name="SupplierCode" />
+          </Key>
+          <Property Name="ItemNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="StationeryCatalogue" Relationship="LussisModel.FK_SupplyTender_SupplyTender" FromRole="SupplyTender" ToRole="StationeryCatalogue" />
+          <NavigationProperty Name="Supplier" Relationship="LussisModel.FK_SupplyTender_Supplier" FromRole="SupplyTender" ToRole="Supplier" />
+        </EntityType>
+        <Association Name="FK_AdjustmentVoucher_Employee">
+          <End Type="LussisModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="LussisModel.AdjustmentVoucher" Role="AdjustmentVoucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="AdjustmentVoucher">
+              <PropertyRef Name="ApproveEmpNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdjustmentVoucher_Employee1">
+          <End Type="LussisModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="LussisModel.AdjustmentVoucher" Role="AdjustmentVoucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="AdjustmentVoucher">
+              <PropertyRef Name="IssueEmpNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdjustmentVoucherDetail_AdjustmentVoucher">
+          <End Type="LussisModel.AdjustmentVoucher" Role="AdjustmentVoucher" Multiplicity="1" />
+          <End Type="LussisModel.AdjustmentVoucherDetail" Role="AdjustmentVoucherDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdjustmentVoucher">
+              <PropertyRef Name="AvNo" />
+            </Principal>
+            <Dependent Role="AdjustmentVoucherDetail">
+              <PropertyRef Name="AvNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdjustmentVoucherDetail_StationeryCatalogue">
+          <End Type="LussisModel.StationeryCatalogue" Role="StationeryCatalogue" Multiplicity="1" />
+          <End Type="LussisModel.AdjustmentVoucherDetail" Role="AdjustmentVoucherDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StationeryCatalogue">
+              <PropertyRef Name="ItemNo" />
+            </Principal>
+            <Dependent Role="AdjustmentVoucherDetail">
+              <PropertyRef Name="ItemNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BackLog_Department">
+          <End Type="LussisModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="LussisModel.BackLog" Role="BackLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DeptCode" />
+            </Principal>
+            <Dependent Role="BackLog">
+              <PropertyRef Name="DeptCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BackLog_StationeryCatalogue">
+          <End Type="LussisModel.StationeryCatalogue" Role="StationeryCatalogue" Multiplicity="1" />
+          <End Type="LussisModel.BackLog" Role="BackLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StationeryCatalogue">
+              <PropertyRef Name="ItemNo" />
+            </Principal>
+            <Dependent Role="BackLog">
+              <PropertyRef Name="ItemNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_Department">
+          <End Type="LussisModel.CollectionPoint" Role="CollectionPoint" Multiplicity="0..1" />
+          <End Type="LussisModel.Department" Role="Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CollectionPoint">
+              <PropertyRef Name="CollectionPointNo" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="CollectionPointNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursement_CollectionPoint">
+          <End Type="LussisModel.CollectionPoint" Role="CollectionPoint" Multiplicity="0..1" />
+          <End Type="LussisModel.Disbursement" Role="Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CollectionPoint">
+              <PropertyRef Name="CollectionPointNo" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="CollectionPointNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_Employee">
+          <End Type="LussisModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="LussisModel.Department" Role="Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="HeadEmpNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_Employee1">
+          <End Type="LussisModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="LussisModel.Department" Role="Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="RepEmpNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_Employee2">
+          <End Type="LussisModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="LussisModel.Department" Role="Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="DeputyEmpNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deputy_Department">
+          <End Type="LussisModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="LussisModel.Deputy" Role="Deputy" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DeptCode" />
+            </Principal>
+            <Dependent Role="Deputy">
+              <PropertyRef Name="DeptCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursement_Department">
+          <End Type="LussisModel.Department" Role="Department" Multiplicity="0..1" />
+          <End Type="LussisModel.Disbursement" Role="Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DeptCode" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="DeptCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Department">
+          <End Type="LussisModel.Department" Role="Department" Multiplicity="0..1" />
+          <End Type="LussisModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DeptCode" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="DeptCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RetrievalDetail_Department">
+          <End Type="LussisModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="LussisModel.RetrievalDetail" Role="RetrievalDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DeptCode" />
+            </Principal>
+            <Dependent Role="RetrievalDetail">
+              <PropertyRef Name="DeptCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deputy_Employee">
+          <End Type="LussisModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="LussisModel.Deputy" Role="Deputy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="Deputy">
+              <PropertyRef Name="DeputyEmpNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Disbursement_Employee">
+          <End Type="LussisModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="LussisModel.Disbursement" Role="Disbursement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="Disbursement">
+              <PropertyRef Name="RepEmpNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementDetail_Disbursement">
+          <End Type="LussisModel.Disbursement" Role="Disbursement" Multiplicity="1" />
+          <End Type="LussisModel.DisbursementDetail" Role="DisbursementDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Disbursement">
+              <PropertyRef Name="DisbursementNo" />
+            </Principal>
+            <Dependent Role="DisbursementDetail">
+              <PropertyRef Name="DisbursementNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DisbursementDetail_StationeryCatalogue">
+          <End Type="LussisModel.StationeryCatalogue" Role="StationeryCatalogue" Multiplicity="1" />
+          <End Type="LussisModel.DisbursementDetail" Role="DisbursementDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StationeryCatalogue">
+              <PropertyRef Name="ItemNo" />
+            </Principal>
+            <Dependent Role="DisbursementDetail">
+              <PropertyRef Name="ItemNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrder_Employee">
+          <End Type="LussisModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="LussisModel.PurchaseOrder" Role="PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="PurchaseOrder">
+              <PropertyRef Name="ApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrder_Employee1">
+          <End Type="LussisModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="LussisModel.PurchaseOrder" Role="PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="PurchaseOrder">
+              <PropertyRef Name="OrderedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requisition_Employee1">
+          <End Type="LussisModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="LussisModel.Requisition" Role="Requisition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="Requisition">
+              <PropertyRef Name="IssuedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requisition_Employee2">
+          <End Type="LussisModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="LussisModel.Requisition" Role="Requisition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="Requisition">
+              <PropertyRef Name="ApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrder_Supplier">
+          <End Type="LussisModel.Supplier" Role="Supplier" Multiplicity="0..1" />
+          <End Type="LussisModel.PurchaseOrder" Role="PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierCode" />
+            </Principal>
+            <Dependent Role="PurchaseOrder">
+              <PropertyRef Name="SupplierCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderDetail_PurchaseOrder">
+          <End Type="LussisModel.PurchaseOrder" Role="PurchaseOrder" Multiplicity="1" />
+          <End Type="LussisModel.PurchaseOrderDetail" Role="PurchaseOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrder">
+              <PropertyRef Name="PONo" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetail">
+              <PropertyRef Name="PONo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrderDetail_StationeryCatalogue">
+          <End Type="LussisModel.StationeryCatalogue" Role="StationeryCatalogue" Multiplicity="1" />
+          <End Type="LussisModel.PurchaseOrderDetail" Role="PurchaseOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StationeryCatalogue">
+              <PropertyRef Name="ItemNo" />
+            </Principal>
+            <Dependent Role="PurchaseOrderDetail">
+              <PropertyRef Name="ItemNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequisitionDetail_Requisition">
+          <End Type="LussisModel.Requisition" Role="Requisition" Multiplicity="1" />
+          <End Type="LussisModel.RequisitionDetail" Role="RequisitionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Requisition">
+              <PropertyRef Name="ReqNo" />
+            </Principal>
+            <Dependent Role="RequisitionDetail">
+              <PropertyRef Name="ReqNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequisitionDetail_StationeryCatalogue">
+          <End Type="LussisModel.StationeryCatalogue" Role="StationeryCatalogue" Multiplicity="1" />
+          <End Type="LussisModel.RequisitionDetail" Role="RequisitionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StationeryCatalogue">
+              <PropertyRef Name="ItemNo" />
+            </Principal>
+            <Dependent Role="RequisitionDetail">
+              <PropertyRef Name="ItemNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RetrievalDetail_Retrieval">
+          <End Type="LussisModel.Retrieval" Role="Retrieval" Multiplicity="1" />
+          <End Type="LussisModel.RetrievalDetail" Role="RetrievalDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Retrieval">
+              <PropertyRef Name="RetrievalNo" />
+            </Principal>
+            <Dependent Role="RetrievalDetail">
+              <PropertyRef Name="RetrievalNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RetrievalDetail_StationeryCatalogue">
+          <End Type="LussisModel.StationeryCatalogue" Role="StationeryCatalogue" Multiplicity="1" />
+          <End Type="LussisModel.RetrievalDetail" Role="RetrievalDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StationeryCatalogue">
+              <PropertyRef Name="ItemNo" />
+            </Principal>
+            <Dependent Role="RetrievalDetail">
+              <PropertyRef Name="ItemNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StationeryCatalogue_Supplier">
+          <End Type="LussisModel.Supplier" Role="Supplier" Multiplicity="0..1" />
+          <End Type="LussisModel.StationeryCatalogue" Role="StationeryCatalogue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierCode" />
+            </Principal>
+            <Dependent Role="StationeryCatalogue">
+              <PropertyRef Name="Supplier1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StationeryCatalogue_Supplier1">
+          <End Type="LussisModel.Supplier" Role="Supplier" Multiplicity="0..1" />
+          <End Type="LussisModel.StationeryCatalogue" Role="StationeryCatalogue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierCode" />
+            </Principal>
+            <Dependent Role="StationeryCatalogue">
+              <PropertyRef Name="Supplier2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StationeryCatalogue_Supplier2">
+          <End Type="LussisModel.Supplier" Role="Supplier" Multiplicity="0..1" />
+          <End Type="LussisModel.StationeryCatalogue" Role="StationeryCatalogue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierCode" />
+            </Principal>
+            <Dependent Role="StationeryCatalogue">
+              <PropertyRef Name="Supplier3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StockTxnDetail_StationeryCatalogue">
+          <End Type="LussisModel.StationeryCatalogue" Role="StationeryCatalogue" Multiplicity="0..1" />
+          <End Type="LussisModel.StockTxnDetail" Role="StockTxnDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StationeryCatalogue">
+              <PropertyRef Name="ItemNo" />
+            </Principal>
+            <Dependent Role="StockTxnDetail">
+              <PropertyRef Name="ItemNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplyTender_SupplyTender">
+          <End Type="LussisModel.StationeryCatalogue" Role="StationeryCatalogue" Multiplicity="1" />
+          <End Type="LussisModel.SupplyTender" Role="SupplyTender" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StationeryCatalogue">
+              <PropertyRef Name="ItemNo" />
+            </Principal>
+            <Dependent Role="SupplyTender">
+              <PropertyRef Name="ItemNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplyTender_Supplier">
+          <End Type="LussisModel.Supplier" Role="Supplier" Multiplicity="1" />
+          <End Type="LussisModel.SupplyTender" Role="SupplyTender" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierCode" />
+            </Principal>
+            <Dependent Role="SupplyTender">
+              <PropertyRef Name="SupplierCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -783,6 +2450,220 @@
               <ScalarProperty Name="UserId" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="AdjustmentVouchers">
+            <EntityTypeMapping TypeName="LussisModel.AdjustmentVoucher">
+              <MappingFragment StoreEntitySet="AdjustmentVoucher">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ApproveEmpNo" ColumnName="ApproveEmpNo" />
+                <ScalarProperty Name="IssueEmpNo" ColumnName="IssueEmpNo" />
+                <ScalarProperty Name="DateIssued" ColumnName="DateIssued" />
+                <ScalarProperty Name="AvNo" ColumnName="AvNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdjustmentVoucherDetails">
+            <EntityTypeMapping TypeName="LussisModel.AdjustmentVoucherDetail">
+              <MappingFragment StoreEntitySet="AdjustmentVoucherDetail">
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
+                <ScalarProperty Name="AvNo" ColumnName="AvNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BackLogs">
+            <EntityTypeMapping TypeName="LussisModel.BackLog">
+              <MappingFragment StoreEntitySet="BackLog">
+                <ScalarProperty Name="BackLogQty" ColumnName="BackLogQty" />
+                <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
+                <ScalarProperty Name="DeptCode" ColumnName="DeptCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CollectionPoints">
+            <EntityTypeMapping TypeName="LussisModel.CollectionPoint">
+              <MappingFragment StoreEntitySet="CollectionPoint">
+                <ScalarProperty Name="CollectionPointDetails" ColumnName="CollectionPointDetails" />
+                <ScalarProperty Name="CollectionPointNo" ColumnName="CollectionPointNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="LussisModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="DeputyEmpNo" ColumnName="DeputyEmpNo" />
+                <ScalarProperty Name="RepEmpNo" ColumnName="RepEmpNo" />
+                <ScalarProperty Name="CollectionPointNo" ColumnName="CollectionPointNo" />
+                <ScalarProperty Name="HeadEmpNo" ColumnName="HeadEmpNo" />
+                <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+                <ScalarProperty Name="DeptCode" ColumnName="DeptCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Deputies">
+            <EntityTypeMapping TypeName="LussisModel.Deputy">
+              <MappingFragment StoreEntitySet="Deputy">
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="DeputyEmpNo" ColumnName="DeputyEmpNo" />
+                <ScalarProperty Name="DeptCode" ColumnName="DeptCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Disbursements">
+            <EntityTypeMapping TypeName="LussisModel.Disbursement">
+              <MappingFragment StoreEntitySet="Disbursement">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Pin" ColumnName="Pin" />
+                <ScalarProperty Name="CollectionPointNo" ColumnName="CollectionPointNo" />
+                <ScalarProperty Name="RepEmpNo" ColumnName="RepEmpNo" />
+                <ScalarProperty Name="DisbursementDate" ColumnName="DisbursementDate" />
+                <ScalarProperty Name="DeptCode" ColumnName="DeptCode" />
+                <ScalarProperty Name="DisbursementNo" ColumnName="DisbursementNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DisbursementDetails">
+            <EntityTypeMapping TypeName="LussisModel.DisbursementDetail">
+              <MappingFragment StoreEntitySet="DisbursementDetail">
+                <ScalarProperty Name="Received" ColumnName="Received" />
+                <ScalarProperty Name="Promised" ColumnName="Promised" />
+                <ScalarProperty Name="Needed" ColumnName="Needed" />
+                <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
+                <ScalarProperty Name="DisbursementNo" ColumnName="DisbursementNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="LussisModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="SessionExpiry" ColumnName="SessionExpiry" />
+                <ScalarProperty Name="SessionNo" ColumnName="SessionNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DeptCode" ColumnName="DeptCode" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrders">
+            <EntityTypeMapping TypeName="LussisModel.PurchaseOrder">
+              <MappingFragment StoreEntitySet="PurchaseOrder">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateReviewed" ColumnName="DateReviewed" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="DateIssued" ColumnName="DateIssued" />
+                <ScalarProperty Name="OrderedBy" ColumnName="OrderedBy" />
+                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
+                <ScalarProperty Name="PONo" ColumnName="PONo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrderDetails">
+            <EntityTypeMapping TypeName="LussisModel.PurchaseOrderDetail">
+              <MappingFragment StoreEntitySet="PurchaseOrderDetail">
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
+                <ScalarProperty Name="PONo" ColumnName="PONo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requisitions">
+            <EntityTypeMapping TypeName="LussisModel.Requisition">
+              <MappingFragment StoreEntitySet="Requisition">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateReviewed" ColumnName="DateReviewed" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="DateIssued" ColumnName="DateIssued" />
+                <ScalarProperty Name="IssuedBy" ColumnName="IssuedBy" />
+                <ScalarProperty Name="ReqNo" ColumnName="ReqNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequisitionDetails">
+            <EntityTypeMapping TypeName="LussisModel.RequisitionDetail">
+              <MappingFragment StoreEntitySet="RequisitionDetail">
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
+                <ScalarProperty Name="ReqNo" ColumnName="ReqNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Retrievals">
+            <EntityTypeMapping TypeName="LussisModel.Retrieval">
+              <MappingFragment StoreEntitySet="Retrieval">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="RetrievalNo" ColumnName="RetrievalNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RetrievalDetails">
+            <EntityTypeMapping TypeName="LussisModel.RetrievalDetail">
+              <MappingFragment StoreEntitySet="RetrievalDetail">
+                <ScalarProperty Name="Actual" ColumnName="Actual" />
+                <ScalarProperty Name="BackLogQty" ColumnName="BackLogQty" />
+                <ScalarProperty Name="Needed" ColumnName="Needed" />
+                <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
+                <ScalarProperty Name="DeptCode" ColumnName="DeptCode" />
+                <ScalarProperty Name="RetrievalNo" ColumnName="RetrievalNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StationeryCatalogues">
+            <EntityTypeMapping TypeName="LussisModel.StationeryCatalogue">
+              <MappingFragment StoreEntitySet="StationeryCatalogue">
+                <ScalarProperty Name="Supplier3" ColumnName="Supplier3" />
+                <ScalarProperty Name="Supplier2" ColumnName="Supplier2" />
+                <ScalarProperty Name="Supplier1" ColumnName="Supplier1" />
+                <ScalarProperty Name="CurrentQty" ColumnName="CurrentQty" />
+                <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
+                <ScalarProperty Name="ReorderQty" ColumnName="ReorderQty" />
+                <ScalarProperty Name="Uom" ColumnName="Uom" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StockTxnDetails">
+            <EntityTypeMapping TypeName="LussisModel.StockTxnDetail">
+              <MappingFragment StoreEntitySet="StockTxnDetail">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="RecordedQty" ColumnName="RecordedQty" />
+                <ScalarProperty Name="AdjustQty" ColumnName="AdjustQty" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
+                <ScalarProperty Name="StockTxnDetail1" ColumnName="StockTxnDetail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="LussisModel.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="GstNo" ColumnName="GstNo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplyTenders">
+            <EntityTypeMapping TypeName="LussisModel.SupplyTender">
+              <MappingFragment StoreEntitySet="SupplyTender">
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
+                <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
