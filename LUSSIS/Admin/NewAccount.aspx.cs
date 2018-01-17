@@ -20,7 +20,7 @@ public partial class Admin_NewAccount : System.Web.UI.Page
             String username = Username.Text;
             String password = Password.Text;
             String employeeID = EmployeeID.Text;
-
+            
             // Create Login
             MembershipCreateStatus result;
             MembershipUser newUser = Membership.CreateUser(username, password, "", "?", "!", true, out result);

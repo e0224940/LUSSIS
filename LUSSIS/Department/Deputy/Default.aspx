@@ -4,7 +4,5 @@
 </asp:Content>
 
 <asp:Content ID="ContentBody" ContentPlaceHolderID="body" runat="server">
-    <form runat="server">
-
-    </form>
+    
 </asp:Content>

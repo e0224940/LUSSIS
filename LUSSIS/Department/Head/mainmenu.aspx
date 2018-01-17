@@ -1,10 +1,10 @@
 ﻿<!--  if(!System.Web.HttpContext.Current.User.IsInRole("rolenamehere")) {  -->
 <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu1
+    <a href="<%= Page.ResolveUrl("~/Department/Head/Default.aspx") %>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Head
         <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
-        <li><a href="#">Submenu1</a></li>
+        <li><a href="<%= Page.ResolveUrl("~/Department/Head/Default.aspx") %>">Submenu1</a></li>
     </ul>
 </li>
 <!-- } -->
