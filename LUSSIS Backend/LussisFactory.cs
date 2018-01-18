@@ -19,7 +19,7 @@ namespace LUSSIS_Backend
     {
         private static ILussis backend = null;
         public static ILussis GetBackend()
-        {
+        {   
             if(backend == null)
             {
                 // TODO : Change from Stub to Actual Implementation in the final stages of the project
