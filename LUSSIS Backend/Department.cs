@@ -34,10 +34,9 @@ namespace LUSSIS_Backend
     
         public virtual ICollection<BackLog> BackLogs { get; set; }
         public virtual CollectionPoint CollectionPoint { get; set; }
-        public virtual Employee Employee { get; set; }
-        public virtual Employee Employee1 { get; set; }
-        public virtual Employee Employee2 { get; set; }
-        public virtual Deputy Deputy { get; set; }
+        public virtual Employee EmployeeHead { get; set; }
+        public virtual Employee EmployeeRepresentative { get; set; }
+        public virtual Employee EmployeeDeputy { get; set; }
         public virtual ICollection<Disbursement> Disbursements { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
         public virtual ICollection<RetrievalDetail> RetrievalDetails { get; set; }

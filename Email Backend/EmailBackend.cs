@@ -17,7 +17,7 @@ namespace Email_Backend
         private static string senderPassword = "******";
 
         // WARNING : THIS FUNCTION IS UNTESTED!
-        public static void sendEmailSteps(String recipientEmail, String emailSubject, String emailContent)
+        public static void sendEmailStep(String recipientEmail, String emailSubject, String emailContent)
         {
             new Thread(() =>
            {

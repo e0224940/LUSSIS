@@ -29,7 +29,7 @@ public partial class Admin_NewAccount : System.Web.UI.Page
             ProfileCommon p = (ProfileCommon)ProfileCommon.Create(username, true);
 
             // TODO : CHECK IF EMPLOYEE NUMBER EXISTS
-            p.EmpNo = employeeID;
+            p.EmpNo = Convert.ToInt32(employeeID);
 
             // Update The Profile
             p.Save();

@@ -27,8 +27,8 @@ namespace LUSSIS_Backend
         public string Status { get; set; }
         public string Remarks { get; set; }
     
-        public virtual Employee Employee { get; set; }
-        public virtual Employee Employee1 { get; set; }
+        public virtual Employee EmployeeWhoIssued { get; set; }
+        public virtual Employee EmployeeWhoApproved { get; set; }
         public virtual ICollection<RequisitionDetail> RequisitionDetails { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace LUSSIS_Backend
         public string ItemNo { get; set; }
         public Nullable<int> Qty { get; set; }
     
-        public virtual Requisition Requisition { get; set; }
-        public virtual StationeryCatalogue StationeryCatalogue { get; set; }
+        public virtual Requisition RequisitionInfo { get; set; }
+        public virtual StationeryCatalogue StationeryItem { get; set; }
     }
 }

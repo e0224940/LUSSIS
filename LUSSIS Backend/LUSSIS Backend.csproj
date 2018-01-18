@@ -48,12 +48,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RejectRequisitionController.cs" />
+    <Compile Include="AcceptRequisitionController.cs" />
     <Compile Include="AdjustmentVoucher.cs">
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AdjustmentVoucherDetail.cs">
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AndroidAuthenticationController.cs" />
     <Compile Include="aspnet_Applications.cs">
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
@@ -105,9 +108,6 @@
     <Compile Include="Employee.cs">
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ILussis.cs" />
-    <Compile Include="LussisImpl.cs" />
-    <Compile Include="LussisFactory.cs" />
     <Compile Include="LussisModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -148,13 +148,14 @@
     <Compile Include="StockTxnDetail.cs">
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="StubImpl.cs" />
     <Compile Include="Supplier.cs">
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SupplyTender.cs">
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewPendingRequisitionsController.cs" />
+    <Compile Include="ViewRequisitionDetailsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="LussisModel.edmx">
@@ -183,6 +184,15 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Email Backend\LUSSIS Email Backend.csproj">
+      <Project>{a9d5b1c9-69db-49b3-a4b8-6f207234ebd8}</Project>
+      <Name>LUSSIS Email Backend</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

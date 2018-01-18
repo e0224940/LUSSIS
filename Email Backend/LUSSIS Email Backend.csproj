@@ -41,13 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmailBackend.cs" />
+    <Compile Include="EmailTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LUSSIS Backend\LUSSIS Backend.csproj">
-      <Project>{f429be15-ef6e-4404-8767-4245b7e4f8bf}</Project>
-      <Name>LUSSIS Backend</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1657,10 +1657,9 @@
           <Property Name="DeputyEmpNo" Type="Int32" />
           <NavigationProperty Name="BackLogs" Relationship="LussisModel.FK_BackLog_Department" FromRole="Department" ToRole="BackLog" />
           <NavigationProperty Name="CollectionPoint" Relationship="LussisModel.FK_Department_Department" FromRole="Department" ToRole="CollectionPoint" />
-          <NavigationProperty Name="Employee" Relationship="LussisModel.FK_Department_Employee" FromRole="Department" ToRole="Employee" />
-          <NavigationProperty Name="Employee1" Relationship="LussisModel.FK_Department_Employee1" FromRole="Department" ToRole="Employee" />
-          <NavigationProperty Name="Employee2" Relationship="LussisModel.FK_Department_Employee2" FromRole="Department" ToRole="Employee" />
-          <NavigationProperty Name="Deputy" Relationship="LussisModel.FK_Deputy_Department" FromRole="Department" ToRole="Deputy" />
+          <NavigationProperty Name="EmployeeHead" Relationship="LussisModel.FK_Department_Employee" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeRepresentative" Relationship="LussisModel.FK_Department_Employee1" FromRole="Department" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeDeputy" Relationship="LussisModel.FK_Department_Employee2" FromRole="Department" ToRole="Employee" />
           <NavigationProperty Name="Disbursements" Relationship="LussisModel.FK_Disbursement_Department" FromRole="Department" ToRole="Disbursement" />
           <NavigationProperty Name="Employees" Relationship="LussisModel.FK_Employee_Department" FromRole="Department" ToRole="Employee" />
           <NavigationProperty Name="RetrievalDetails" Relationship="LussisModel.FK_RetrievalDetail_Department" FromRole="Department" ToRole="RetrievalDetail" />
@@ -1767,8 +1766,8 @@
           <Property Name="DateReviewed" Type="DateTime" Precision="0" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Employee" Relationship="LussisModel.FK_Requisition_Employee1" FromRole="Requisition" ToRole="Employee" />
-          <NavigationProperty Name="Employee1" Relationship="LussisModel.FK_Requisition_Employee2" FromRole="Requisition" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeWhoIssued" Relationship="LussisModel.FK_Requisition_Employee1" FromRole="Requisition" ToRole="Employee" />
+          <NavigationProperty Name="EmployeeWhoApproved" Relationship="LussisModel.FK_Requisition_Employee2" FromRole="Requisition" ToRole="Employee" />
           <NavigationProperty Name="RequisitionDetails" Relationship="LussisModel.FK_RequisitionDetail_Requisition" FromRole="Requisition" ToRole="RequisitionDetail" />
         </EntityType>
         <EntityType Name="RequisitionDetail">
@@ -1779,8 +1778,8 @@
           <Property Name="ReqNo" Type="Int32" Nullable="false" />
           <Property Name="ItemNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Qty" Type="Int32" />
-          <NavigationProperty Name="Requisition" Relationship="LussisModel.FK_RequisitionDetail_Requisition" FromRole="RequisitionDetail" ToRole="Requisition" />
-          <NavigationProperty Name="StationeryCatalogue" Relationship="LussisModel.FK_RequisitionDetail_StationeryCatalogue" FromRole="RequisitionDetail" ToRole="StationeryCatalogue" />
+          <NavigationProperty Name="RequisitionInfo" Relationship="LussisModel.FK_RequisitionDetail_Requisition" FromRole="RequisitionDetail" ToRole="Requisition" />
+          <NavigationProperty Name="StationeryItem" Relationship="LussisModel.FK_RequisitionDetail_StationeryCatalogue" FromRole="RequisitionDetail" ToRole="StationeryCatalogue" />
         </EntityType>
         <EntityType Name="Retrieval">
           <Key>
