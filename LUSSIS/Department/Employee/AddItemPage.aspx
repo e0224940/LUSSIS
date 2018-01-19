@@ -8,23 +8,42 @@
     <div style="float: right">
         <asp:TextBox ID="SearchItem" runat="server"></asp:TextBox>
     <asp:Button ID="Search" runat="server" Text="Search" />
-        <br />
-    <asp:Label ID="Label1" runat="server" Text="Quantity:"></asp:Label>
-   
-    <asp:TextBox ID="Quantity" runat="server" Width="50px"></asp:TextBox>
-     <br />
     <asp:Button ID="Confirm" runat="server" OnClick="Confirm_Click" Text="Confirm" />
     </div>
     <div>
     
     <br />
     <br />
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="LUSSIS" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
-        <Columns>
-            <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
-        </Columns>
-    </asp:GridView>
-    &nbsp;<asp:SqlDataSource ID="LUSSIS" runat="server" ConnectionString="<%$ ConnectionStrings:LussisConnectionString %>" SelectCommand="SELECT [Description] FROM [StationeryCatalogue]"></asp:SqlDataSource>
-    <br />
+                <asp:GridView   GridLines="None" runat="server" ID="StationeryGridView" AutoGenerateColumns="False" OnSelectedIndexChanged="StationeryGridView_SelectedIndexChanged">
+                <Columns>
+                    <asp:BoundField DataField="Description" HeaderText="Description:" SortExpression="Description" />
+                    <asp:TemplateField HeaderText="Quantity:">
+                     <ItemTemplate>
+                        <asp:TextBox ID="Quantity" runat="server" ></asp:TextBox>
+                    </ItemTemplate>
+                        </asp:TemplateField>
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:Label ID="successLabel" runat="server" Text="Success!" Visible="false">
+                            </asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:CommandField ShowSelectButton="true" />
+                </Columns>
+                
+            </asp:GridView>
+   
+  
+        <asp:GridView   GridLines="None" runat="server" ID="Cart" AutoGenerateColumns="False">
+          <Columns>
+            <asp:TemplateField HeaderText="Description:">
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Quantity:">
+            </asp:TemplateField>
+
+          </Columns>
+        </asp:GridView>
+   
+  
         </div>
 </asp:Content>

@@ -154,6 +154,7 @@
     <Compile Include="SupplyTender.cs">
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeController.cs" />
     <Compile Include="ViewPendingRequisitionsController.cs" />
     <Compile Include="ViewRequisitionDetailsController.cs" />
   </ItemGroup>
