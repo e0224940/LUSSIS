@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ItemList.cs" />
     <Compile Include="RejectRequisitionController.cs" />
     <Compile Include="AcceptRequisitionController.cs" />
     <Compile Include="AdjustmentVoucher.cs">

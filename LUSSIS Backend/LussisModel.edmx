@@ -306,12 +306,13 @@
           <Property Name="Supplier1" Type="nvarchar" MaxLength="50" />
           <Property Name="Supplier2" Type="nvarchar" MaxLength="50" />
           <Property Name="Supplier3" Type="nvarchar" MaxLength="50" />
+          <Property Name="Bin" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="StockTxnDetail">
           <Key>
-            <PropertyRef Name="StockTxnDetail" />
+            <PropertyRef Name="StockTxnNo" />
           </Key>
-          <Property Name="StockTxnDetail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StockTxnNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ItemNo" Type="nvarchar" MaxLength="50" />
           <Property Name="Date" Type="date" />
           <Property Name="AdjustQty" Type="int" />
@@ -1830,18 +1831,19 @@
           <NavigationProperty Name="Supplier5" Relationship="LussisModel.FK_StationeryCatalogue_Supplier2" FromRole="StationeryCatalogue" ToRole="Supplier" />
           <NavigationProperty Name="StockTxnDetails" Relationship="LussisModel.FK_StockTxnDetail_StationeryCatalogue" FromRole="StationeryCatalogue" ToRole="StockTxnDetail" />
           <NavigationProperty Name="SupplyTenders" Relationship="LussisModel.FK_SupplyTender_SupplyTender" FromRole="StationeryCatalogue" ToRole="SupplyTender" />
+          <Property Name="Bin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="StockTxnDetail">
           <Key>
-            <PropertyRef Name="StockTxnDetail1" />
+            <PropertyRef Name="StockTxnNo" />
           </Key>
-          <Property Name="StockTxnDetail1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ItemNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Date" Type="DateTime" Precision="0" />
           <Property Name="AdjustQty" Type="Int32" />
           <Property Name="RecordedQty" Type="Int32" />
           <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="StationeryCatalogue" Relationship="LussisModel.FK_StockTxnDetail_StationeryCatalogue" FromRole="StockTxnDetail" ToRole="StationeryCatalogue" />
+          <Property Name="StockTxnNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="Supplier">
           <Key>
@@ -2616,6 +2618,7 @@
           <EntitySetMapping Name="StationeryCatalogues">
             <EntityTypeMapping TypeName="LussisModel.StationeryCatalogue">
               <MappingFragment StoreEntitySet="StationeryCatalogue">
+                <ScalarProperty Name="Bin" ColumnName="Bin" />
                 <ScalarProperty Name="Supplier3" ColumnName="Supplier3" />
                 <ScalarProperty Name="Supplier2" ColumnName="Supplier2" />
                 <ScalarProperty Name="Supplier1" ColumnName="Supplier1" />
@@ -2632,12 +2635,12 @@
           <EntitySetMapping Name="StockTxnDetails">
             <EntityTypeMapping TypeName="LussisModel.StockTxnDetail">
               <MappingFragment StoreEntitySet="StockTxnDetail">
+                <ScalarProperty Name="StockTxnNo" ColumnName="StockTxnNo" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="RecordedQty" ColumnName="RecordedQty" />
                 <ScalarProperty Name="AdjustQty" ColumnName="AdjustQty" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
-                <ScalarProperty Name="StockTxnDetail1" ColumnName="StockTxnDetail" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
