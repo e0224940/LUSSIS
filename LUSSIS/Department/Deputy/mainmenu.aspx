@@ -4,10 +4,8 @@
         <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
-        <li><a href="<%= Page.ResolveUrl("~/Department/Deputy/Default.aspx") %>">Submenu1</a></li>
-    </ul>
-    <ul class="dropdown-menu">
         <li><a href="<%= Page.ResolveUrl("~/Department/Deputy/ViewAllPendingRequisitions.aspx") %>">Pending Requisitions</a></li>
+        <li><a href="<%= Page.ResolveUrl("~/Department/Deputy/SelectRepresentative.aspx") %>">Select Representative</a></li>
     </ul>
 </li>
 <!-- } -->
