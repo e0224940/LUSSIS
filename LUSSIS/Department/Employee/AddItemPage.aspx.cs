@@ -19,7 +19,7 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
 
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        string des = GridView1.SelectedRow.ToString();
+       // string des = GridView1.SelectedRow.ToString();
 
     }
 }
