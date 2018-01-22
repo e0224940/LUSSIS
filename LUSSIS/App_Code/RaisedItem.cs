@@ -11,6 +11,7 @@ public class RaisedItem
     public string description {get; set;}
 
     public string quantity { get; set; }
+    public string ItemNo { get; set; }
     public RaisedItem()
     {
         //

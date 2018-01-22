@@ -18,7 +18,7 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
         date.Text = DateTime.Today.ToString("d");
         if (!IsPostBack)
         {
-            
+
             string empName = EmployeeController.GetName(empNo);
             NameLB.Text = empName;
             StationeryGridView.Visible = true;
@@ -33,13 +33,13 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
 
     protected void Confirm_Click(object sender, EventArgs e)
     {
-        
+
     }
 
     protected void StationeryGridView_SelectedIndexChanged(object sender, EventArgs e)
     {
         GridViewRow row = StationeryGridView.SelectedRow;
-        RaisedItem cart = new RaisedItem(); 
+        RaisedItem cart = new RaisedItem();
         cart.description = row.Cells[0].Text;
         cart.quantity = (row.Cells[1].FindControl("Quantity") as TextBox).Text;
         cartitem.Add(cart);
@@ -61,7 +61,7 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
             else if (StationeryGridView.Rows[i].ToString() == name)
             {
                 RaisedItem search = new RaisedItem();
-                search.description =StationeryGridView.Rows[i].Cells[0].Text;
+                search.description = StationeryGridView.Rows[i].Cells[0].Text;
                 StationeryGridView.Visible = false;
                 SearchRes.Visible = true;
                 searchitem.Add(search);
@@ -77,5 +77,37 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
     protected void Cancel_Click(object sender, EventArgs e)
     {
 
+    }
+
+    //protected void BindGrid()
+    //{
+    //    Cart.DataSource = ViewState["dt"] as DataTable;
+
+    //}
+
+    protected void Cart_GridViewDelete(object sender, GridViewDeletedEventArgs e)
+    {
+        //GridViewRow row1 = Cart.SelectedRow;
+        //RaisedItem cart1 = new RaisedItem();
+        //cart1.description = row1.Cells[0].Text;
+        ////cart1.quantity = (row.Cells[1].FindControl("Quantity") as TextBox).Text;
+
+        //// cartitem.Add(cart);
+        ////cartitem.Remove(cart);
+        //Cart.DataSource = cartitem;
+        //Cart.DataBind();
+
+
+        //if (e.CommandName == "delete")
+        //{
+        //    string id = e.CommandArgument.toString();
+        //}
+        //GridViewRow row1 = Cart.SelectedRow;
+        //cartitem.RemoveAt(row1);
+
+        int row = Cart.SelectedIndex;
+        cartitem.RemoveAt(row);
+        Cart.DataSource = cartitem;
+        Cart.DataBind();
     }
 }
