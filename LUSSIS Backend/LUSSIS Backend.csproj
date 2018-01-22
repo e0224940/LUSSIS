@@ -155,6 +155,7 @@
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EmployeeController.cs" />
+    <Compile Include="UpdateCollectionPoint.cs" />
     <Compile Include="UpdateRepresentativeController.cs" />
     <Compile Include="ViewPendingRequisitionsController.cs" />
     <Compile Include="ViewRequisitionDetailsController.cs" />
