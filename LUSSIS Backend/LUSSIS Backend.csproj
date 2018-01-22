@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ItemList.cs" />
     <Compile Include="RejectRequisitionController.cs" />
     <Compile Include="AcceptRequisitionController.cs" />
     <Compile Include="AdjustmentVoucher.cs">
@@ -155,6 +156,7 @@
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EmployeeController.cs" />
+    <Compile Include="UpdateCollectionPoint.cs" />
     <Compile Include="UpdateRepresentativeController.cs" />
     <Compile Include="ViewPendingRequisitionsController.cs" />
     <Compile Include="ViewRequisitionDetailsController.cs" />

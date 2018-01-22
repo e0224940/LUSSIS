@@ -14,12 +14,12 @@ namespace LUSSIS_Backend
     
     public partial class StockTxnDetail
     {
-        public int StockTxnDetail1 { get; set; }
         public string ItemNo { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public Nullable<int> AdjustQty { get; set; }
         public Nullable<int> RecordedQty { get; set; }
         public string Remarks { get; set; }
+        public int StockTxnNo { get; set; }
     
         public virtual StationeryCatalogue StationeryCatalogue { get; set; }
     }

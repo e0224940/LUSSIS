@@ -36,6 +36,7 @@ namespace LUSSIS_Backend
         public string Supplier1 { get; set; }
         public string Supplier2 { get; set; }
         public string Supplier3 { get; set; }
+        public string Bin { get; set; }
     
         public virtual ICollection<AdjustmentVoucherDetail> AdjustmentVoucherDetails { get; set; }
         public virtual ICollection<BackLog> BackLogs { get; set; }

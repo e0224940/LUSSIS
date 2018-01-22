@@ -14,8 +14,8 @@ public partial class Department_Employee_ItemAdding : System.Web.UI.Page
     string quantity;
     protected void Page_Load(object sender, EventArgs e)
     {
-        //ItemList.GetDescription();
-        if(!IsPostBack)
+        ItemList.GetDescription();
+        if (!IsPostBack)
         {
             catList = new List<StationeryCatalogue>();
             catitem = new List<RaisedItem>();

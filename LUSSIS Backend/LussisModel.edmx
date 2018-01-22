@@ -1835,10 +1835,8 @@
         </EntityType>
         <EntityType Name="StockTxnDetail">
           <Key>
-            <PropertyRef Name="StockTxnDetail1" />
             <PropertyRef Name="StockTxnNo" />
           </Key>
-          <Property Name="StockTxnDetail1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ItemNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Date" Type="DateTime" Precision="0" />
           <Property Name="AdjustQty" Type="Int32" />
