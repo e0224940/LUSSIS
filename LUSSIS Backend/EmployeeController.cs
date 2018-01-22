@@ -13,5 +13,15 @@ namespace LUSSIS_Backend
             LussisEntities entity = new LussisEntities();
             return entity.StationeryCatalogues.ToList();
         }
+
+        public static string GetName(int empNo)
+        {
+            LussisEntities entity = new LussisEntities();
+            Employee currrentEmp = entity.Employees.Where(emp => emp.EmpNo == empNo).First();
+
+            return currrentEmp.EmpName;
+        }
     }
+
+    
 }
