@@ -59,7 +59,7 @@ namespace LUSSIS_Backend.controller
                 for (int j = 0; j < requisitionDetailList.Count; j++)
                 {
                     // Get deptCode & itemNo
-                    string deptCode = requisitionDetailList[i].Requisition.Employee.DeptCode;
+                    string deptCode = requisitionDetailList[i].RequisitionInfo.EmployeeWhoIssued.DeptCode;
                     string itemNo = requisitionDetailList[i].ItemNo;
 
                     // Get RetrievalDetail
