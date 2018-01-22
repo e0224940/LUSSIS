@@ -8,7 +8,7 @@ using System.Web;
 /// </summary>
 public class RaisedItem
 {
-    public string description { get; set; }
+    public string description {get; set;}
 
     public string quantity { get; set; }
     public RaisedItem()
@@ -18,5 +18,5 @@ public class RaisedItem
         //
     }
 
-
+  
 }
