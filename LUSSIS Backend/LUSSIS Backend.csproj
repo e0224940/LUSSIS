@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ItemList.cs" />
     <Compile Include="RejectRequisitionController.cs" />
     <Compile Include="AcceptRequisitionController.cs" />
     <Compile Include="AdjustmentVoucher.cs">
@@ -155,7 +154,8 @@
     <Compile Include="SupplyTender.cs">
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="UpdateCollectionPoint.cs" />
+    <Compile Include="EmployeeController.cs" />
+    <Compile Include="UpdateRepresentativeController.cs" />
     <Compile Include="ViewPendingRequisitionsController.cs" />
     <Compile Include="ViewRequisitionDetailsController.cs" />
   </ItemGroup>
@@ -195,6 +195,10 @@
       <Project>{a9d5b1c9-69db-49b3-a4b8-6f207234ebd8}</Project>
       <Name>LUSSIS Email Backend</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="controller\" />
+    <Folder Include="dao\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
