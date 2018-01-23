@@ -21,6 +21,13 @@ namespace LUSSIS_Backend
 
             return currrentEmp.EmpName;
         }
+        public static List<StationeryCatalogue> SearchDes(string value)
+        {
+            using (LussisEntities entities = new LussisEntities())
+            {
+                return entities.StationeryCatalogues.Where(p => p.Description.Contains(value.Trim())).ToList();
+            }
+        }
     }
 
     

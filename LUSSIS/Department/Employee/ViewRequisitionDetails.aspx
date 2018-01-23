@@ -9,6 +9,8 @@
         <asp:Label ID="Label1" runat="server" Text="Employee Name:"></asp:Label>
         <asp:Label ID="name" runat="server"></asp:Label>
     </p>
+    <asp:Label runat="server" Text="Date:" ID="Label2"></asp:Label>
+    <asp:Label runat="server" Text="Date" ID="date"></asp:Label>
     <p>
         <asp:GridView ID="GridView1" runat="server" DataSourceID="EntityDataSource1">
         </asp:GridView>

@@ -9,6 +9,6 @@ public partial class Department_Employee_ViewRequisitionDetails : System.Web.UI.
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        int empNo = Profile.EmpNo;
     }
 }

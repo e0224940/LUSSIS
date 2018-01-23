@@ -13,10 +13,12 @@
     <asp:Label runat="server" Text="Date" ID="date"></asp:Label>
     <br />
     <div style="float: right">
-        <asp:TextBox ID="SearchItem" runat="server"></asp:TextBox>
+        <asp:TextBox ID="SearchItemText" runat="server"></asp:TextBox>
+                <br />
+        <br />
         <asp:Button ID="Search" runat="server" Text="Search" OnClick="Search_Click" />
-        <br />
-        <br />
+
+        <asp:Button ID="CancelSearch" runat="server" Text="Cancel" OnClick="CancelSearch_Click" />
         <br />
         <br />
         <asp:Button ID="Confirm" runat="server" OnClick="Confirm_Click" Text="Confirm" />
@@ -71,17 +73,5 @@
         </div>
     </div>
 
-    <asp:GridView ID="SearchRes" runat="server" GridLines="None" AutoGenerateColumns="False">
-        <Columns>
-            <asp:BoundField DataField="Description" HeaderText="Description:" SortExpression="Description" />
-            <asp:TemplateField HeaderText="Quantity:">
-                <ItemTemplate>
-                    <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-                </ItemTemplate>
-            </asp:TemplateField>
-            <asp:CommandField ShowSelectButton="true" />
-        </Columns>
-
-    </asp:GridView>
     <br />
 </asp:Content>
