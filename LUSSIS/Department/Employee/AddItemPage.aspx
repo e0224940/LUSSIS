@@ -33,13 +33,14 @@
                 <asp:GridView GridLines="None" runat="server" ID="StationeryGridView" AutoGenerateColumns="False" OnSelectedIndexChanged="StationeryGridView_SelectedIndexChanged">
                     <Columns>
                         <asp:BoundField DataField="ItemNo" HeaderText="ItemNo" SortExpression="ItemNo" />
-                        <asp:BoundField DataField="Description" HeaderText="Description:" SortExpression="Description" />
-                        <asp:TemplateField HeaderText="Quantity:">
+                        <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
+                        <asp:TemplateField HeaderText="Quantity">
                             <ItemTemplate>
-                                <asp:TextBox ID="Quantity" runat="server" TextMode="Number"></asp:TextBox>
+                                <asp:TextBox ID="Quantity" runat="server" TextMode="Number" ></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:CommandField ShowSelectButton="true" />
+
                     </Columns>
                 </asp:GridView>
             </div>

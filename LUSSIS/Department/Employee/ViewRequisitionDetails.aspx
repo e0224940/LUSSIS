@@ -5,19 +5,26 @@
 
 <asp:Content ID="ContentBody" ContentPlaceHolderID="body" runat="server">
     <h1>View Requisition Details</h1>
-    <p>
-        <asp:Label ID="Label1" runat="server" Text="Employee Name:"></asp:Label>
-        <asp:Label ID="name" runat="server"></asp:Label>
-    </p>
-    <asp:Label runat="server" Text="Date:" ID="Label2"></asp:Label>
-    <asp:Label runat="server" Text="Date" ID="date"></asp:Label>
-    <p>
-        <asp:GridView ID="GridView1" runat="server" DataSourceID="EntityDataSource1">
-        </asp:GridView>
-        <asp:EntityDataSource ID="EntityDataSource1" runat="server">
-        </asp:EntityDataSource>
-    </p>
-    <p>
-        <asp:Button ID="Submit" runat="server" Text="Submit" />
-    </p>
+    <asp:label id="Label1" runat="server" text="Employee Name:"></asp:label>
+    <asp:label id="name" runat="server"></asp:label>
+    <br />
+    <asp:label runat="server" text="Date:" id="Label2"></asp:label>
+    <asp:label runat="server" text="Date" id="date"></asp:label>
+    <br />
+    <br />
+    <asp:gridview gridlines="None" runat="server" id="ReqDetails" autogeneratecolumns="False">
+                    <Columns>
+                        <asp:BoundField DataField="ItemNo" HeaderText="ItemNo" SortExpression="ItemNo" />
+                        <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
+                        <asp:BoundField DataField="Quantity" HeaderText="Quantity" SortExpression="Qty" />
+                          <ItemTemplate>
+                                <asp:TextBox ID="Quantity" runat="server" TextMode="Number" ReadOnly="true"></asp:TextBox>
+                          </ItemTemplate>
+                        <asp:CommandField ShowEditButton="true" />
+                        <asp:CommandField ShowDeleteButton="true" />
+                    </Columns>
+                </asp:gridview>
+
+    <asp:button id="Submit" runat="server" text="Submit" />
+
 </asp:Content>
