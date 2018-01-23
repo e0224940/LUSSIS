@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Email_Backend;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,16 +37,36 @@ namespace LUSSIS_Backend
 
         public static void UpdatePoint(int empNo, int collectionNewPoint)
         {
-            using (LussisEntities entities = new LussisEntities())
+           
+            string dayofweek = DateTime.Today.DayOfWeek.ToString();
+            //string hour = DateTime.Today.Hour.ToString();
+            //string minute = DateTime.Now.Minute.ToString();
+
+
+            if (dayofweek != "Saturday" || dayofweek != "Sunday")
             {
-                Employee currEmployee = entities.Employees.Where(emp => emp.EmpNo == empNo).First();
-                Department currDept = currEmployee.Department;
-                currDept.CollectionPointNo = collectionNewPoint;
-                entities.SaveChanges();
+                using (LussisEntities entities = new LussisEntities())
+                {
+                    Employee currEmploy = entities.Employees.Where(emp => emp.EmpNo == empNo).First();
+                    Department currDept = currEmploy.Department;
+                    currDept.CollectionPointNo = collectionNewPoint;
+                    entities.SaveChanges();
+                }
 
+                LussisEntities entity = new LussisEntities();
+                Employee currEmployee = entity.Employees.Where(emp => emp.EmpNo == empNo).First();
+                Department currDepartment = entity.Departments.Where(dep => dep.DeptCode.Equals(currEmployee.DeptCode)).First();
 
-
-               
+                // Send Email
+                EmailBackend.sendEmailStep(
+                    currDepartment.EmployeeHead.Email,
+                    EmailTemplate.GenerateUpdateCollectionPointEmailSubject(
+                        currDepartment.CollectionPoint.ToString(),
+                        currDepartment.EmployeeHead.ToString()),
+                    EmailTemplate.GenerateCollectionPointStatusChangedEmail(
+                        currDepartment.EmployeeHead.ToString(),
+                        currDepartment.CollectionPoint.ToString())
+                    );
             }
         }
 
