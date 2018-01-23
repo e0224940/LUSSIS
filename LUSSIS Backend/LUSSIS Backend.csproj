@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controller\RetrievalController.cs" />
     <Compile Include="ItemList.cs" />
     <Compile Include="RejectRequisitionController.cs" />
     <Compile Include="AcceptRequisitionController.cs" />
@@ -199,7 +200,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="controller\" />
     <Folder Include="dao\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
