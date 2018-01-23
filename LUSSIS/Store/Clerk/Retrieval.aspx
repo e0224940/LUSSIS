@@ -7,8 +7,16 @@
     <div class="Container">
         <div class="row">
             <div class="form-group">
+                <label>Select A Previous Retrieval To View</label>
+                <br />
                 <asp:DropDownList runat="server" AutoPostBack="true" ID="SelectRetrevialDropDownList" OnSelectedIndexChanged="SelectRetrevialDropDownList_SelectedIndexChanged"></asp:DropDownList>
-                <asp:Button runat="server" ID="CreateNewRetrievalButton" Text="Create Retrieval" CssClass="btn btn-primary" OnClick="CreateNewRetrievalButton_Click" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label>Or Create A New One</label>
+                <br />
+                <asp:Button runat="server" ID="Button1" Text="Create Retrieval" CssClass="btn btn-primary" OnClick="CreateNewRetrievalButton_Click" />
             </div>
         </div>
         <div class="row">
