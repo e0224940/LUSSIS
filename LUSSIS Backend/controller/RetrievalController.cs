@@ -10,16 +10,16 @@ namespace LUSSIS_Backend.controller
     {
         static LussisEntities context;
 
-        public static void CreateWeeklyRetrieval()
+        public static int CreateWeeklyRetrieval()
         {
 
             // Creating Database Transaction
             //using (var dbcxtransaction = context.Database.BeginTransaction())
             //{
-            //try
-            //{
-            // Add Retrieval
-            Retrieval retrieval = AddRetrieval(context, new Retrieval());
+            //    try
+            //    {
+                    // Add Retrieval
+                    Retrieval retrieval = AddRetrieval(context, new Retrieval());
 
             // Get RetrievalNo
             int retrievalNo = retrieval.RetrievalNo;
@@ -42,6 +42,7 @@ namespace LUSSIS_Backend.controller
             //    dbcxtransaction.Rollback();
             //}
             //}
+            return retrieval.RetrievalNo;
         }
 
         private static void ProcessRequisitions(LussisEntities context, int retrievalNo)
