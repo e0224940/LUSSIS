@@ -49,8 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controller\DisbursementController.cs" />
     <Compile Include="controller\RetrievalController.cs" />
+    <Compile Include="dao\StoreClerkDao.cs" />
     <Compile Include="ItemList.cs" />
+    <Compile Include="model\DisbursementItem.cs" />
     <Compile Include="RejectRequisitionController.cs" />
     <Compile Include="AcceptRequisitionController.cs" />
     <Compile Include="AdjustmentVoucher.cs">
@@ -201,9 +204,7 @@
       <Name>LUSSIS Email Backend</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="dao\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

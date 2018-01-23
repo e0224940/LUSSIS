@@ -21,5 +21,17 @@ namespace Email_Backend
                 + ((remark.Trim().Length > 0 ) ? "The following Remark has been left for you: " + remark: "") + "<br/>"
                 + "[This is an automated Message, do no reply]";
         }
+
+        public static String GenerateUpdateCollectionPointEmailSubject(string collectionpoint, string result)
+        {
+            return "New Collection Point Changed";
+        }
+
+        public static String GenerateCollectionPointStatusChangedEmail(string applicant, string newPoint)
+        {
+            return
+                "Dear " + applicant + "<br/>" + "There is a new Collection Point Change. Now New Location is " 
+                + newPoint + "[This is an automated Message, do no reply]";
+        }
     }
 }
