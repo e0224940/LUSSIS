@@ -34,7 +34,7 @@
                         <asp:BoundField DataField="Description" HeaderText="Description:" SortExpression="Description" />
                         <asp:TemplateField HeaderText="Quantity:">
                             <ItemTemplate>
-                                <asp:TextBox ID="Quantity" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="Quantity" runat="server" TextMode="Number"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:CommandField ShowSelectButton="true" />
@@ -42,7 +42,7 @@
                 </asp:GridView>
             </div>
             <div class="col-sm-6">
-                <asp:GridView GridLines="None" runat="server" ID="Cart" AutoGenerateColumns="False" OnRowDeleted="Cart_GridViewDelete">
+                <asp:GridView GridLines="None" DataKeyNames="ItemNo" runat="server" ID="Cart" AutoGenerateColumns="False" OnRowDeleting="Cart_GridViewDelete">
                     <Columns>
                         <asp:TemplateField HeaderText="ItemNo" SortExpression="ItemNo">
                             <ItemTemplate>
@@ -57,9 +57,7 @@
                         <asp:TemplateField HeaderText="Qty">
 
                             <ItemTemplate>
-                                <asp:Label ID="lblQuantity" runat="server" Text='<%# Bind("quantity") %>'></asp:Label>
-
-                                <%--                        <asp:Label ID="lblQuantity" runat="server" ></asp:Label>--%>
+                                <asp:Label ID="lblQuantity" runat="server" width="50px" Text='<%# Bind("quantity") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField>

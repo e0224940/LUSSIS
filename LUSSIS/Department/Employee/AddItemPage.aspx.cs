@@ -33,15 +33,17 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
 
     protected void Confirm_Click(object sender, EventArgs e)
     {
-
+        //SqlDataSource con
     }
 
     protected void StationeryGridView_SelectedIndexChanged(object sender, EventArgs e)
     {
         GridViewRow row = StationeryGridView.SelectedRow;
         RaisedItem cart = new RaisedItem();
-        cart.description = row.Cells[0].Text;
-        cart.quantity = (row.Cells[1].FindControl("Quantity") as TextBox).Text;
+        cart.ItemNo = row.Cells[0].Text;
+        cart.description = row.Cells[1].Text;
+        cart.quantity = (row.Cells[2].FindControl("Quantity") as TextBox).Text;
+
         cartitem.Add(cart);
         Cart.DataSource = cartitem;
         Cart.DataBind();
@@ -49,26 +51,31 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
 
     protected void Search_Click(object sender, EventArgs e)
     {
-        searchitem = new List<RaisedItem>();
-        string name = SearchItem.Text.ToString();
-        for (int i = 0; i < StationeryGridView.Rows.Count; i++)
-        {
-            if (name == null)
-            {
-                StationeryGridView.Visible = true;
-                SearchRes.Visible = false;
-            }
-            else if (StationeryGridView.Rows[i].ToString() == name)
-            {
-                RaisedItem search = new RaisedItem();
-                search.description = StationeryGridView.Rows[i].Cells[0].Text;
-                StationeryGridView.Visible = false;
-                SearchRes.Visible = true;
-                searchitem.Add(search);
-                SearchRes.DataSource = searchitem;
-                SearchRes.DataBind();
-            }
-        }
+        //searchitem = new List<RaisedItem>();
+        //string name = SearchItem.Text.ToString();
+        //for (int i = 0; i < StationeryGridView.Rows.Count; i++)
+        //{
+        //    if (name == null)
+        //    {
+        //        StationeryGridView.Visible = true;
+        //        SearchRes.Visible = false;
+        //    }
+        //    else if (StationeryGridView.Rows[i].ToString() == name)
+        //    {
+        //        RaisedItem search = new RaisedItem();
+        //        search.description = StationeryGridView.Rows[i].Cells[0].Text;
+        //        StationeryGridView.Visible = false;
+        //        SearchRes.Visible = true;
+        //        searchitem.Add(search);
+        //        SearchRes.DataSource = searchitem;
+        //        SearchRes.DataBind();
+        //}
+        //string ItemNo = StationeryGridView.DataKeys[e.RowIndex].Values[0].ToString();
+        //RaisedItem selected = cartitem.Where(item => item.ItemNo == ItemNo).FirstOrDefault();
+        //cartitem.Remove(selected);
+        //Cart.DataSource = cartitem;
+        //Cart.DataBind();
+    
         //StationeryGridView.Visible = false;
         //SearchRes.Visible = true;
         //(StationeryGridView.DataSource as SearchRes).DefaultView.RowFilter = string.Format("Description LIKE '{0}%'", SearchItem.Text);
@@ -79,34 +86,11 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
 
     }
 
-    //protected void BindGrid()
-    //{
-    //    Cart.DataSource = ViewState["dt"] as DataTable;
-
-    //}
-
-    protected void Cart_GridViewDelete(object sender, GridViewDeletedEventArgs e)
+    protected void Cart_GridViewDelete(object sender, GridViewDeleteEventArgs e)
     {
-        //GridViewRow row1 = Cart.SelectedRow;
-        //RaisedItem cart1 = new RaisedItem();
-        //cart1.description = row1.Cells[0].Text;
-        ////cart1.quantity = (row.Cells[1].FindControl("Quantity") as TextBox).Text;
-
-        //// cartitem.Add(cart);
-        ////cartitem.Remove(cart);
-        //Cart.DataSource = cartitem;
-        //Cart.DataBind();
-
-
-        //if (e.CommandName == "delete")
-        //{
-        //    string id = e.CommandArgument.toString();
-        //}
-        //GridViewRow row1 = Cart.SelectedRow;
-        //cartitem.RemoveAt(row1);
-
-        int row = Cart.SelectedIndex;
-        cartitem.RemoveAt(row);
+        string ItemNo = Cart.DataKeys[e.RowIndex].Values[0].ToString();
+        RaisedItem selected = cartitem.Where(item => item.ItemNo == ItemNo).FirstOrDefault();
+        cartitem.Remove(selected);
         Cart.DataSource = cartitem;
         Cart.DataBind();
     }
