@@ -12,6 +12,7 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
     static List<StationeryCatalogue> itemList;
     static List<RaisedItem> cartitem;
     static List<RaisedItem> searchitem;
+    DateTime dateIssue;
     //string quantity;
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -32,7 +33,19 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
 
     protected void Confirm_Click(object sender, EventArgs e)
     {
-        //SqlConnection 
+        LussisEntities entity = new LussisEntities();
+        cartitem = new List<RaisedItem>();
+        foreach(RaisedItem selectItem in cartitem)
+        {
+            entity.SaveChanges();
+        }
+
+        int isissueBy = Profile.EmpNo;
+        dateIssue = DateTime.Now.Date;
+
+        EmployeeController.RaisedRequisition(isissueBy, dateIssue);
+
+        Response.Redirect("Default.aspx");
     }
 
     protected void StationeryGridView_SelectedIndexChanged(object sender, EventArgs e)
