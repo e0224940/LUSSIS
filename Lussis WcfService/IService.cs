@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LUSSIS_Backend;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -12,13 +13,15 @@ namespace Lussis_WcfService
     [ServiceContract]
     public interface IService
     {
-
         // Test Function for android apps to check the connection to server.
         // Always returns the string "test"
         [OperationContract]
         [WebGet(UriTemplate = "/test", ResponseFormat = WebMessageFormat.Json)]
         string Test();
-        
-        // TODO: Add your service operations here
+
+        // Check if Session id is okay
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/checkSession", Method="POST", ResponseFormat = WebMessageFormat.Json, RequestFormat =WebMessageFormat.Json)]
+        bool TestSessionId(int sessionID);
     }
 }
