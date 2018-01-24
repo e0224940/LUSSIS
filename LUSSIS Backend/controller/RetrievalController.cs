@@ -39,7 +39,7 @@ namespace LUSSIS_Backend.controller
                     // Commit Transaction
                     txn.Complete();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     // Rollback Transaction
                     //dbcxtransaction.Rollback();

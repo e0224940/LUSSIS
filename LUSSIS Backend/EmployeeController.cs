@@ -57,7 +57,7 @@ namespace LUSSIS_Backend
                     DateIssued = dateIssue,
                     Status = status
                 };
-                entities.Requisitions.Add(req);
+                
                 foreach (RequisitionDetail l in r)
                 {
                     RequisitionDetail rl = new RequisitionDetail();
@@ -66,8 +66,9 @@ namespace LUSSIS_Backend
                     rl.Qty = l.Qty;
                     entities.RequisitionDetails.Add(l);
                 }
-                
+                entities.Requisitions.Add(req);
                 entities.SaveChanges();
+
             }
         }
 
