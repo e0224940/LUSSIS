@@ -33,11 +33,10 @@
                         <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
                         <asp:TemplateField HeaderText="Quantity">
                             <ItemTemplate>
-                                <asp:TextBox ID="Quantity" runat="server" TextMode="Number" ></asp:TextBox>
+                                <asp:TextBox ID="Quantity" runat="server" TextMode="Number"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:CommandField ShowSelectButton="true" />
-
                     </Columns>
                 </asp:GridView>
                 <asp:Label ID="showerrorLb" runat="server" Text=""></asp:Label>
@@ -77,6 +76,8 @@
             <asp:Button ID="Confirm" runat="server" OnClick="Confirm_Click" Text="Confirm" />
             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp;
             <asp:Button runat="server" Text="Cancel" ID="Cancel" OnClick="Cancel_Click" />
+            <br />
+            <asp:Label ID="Msg" runat="server" Text=""></asp:Label>
         </div>
     </div>
 

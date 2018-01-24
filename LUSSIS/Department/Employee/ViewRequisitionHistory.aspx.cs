@@ -10,22 +10,32 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
 {
 
     static List<Requisition> requsition;
+    static List<ReqHistory> reqhistory;
     protected void Page_Load(object sender, EventArgs e)
     {
         int empNo = Profile.EmpNo;
-
         if (!IsPostBack)
         {
             string empName = EmployeeController.GetName(empNo);
             name.Text = empName;  
             DetailGridView.Visible = true;
             requsition = new List<Requisition>();
-
-
+            reqhistory = new List<ReqHistory>();
             DetailGridView.DataSource = EmployeeController.viewRequisition();
             DetailGridView.DataBind();
             
         }
+        //if()
 
+    }
+
+    protected void detailGridView_Delete(object sender, GridViewDeleteEventArgs e)
+    {
+        string ReqNo = DetailGridView.DataKeys[e.RowIndex].Values[1].ToString();
+        ReqHistory selected = reqhistory.Where(item => item.ReqNo == ReqNo).FirstOrDefault();
+        reqhistory.Remove(selected);
+        Session["session"] = reqhistory;
+        DetailGridView.DataSource = reqhistory;
+        DetailGridView.DataBind();
     }
 }
