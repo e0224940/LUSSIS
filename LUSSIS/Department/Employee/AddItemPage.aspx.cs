@@ -62,7 +62,14 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
         RaisedItem cart = new RaisedItem();
         cart.ItemNo = row.Cells[0].Text;
         cart.description = row.Cells[1].Text;
-        cart.quantity = (row.Cells[2].FindControl("Quantity") as TextBox).Text;
+        if (Int32.Parse((row.Cells[2].FindControl("Quantity") as TextBox).Text) <= 0)
+        {
+
+        }
+        else
+        {
+            cart.quantity = (row.Cells[2].FindControl("Quantity") as TextBox).Text;
+        }
 
         cartitem.Add(cart);
         Session["session"] = cartitem;
@@ -73,7 +80,34 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
 
     protected void Search_Click(object sender, EventArgs e)
     {
-      
+        //searchitem = new Lsist<RaisedItem>();
+        //string name = SearchItem.Text.ToString();
+        //for (int i = 0; i < StationeryGridView.Rows.Count; i++)
+        //{
+        //    if (name == null)
+        //    {
+        //        StationeryGridView.Visible = true;
+        //        SearchRes.Visible = false;
+        //    }
+        //    else if (StationeryGridView.Rows[i].ToString() == name)
+        //    {
+        //        RaisedItem search = new RaisedItem();
+        //        search.description = StationeryGridView.Rows[i].Cells[0].Text;
+        //        StationeryGridView.Visible = false;
+        //        SearchRes.Visible = true;
+        //        searchitem.Add(search);
+        //        SearchRes.DataSource = searchitem;
+        //        SearchRes.DataBind();
+        //}
+        //string ItemNo = StationeryGridView.DataKeys[e.RowIndex].Values[0].ToString();
+        //RaisedItem selected = cartitem.Where(item => item.ItemNo == ItemNo).FirstOrDefault();
+        //cartitem.Remove(selected);
+        //Cart.DataSource = cartitem;
+        //Cart.DataBind();
+
+        //StationeryGridView.Visible = false;
+        //SearchRes.Visible = true;
+        //(StationeryGridView.DataSource as SearchRes).DefaultView.RowFilter = string.Format("Description LIKE '{0}%'", SearchItem.Text);
             string val = SearchItemText.Text;
             StationeryGridView.DataSource = EmployeeController.SearchDes(val);
             StationeryGridView.DataBind();
