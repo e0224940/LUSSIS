@@ -40,39 +40,43 @@ namespace LUSSIS_Backend
         //Add data into database: requisitionDetails
         public static void RaisedRequisitionDetails(string ItemNum, int qty)
         {
-            //using (LussisEntities entities = new LussisEntities())
-            //{
-            //    RequisitionDetail reqDe = new RequisitionDetail
-            //    {
-            //        ItemNo = ItemNum,
-            //        Qty = qty
-
-            //    };
-            //    entities.RequisitionDetails.Add(reqDe);
-            //    entities.SaveChanges();
-            //}
-
-            
-           
+            using (LussisEntities entities = new LussisEntities())
+            {
+               
+            }
 
         }
         //Add data into database: requisition
-        public static void RaisedRequisition(int issueBy,DateTime dateIssue,string status)
+        public static void RaisedRequisition(int issueBy,DateTime dateIssue,string status, List<RequisitionDetail> r)
         {
             using (LussisEntities entities = new LussisEntities())
             {
                 Requisition req = new Requisition
                 {
-                    IssuedBy = issueBy ,
+                    IssuedBy = issueBy,
                     DateIssued = dateIssue,
                     Status = status
                 };
                 entities.Requisitions.Add(req);
+                foreach (RequisitionDetail l in r)
+                {
+                    RequisitionDetail rl = new RequisitionDetail();
+                    rl.ReqNo = req.ReqNo;
+                    rl.ItemNo = l.ItemNo;
+                    rl.Qty = l.Qty;
+                    entities.RequisitionDetails.Add(l);
+                }
+                
                 entities.SaveChanges();
             }
         }
 
-       
+        public static List<Requisition> viewRequisition()
+        {
+            LussisEntities entity = new LussisEntities();
+            return entity.Requisitions.ToList();
+        }
+
 
     }
 }

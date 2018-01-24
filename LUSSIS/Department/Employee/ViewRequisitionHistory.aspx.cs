@@ -8,6 +8,8 @@ using LUSSIS_Backend;
 
 public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.Page
 {
+
+    static List<Requisition> requsition;
     protected void Page_Load(object sender, EventArgs e)
     {
         int empNo = Profile.EmpNo;
@@ -15,7 +17,14 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
         if (!IsPostBack)
         {
             string empName = EmployeeController.GetName(empNo);
-            name.Text = empName;
+            name.Text = empName;  
+            DetailGridView.Visible = true;
+            requsition = new List<Requisition>();
+
+
+            DetailGridView.DataSource = EmployeeController.viewRequisition();
+            DetailGridView.DataBind();
+            
         }
 
     }
