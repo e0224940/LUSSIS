@@ -179,6 +179,9 @@
     <Compile Include="StockTxnDetail.cs">
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="StoreAssignment.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Supplier.cs">
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>

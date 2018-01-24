@@ -319,6 +319,13 @@
           <Property Name="RecordedQty" Type="int" />
           <Property Name="Remarks" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="StoreAssignments">
+          <Key>
+            <PropertyRef Name="EmpNo" />
+          </Key>
+          <Property Name="EmpNo" Type="int" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Supplier">
           <Key>
             <PropertyRef Name="SupplierCode" />
@@ -340,59 +347,7 @@
           <Property Name="SupplierCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="UnitPrice" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Lussis.dbo.ApprovePurchaseOrderView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="ApprovePurchaseOrderView">
-          <Key>
-            <PropertyRef Name="PONo" />
-            <PropertyRef Name="ItemNo" />
-          </Key>
-          <Property Name="PONo" Type="int" Nullable="false" />
-          <Property Name="ItemNo" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Qty" Type="int" />
-          <Property Name="Description" Type="nvarchar" MaxLength="50" />
-          <Property Name="CurrentQty" Type="int" />
-          <Property Name="UnitPrice" Type="decimal" Precision="10" Scale="2" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Lussis.dbo.PURCHASEORDERVIEW' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="PURCHASEORDERVIEW">
-          <Key>
-            <PropertyRef Name="PONo" />
-            <PropertyRef Name="ItemNo" />
-          </Key>
-          <Property Name="PONo" Type="int" Nullable="false" />
-          <Property Name="SupplierCode" Type="nvarchar" MaxLength="50" />
-          <Property Name="OrderedBy" Type="int" />
-          <Property Name="DateIssued" Type="date" />
-          <Property Name="ApprovedBy" Type="int" />
-          <Property Name="DateReviewed" Type="date" />
-          <Property Name="Status" Type="nvarchar" MaxLength="50" />
-          <Property Name="Remarks" Type="nvarchar(max)" />
-          <Property Name="ItemNo" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Qty" Type="int" />
-          <Property Name="Description" Type="nvarchar" MaxLength="50" />
-          <Property Name="ReorderLevel" Type="int" />
-          <Property Name="ReorderQty" Type="int" />
-          <Property Name="CurrentQty" Type="int" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Lussis.dbo.ReorderTrendView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="ReorderTrendView">
-          <Key>
-            <PropertyRef Name="PONo" />
-            <PropertyRef Name="ItemNo" />
-            <PropertyRef Name="SupplierCode" />
-          </Key>
-          <Property Name="PONo" Type="int" Nullable="false" />
-          <Property Name="DateReviewed" Type="date" />
-          <Property Name="ItemNo" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Qty" Type="int" />
-          <Property Name="Description" Type="nvarchar" MaxLength="50" />
-          <Property Name="SupplierCode" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="SupplierName" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <Association Name="FK__aspnet_Me__Appli__73BA3083">
+        <Association Name="FK__aspnet_Me__Appli__70DDC3D8">
           <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
           <End Role="aspnet_Membership" Type="Self.aspnet_Membership" Multiplicity="*" />
           <ReferentialConstraint>
@@ -404,7 +359,7 @@ warning 6002: The table/view 'Lussis.dbo.ReorderTrendView' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Me__UserI__74AE54BC">
+        <Association Name="FK__aspnet_Me__UserI__71D1E811">
           <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
           <End Role="aspnet_Membership" Type="Self.aspnet_Membership" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -416,7 +371,7 @@ warning 6002: The table/view 'Lussis.dbo.ReorderTrendView' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Pa__Appli__25518C17">
+        <Association Name="FK__aspnet_Pa__Appli__22751F6C">
           <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
           <End Role="aspnet_Paths" Type="Self.aspnet_Paths" Multiplicity="*" />
           <ReferentialConstraint>
@@ -428,7 +383,7 @@ warning 6002: The table/view 'Lussis.dbo.ReorderTrendView' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Pe__PathI__2B0A656D">
+        <Association Name="FK__aspnet_Pe__PathI__282DF8C2">
           <End Role="aspnet_Paths" Type="Self.aspnet_Paths" Multiplicity="1" />
           <End Role="aspnet_PersonalizationAllUsers" Type="Self.aspnet_PersonalizationAllUsers" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -440,7 +395,7 @@ warning 6002: The table/view 'Lussis.dbo.ReorderTrendView' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Pe__PathI__2EDAF651">
+        <Association Name="FK__aspnet_Pe__PathI__2BFE89A6">
           <End Role="aspnet_Paths" Type="Self.aspnet_Paths" Multiplicity="0..1" />
           <End Role="aspnet_PersonalizationPerUser" Type="Self.aspnet_PersonalizationPerUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -452,7 +407,7 @@ warning 6002: The table/view 'Lussis.dbo.ReorderTrendView' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Pe__UserI__2FCF1A8A">
+        <Association Name="FK__aspnet_Pe__UserI__2CF2ADDF">
           <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="0..1" />
           <End Role="aspnet_PersonalizationPerUser" Type="Self.aspnet_PersonalizationPerUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -464,7 +419,7 @@ warning 6002: The table/view 'Lussis.dbo.ReorderTrendView' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Pr__UserI__08B54D69">
+        <Association Name="FK__aspnet_Pr__UserI__05D8E0BE">
           <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
           <End Role="aspnet_Profile" Type="Self.aspnet_Profile" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -476,7 +431,7 @@ warning 6002: The table/view 'Lussis.dbo.ReorderTrendView' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Ro__Appli__123EB7A3">
+        <Association Name="FK__aspnet_Ro__Appli__0F624AF8">
           <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
           <End Role="aspnet_Roles" Type="Self.aspnet_Roles" Multiplicity="*" />
           <ReferentialConstraint>
@@ -488,7 +443,7 @@ warning 6002: The table/view 'Lussis.dbo.ReorderTrendView' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Us__Appli__6383C8BA">
+        <Association Name="FK__aspnet_Us__Appli__60A75C0F">
           <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
           <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="*" />
           <ReferentialConstraint>
@@ -500,7 +455,7 @@ warning 6002: The table/view 'Lussis.dbo.ReorderTrendView' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Us__RoleI__17036CC0">
+        <Association Name="FK__aspnet_Us__RoleI__14270015">
           <End Role="aspnet_Roles" Type="Self.aspnet_Roles" Multiplicity="1" />
           <End Role="aspnet_UsersInRoles" Type="Self.aspnet_UsersInRoles" Multiplicity="*" />
           <ReferentialConstraint>
@@ -512,7 +467,7 @@ warning 6002: The table/view 'Lussis.dbo.ReorderTrendView' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Us__UserI__160F4887">
+        <Association Name="FK__aspnet_Us__UserI__1332DBDC">
           <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
           <End Role="aspnet_UsersInRoles" Type="Self.aspnet_UsersInRoles" Multiplicity="*" />
           <ReferentialConstraint>
@@ -521,6 +476,18 @@ warning 6002: The table/view 'Lussis.dbo.ReorderTrendView' does not have a prima
             </Principal>
             <Dependent Role="aspnet_UsersInRoles">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StoreAssi__EmpNo__571DF1D5">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="StoreAssignments" Type="Self.StoreAssignments" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="StoreAssignments">
+              <PropertyRef Name="EmpNo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -985,90 +952,56 @@ warning 6002: The table/view 'Lussis.dbo.ReorderTrendView' does not have a prima
           <EntitySet Name="RetrievalDetail" EntityType="Self.RetrievalDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StationeryCatalogue" EntityType="Self.StationeryCatalogue" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockTxnDetail" EntityType="Self.StockTxnDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreAssignments" EntityType="Self.StoreAssignments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SupplyTender" EntityType="Self.SupplyTender" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ApprovePurchaseOrderView" EntityType="Self.ApprovePurchaseOrderView" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[ApprovePurchaseOrderView].[PONo] AS [PONo], 
-[ApprovePurchaseOrderView].[ItemNo] AS [ItemNo], 
-[ApprovePurchaseOrderView].[Qty] AS [Qty], 
-[ApprovePurchaseOrderView].[Description] AS [Description], 
-[ApprovePurchaseOrderView].[CurrentQty] AS [CurrentQty], 
-[ApprovePurchaseOrderView].[UnitPrice] AS [UnitPrice]
-FROM [dbo].[ApprovePurchaseOrderView] AS [ApprovePurchaseOrderView]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="PURCHASEORDERVIEW" EntityType="Self.PURCHASEORDERVIEW" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[PURCHASEORDERVIEW].[PONo] AS [PONo], 
-[PURCHASEORDERVIEW].[SupplierCode] AS [SupplierCode], 
-[PURCHASEORDERVIEW].[OrderedBy] AS [OrderedBy], 
-[PURCHASEORDERVIEW].[DateIssued] AS [DateIssued], 
-[PURCHASEORDERVIEW].[ApprovedBy] AS [ApprovedBy], 
-[PURCHASEORDERVIEW].[DateReviewed] AS [DateReviewed], 
-[PURCHASEORDERVIEW].[Status] AS [Status], 
-[PURCHASEORDERVIEW].[Remarks] AS [Remarks], 
-[PURCHASEORDERVIEW].[ItemNo] AS [ItemNo], 
-[PURCHASEORDERVIEW].[Qty] AS [Qty], 
-[PURCHASEORDERVIEW].[Description] AS [Description], 
-[PURCHASEORDERVIEW].[ReorderLevel] AS [ReorderLevel], 
-[PURCHASEORDERVIEW].[ReorderQty] AS [ReorderQty], 
-[PURCHASEORDERVIEW].[CurrentQty] AS [CurrentQty]
-FROM [dbo].[PURCHASEORDERVIEW] AS [PURCHASEORDERVIEW]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="ReorderTrendView" EntityType="Self.ReorderTrendView" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[ReorderTrendView].[PONo] AS [PONo], 
-[ReorderTrendView].[DateReviewed] AS [DateReviewed], 
-[ReorderTrendView].[ItemNo] AS [ItemNo], 
-[ReorderTrendView].[Qty] AS [Qty], 
-[ReorderTrendView].[Description] AS [Description], 
-[ReorderTrendView].[SupplierCode] AS [SupplierCode], 
-[ReorderTrendView].[SupplierName] AS [SupplierName]
-FROM [dbo].[ReorderTrendView] AS [ReorderTrendView]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK__aspnet_Me__Appli__73BA3083" Association="Self.FK__aspnet_Me__Appli__73BA3083">
+          <AssociationSet Name="FK__aspnet_Me__Appli__70DDC3D8" Association="Self.FK__aspnet_Me__Appli__70DDC3D8">
             <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
             <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Me__UserI__74AE54BC" Association="Self.FK__aspnet_Me__UserI__74AE54BC">
+          <AssociationSet Name="FK__aspnet_Me__UserI__71D1E811" Association="Self.FK__aspnet_Me__UserI__71D1E811">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Pa__Appli__25518C17" Association="Self.FK__aspnet_Pa__Appli__25518C17">
+          <AssociationSet Name="FK__aspnet_Pa__Appli__22751F6C" Association="Self.FK__aspnet_Pa__Appli__22751F6C">
             <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
             <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Pe__PathI__2B0A656D" Association="Self.FK__aspnet_Pe__PathI__2B0A656D">
+          <AssociationSet Name="FK__aspnet_Pe__PathI__282DF8C2" Association="Self.FK__aspnet_Pe__PathI__282DF8C2">
             <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
             <End Role="aspnet_PersonalizationAllUsers" EntitySet="aspnet_PersonalizationAllUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Pe__PathI__2EDAF651" Association="Self.FK__aspnet_Pe__PathI__2EDAF651">
+          <AssociationSet Name="FK__aspnet_Pe__PathI__2BFE89A6" Association="Self.FK__aspnet_Pe__PathI__2BFE89A6">
             <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
             <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Pe__UserI__2FCF1A8A" Association="Self.FK__aspnet_Pe__UserI__2FCF1A8A">
+          <AssociationSet Name="FK__aspnet_Pe__UserI__2CF2ADDF" Association="Self.FK__aspnet_Pe__UserI__2CF2ADDF">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Pr__UserI__08B54D69" Association="Self.FK__aspnet_Pr__UserI__08B54D69">
+          <AssociationSet Name="FK__aspnet_Pr__UserI__05D8E0BE" Association="Self.FK__aspnet_Pr__UserI__05D8E0BE">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="aspnet_Profile" EntitySet="aspnet_Profile" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Ro__Appli__123EB7A3" Association="Self.FK__aspnet_Ro__Appli__123EB7A3">
+          <AssociationSet Name="FK__aspnet_Ro__Appli__0F624AF8" Association="Self.FK__aspnet_Ro__Appli__0F624AF8">
             <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
             <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Us__Appli__6383C8BA" Association="Self.FK__aspnet_Us__Appli__6383C8BA">
+          <AssociationSet Name="FK__aspnet_Us__Appli__60A75C0F" Association="Self.FK__aspnet_Us__Appli__60A75C0F">
             <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Us__RoleI__17036CC0" Association="Self.FK__aspnet_Us__RoleI__17036CC0">
+          <AssociationSet Name="FK__aspnet_Us__RoleI__14270015" Association="Self.FK__aspnet_Us__RoleI__14270015">
             <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
             <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Us__UserI__160F4887" Association="Self.FK__aspnet_Us__UserI__160F4887">
+          <AssociationSet Name="FK__aspnet_Us__UserI__1332DBDC" Association="Self.FK__aspnet_Us__UserI__1332DBDC">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StoreAssi__EmpNo__571DF1D5" Association="Self.FK__StoreAssi__EmpNo__571DF1D5">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="StoreAssignments" EntitySet="StoreAssignments" />
           </AssociationSet>
           <AssociationSet Name="FK_AdjustmentVoucher_Employee" Association="Self.FK_AdjustmentVoucher_Employee">
             <End Role="Employee" EntitySet="Employee" />
@@ -1691,6 +1624,11 @@ FROM [dbo].[ReorderTrendView] AS [ReorderTrendView]</DefiningQuery>
           <EntitySet Name="ApprovePurchaseOrderViews" EntityType="LussisModel.ApprovePurchaseOrderView" />
           <EntitySet Name="PURCHASEORDERVIEWs" EntityType="LussisModel.PURCHASEORDERVIEW" />
           <EntitySet Name="ReorderTrendViews" EntityType="LussisModel.ReorderTrendView" />
+          <EntitySet Name="StoreAssignments" EntityType="LussisModel.StoreAssignment" />
+          <AssociationSet Name="FK__StoreAssi__EmpNo__571DF1D5" Association="LussisModel.FK__StoreAssi__EmpNo__571DF1D5">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="StoreAssignment" EntitySet="StoreAssignments" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AdjustmentVoucher">
           <Key>
@@ -1821,6 +1759,7 @@ FROM [dbo].[ReorderTrendView] AS [ReorderTrendView]</DefiningQuery>
           <NavigationProperty Name="PurchaseOrders1" Relationship="LussisModel.FK_PurchaseOrder_Employee1" FromRole="Employee" ToRole="PurchaseOrder" />
           <NavigationProperty Name="Requisitions" Relationship="LussisModel.FK_Requisition_Employee1" FromRole="Employee" ToRole="Requisition" />
           <NavigationProperty Name="Requisitions1" Relationship="LussisModel.FK_Requisition_Employee2" FromRole="Employee" ToRole="Requisition" />
+          <NavigationProperty Name="StoreAssignment" Relationship="LussisModel.FK__StoreAssi__EmpNo__571DF1D5" FromRole="Employee" ToRole="StoreAssignment" />
         </EntityType>
         <EntityType Name="PurchaseOrder">
           <Key>
@@ -2445,6 +2384,26 @@ FROM [dbo].[ReorderTrendView] AS [ReorderTrendView]</DefiningQuery>
           <Property Name="SupplierCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SupplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="StoreAssignment">
+          <Key>
+            <PropertyRef Name="EmpNo" />
+          </Key>
+          <Property Name="EmpNo" Type="Int32" Nullable="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="LussisModel.FK__StoreAssi__EmpNo__571DF1D5" FromRole="StoreAssignment" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK__StoreAssi__EmpNo__571DF1D5">
+          <End Type="LussisModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="LussisModel.StoreAssignment" Role="StoreAssignment" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="StoreAssignment">
+              <PropertyRef Name="EmpNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2806,52 +2765,15 @@ FROM [dbo].[ReorderTrendView] AS [ReorderTrendView]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ApprovePurchaseOrderViews">
-            <EntityTypeMapping TypeName="LussisModel.ApprovePurchaseOrderView">
-              <MappingFragment StoreEntitySet="ApprovePurchaseOrderView">
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="CurrentQty" ColumnName="CurrentQty" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Qty" ColumnName="Qty" />
-                <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
-                <ScalarProperty Name="PONo" ColumnName="PONo" />
+          <EntitySetMapping Name="StoreAssignments">
+            <EntityTypeMapping TypeName="LussisModel.StoreAssignment">
+              <MappingFragment StoreEntitySet="StoreAssignments">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PURCHASEORDERVIEWs">
-            <EntityTypeMapping TypeName="LussisModel.PURCHASEORDERVIEW">
-              <MappingFragment StoreEntitySet="PURCHASEORDERVIEW">
-                <ScalarProperty Name="CurrentQty" ColumnName="CurrentQty" />
-                <ScalarProperty Name="ReorderQty" ColumnName="ReorderQty" />
-                <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Qty" ColumnName="Qty" />
-                <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="DateReviewed" ColumnName="DateReviewed" />
-                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
-                <ScalarProperty Name="DateIssued" ColumnName="DateIssued" />
-                <ScalarProperty Name="OrderedBy" ColumnName="OrderedBy" />
-                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
-                <ScalarProperty Name="PONo" ColumnName="PONo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ReorderTrendViews">
-            <EntityTypeMapping TypeName="LussisModel.ReorderTrendView">
-              <MappingFragment StoreEntitySet="ReorderTrendView">
-                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
-                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Qty" ColumnName="Qty" />
-                <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
-                <ScalarProperty Name="DateReviewed" ColumnName="DateReviewed" />
-                <ScalarProperty Name="PONo" ColumnName="PONo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

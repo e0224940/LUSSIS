@@ -48,5 +48,6 @@ namespace LUSSIS_Backend
         public virtual ICollection<PurchaseOrder> PurchaseOrders1 { get; set; }
         public virtual ICollection<Requisition> Requisitions { get; set; }
         public virtual ICollection<Requisition> Requisitions1 { get; set; }
+        public virtual StoreAssignment StoreAssignment { get; set; }
     }
 }
