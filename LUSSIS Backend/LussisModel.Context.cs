@@ -57,5 +57,6 @@ namespace LUSSIS_Backend
         public DbSet<ApprovePurchaseOrderView> ApprovePurchaseOrderViews { get; set; }
         public DbSet<PURCHASEORDERVIEW> PURCHASEORDERVIEWs { get; set; }
         public DbSet<ReorderTrendView> ReorderTrendViews { get; set; }
+        public DbSet<StoreAssignment> StoreAssignments { get; set; }
     }
 }
