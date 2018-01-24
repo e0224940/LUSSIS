@@ -113,7 +113,7 @@ namespace LUSSIS_Backend
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 result = false;
             }
