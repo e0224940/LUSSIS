@@ -24,9 +24,7 @@ public partial class android : System.Web.UI.Page
             // Get the Profile of the User
             loginProfile = (ProfileCommon)ProfileCommon.Create(username, true);
 
-            result = loginProfile.EmpNo
-                    + ":"
-                    + AndroidAuthenticationController.GenerateAndroidSessionNumber(loginProfile.EmpNo);
+            result = AndroidAuthenticationController.GenerateAndroidSessionNumber(loginProfile.EmpNo).ToString();
         }
 
         Response.Write(result);

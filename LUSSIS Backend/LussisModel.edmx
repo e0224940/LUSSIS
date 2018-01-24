@@ -1621,9 +1621,6 @@
             <End Role="Supplier" EntitySet="Suppliers" />
             <End Role="SupplyTender" EntitySet="SupplyTenders" />
           </AssociationSet>
-          <EntitySet Name="ApprovePurchaseOrderViews" EntityType="LussisModel.ApprovePurchaseOrderView" />
-          <EntitySet Name="PURCHASEORDERVIEWs" EntityType="LussisModel.PURCHASEORDERVIEW" />
-          <EntitySet Name="ReorderTrendViews" EntityType="LussisModel.ReorderTrendView" />
           <EntitySet Name="StoreAssignments" EntityType="LussisModel.StoreAssignment" />
           <AssociationSet Name="FK__StoreAssi__EmpNo__571DF1D5" Association="LussisModel.FK__StoreAssi__EmpNo__571DF1D5">
             <End Role="Employee" EntitySet="Employees" />
@@ -2338,52 +2335,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ApprovePurchaseOrderView">
-          <Key>
-            <PropertyRef Name="PONo" />
-            <PropertyRef Name="ItemNo" />
-          </Key>
-          <Property Name="PONo" Type="Int32" Nullable="false" />
-          <Property Name="ItemNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Qty" Type="Int32" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CurrentQty" Type="Int32" />
-          <Property Name="UnitPrice" Type="Decimal" Precision="10" Scale="2" />
-        </EntityType>
-        <EntityType Name="PURCHASEORDERVIEW">
-          <Key>
-            <PropertyRef Name="PONo" />
-            <PropertyRef Name="ItemNo" />
-          </Key>
-          <Property Name="PONo" Type="Int32" Nullable="false" />
-          <Property Name="SupplierCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="OrderedBy" Type="Int32" />
-          <Property Name="DateIssued" Type="DateTime" Precision="0" />
-          <Property Name="ApprovedBy" Type="Int32" />
-          <Property Name="DateReviewed" Type="DateTime" Precision="0" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ItemNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Qty" Type="Int32" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ReorderLevel" Type="Int32" />
-          <Property Name="ReorderQty" Type="Int32" />
-          <Property Name="CurrentQty" Type="Int32" />
-        </EntityType>
-        <EntityType Name="ReorderTrendView">
-          <Key>
-            <PropertyRef Name="PONo" />
-            <PropertyRef Name="ItemNo" />
-            <PropertyRef Name="SupplierCode" />
-          </Key>
-          <Property Name="PONo" Type="Int32" Nullable="false" />
-          <Property Name="DateReviewed" Type="DateTime" Precision="0" />
-          <Property Name="ItemNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Qty" Type="Int32" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SupplierCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SupplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="StoreAssignment">
           <Key>
             <PropertyRef Name="EmpNo" />

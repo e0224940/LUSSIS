@@ -40,19 +40,19 @@ namespace LUSSIS_Backend
             return dtList;
         }
 
-        public static List<PURCHASEORDERVIEW> showReorderReportDetails(int SNO)
-        {
-            LussisEntities context = new LussisEntities();
-            var currentYear = DateTime.Now.Year;
-            var currentMonth = DateTime.Now.Month;
-            int monthsToDeduct = SNO;
-            DateTime selectedDate = DateTime.Now.AddMonths(-monthsToDeduct);
-            int getSelectedMonth = selectedDate.Month;
-            int getSelectedYear = selectedDate.Year;
+        //public static List<PURCHASEORDERVIEW> showReorderReportDetails(int SNO)
+        //{
+        //    LussisEntities context = new LussisEntities();
+        //    var currentYear = DateTime.Now.Year;
+        //    var currentMonth = DateTime.Now.Month;
+        //    int monthsToDeduct = SNO;
+        //    DateTime selectedDate = DateTime.Now.AddMonths(-monthsToDeduct);
+        //    int getSelectedMonth = selectedDate.Month;
+        //    int getSelectedYear = selectedDate.Year;
 
-            var result = context.PURCHASEORDERVIEWs.Where(p => p.DateReviewed.Value.Month == getSelectedMonth && p.DateReviewed.Value.Year == getSelectedYear).ToList();
-            return result;
-        }
+        //    var result = context.PURCHASEORDERVIEWs.Where(p => p.DateReviewed.Value.Month == getSelectedMonth && p.DateReviewed.Value.Year == getSelectedYear).ToList();
+        //    return result;
+        //}
 
     }
 }

@@ -17,12 +17,12 @@ namespace LUSSIS_Backend
         }
 
         //ApprovePODetails functions
-        public static List<ApprovePurchaseOrderView> getPurchaseOrderDetails(int poNO)
-        {
-            LussisEntities context = new LussisEntities();
-            var result = context.ApprovePurchaseOrderViews.Where(x => x.PONo == poNO).ToList();
-            return result;
-        }
+        //public static List<ApprovePurchaseOrderView> getPurchaseOrderDetails(int poNO)
+        //{
+        //    LussisEntities context = new LussisEntities();
+        //    var result = context.ApprovePurchaseOrderViews.Where(x => x.PONo == poNO).ToList();
+        //    return result;
+        //}
 
         //Button(Approve) function
         public static void setStatusApprove(int poNO)
