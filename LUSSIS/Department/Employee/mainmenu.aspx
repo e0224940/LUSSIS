@@ -5,8 +5,8 @@
     </a>
     <ul class="dropdown-menu">
         <li><a href="<%= Page.ResolveUrl("~/Department/Employee/Default.aspx") %>">Submenu1</a></li>
-        <li><a href="<%= Page.ResolveUrl("~/Department/Employee/RequisitionDetailsView.aspx") %>">RequisitionDetails</a></li>
-        <li><a href="<%= Page.ResolveUrl("~/Department/Employee/AddItemPage.aspx") %>">Add Item</a></li>  
+        <li><a href="<%= Page.ResolveUrl("~/Department/Employee/RequisitionDetailsView.aspx") %>">Requisition Details</a></li>
+        <li><a href="<%= Page.ResolveUrl("~/Department/Employee/AddItemPage.aspx") %>">Raised Requisition</a></li>  
     </ul>
 </li>
 <!-- } -->

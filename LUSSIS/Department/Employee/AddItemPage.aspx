@@ -10,19 +10,16 @@
     <asp:Label ID="NameLB" runat="server"></asp:Label>
     <br />
     <asp:Label runat="server" Text="Date:" ID="Label2"></asp:Label>
-    <asp:Label runat="server" Text="Date" ID="date"></asp:Label>
+    <asp:Label runat="server" Text=" " ID="date"></asp:Label>
     <br />
     <div style="float: right">
         <asp:TextBox ID="SearchItemText" runat="server"></asp:TextBox>
-                <br />
+        <br />
         <br />
         <asp:Button ID="Search" runat="server" Text="Search" OnClick="Search_Click" />
 
         <asp:Button ID="CancelSearch" runat="server" Text="Cancel" OnClick="CancelSearch_Click" />
-        <br />
-        <br />
-        <asp:Button ID="Confirm" runat="server" OnClick="Confirm_Click" Text="Confirm" />
-        <asp:Button runat="server" Text="Cancel" ID="Cancel" OnClick="Cancel_Click" />
+
     </div>
 
     <br />
@@ -32,11 +29,11 @@
             <div class="col-sm-6">
                 <asp:GridView GridLines="None" runat="server" ID="StationeryGridView" AutoGenerateColumns="False" OnSelectedIndexChanged="StationeryGridView_SelectedIndexChanged">
                     <Columns>
-                        <asp:BoundField DataField="ItemNo" HeaderText="ItemNo" SortExpression="ItemNo" />
+                        <asp:BoundField DataField="ItemNo" HeaderText="ItemNo" SortExpression="ItemNo" Visible="false" />
                         <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
                         <asp:TemplateField HeaderText="Quantity">
                             <ItemTemplate>
-                                <asp:TextBox ID="Quantity" runat="server" TextMode="Number" ></asp:TextBox>
+                                <asp:TextBox ID="Quantity" runat="server" TextMode="Number"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:CommandField ShowSelectButton="true" />
@@ -45,11 +42,11 @@
                 </asp:GridView>
             </div>
             <div class="col-sm-6">
-                <asp:GridView GridLines="None" DataKeyNames="ItemNo" runat="server" ID="Cart" AutoGenerateColumns="False" OnRowDeleting="Cart_GridViewDelete">
+                <asp:GridView GridLines="Horizontal" DataKeyNames="ItemNo" runat="server" ID="Cart" AutoGenerateColumns="False" OnRowDeleting="Cart_GridViewDelete">
                     <Columns>
-                        <asp:TemplateField HeaderText="ItemNo" SortExpression="ItemNo">
+                        <asp:TemplateField HeaderText="ItemNo" SortExpression="ItemNo" Visible="false">
                             <ItemTemplate>
-                                <asp:Label ID="No" runat="server" Text='<%# Bind("ItemNo") %>'></asp:Label>
+                                <asp:Label ID="ItemNo" runat="server" Text='<%# Bind("ItemNo") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Description" SortExpression="description">
@@ -60,7 +57,7 @@
                         <asp:TemplateField HeaderText="Qty">
 
                             <ItemTemplate>
-                                <asp:Label ID="lblQuantity" runat="server" width="50px" Text='<%# Bind("quantity") %>'></asp:Label>
+                                <asp:Label ID="lblQuantity" runat="server" Width="50px" Text='<%# Bind("quantity") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField>
@@ -71,6 +68,14 @@
                     </Columns>
                 </asp:GridView>
             </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <asp:Button ID="Confirm" runat="server" OnClick="Confirm_Click" Text="Confirm" />
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp;
+            <asp:Button runat="server" Text="Cancel" ID="Cancel" OnClick="Cancel_Click" />
         </div>
     </div>
 

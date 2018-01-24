@@ -74,19 +74,27 @@ namespace LUSSIS_Backend
             {
                 if (currEmployee != null && newRepresentative != null)
                 {
+                    String currDeptCode = currEmployee.DeptCode;
                     currDepartment = context.Departments
-                        .Where(dep => dep.DeptCode.Equals(currEmployee.DeptCode))
+                        .Where(dep => dep.DeptCode.Equals(currDeptCode))
                         .FirstOrDefault();
 
                     if (currDepartment != null)
                     {
+                        // Remove the role from the old employee
+                        RoleController.removeRoleFromEmployee(context, currDepartment.RepEmpNo??-1, RoleController.LUSSISRoles.DepartmentRepresentative);
+
+                        // Add the role to the new employee
+                        RoleController.addRoleToEmployee(context, newRepresentativeNo, RoleController.LUSSISRoles.DepartmentRepresentative);
+
+                        // Mark the new representative in the database
                         currDepartment.RepEmpNo = newRepresentative.EmpNo;
                         context.SaveChanges();
                         result = true;
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 result = false;
             }

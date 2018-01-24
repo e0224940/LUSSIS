@@ -12,6 +12,8 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
     static List<StationeryCatalogue> itemList;
     static List<RaisedItem> cartitem;
     static List<RaisedItem> searchitem;
+    static List<SelectedItem> item;
+    DateTime dateIssue;
     //string quantity;
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -25,6 +27,7 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
             StationeryGridView.Visible = true;
             itemList = new List<StationeryCatalogue>();
             cartitem = new List<RaisedItem>();
+            Session["raisedItem"] = cartitem;
             StationeryGridView.DataSource = EmployeeController.ViewItem();
             StationeryGridView.DataBind();
         }
@@ -32,8 +35,24 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
 
     protected void Confirm_Click(object sender, EventArgs e)
     {
-        //SqlConnection 
+        LussisEntities entity = new LussisEntities();
+        List<RaisedItem> raisedItem = (List<RaisedItem>)Session["raisedItem"];
+
+        foreach (RaisedItem selectItem in raisedItem)
+        {
+            entity.SaveChanges();
+        }
+
+        int isissueBy = Profile.EmpNo;
+        dateIssue = DateTime.Now.Date;
+        string status = "Not Approved yet.";
+
+        EmployeeController.RaisedRequisition(isissueBy, dateIssue, status);
+
+        Response.Redirect("Default.aspx");
     }
+
+    
 
     protected void StationeryGridView_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -85,7 +104,7 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
 
     protected void Cancel_Click(object sender, EventArgs e)
     {
-
+        Response.Redirect("Default.aspx");
     }
 
     protected void Cart_GridViewDelete(object sender, GridViewDeleteEventArgs e)
