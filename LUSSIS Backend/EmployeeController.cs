@@ -28,6 +28,13 @@ namespace LUSSIS_Backend
                 return entities.StationeryCatalogues.Where(p => p.Description.Contains(value.Trim())).ToList();
             }
         }
+        public static List<RequisitionDetail> SearchReqNo(string value)
+        {
+            using (LussisEntities entities = new LussisEntities())
+            {
+                return entities.RequisitionDetails.Where(p => p.ReqNo.ToString().Contains(value.Trim())).ToList();
+            }
+        }
 
 
         //Add data into database: requisitionDetails

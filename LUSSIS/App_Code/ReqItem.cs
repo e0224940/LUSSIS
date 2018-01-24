@@ -4,24 +4,17 @@ using System.Linq;
 using System.Web;
 
 /// <summary>
-/// Summary description for RaisedItem
+/// Summary description for ReqItem
 /// </summary>
-public class RaisedItem
+public class ReqItem
 {
-  
-    public string ItemNo { get; set; }
-    public string description { get; set; }
-
-    public string quantity { get; set; }
     public string ReqNo { get; set; }
+    public string ItemNo { get; set; }
 
-   
-    public RaisedItem()
+    public ReqItem()
     {
         //
         // TODO: Add constructor logic here
         //
     }
-
-  
 }

@@ -9,8 +9,7 @@ using System.Web;
 public class SelectedItem
 {
     public string ItemNo { get; set; }
-    public string quantity { get; set; }
-    
+    public string quantity { get; set; }    
 
     public SelectedItem()
     {
