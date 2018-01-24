@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Email_Backend;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -81,8 +82,19 @@ namespace LUSSIS_Backend
 
                     if (currDepartment != null)
                     {
-                        // Remove the role from the old employee
-                        RoleController.removeRoleFromEmployee(context, currDepartment.RepEmpNo??-1, RoleController.LUSSISRoles.DepartmentRepresentative);
+                        Employee oldRepresentative = currDepartment.EmployeeRepresentative;
+                        if (oldRepresentative != null)
+                        {
+                            // Remove the role from the old employee
+                            RoleController.removeRoleFromEmployee(context, oldRepresentative.EmpNo, RoleController.LUSSISRoles.DepartmentRepresentative);
+
+                            // Notify the old employee
+                            EmailBackend.sendEmailStep(
+                                oldRepresentative.Email,
+                                EmailTemplate.GenerateOldRepresentativeRemovedSubject(),
+                                EmailTemplate.GenerateOldRepresentativeRemovedEmail()
+                                );
+                        }
 
                         // Add the role to the new employee
                         RoleController.addRoleToEmployee(context, newRepresentativeNo, RoleController.LUSSISRoles.DepartmentRepresentative);
@@ -91,6 +103,13 @@ namespace LUSSIS_Backend
                         currDepartment.RepEmpNo = newRepresentative.EmpNo;
                         context.SaveChanges();
                         result = true;
+
+                        // Notify the new employee
+                        EmailBackend.sendEmailStep(
+                            newRepresentative.Email,
+                            EmailTemplate.GenerateNewRepresentativeRemovedSubject(),
+                            EmailTemplate.GenerateNewRepresentativeRemovedEmail()
+                            );
                     }
                 }
             }

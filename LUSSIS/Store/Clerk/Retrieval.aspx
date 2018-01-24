@@ -74,11 +74,11 @@
                         <!--ROW START-->
                         <tr>
                             <!--colspan is number of departments-->
-                            <td rowspan='<%# Eval("DepartmentCount") %>' style="vertical-align: middle;"><%# Eval("Bin") %></td>
-                            <td rowspan='<%# Eval("DepartmentCount") %>' style="vertical-align: middle;"><%# Eval("Description") %></td>
-                            <td rowspan='<%# Eval("DepartmentCount") %>' style="vertical-align: middle;"><%# Eval("Needed") %></td>
-                            <td rowspan='<%# Eval("DepartmentCount") %>' style="vertical-align: middle;"><%# Eval("Backlog") %></td>
-                            <td rowspan='<%# Eval("DepartmentCount") %>' style="vertical-align: middle;"><%# Eval("Reterived") %></td>
+                            <td class='<%# Eval("CssClass") %>' rowspan='<%# Eval("DepartmentCount") %>' style="vertical-align: middle;"><%# Eval("Bin") %></td>
+                            <td class='<%# Eval("CssClass") %>' rowspan='<%# Eval("DepartmentCount") %>' style="vertical-align: middle;"><%# Eval("Description") %></td>
+                            <td class='<%# Eval("CssClass") %>' rowspan='<%# Eval("DepartmentCount") %>' style="vertical-align: middle;"><%# Eval("Needed") %></td>
+                            <td class='<%# Eval("CssClass") %>' rowspan='<%# Eval("DepartmentCount") %>' style="vertical-align: middle;"><%# Eval("Backlog") %></td>
+                            <td class='<%# Eval("CssClass") %>' rowspan='<%# Eval("DepartmentCount") %>' style="vertical-align: middle;"><%# Eval("Reterived") %></td>
 
                             <asp:Repeater
                                 runat="server"

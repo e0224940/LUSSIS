@@ -76,7 +76,8 @@ public partial class _Default : System.Web.UI.Page
                     Reterived = 0,
                     Maximum = item.CurrentQty ?? 0,
                     Breakdown = new List<SmallRow>(),
-                    DepartmentCount = 0
+                    DepartmentCount = 0,
+                    CssClass = isAlternate ? "active" : "default",
                 };
 
                 var itemSpecificDetails = retreivalDetails.Where(retDet => retDet.ItemNo.Equals(item.ItemNo)).ToList();
@@ -213,6 +214,7 @@ public class BigRow
     public int Maximum { get; set; }
     public List<SmallRow> Breakdown { get; set; }
     public int DepartmentCount { get; set; }
+    public String CssClass { get; set; }
 }
 
 public class SmallRow
