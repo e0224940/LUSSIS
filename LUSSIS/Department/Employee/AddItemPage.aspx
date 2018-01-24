@@ -29,7 +29,7 @@
             <div class="col-sm-6">
                 <asp:GridView GridLines="None" runat="server" ID="StationeryGridView" AutoGenerateColumns="False" OnSelectedIndexChanged="StationeryGridView_SelectedIndexChanged">
                     <Columns>
-                        <asp:BoundField DataField="ItemNo" HeaderText="ItemNo" SortExpression="ItemNo" Visible="false" />
+                        <asp:BoundField DataField="ItemNo" HeaderText="ItemNo" SortExpression="ItemNo" />
                         <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
                         <asp:TemplateField HeaderText="Quantity">
                             <ItemTemplate>
@@ -44,7 +44,7 @@
             <div class="col-sm-6">
                 <asp:GridView GridLines="Horizontal" DataKeyNames="ItemNo" runat="server" ID="Cart" AutoGenerateColumns="False" OnRowDeleting="Cart_GridViewDelete">
                     <Columns>
-                        <asp:TemplateField HeaderText="ItemNo" SortExpression="ItemNo" Visible="false">
+                        <asp:TemplateField HeaderText="ItemNo" SortExpression="ItemNo">
                             <ItemTemplate>
                                 <asp:Label ID="ItemNo" runat="server" Text='<%# Bind("ItemNo") %>'></asp:Label>
                             </ItemTemplate>

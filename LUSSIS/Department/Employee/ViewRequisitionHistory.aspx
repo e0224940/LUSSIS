@@ -8,9 +8,15 @@
     <asp:Label ID="label" runat="server" Text="Employee Name:"></asp:Label>
     <asp:Label ID="name" runat="server"></asp:Label>
     <br />
-    <asp:GridView ID="ReqHistory" runat="server" GridLines="None" AutoGenerateColumns="False">
-        <asp:BoundField DataField="Date" HeaderText="Date" SortExpression="DateIssued" />
-        <asp:BoundField DataField="RequisitionForm" HeaderText="Requisition Form" SortExpression="ReqNo" />
-        <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
+    <asp:GridView ID="DetailGridView" runat="server" AutoGenerateColumns="false">
+       <Columns>
+                <asp:BoundField  HeaderText=" " SortExpression=" " />
+           <asp:TemplateField HeaderText="DateIssued">
+            
+        </asp:TemplateField>
+                <asp:BoundField DataField="DateIssued" HeaderText="Date" SortExpression="DateIssued" />
+                <asp:BoundField DataField="ReqNo" HeaderText="Requisition Form" SortExpression="ReqNo" />
+<asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
+            </Columns>
     </asp:GridView>
 </asp:Content>

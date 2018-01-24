@@ -5,14 +5,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using LUSSIS_Backend;
-using System.Data.SqlClient;
+
 
 public partial class Department_Employee_AddItemPage : System.Web.UI.Page
 {
     static List<StationeryCatalogue> itemList;
     static List<RaisedItem> cartitem;
     static List<RaisedItem> searchitem;
-    static List<SelectedItem> item;
+    
     DateTime dateIssue;
     //string quantity;
     protected void Page_Load(object sender, EventArgs e)
@@ -26,8 +26,8 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
             NameLB.Text = empName;
             StationeryGridView.Visible = true;
             itemList = new List<StationeryCatalogue>();
-            cartitem = new List<RaisedItem>();
-            Session["raisedItem"] = cartitem;
+           
+           
             StationeryGridView.DataSource = EmployeeController.ViewItem();
             StationeryGridView.DataBind();
         }
@@ -35,20 +35,20 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
 
     protected void Confirm_Click(object sender, EventArgs e)
     {
-        LussisEntities entity = new LussisEntities();
-        List<RaisedItem> raisedItem = (List<RaisedItem>)Session["raisedItem"];
-
-        foreach (RaisedItem selectItem in raisedItem)
-        {
-            entity.SaveChanges();
-        }
-
+        cartitem = (List<RaisedItem>)Session["session"];
         int isissueBy = Profile.EmpNo;
         dateIssue = DateTime.Now.Date;
         string status = "Not Approved yet.";
 
-        EmployeeController.RaisedRequisition(isissueBy, dateIssue, status);
-
+        List<RequisitionDetail> detailList = new List<RequisitionDetail>();
+        RequisitionDetail rd = new RequisitionDetail();
+        foreach (RaisedItem k in cartitem)
+        {
+            rd.ItemNo=k.ItemNo;
+            rd.Qty=Convert.ToInt32(k.quantity);
+            detailList.Add(rd);
+        }
+        EmployeeController.RaisedRequisition(isissueBy, dateIssue, status, detailList);
         Response.Redirect("Default.aspx");
     }
 
@@ -56,6 +56,8 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
 
     protected void StationeryGridView_SelectedIndexChanged(object sender, EventArgs e)
     {
+        cartitem = new List<RaisedItem>();
+        Session["session"] = cartitem;
         GridViewRow row = StationeryGridView.SelectedRow;
         RaisedItem cart = new RaisedItem();
         cart.ItemNo = row.Cells[0].Text;
@@ -63,43 +65,19 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
         cart.quantity = (row.Cells[2].FindControl("Quantity") as TextBox).Text;
 
         cartitem.Add(cart);
+        Session["session"] = cartitem;
         Cart.DataSource = cartitem;
         Cart.DataBind();
+        
     }
 
     protected void Search_Click(object sender, EventArgs e)
     {
-        //searchitem = new Lsist<RaisedItem>();
-        //string name = SearchItem.Text.ToString();
-        //for (int i = 0; i < StationeryGridView.Rows.Count; i++)
-        //{
-        //    if (name == null)
-        //    {
-        //        StationeryGridView.Visible = true;
-        //        SearchRes.Visible = false;
-        //    }
-        //    else if (StationeryGridView.Rows[i].ToString() == name)
-        //    {
-        //        RaisedItem search = new RaisedItem();
-        //        search.description = StationeryGridView.Rows[i].Cells[0].Text;
-        //        StationeryGridView.Visible = false;
-        //        SearchRes.Visible = true;
-        //        searchitem.Add(search);
-        //        SearchRes.DataSource = searchitem;
-        //        SearchRes.DataBind();
-        //}
-        //string ItemNo = StationeryGridView.DataKeys[e.RowIndex].Values[0].ToString();
-        //RaisedItem selected = cartitem.Where(item => item.ItemNo == ItemNo).FirstOrDefault();
-        //cartitem.Remove(selected);
-        //Cart.DataSource = cartitem;
-        //Cart.DataBind();
-
-        //StationeryGridView.Visible = false;
-        //SearchRes.Visible = true;
-        //(StationeryGridView.DataSource as SearchRes).DefaultView.RowFilter = string.Format("Description LIKE '{0}%'", SearchItem.Text);
+      
             string val = SearchItemText.Text;
             StationeryGridView.DataSource = EmployeeController.SearchDes(val);
             StationeryGridView.DataBind();
+        Session["session"] = cartitem;
     }
 
     protected void Cancel_Click(object sender, EventArgs e)
@@ -112,8 +90,10 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
         string ItemNo = Cart.DataKeys[e.RowIndex].Values[0].ToString();
         RaisedItem selected = cartitem.Where(item => item.ItemNo == ItemNo).FirstOrDefault();
         cartitem.Remove(selected);
+        Session["session"] = cartitem;
         Cart.DataSource = cartitem;
         Cart.DataBind();
+        
     }
 
     protected void CancelSearch_Click(object sender, EventArgs e)
@@ -125,6 +105,7 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
             cartitem = new List<RaisedItem>();
             StationeryGridView.DataSource = EmployeeController.ViewItem();
             StationeryGridView.DataBind();
+            Session["session"] = cartitem;
         }
     }
 }
