@@ -11,6 +11,7 @@ public partial class Department_Employee_ItemAdding : System.Web.UI.Page
 {
     static List<StationeryCatalogue> catList;
     static List<RaisedItem> catitem;
+    static List<New> item;
     string quantity;
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -49,4 +50,9 @@ public partial class Department_Employee_ItemAdding : System.Web.UI.Page
     //            quantitylabel.Text = quantity;
     //    }
     //}
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+      
+    }
 }
