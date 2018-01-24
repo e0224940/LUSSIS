@@ -39,6 +39,8 @@ Items
                 </asp:TemplateField>
                 </Columns>
         </asp:GridView>
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+        <br />
         <asp:Label ID="lblHiddenQty" runat="server" Text="Label" Visible="False"></asp:Label>
     </div>
  </asp:Content>

@@ -4,7 +4,7 @@
         <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
-        <li><a href="<%= Page.ResolveUrl("~/Store/Clerk/Default.aspx") %>">Submenu1</a></li>
+        <li><a href="<%= Page.ResolveUrl("~/Store/Clerk/Retrieval.aspx") %>">Retrievals</a></li>
     </ul>
 </li>
 <!-- } -->

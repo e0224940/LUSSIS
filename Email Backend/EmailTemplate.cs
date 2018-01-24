@@ -21,5 +21,37 @@ namespace Email_Backend
                 + ((remark.Trim().Length > 0 ) ? "The following Remark has been left for you: " + remark: "") + "<br/>"
                 + "[This is an automated Message, do no reply]";
         }
+
+        public static String GenerateUpdateCollectionPointEmailSubject(string collectionpoint, string result)
+        {
+            return "New Collection Point Changed";
+        }
+
+        public static String GenerateCollectionPointStatusChangedEmail(string applicant, string newPoint)
+        {
+            return
+                "Dear " + applicant + "<br/>" + "There is a new Collection Point Change. Now New Location is " 
+                + newPoint + "[This is an automated Message, do no reply]";
+        }
+
+        public static String GenerateOldRepresentativeRemovedSubject()
+        {
+            return "You are no longer the Department Representative";
+        }
+
+        public static String GenerateOldRepresentativeRemovedEmail()
+        {
+            return "Your Department Has Relieved you from Department Representative Duties. Have a Nice Day!";
+        }
+
+        public static String GenerateNewRepresentativeRemovedSubject()
+        {
+            return "You are now the Department Representative";
+        }
+
+        public static String GenerateNewRepresentativeRemovedEmail()
+        {
+            return "Your Department Has chosen you as the new Department Representative to collect the next disbursement. Upcoming disbursement details if present can be found when you login. Congrats!";
+        }
     }
 }

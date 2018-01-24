@@ -44,6 +44,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,7 +58,9 @@
     <Compile Include="ApprovePurchaseOrderView.cs">
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="controller\DisbursementController.cs" />
     <Compile Include="controller\RetrievalController.cs" />
+    <Compile Include="dao\StoreClerkDao.cs" />
     <Compile Include="CrystalReport1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -79,6 +82,7 @@
     <Compile Include="PURCHASEORDERVIEW.cs">
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="model\DisbursementItem.cs" />
     <Compile Include="RejectRequisitionController.cs" />
     <Compile Include="AcceptRequisitionController.cs" />
     <Compile Include="AdjustmentVoucher.cs">
@@ -176,6 +180,8 @@
     <Compile Include="RetrievalDetail.cs">
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="RetrievalFormController.cs" />
+    <Compile Include="RoleController.cs" />
     <Compile Include="StationeryCatalogue.cs">
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
@@ -248,6 +254,7 @@
       <Name>LUSSIS Email Backend</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Folder Include="dao\" />
   </ItemGroup>

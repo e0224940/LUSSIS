@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Email_Backend;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -74,19 +75,45 @@ namespace LUSSIS_Backend
             {
                 if (currEmployee != null && newRepresentative != null)
                 {
+                    String currDeptCode = currEmployee.DeptCode;
                     currDepartment = context.Departments
-                        .Where(dep => dep.DeptCode.Equals(currEmployee.DeptCode))
+                        .Where(dep => dep.DeptCode.Equals(currDeptCode))
                         .FirstOrDefault();
 
                     if (currDepartment != null)
                     {
+                        Employee oldRepresentative = currDepartment.EmployeeRepresentative;
+                        if (oldRepresentative != null)
+                        {
+                            // Remove the role from the old employee
+                            RoleController.removeRoleFromEmployee(context, oldRepresentative.EmpNo, RoleController.LUSSISRoles.DepartmentRepresentative);
+
+                            // Notify the old employee
+                            EmailBackend.sendEmailStep(
+                                oldRepresentative.Email,
+                                EmailTemplate.GenerateOldRepresentativeRemovedSubject(),
+                                EmailTemplate.GenerateOldRepresentativeRemovedEmail()
+                                );
+                        }
+
+                        // Add the role to the new employee
+                        RoleController.addRoleToEmployee(context, newRepresentativeNo, RoleController.LUSSISRoles.DepartmentRepresentative);
+
+                        // Mark the new representative in the database
                         currDepartment.RepEmpNo = newRepresentative.EmpNo;
                         context.SaveChanges();
                         result = true;
+
+                        // Notify the new employee
+                        EmailBackend.sendEmailStep(
+                            newRepresentative.Email,
+                            EmailTemplate.GenerateNewRepresentativeRemovedSubject(),
+                            EmailTemplate.GenerateNewRepresentativeRemovedEmail()
+                            );
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 result = false;
             }

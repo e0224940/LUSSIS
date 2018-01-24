@@ -1,53 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace LUSSIS_Backend.controller
 {
-    static class RetrievalController
+    public static class RetrievalController
     {
         static LussisEntities context;
 
-        public static void CreateWeeklyRetrieval()
+        public static int CreateWeeklyRetrieval()
         {
-
+            context = new LussisEntities();
+            int retrievalNo = -1;
             // Creating Database Transaction
-            //using (var dbcxtransaction = context.Database.BeginTransaction())
-            //{
-            //try
-            //{
-            // Add Retrieval
-            Retrieval retrieval = AddRetrieval(context, new Retrieval());
+            using (var txn = new TransactionScope())
+            {
+                try
+                {
+                    //Add Retrieval
+                    Retrieval retrieval = AddRetrieval(context, new Retrieval() { Date = DateTime.Today });
 
-            // Get RetrievalNo
-            int retrievalNo = retrieval.RetrievalNo;
+                    // Get RetrievalNo
+                    retrievalNo = retrieval.RetrievalNo;
 
-            // Add RetrievalDetails (from RequisitionDetails)
-            ProcessRequisitions(context, retrievalNo);
+                    // Add RetrievalDetails (from RequisitionDetails)
+                    ProcessRequisitions(context, retrievalNo);
 
-            // Add RetrievalDetails (from Backlogs)
-            ProcessBacklogs(context, retrievalNo);
+                    // Add RetrievalDetails (from Backlogs)
+                    ProcessBacklogs(context, retrievalNo);
 
-            // Clear Backlog
-            Clear(context);
+                    // Clear Backlog
+                    Clear(context);
 
-            //// Commit Transaction
-            //dbcxtransaction.Commit();
-            //}
-            //catch
-            //{
-            //    // Rollback Transaction
-            //    dbcxtransaction.Rollback();
-            //}
-            //}
+                    // Commit Transaction
+                    txn.Complete();
+                }
+                catch (Exception ex)
+                {
+                    // Rollback Transaction
+                    //dbcxtransaction.Rollback();
+                }
+            }
+
+            return retrievalNo;
         }
 
         private static void ProcessRequisitions(LussisEntities context, int retrievalNo)
         {
             // Get Approved Requisitions
             List<Requisition> requisitionList = GetApprovedRequisitions(context);
+
+            if(requisitionList.Count == 0)
+            {
+                throw new Exception("No Requisitions to Process");
+            }
 
             // For each Requisition
             for (int i = 0; i < requisitionList.Count; i++)
@@ -59,8 +69,8 @@ namespace LUSSIS_Backend.controller
                 for (int j = 0; j < requisitionDetailList.Count; j++)
                 {
                     // Get deptCode & itemNo
-                    string deptCode = requisitionDetailList[i].RequisitionInfo.EmployeeWhoIssued.DeptCode;
-                    string itemNo = requisitionDetailList[i].ItemNo;
+                    string deptCode = requisitionDetailList[j].RequisitionInfo.EmployeeWhoIssued.DeptCode;
+                    string itemNo = requisitionDetailList[j].ItemNo;
 
                     // Get RetrievalDetail
                     RetrievalDetail retrievalDetail = GetRetrievalDetail(context, retrievalNo, deptCode, itemNo);
@@ -68,7 +78,7 @@ namespace LUSSIS_Backend.controller
                     if (retrievalDetail != null)
                     {
                         // Update RetrievalDetail
-                        retrievalDetail.Needed += requisitionDetailList[i].Qty;
+                        retrievalDetail.Needed += requisitionDetailList[j].Qty;
                     }
                     else
                     {
@@ -76,18 +86,18 @@ namespace LUSSIS_Backend.controller
                         retrievalDetail = new RetrievalDetail();
                         retrievalDetail.RetrievalNo = retrievalNo;
                         retrievalDetail.DeptCode = deptCode;
-                        retrievalDetail.ItemNo = requisitionDetailList[i].ItemNo;
-                        retrievalDetail.Needed = requisitionDetailList[i].Qty;
+                        retrievalDetail.ItemNo = requisitionDetailList[j].ItemNo;
+                        retrievalDetail.Needed = requisitionDetailList[j].Qty;
                         retrievalDetail.BackLogQty = 0;
                         retrievalDetail.Actual = 0;
                         retrievalDetail = AddRetrievalDetail(context, retrievalDetail);
+                        context.SaveChanges();
                     }
                 }
 
                 // Update Requisition Status
                 requisitionList[i].Status = "Processed";
             }
-
             context.SaveChanges();
         }
 
@@ -140,7 +150,7 @@ namespace LUSSIS_Backend.controller
             // Get DisbursementDate
             DateTime today = DateTime.Today;
             int daysUntilMonday = ((int)DayOfWeek.Monday - (int)today.DayOfWeek + 7) % 7;
-            DateTime disbursementDate = today.AddDays(daysUntilMonday);
+            DateTime disbursementDate = today.Date.AddDays(daysUntilMonday);
 
             // Update RetrievalDate
             Retrieval retrieval = GetRetrieval(context, retrievalNo);
@@ -235,7 +245,7 @@ namespace LUSSIS_Backend.controller
         }
         public static RetrievalDetail GetRetrievalDetail(LussisEntities context, int retrievalNo, string deptCode, string itemNo)
         {
-            return context.RetrievalDetails.Where(x => x.RetrievalNo == retrievalNo && x.DeptCode == deptCode && x.ItemNo == itemNo).FirstOrDefault();
+            return context.RetrievalDetails.Where(x => x.RetrievalNo == retrievalNo && x.DeptCode.Equals(deptCode) && x.ItemNo.Equals(itemNo)).FirstOrDefault();
         }
         public static RetrievalDetail AddRetrievalDetail(LussisEntities context, RetrievalDetail retrievalDetail)
         {
@@ -248,15 +258,15 @@ namespace LUSSIS_Backend.controller
         }
         public static StationeryCatalogue GetStock(LussisEntities context, string itemNo)
         {
-            return context.StationeryCatalogues.Where(x => x.ItemNo == itemNo).FirstOrDefault();
+            return context.StationeryCatalogues.Where(x => x.ItemNo.Equals(itemNo)).FirstOrDefault();
         }
         public static Department GetDepartment(LussisEntities context, string deptCode)
         {
-            return context.Departments.Where(x => x.DeptCode == deptCode).FirstOrDefault();
+            return context.Departments.Where(x => x.DeptCode.Equals(deptCode)).FirstOrDefault();
         }
         public static Disbursement GetDisbursement(LussisEntities context, string deptCode, DateTime disbursementDate)
         {
-            return context.Disbursements.Where(x => x.DeptCode == deptCode && x.DisbursementDate == disbursementDate).FirstOrDefault();
+            return context.Disbursements.Where(x => x.DeptCode.Equals(deptCode) && x.DisbursementDate == disbursementDate).FirstOrDefault();
         }
         public static StockTxnDetail AddStockTxn(LussisEntities context, StockTxnDetail txn)
         {
