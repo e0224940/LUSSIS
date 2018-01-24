@@ -69,7 +69,7 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
 
     protected void Search_Click(object sender, EventArgs e)
     {
-        //searchitem = new List<RaisedItem>();
+        //searchitem = new Lsist<RaisedItem>();
         //string name = SearchItem.Text.ToString();
         //for (int i = 0; i < StationeryGridView.Rows.Count; i++)
         //{
