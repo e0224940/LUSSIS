@@ -149,6 +149,7 @@
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="RetrievalFormController.cs" />
+    <Compile Include="RoleController.cs" />
     <Compile Include="StationeryCatalogue.cs">
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>

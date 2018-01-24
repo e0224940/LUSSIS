@@ -69,62 +69,23 @@ namespace LUSSIS_Backend
                 .Where(emp => emp.EmpNo == newRepresentativeNo)
                 .FirstOrDefault();
             Department currDepartment = null;
-            Employee oldRepresentative = null;
-            aspnet_Roles representativeRole = context
-                .aspnet_Roles
-                .Where(role =>
-                role
-                    .RoleName
-                    .Equals("DepartmentRepresentative"))
-                .FirstOrDefault();
 
             try
             {
                 if (currEmployee != null && newRepresentative != null)
                 {
+                    String currDeptCode = currEmployee.DeptCode;
                     currDepartment = context.Departments
-                        .Where(dep => dep.DeptCode.Equals(currEmployee.DeptCode))
+                        .Where(dep => dep.DeptCode.Equals(currDeptCode))
                         .FirstOrDefault();
 
                     if (currDepartment != null)
                     {
                         // Remove the role from the old employee
-                        oldRepresentative = currDepartment.EmployeeRepresentative;
-                        if (oldRepresentative != null)
-                        {
-                            aspnet_Profile oldUserProfile = context
-                                .aspnet_Profile
-                                .Where(profile =>
-                                    profile
-                                        .PropertyValuesString
-                                    .Equals(oldRepresentative.EmpNo.ToString()))
-                                .FirstOrDefault();
-
-                            if (oldUserProfile != null && representativeRole != null)
-                            {
-                                aspnet_Users oldUser = context.aspnet_Users.Where(user => user.UserId.Equals(oldUserProfile.UserId)).FirstOrDefault();
-                                oldUser.aspnet_Roles.Remove(representativeRole);
-
-                            }
-                        }
+                        RoleController.removeRoleFromEmployee(context, currDepartment.RepEmpNo??-1, RoleController.LUSSISRoles.DepartmentRepresentative);
 
                         // Add the role to the new employee
-                        if (newRepresentative != null)
-                        {
-                            aspnet_Profile newUserProfile = context
-                                .aspnet_Profile
-                                .Where(profile =>
-                                    profile
-                                        .PropertyValuesString
-                                    .Equals(newRepresentative.EmpNo.ToString()))
-                                .FirstOrDefault();
-
-                            if (newUserProfile != null && representativeRole != null)
-                            {
-                                aspnet_Users newUser = context.aspnet_Users.Where(user => user.UserId.Equals(newUserProfile.UserId)).FirstOrDefault();
-                                newUser.aspnet_Roles.Add(representativeRole);
-                            }
-                        }
+                        RoleController.addRoleToEmployee(context, newRepresentativeNo, RoleController.LUSSISRoles.DepartmentRepresentative);
 
                         // Mark the new representative in the database
                         currDepartment.RepEmpNo = newRepresentative.EmpNo;
@@ -133,7 +94,7 @@ namespace LUSSIS_Backend
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 result = false;
             }
