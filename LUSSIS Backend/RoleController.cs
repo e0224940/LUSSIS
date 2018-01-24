@@ -19,7 +19,7 @@ namespace LUSSIS_Backend
             StoreClerk
         }
 
-        private static String[] LUSSISRolesString =  
+        private static String[] LUSSISRolesString =
         {
             "DepartmentHead",
             "DepartmentDeputy",
@@ -32,7 +32,7 @@ namespace LUSSIS_Backend
 
         public static void removeRoleFromEmployee(LussisEntities context, int employeeNo, LUSSISRoles roleToRemove)
         {
-            if(context == null)
+            if (context == null)
             {
                 return;
             }
@@ -54,9 +54,9 @@ namespace LUSSIS_Backend
                 String empNoToFind = employee.EmpNo.ToString();
                 aspnet_Profile userProfile = null;
 
-                foreach(aspnet_Profile profile in context.aspnet_Profile)
+                foreach (aspnet_Profile profile in context.aspnet_Profile)
                 {
-                    if(profile.PropertyValuesString.Equals(empNoToFind))
+                    if (profile.PropertyValuesString.Equals(empNoToFind))
                     {
                         userProfile = profile;
                         break;
@@ -114,6 +114,48 @@ namespace LUSSIS_Backend
                     context.SaveChanges();
                 }
             }
+        }
+
+        public static String[] getRolesOfEmployee(LussisEntities context, int employeeNo)
+        {
+            String[] result = null;
+
+            if (context == null)
+            {
+                return result;
+            }
+
+            Employee employee = context.Employees
+                .Where(emp => emp.EmpNo == employeeNo)
+                .FirstOrDefault();
+
+            if (employee != null)
+            {
+                String empNoToFind = employee.EmpNo.ToString();
+                aspnet_Profile userProfile = null;
+
+                foreach (aspnet_Profile profile in context.aspnet_Profile)
+                {
+                    if (profile.PropertyValuesString.Equals(empNoToFind))
+                    {
+                        userProfile = profile;
+                        break;
+                    }
+                }
+
+                if (userProfile != null)
+                {
+                    Guid userId = userProfile.UserId;
+                    result = context.aspnet_Users
+                        .Where(user => user.UserId.Equals(userId))
+                        .First()
+                        .aspnet_Roles
+                        .Select(role => role.RoleName)
+                        .ToArray();
+                }
+            }
+
+            return result;
         }
     }
 }
