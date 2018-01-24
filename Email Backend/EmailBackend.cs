@@ -18,29 +18,35 @@ namespace Email_Backend
         private static string senderUsername = @"apikey";
         private static string senderPassword = "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";
 
-        // WARNING : THIS FUNCTION IS UNTESTED!
+        // WARNING : Don't forget to set "SendEmailForReal" to really send emails!
         public static bool sendEmailStep(String recipientEmail, String emailSubject, String emailContent)
         {
             // Default to true if we are not sending email for real
-            bool result = false; 
+            bool result = true;
 
             if (SendEmailForReal)
             {
                 try
                 {
-                    SmtpClient client = new SmtpClient(senderSmtpAddress, Convert.ToInt32(senderSmtpPort));
-                    client.Credentials = new System.Net.NetworkCredential(senderUsername, senderPassword);
-                    client.EnableSsl = true;
-                    client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    client.Timeout = 10000;
+                    // Threading it as it takes too much time
+                    new Thread(
+                        () =>
+                        {
+                            SmtpClient client = new SmtpClient(senderSmtpAddress, Convert.ToInt32(senderSmtpPort));
+                            client.Credentials = new System.Net.NetworkCredential(senderUsername, senderPassword);
+                            client.EnableSsl = true;
+                            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                            client.Timeout = 10000;
 
-                    MailMessage mm = new MailMessage(senderEmail, recipientEmail);
-                    mm.Subject = emailSubject;
-                    mm.Body = emailContent;
+                            MailMessage mm = new MailMessage(senderEmail, recipientEmail);
+                            mm.Subject = emailSubject;
+                            mm.Body = emailContent;
 
-                    client.Send(mm);
+                            client.Send(mm);
 
-                    result = true;
+                            result = true;
+                        }).Start();
+
                 }
                 catch (Exception e)
                 {
