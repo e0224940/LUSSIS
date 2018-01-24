@@ -29,8 +29,10 @@ public partial class Department_Employee_ItemAdding : System.Web.UI.Page
 
     protected void GVAddItem_SelectedIndexChanged(object sender, EventArgs e)
     {
+        
         GridViewRow row = GVAddItem.SelectedRow;
         RaisedItem cat = new RaisedItem();
+        
         cat.description = row.Cells[0].Text;
         cat.quantity = (row.Cells[1].FindControl("txtQty") as TextBox).Text;
        

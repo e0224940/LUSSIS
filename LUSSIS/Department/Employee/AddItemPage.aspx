@@ -40,6 +40,7 @@
 
                     </Columns>
                 </asp:GridView>
+                <asp:Label ID="showerrorLb" runat="server" Text=""></asp:Label>
             </div>
             <div class="col-sm-6">
                 <asp:GridView GridLines="Horizontal" DataKeyNames="ItemNo" runat="server" ID="Cart" AutoGenerateColumns="False" OnRowDeleting="Cart_GridViewDelete">
