@@ -18,7 +18,6 @@ namespace LUSSIS_Backend
         {
             LussisEntities entity = new LussisEntities();
             Employee currrentEmp = entity.Employees.Where(emp => emp.EmpNo == empNo).First();
-
             return currrentEmp.EmpName;
         }
         public static List<StationeryCatalogue> SearchDes(string value)

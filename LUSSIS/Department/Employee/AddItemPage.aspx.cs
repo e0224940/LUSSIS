@@ -37,18 +37,23 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
     {
      
         GridViewRow row = StationeryGridView.SelectedRow;
-
-        
-
         RaisedItem cart = new RaisedItem();
         cart.ItemNo = row.Cells[0].Text;
         cart.description = row.Cells[1].Text;
-        cart.quantity = (row.Cells[2].FindControl("Quantity") as TextBox).Text;
-
-        cartitem.Add(cart);
-        Session["session"] = cartitem;
-        Cart.DataSource = cartitem;
-        Cart.DataBind();
+        if ((row.Cells[2].FindControl("Quantity") as TextBox).Text.ToString() == "" || Int32.Parse((row.Cells[2].FindControl("Quantity") as TextBox).Text) <= 0
+            )
+        {
+            Msg.Text = "The input number has to be greater than 0.";
+        }
+        else
+        {
+            Msg.Text = "";
+            cart.quantity = (row.Cells[2].FindControl("Quantity") as TextBox).Text;
+            cartitem.Add(cart);
+            Session["session"] = cartitem;
+            Cart.DataSource = cartitem;
+            Cart.DataBind();
+        }
     }
 
     protected void Confirm_Click(object sender, EventArgs e)
@@ -57,7 +62,6 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
         int isissueBy = Profile.EmpNo;
         dateIssue = DateTime.Now.Date;
         string status = "Not Approved yet.";
-
         List<RequisitionDetail> detailList = new List<RequisitionDetail>();
         foreach (RaisedItem k in cartitem)
         {
@@ -67,7 +71,7 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
             detailList.Add(rd);
         }
         EmployeeController.RaisedRequisition(isissueBy, dateIssue, status, detailList);
-        Response.Redirect("Default.aspx");
+        Msg.Text = "Success!";
     }
 
     protected void Search_Click(object sender, EventArgs e)
@@ -76,7 +80,6 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
             string val = SearchItemText.Text;
             StationeryGridView.DataSource = EmployeeController.SearchDes(val);
             StationeryGridView.DataBind();
-       // Session["session"] = cartitem;
     }
 
     protected void Cancel_Click(object sender, EventArgs e)

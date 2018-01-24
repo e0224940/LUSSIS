@@ -10,7 +10,7 @@
 
     <br />
 
-    <asp:Label ID="reuNo" runat="server" Text="ReqNo:"></asp:Label>
+    <asp:Label ID="reuNo" runat="server" Text="Requisition No:"></asp:Label>
     <asp:Label ID="Num" runat="server" Text=" "></asp:Label>
 
     <br />
@@ -30,7 +30,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Qty">
                 <ItemTemplate>
-                    <asp:TextBox ID="lblQuantity" runat="server" Width="50px" ReadOnly="true" Text='<%# Bind("quantity") %>'></asp:TextBox>
+                    <asp:Label ID="lblQuantity" runat="server" Width="50px" Text='<%# Bind("quantity") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="New Qty">
@@ -47,5 +47,6 @@
 
     <br />
     <asp:Button ID="submit" runat="server" Text="Submit" />
+    &nbsp&nbsp&nbsp&nbsp
     <asp:Button ID="cancel" runat="server" Text="Cancel" OnClick="cancel_Click" />
 </asp:Content>
