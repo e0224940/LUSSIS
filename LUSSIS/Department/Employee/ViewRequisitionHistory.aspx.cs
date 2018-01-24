@@ -22,8 +22,7 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
             requsition = new List<Requisition>();
             reqhistory = new List<ReqHistory>();
             DetailGridView.DataSource = EmployeeController.viewRequisition();
-            DetailGridView.DataBind();
-            
+            DetailGridView.DataBind();         
         }
         //if()
 

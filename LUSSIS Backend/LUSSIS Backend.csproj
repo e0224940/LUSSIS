@@ -53,6 +53,7 @@
     <Compile Include="ApproveInventoryAdjustmentController.cs" />
     <Compile Include="ApprovePurchaseOrderController.cs" />
     <Compile Include="controller\DisbursementController.cs" />
+    <Compile Include="controller\OrderController.cs" />
     <Compile Include="controller\RetrievalController.cs" />
     <Compile Include="dao\StoreClerkDao.cs" />
     <Compile Include="CrystalReportController.cs" />
@@ -62,6 +63,7 @@
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="ItemList.cs" />
+    <Compile Include="model\OrderItem.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
