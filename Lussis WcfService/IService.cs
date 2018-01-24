@@ -23,5 +23,26 @@ namespace Lussis_WcfService
         [OperationContract]
         [WebInvoke(UriTemplate = "/checkSession", Method="POST", ResponseFormat = WebMessageFormat.Json, RequestFormat =WebMessageFormat.Json)]
         bool TestSessionId(int sessionID);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/CollectionPoint", Method = "POST", BodyStyle =WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        String GetCollectionPoint(int sessionID, int collectionPointNo);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Department", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        WCFDepartment GetDepartment(int sessionID, String deptCode);
+    }
+
+    public class WCFDepartment
+    {
+        public String DeptCode;
+        public String DeptName;
+        public String ContactName;
+        public String PhoneNo;
+        public String FaxNo;
+        public int HeadEmpNo;
+        public int CollectionPointNo;
+        public int RepEmpNo;
+        public int DeputyEmpNo;
     }
 }
