@@ -45,23 +45,27 @@ namespace LUSSIS_Backend
             //    entities.SaveChanges();
             //}
 
-            LussisEntities entity = new LussisEntities();
+            
            
+
         }
         //Add data into database: requisition
-        public static void RaisedRequisition(int issueBy,DateTime dateIssue)
+        public static void RaisedRequisition(int issueBy,DateTime dateIssue,string status)
         {
             using (LussisEntities entities = new LussisEntities())
             {
                 Requisition req = new Requisition
                 {
                     IssuedBy = issueBy ,
-                    DateIssued = dateIssue
+                    DateIssued = dateIssue,
+                    Status = status
                 };
                 entities.Requisitions.Add(req);
                 entities.SaveChanges();
             }
         }
+
+       
 
     }
 }
