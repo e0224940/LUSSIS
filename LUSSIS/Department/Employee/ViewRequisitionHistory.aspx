@@ -10,7 +10,7 @@
     <br />
     <asp:GridView ID="DetailGridView" runat="server" DataKeyNames="ReqNo" AutoGenerateColumns="False" OnRowDeleting="detailGridView_Delete">
         <Columns>
-             <asp:BoundField DataField="ReqNo" HeaderText="ReqNo" SortExpression="ReqNo" />
+             <asp:BoundField DataField="ReqNo" HeaderText="ReqNo" SortExpression="ReqNo" Visible="false" />
             <asp:BoundField DataField="DateIssued" HeaderText="Date" SortExpression="DateIssued" />
             <asp:BoundField DataField="ReqNo" HeaderText="Requisition Form" SortExpression="ReqNo" />
             <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
