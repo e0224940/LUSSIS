@@ -28,13 +28,21 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
 
     }
 
+    //protected void detailGridView_Delete(object sender, GridViewDeleteEventArgs e)
+    //{
+    //    string ReqNo = DetailGridView.DataKeys[e.RowIndex].Values[1].ToString();
+    //    ReqHistory selected = reqhistory.Where(item => item.ReqNo == ReqNo).FirstOrDefault();
+    //    reqhistory.Remove(selected);
+    //    Session["session"] = reqhistory;
+    //    DetailGridView.DataSource = reqhistory;
+    //    DetailGridView.DataBind();
+    //}
+
     protected void detailGridView_Delete(object sender, GridViewDeleteEventArgs e)
     {
-        string ReqNo = DetailGridView.DataKeys[e.RowIndex].Values[1].ToString();
-        ReqHistory selected = reqhistory.Where(item => item.ReqNo == ReqNo).FirstOrDefault();
-        reqhistory.Remove(selected);
-        Session["session"] = reqhistory;
-        DetailGridView.DataSource = reqhistory;
+        int reqId = Convert.ToInt32(DetailGridView.DataKeys[e.RowIndex].Values[0]);
+        EmployeeController.DeleteReqHistory(reqId);
+        DetailGridView.DataSource = EmployeeController.viewRequisition();
         DetailGridView.DataBind();
     }
 }

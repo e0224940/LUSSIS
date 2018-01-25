@@ -102,7 +102,6 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
     {
         if (IsPostBack)
         {
-          
             itemList = new List<StationeryCatalogue>();
             cartitem = new List<RaisedItem>();
             StationeryGridView.DataSource = EmployeeController.ViewItem();

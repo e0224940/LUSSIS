@@ -77,7 +77,16 @@ namespace LUSSIS_Backend
             return entity.Requisitions.ToList();
         }
 
-
+        //Delete row for Requisition History
+        public static void DeleteReqHistory(int reqId)
+        {
+            using (LussisEntities entities = new LussisEntities())
+            {
+                Requisition req = entities.Requisitions.Where(p => p.ReqNo == reqId).First<Requisition>();
+                entities.Requisitions.Remove(req);
+                entities.SaveChanges();
+            }
+        }
     }
 }
 
