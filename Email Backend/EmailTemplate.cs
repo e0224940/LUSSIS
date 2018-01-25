@@ -53,5 +53,16 @@ namespace Email_Backend
         {
             return "Your Department Has chosen you as the new Department Representative to collect the next disbursement. Upcoming disbursement details if present can be found when you login. Congrats!";
         }
+        public static String GeneratePendingRequisitionSubject(string requestEmployee)
+        {
+            return "A new Requisition has been raised by" + requestEmployee+".";
+        }
+
+        public static String GeneratePendingRequisition(string manager, string requestEmployee)
+        {
+            return
+                "Dear " + manager + "<br/>" + "A new requisition has been raised by" + requestEmployee + ",please approve it soon.";
+        }
+
     }
 }
