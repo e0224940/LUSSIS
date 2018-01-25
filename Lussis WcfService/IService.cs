@@ -21,7 +21,7 @@ namespace Lussis_WcfService
 
         // Check if Session id is okay
         [OperationContract]
-        [WebInvoke(UriTemplate = "/checkSession", Method="POST", ResponseFormat = WebMessageFormat.Json, RequestFormat =WebMessageFormat.Json)]
+        [WebInvoke(UriTemplate = "/checkSession", Method="POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat =WebMessageFormat.Json)]
         bool TestSessionId(int sessionID);
 
         [OperationContract]

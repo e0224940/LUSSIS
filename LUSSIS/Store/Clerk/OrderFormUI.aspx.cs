@@ -130,7 +130,6 @@ public partial class Store_Clerk_OrderFormUI : System.Web.UI.Page
         OrderController.SubmitOrder(orderList, orderedBy, approvedBy, dateIssued);
 
         // Redirect to SuccessPage
-        Response.Redirect(successPageUrl);
     }
 
     protected void SupplierDropDownList_SelectedIndexChanged(object sender, EventArgs e)
