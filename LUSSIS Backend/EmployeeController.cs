@@ -81,7 +81,7 @@ namespace LUSSIS_Backend
             }
         }
 
-        public static List<Requisition> viewRequisition()
+        public static List<Requisition> ViewRequisition()
         {
             LussisEntities entity = new LussisEntities();
             return entity.Requisitions.ToList();

@@ -71,6 +71,9 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
             detailList.Add(rd);
         }
         EmployeeController.RaisedRequisition(isissueBy, dateIssue, status, detailList);
+        Session.Abandon();
+        Response.Redirect("ViewRequisitionHistory.aspx");
+
         Msg.Text = "Success!";
     }
 
