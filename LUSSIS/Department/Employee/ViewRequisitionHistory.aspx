@@ -16,7 +16,7 @@
             <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
             <asp:TemplateField>
                 <ItemTemplate>
-                    <asp:Button ID="view" runat="server" Text="View Details" />
+                    <asp:Button ID="view" runat="server" Text="View Details" OnClick="view_Click"/>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:CommandField ShowDeleteButton="true" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Email_Backend;
 
 namespace LUSSIS_Backend
 {
@@ -41,12 +42,12 @@ namespace LUSSIS_Backend
         {
             using (LussisEntities entities = new LussisEntities())
             {
-               
+
             }
 
         }
         //Add data into database: requisition
-        public static void RaisedRequisition(int issueBy,DateTime dateIssue,string status, List<RequisitionDetail> r)
+        public static void RaisedRequisition(int issueBy, DateTime dateIssue, string status, List<RequisitionDetail> r)
         {
             using (LussisEntities entities = new LussisEntities())
             {
@@ -56,7 +57,7 @@ namespace LUSSIS_Backend
                     DateIssued = dateIssue,
                     Status = status
                 };
-                
+
                 foreach (RequisitionDetail l in r)
                 {
                     RequisitionDetail rl = new RequisitionDetail();
@@ -68,6 +69,15 @@ namespace LUSSIS_Backend
                 entities.Requisitions.Add(req);
                 entities.SaveChanges();
 
+                LussisEntities entity = new LussisEntities();
+                Employee currEmployee = entity.Employees.Where(emp => emp.EmpNo == issueBy).First();
+                Department currDepartment = entity.Departments.Where(dep => dep.DeptCode.Equals(currEmployee.DeptCode)).First();
+                // Send Email
+                EmailBackend.sendEmailStep(
+                    currDepartment.EmployeeHead.Email,
+                    EmailTemplate.GeneratePendingRequisitionSubject(currEmployee.ToString()),
+                    EmailTemplate.GenerateCollectionPointStatusChangedEmail(currDepartment.EmployeeHead.ToString(), currEmployee.ToString());)
+                
             }
         }
 
@@ -91,7 +101,7 @@ namespace LUSSIS_Backend
 
                 }
 
-                Requisition req = entities.Requisitions.Where(p => p.ReqNo == reqId).FirstOrDefault<Requisition>();     
+                Requisition req = entities.Requisitions.Where(p => p.ReqNo == reqId).FirstOrDefault<Requisition>();
                 entities.Requisitions.Remove(req);
                 entities.SaveChanges();
             }

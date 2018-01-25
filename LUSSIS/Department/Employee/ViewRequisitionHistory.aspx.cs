@@ -17,26 +17,22 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
         if (!IsPostBack)
         {
             string empName = EmployeeController.GetName(empNo);
-            name.Text = empName;  
+            name.Text = empName;
             DetailGridView.Visible = true;
             requsition = new List<Requisition>();
             reqhistory = new List<ReqHistory>();
+            GridViewRow row = DetailGridView.SelectedRow;
+            string Rnum = DetailGridView.Rows[row.RowIndex].Cells[2].Text.ToString();
+            if (Rnum == "Approved")
+            {
+                row.Cells[3].Visible = false;
+                row.Cells[4].Visible = false;
+            }
             DetailGridView.DataSource = EmployeeController.viewRequisition();
-            DetailGridView.DataBind();         
+            DetailGridView.DataBind();
+
         }
-        //if()
-
     }
-
-    //protected void detailGridView_Delete(object sender, GridViewDeleteEventArgs e)
-    //{
-    //    string ReqNo = DetailGridView.DataKeys[e.RowIndex].Values[1].ToString();
-    //    ReqHistory selected = reqhistory.Where(item => item.ReqNo == ReqNo).FirstOrDefault();
-    //    reqhistory.Remove(selected);
-    //    Session["session"] = reqhistory;
-    //    DetailGridView.DataSource = reqhistory;
-    //    DetailGridView.DataBind();
-    //}
 
     protected void detailGridView_Delete(object sender, GridViewDeleteEventArgs e)
     {
@@ -44,5 +40,10 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
         EmployeeController.DeleteReqHistory(reqId);
         DetailGridView.DataSource = EmployeeController.viewRequisition();
         DetailGridView.DataBind();
+    }
+
+    protected void view_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("RequisitionDetailsView.aspx");
     }
 }
