@@ -20,7 +20,7 @@
         <Columns>
             <asp:TemplateField HeaderText="ItemNo" SortExpression="ItemNo" Visible="false">
                 <ItemTemplate>
-                    <asp:Label ID="No" runat="server" Text='<%# Bind("ItemNo") %>' Visible="false"></asp:Label>
+                    <asp:Label ID="No" runat="server" Text='<%# Bind("reqNo") %>' ></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Description" SortExpression="description">

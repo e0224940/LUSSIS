@@ -11,6 +11,7 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
 
     static List<Requisition> requsition;
     static List<ReqHistory> reqhistory;
+    
     protected void Page_Load(object sender, EventArgs e)
     {
         int empNo = Profile.EmpNo;
@@ -21,28 +22,31 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
             DetailGridView.Visible = true;
             requsition = new List<Requisition>();
             reqhistory = new List<ReqHistory>();
-            DetailGridView.DataSource = EmployeeController.viewRequisition();
+            DetailGridView.DataSource = EmployeeController.ViewRequisition();
             DetailGridView.DataBind();         
         }
         //if()
 
     }
-
-    //protected void detailGridView_Delete(object sender, GridViewDeleteEventArgs e)
-    //{
-    //    string ReqNo = DetailGridView.DataKeys[e.RowIndex].Values[1].ToString();
-    //    ReqHistory selected = reqhistory.Where(item => item.ReqNo == ReqNo).FirstOrDefault();
-    //    reqhistory.Remove(selected);
-    //    Session["session"] = reqhistory;
-    //    DetailGridView.DataSource = reqhistory;
-    //    DetailGridView.DataBind();
-    //}
-
     protected void detailGridView_Delete(object sender, GridViewDeleteEventArgs e)
     {
         int reqId = Convert.ToInt32(DetailGridView.DataKeys[e.RowIndex].Values[0]);
+        Session["sessionID"] = reqId;
         EmployeeController.DeleteReqHistory(reqId);
-        DetailGridView.DataSource = EmployeeController.viewRequisition();
+        DetailGridView.DataSource = EmployeeController.ViewRequisition();
         DetailGridView.DataBind();
+    }
+
+    protected void DetailGridView_SelectedIndexChanged(object sender, EventArgs e)
+    {
+       
+        Response.Redirect("RequisitionDetailsView.aspx");
+
+    }
+
+    protected void view_Click(object sender, EventArgs e)
+    {
+        GridViewRow row = DetailGridView.Rows[e];
+        Response.Redirect("RequisitionDetailsView.aspx?reqNo=" + Session["sessionID"]);
     }
 }
