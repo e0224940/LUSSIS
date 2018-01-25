@@ -56,7 +56,7 @@ namespace LUSSIS_Backend
                 LussisEntities entity = new LussisEntities();
                 Employee currEmployee = entity.Employees.Where(emp => emp.EmpNo == empNo).First();
                 Department currDepartment = entity.Departments.Where(dep => dep.DeptCode.Equals(currEmployee.DeptCode)).First();
-
+                
                 // Send Email
                 EmailBackend.sendEmailStep(
                     currDepartment.EmployeeHead.Email,

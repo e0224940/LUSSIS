@@ -60,7 +60,7 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
     {
         cartitem = (List<RaisedItem>)Session["session"];
         int isissueBy = Profile.EmpNo;
-        dateIssue = DateTime.Now.Date;
+        dateIssue = DateTime.Today;
         string status = "Not Approved yet.";
         List<RequisitionDetail> detailList = new List<RequisitionDetail>();
         foreach (RaisedItem k in cartitem)
@@ -71,6 +71,9 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
             detailList.Add(rd);
         }
         EmployeeController.RaisedRequisition(isissueBy, dateIssue, status, detailList);
+        Session.Abandon();
+        Response.Redirect("ViewRequisitionHistory.aspx");
+
         Msg.Text = "Success!";
     }
 
