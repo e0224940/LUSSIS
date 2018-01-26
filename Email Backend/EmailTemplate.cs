@@ -18,7 +18,7 @@ namespace Email_Backend
             return
                 "Dear " + applicant + "<br/>"
                 + "Your Stationery Request numbered " + requestNumber + " has been " + result + " by " + approver + "." + "<br/>"
-                + ((remark.Trim().Length > 0 ) ? "The following Remark has been left for you: " + remark: "") + "<br/>"
+                + ((remark.Trim().Length > 0) ? "The following Remark has been left for you: " + remark : "") + "<br/>"
                 + "[This is an automated Message, do no reply]";
         }
 
@@ -30,7 +30,7 @@ namespace Email_Backend
         public static String GenerateCollectionPointStatusChangedEmail(string applicant, string newPoint)
         {
             return
-                "Dear " + applicant + "<br/>" + "There is a new Collection Point Change. Now New Location is " 
+                "Dear " + applicant + "<br/>" + "There is a new Collection Point Change. Now New Location is "
                 + newPoint + "[This is an automated Message, do no reply]";
         }
 
@@ -53,5 +53,36 @@ namespace Email_Backend
         {
             return "Your Department Has chosen you as the new Department Representative to collect the next disbursement. Upcoming disbursement details if present can be found when you login. Congrats!";
         }
+
+        public static String GenerateOldDeputyAuthorityRemovedSubject()
+        {
+            return "You have been removed as Approving Authority";
+        }
+
+        public static String GenerateOldDeputyAuthorityRemovedEmail(string empName, string deptName)
+        {
+            return "Dear " + empName + ",<br/><br/>You have been removed as the approving authority of "+deptName+".";
+        }
+
+        public static String GenerateNewDeputyAuthoritySubject()
+        {
+            return "You have been appointed as Approving Authority";
+        }
+
+        public static String GenerateNewDeputyAuthorityEmail(string empName, string deptName, string startDate, string endDate)
+        {
+            return "Dear "+empName+", <br/><br/>You have been appointed as the approving authority of "+deptName+", starting at "+startDate+" and ending at "+endDate+".";
+        }
+
+        public static String GeneratePendingRequisitionSubject(string requestEmployee)
+        {
+            return "A new Requisition has been raised by" + requestEmployee + ".";
+        }
+        public static String GeneratePendingRequisition(string manager, string requestEmployee)
+        {
+            return
+                "Dear " + manager + "<br/>" + "A new requisition has been raised by" + requestEmployee + ",please approve it soon.";
+        }
+
     }
 }

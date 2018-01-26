@@ -30,23 +30,30 @@ public partial class Department_Head_ApproveAuthority : System.Web.UI.Page
             txtbox_dateStart.Text = DateTime.Now.ToString("yyyy-MM-dd");
             txtbox_dateEnd.Text = DateTime.Now.ToString("yyyy-MM-dd");
 
+            if(deputyHead.EmpNo.Equals(Profile.EmpNo))
+            {
+                button_appAuth_remove.Enabled = false;
+            }
+
         }
     }
 
     protected void button_appAuth_appoint_Click(object sender, EventArgs e)
     {
-
+        //collecting data from view
         string empName = ddl_appAuth_deptEmps.SelectedItem.Value;
         int empNo = getEmpNoFromEmpName(empName);
         DateTime dateStart = Convert.ToDateTime(txtbox_dateStart.Text);
         DateTime dateEnd = Convert.ToDateTime(txtbox_dateEnd.Text);
         string deptCode = getDepartmentNoFromProfile();
 
+        //remove authority 
         if (getDeputyHeadOfDepartment(deptCode).EmpNo != Profile.EmpNo)
         {
             removeAuthority(deptCode, getDeputyHeadOfDepartment(deptCode).EmpNo);
         }
 
+        //add authority
         addAuthority(deptCode, empNo, dateStart, dateEnd);
     }
 
@@ -119,6 +126,8 @@ public partial class Department_Head_ApproveAuthority : System.Web.UI.Page
     {
 
         string recipientEmail;
+        string recipientName;
+        string deptName;
         using (LussisEntities context = new LussisEntities())
         {
             Deputy dep = context.Deputies.Where(x => x.DeptCode.Equals(deptCode)).First();
@@ -126,8 +135,11 @@ public partial class Department_Head_ApproveAuthority : System.Web.UI.Page
 
             Department dept = context.Departments.Where(x => x.DeptCode.Equals(deptCode)).First();
             dept.DeputyEmpNo = Profile.EmpNo;
+            deptName = dept.DeptName;
 
             context.SaveChanges();
+
+            RoleController.removeRoleFromEmployee(context, outgoingEmpNo, RoleController.LUSSISRoles.DepartmentDeputy);
 
             Employee newDeputy = context.Employees.Where(x => x.EmpNo.Equals(dept.EmployeeDeputy.EmpNo)).First();
             txtBox_appAuth_currentHead.Text = newDeputy.EmpName;
@@ -138,11 +150,12 @@ public partial class Department_Head_ApproveAuthority : System.Web.UI.Page
         using (LussisEntities context = new LussisEntities())
         {
             recipientEmail = context.Employees.Where(x => x.EmpNo.Equals(outgoingEmpNo)).First().Email;
+            recipientName = context.Employees.Where(x => x.EmpNo.Equals(outgoingEmpNo)).First().EmpName;
         }
 
         EmailBackend.sendEmailStep(recipientEmail,
             EmailTemplate.GenerateOldDeputyAuthorityRemovedSubject(), 
-            EmailTemplate.GenerateOldDeputyAuthorityRemovedEmail());
+            EmailTemplate.GenerateOldDeputyAuthorityRemovedEmail(recipientName,deptName));
         
     }
 
@@ -154,27 +167,29 @@ public partial class Department_Head_ApproveAuthority : System.Web.UI.Page
         d.FromDate = start;
         d.ToDate = end;
 
+        string empName;
+        string deptName;
+        string recipientEmail;
+
         using (LussisEntities context = new LussisEntities())
         {
             context.Deputies.Add(d);
             Department dept = context.Departments.Where(x => x.DeptCode.Equals(deptCode)).First();
             dept.DeputyEmpNo = empNo;
+            deptName = dept.DeptName;
             context.SaveChanges();
+            RoleController.addRoleToEmployee(context, empNo, RoleController.LUSSISRoles.DepartmentDeputy);
 
             Employee newDeputy = context.Employees.Where(x => x.EmpNo.Equals(empNo)).First();
-            txtBox_appAuth_currentHead.Text = newDeputy.EmpName;
-        }
-
-        string recipientEmail;
-
-        using (LussisEntities context = new LussisEntities())
-        {
-            recipientEmail = context.Employees.Where(x => x.EmpNo.Equals(empNo)).First().Email;
+            empName = newDeputy.EmpName;
+            recipientEmail = newDeputy.Email;
+            txtBox_appAuth_currentHead.Text = empName;
+            
         }
 
         EmailBackend.sendEmailStep(recipientEmail,
         EmailTemplate.GenerateNewDeputyAuthoritySubject(),
-        EmailTemplate.GenerateNewDeputyAuthorityEmail());
+        EmailTemplate.GenerateNewDeputyAuthorityEmail(empName,deptName, start.ToString(), end.ToString()));
 
     }
 
