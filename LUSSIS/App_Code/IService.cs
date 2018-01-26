@@ -42,8 +42,28 @@ public interface IService
     [WebInvoke(UriTemplate = "/Employee", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     WCFEmployee GetEmployeeById(int sessionID, int empNo);
 
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/Catalogue", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    WCFStationeryCatalogue[] GetCatalogue(int sessionID);
 
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/CatalogueSearch", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    WCFStationeryCatalogue[] CatalogueSearch(int sessionID, String ItemNo, String Category, String Description, String Bin);
+}
 
+public class WCFStationeryCatalogue
+{
+    public String ItemNo;
+    public String Description;
+    public String Category;
+    public String Uom;
+    public String ReorderQty;
+    public String ReorderLevel;
+    public String CurrentQty;
+    public String Supplier1;
+    public String Supplier2;
+    public String Supplier3;
+    public String Bin;
 }
 
 public class WCFEmployee

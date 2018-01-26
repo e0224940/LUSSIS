@@ -84,7 +84,7 @@ public class Service : IService
         {
             Disbursement disbursement = AndroidController.GetCurrentDisbursementForDepartment(deptCode);
 
-            if(disbursement != null)
+            if (disbursement != null)
             {
                 result = new WCFDisbursement()
                 {
@@ -125,5 +125,71 @@ public class Service : IService
         }
 
         return result;
+    }
+
+    public WCFStationeryCatalogue[] GetCatalogue(int sessionID)
+    {
+        List<WCFStationeryCatalogue> result = new List<WCFStationeryCatalogue>();
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            List<StationeryCatalogue> items = AndroidController.GetCatalogue();
+
+            if (items != null)
+            {
+                foreach (var item in items)
+                {
+                    result.Add(new WCFStationeryCatalogue()
+                    {
+                        Bin = item.Bin,
+                        Category = item.Category,
+                        CurrentQty = item.CurrentQty.ToString(),
+                        Description = item.Description.ToString(),
+                        ItemNo = item.ItemNo.ToString(),
+                        ReorderLevel = item.ReorderLevel.ToString(),
+                        ReorderQty = item.ReorderQty.ToString(),
+                        Supplier1 = item.Supplier1,
+                        Supplier2 = item.Supplier2,
+                        Supplier3 = item.Supplier3,
+                        Uom = item.Uom
+                    });
+                }
+            }
+        }
+
+        return result.ToArray();
+    }
+
+    public WCFStationeryCatalogue[] CatalogueSearch(int sessionID, string ItemNo, string Category, string Description, string Bin)
+    {
+        List<WCFStationeryCatalogue> result = new List<WCFStationeryCatalogue>();
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            List<StationeryCatalogue> items = AndroidController.SearchCatalogue(ItemNo, Category, Description, Bin);
+
+            if (items != null)
+            {
+                foreach (var item in items)
+                {
+                    result.Add(new WCFStationeryCatalogue()
+                    {
+                        Bin = item.Bin,
+                        Category = item.Category,
+                        CurrentQty = item.CurrentQty.ToString(),
+                        Description = item.Description.ToString(),
+                        ItemNo = item.ItemNo.ToString(),
+                        ReorderLevel = item.ReorderLevel.ToString(),
+                        ReorderQty = item.ReorderQty.ToString(),
+                        Supplier1 = item.Supplier1,
+                        Supplier2 = item.Supplier2,
+                        Supplier3 = item.Supplier3,
+                        Uom = item.Uom
+                    });
+                }
+            }
+        }
+
+        return result.ToArray();
     }
 }
