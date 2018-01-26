@@ -18,7 +18,7 @@ namespace Email_Backend
             return
                 "Dear " + applicant + "<br/>"
                 + "Your Stationery Request numbered " + requestNumber + " has been " + result + " by " + approver + "." + "<br/>"
-                + ((remark.Trim().Length > 0 ) ? "The following Remark has been left for you: " + remark: "") + "<br/>"
+                + ((remark.Trim().Length > 0) ? "The following Remark has been left for you: " + remark : "") + "<br/>"
                 + "[This is an automated Message, do no reply]";
         }
 
@@ -30,7 +30,7 @@ namespace Email_Backend
         public static String GenerateCollectionPointStatusChangedEmail(string applicant, string newPoint)
         {
             return
-                "Dear " + applicant + "<br/>" + "There is a new Collection Point Change. Now New Location is " 
+                "Dear " + applicant + "<br/>" + "There is a new Collection Point Change. Now New Location is "
                 + newPoint + "[This is an automated Message, do no reply]";
         }
 
@@ -76,5 +76,18 @@ namespace Email_Backend
 
 
 
+    }
+}
+        }
+
+        public static String GeneratePendingRequisitionSubject(string requestEmployee)
+        {
+            return "A new Requisition has been raised by" + requestEmployee + ".";
+        }
+        public static String GeneratePendingRequisition(string manager, string requestEmployee)
+        {
+            return
+                "Dear " + manager + "<br/>" + "A new requisition has been raised by" + requestEmployee + ",please approve it soon.";
+        }
     }
 }

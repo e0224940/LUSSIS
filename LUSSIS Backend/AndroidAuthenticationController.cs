@@ -56,7 +56,7 @@ namespace LUSSIS_Backend
             if (employee != null)
             {
                 DateTime expiry = employee.SessionExpiry ?? DateTime.MinValue;
-                if (DateTime.Compare(DateTime.Today, expiry) >= 0)
+                if (DateTime.Compare(DateTime.Today, expiry) == 0)
                 {
                     result = true;
                 }
