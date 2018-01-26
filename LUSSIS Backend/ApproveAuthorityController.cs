@@ -132,5 +132,29 @@ namespace LUSSIS_Backend
 
             return empName;     //for display in view
         }
+
+        public static void checkIfDeputyEndDateElapsed()
+        {
+            using (LussisEntities context = new LussisEntities())
+            {
+                List<Deputy> listd = context.Deputies.ToList();
+                if(listd.Count!=0)
+                {
+                    for(int i =0;i<listd.Count;i++)
+                    {
+                        Deputy d = listd[i];
+                        Department dept = context.Departments.Where(x => x.DeputyEmpNo.Equals(d.DeputyEmpNo)).First();
+                        if(d.ToDate.Equals(DateTime.Today))
+                        {
+                            context.Deputies.Remove(d);
+                            dept.DeputyEmpNo = dept.HeadEmpNo;
+                            RoleController.removeRoleFromEmployee(context, (int) d.DeputyEmpNo, RoleController.LUSSISRoles.DepartmentDeputy);
+                        }
+                    }
+                    context.SaveChanges();
+                }
+                
+            }
+        }
     }
 }
