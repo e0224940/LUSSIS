@@ -8,6 +8,13 @@ namespace LUSSIS_Backend
 {
     public class ApprovePurchaseOrderController
     {
+        public static List<PurchaseOrder> ViewPurchaseOrder(int empNo)
+        {
+            LussisEntities context = new LussisEntities();
+            var result = context.PurchaseOrders.Where(x => x.OrderedBy == empNo).ToList();
+            return result;
+        }
+        
         //ApprovePOList functions
         public static List<PurchaseOrder> getPendingOrdersList()
         {
