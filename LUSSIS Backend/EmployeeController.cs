@@ -87,6 +87,15 @@ namespace LUSSIS_Backend
             return entity.Requisitions.ToList();
         }
 
+        //View Requisition Detail
+        public static List<RequisitionDetail> ViewRequisitionDetail( int reqNo)
+        {
+            LussisEntities entity = new LussisEntities();
+            List<RequisitionDetail> rd = entity.RequisitionDetails.Where(p => p.ReqNo == reqNo).ToList();
+            return rd;
+        }
+
+
         //Delete row for Requisition History
         public static void DeleteReqHistory(int reqId)
         {

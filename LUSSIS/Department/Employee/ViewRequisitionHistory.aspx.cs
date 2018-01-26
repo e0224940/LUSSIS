@@ -69,6 +69,6 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
     protected void view_Click(object sender, EventArgs e)
     {
        // GridViewRow row = DetailGridView.Rows[e];
-        Response.Redirect("RequisitionDetailsView.aspx?reqNo=" + Session["sessionID"]);
+        Response.Redirect("RequisitionDetailsView.aspx");
     }
 }

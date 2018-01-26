@@ -26,7 +26,7 @@ public partial class Department_Employee_RequisitionDetailsView : System.Web.UI.
 
             if(Session["sessionID"] != null) {
                 
-             int reqNo = (int)Session["sessionID"];
+             int reqNo = 42;
                 List<RequisitionDetail> reqHistory = EmployeeController.ViewRequisitionDetail(reqNo);
             foreach(RequisitionDetail r in reqHistory)
             {
