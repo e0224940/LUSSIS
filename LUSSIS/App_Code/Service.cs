@@ -283,4 +283,42 @@ public class Service : IService
 
         return result;
     }
+
+    public bool RemoveRequisitionDetail(int sessionID, WCFRequisitionDetail removeRequisitionDetail)
+    {
+        bool result = false;
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            RequisitionDetail requisition = new RequisitionDetail()
+            {
+                ReqNo = removeRequisitionDetail.ReqNo,
+                ItemNo = removeRequisitionDetail.ItemNo,
+                Qty = removeRequisitionDetail.Qty
+            };
+
+            result = AndroidController.RemoveRequisitionDetail(requisition);
+        }
+
+        return result;
+    }
+
+    public bool UpdateRequisitionDetail(int sessionID, WCFRequisitionDetail removeRequisitionDetail)
+    {
+        bool result = false;
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            RequisitionDetail requisition = new RequisitionDetail()
+            {
+                ReqNo = removeRequisitionDetail.ReqNo,
+                ItemNo = removeRequisitionDetail.ItemNo,
+                Qty = removeRequisitionDetail.Qty
+            };
+
+            result = AndroidController.UpdateRequisitionDetail(requisition);
+        }
+
+        return result;
+    }
 }

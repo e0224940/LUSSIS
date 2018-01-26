@@ -70,6 +70,14 @@ public interface IService
     [OperationContract]
     [WebInvoke(UriTemplate = "/AddRequisitionDetail", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     bool AddRequisitionDetail(int sessionID, WCFRequisitionDetail addRequisitionDetail);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/RemoveRequisitionDetail", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    bool RemoveRequisitionDetail(int sessionID, WCFRequisitionDetail removeRequisitionDetail);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/UpdateRequisitionDetail", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    bool UpdateRequisitionDetail(int sessionID, WCFRequisitionDetail updateRequisitionDetail);
 }
 
 public class WCFDisbursementDetail
