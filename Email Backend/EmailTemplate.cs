@@ -74,12 +74,6 @@ namespace Email_Backend
             return "Dear "+empName+", <br/><br/>You have been appointed as the approving authority of "+deptName+", starting at "+startDate+" and ending at "+endDate+".";
         }
 
-
-
-    }
-}
-        }
-
         public static String GeneratePendingRequisitionSubject(string requestEmployee)
         {
             return "A new Requisition has been raised by" + requestEmployee + ".";
@@ -89,5 +83,6 @@ namespace Email_Backend
             return
                 "Dear " + manager + "<br/>" + "A new requisition has been raised by" + requestEmployee + ",please approve it soon.";
         }
+
     }
 }
