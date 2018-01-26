@@ -21,6 +21,11 @@ public interface IService
     [WebInvoke(UriTemplate = "/login", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     WCFSessionID AuthenticateUser(String user, String pass);
 
+    // Get Employee id from session
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/GetEmployeeIDFromSession", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    String GetLoggedInEmployeeNumber(int sessionID);
+
     // Check if Session id is okay
     [OperationContract]
     [WebInvoke(UriTemplate = "/checkSession", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
@@ -39,6 +44,18 @@ public interface IService
     WCFDisbursement GetCurrentDisbursementForDepartment(int sessionID, String deptCode);
 
     [OperationContract]
+    [WebInvoke(UriTemplate = "/CurrentDisbursementNo", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    String GetCurrentDisbursementNoForDepartment(int sessionID);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/DisbursementDetails", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    WCFDisbursementDetail[] GetDisbursementDetailsOf(int sessionID, int DisbursementNo);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/UpdateDisbursementDetail", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    bool UpdateDisbursementDetail(int sessionID, WCFDisbursementDetail updatedDisbursementDetail);
+
+    [OperationContract]
     [WebInvoke(UriTemplate = "/Employee", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     WCFEmployee GetEmployeeById(int sessionID, int empNo);
 
@@ -49,6 +66,15 @@ public interface IService
     [OperationContract]
     [WebInvoke(UriTemplate = "/CatalogueSearch", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     WCFStationeryCatalogue[] CatalogueSearch(int sessionID, String ItemNo, String Category, String Description, String Bin);
+}
+
+public class WCFDisbursementDetail
+{
+    public String DisbursementNo;
+    public String ItemNo;
+    public String Needed;
+    public String Promised;
+    public String Received;
 }
 
 public class WCFStationeryCatalogue

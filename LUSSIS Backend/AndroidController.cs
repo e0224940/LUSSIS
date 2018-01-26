@@ -71,5 +71,53 @@ namespace LUSSIS_Backend
                 return errorList;
             }
         }
+
+        public static List<DisbursementDetail> GetDisbursementDetailsOf(int disbursementNo)
+        {
+            LussisEntities context = new LussisEntities();
+            return context.DisbursementDetails.Where(dis => dis.DisbursementNo.Equals(disbursementNo)).ToList();
+        }
+
+        public static string GetDisbursementNoForCurrentDepartmentOf(int sessionID)
+        {
+            Employee employee = AndroidAuthenticationController.GetDetailsOfEmployee(sessionID);
+            return employee
+                .Department
+                .Disbursements
+                .Where(dis => dis.Status.Equals("Pending"))
+                .OrderByDescending(dis => dis.DisbursementDate)
+                .FirstOrDefault()
+                .DisbursementNo
+                .ToString();
+        }
+
+        public static bool UpdateDisbursement(DisbursementDetail updatedDisbursementDetail)
+        {
+            bool result = false;
+            try
+            {
+                LussisEntities context = new LussisEntities();
+                DisbursementDetail disbursementDetail = context.DisbursementDetails
+                    .Where(dis => dis.DisbursementNo.Equals(updatedDisbursementDetail.DisbursementNo)
+                    && dis.ItemNo.Equals(updatedDisbursementDetail.ItemNo))
+                    .FirstOrDefault();
+
+                if(disbursementDetail != null)
+                {
+                    disbursementDetail.Needed = updatedDisbursementDetail.Needed;
+                    disbursementDetail.Promised = updatedDisbursementDetail.Promised;
+                    disbursementDetail.Received = updatedDisbursementDetail.Received;
+
+                    context.SaveChanges();
+
+                    result = true;
+                }                
+            }catch(Exception)
+            {
+                result = false;
+            }
+
+            return result;
+        }
     }
 }

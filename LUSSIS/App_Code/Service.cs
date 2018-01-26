@@ -192,4 +192,76 @@ public class Service : IService
 
         return result.ToArray();
     }
+
+    public WCFDisbursementDetail[] GetDisbursementDetailsOf(int sessionID, int DisbursementNo)
+    {
+        List<WCFDisbursementDetail> result = new List<WCFDisbursementDetail>();
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            List<DisbursementDetail> items = AndroidController.GetDisbursementDetailsOf(DisbursementNo);
+
+            if (items != null)
+            {
+                foreach (var item in items)
+                {
+                    result.Add(new WCFDisbursementDetail()
+                    {
+                        DisbursementNo = item.DisbursementNo.ToString(),
+                        ItemNo = item.ItemNo.ToString(),
+                        Needed = item.Needed.ToString(),
+                        Promised = item.Promised.ToString(),
+                        Received = item.Received.ToString()
+                    });
+                }
+            }
+        }
+
+        return result.ToArray();
+    }
+
+    public String GetLoggedInEmployeeNumber(int sessionID)
+    {
+        String result = "";
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            result = AndroidAuthenticationController.GetEmployeeIdFromSessionId(sessionID).ToString();
+        }
+
+        return result;
+    }
+
+    public string GetCurrentDisbursementNoForDepartment(int sessionID)
+    {
+        String result = "";
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            result = AndroidController.GetDisbursementNoForCurrentDepartmentOf(sessionID);
+        }
+
+        return result;
+    }
+
+    public bool UpdateDisbursementDetail(int sessionID, WCFDisbursementDetail updatedDisbursementDetail)
+    {
+        bool result = false;
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            DisbursementDetail disbursement = new DisbursementDetail()
+            {
+                DisbursementNo = int.Parse(updatedDisbursementDetail.DisbursementNo),
+                ItemNo = updatedDisbursementDetail.ItemNo,
+                Needed = int.Parse(updatedDisbursementDetail.Needed),
+                Promised = int.Parse(updatedDisbursementDetail.Promised),
+                Received = int.Parse(updatedDisbursementDetail.Received)
+            };
+
+            result = AndroidController.UpdateDisbursement(disbursement);
+        }
+
+        return result;
+    }
 }
