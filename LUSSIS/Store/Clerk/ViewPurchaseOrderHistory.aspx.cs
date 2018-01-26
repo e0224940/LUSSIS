@@ -18,7 +18,7 @@ public partial class Store_Clerk_ViewPurchaseOrderHistory : System.Web.UI.Page
             string empName = EmployeeController.GetName(empNo);
             PurchaseOrderGridView.Visible = true;
             purchaseOrder = new List<PurchaseOrder>();
-            PurchaseOrderGridView.DataSource = EmployeeController.ViewPurchaseOrder(empNo);
+            PurchaseOrderGridView.DataSource = ApprovePurchaseOrderController.ViewPurchaseOrder(empNo);
             PurchaseOrderGridView.DataBind();
         }
     }
