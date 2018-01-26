@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Web.Security;
 
 // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service" in code, svc and config file together.
 public class Service : IService
@@ -54,6 +55,22 @@ public class Service : IService
                     RepEmpNo = department.RepEmpNo ?? -1
                 };
             }
+        }
+
+        return result;
+    }
+
+    public WCFSessionID AuthenticateUser(String username, String password)
+    {
+        ProfileCommon loginProfile;
+        WCFSessionID result = new WCFSessionID() { SessionID = "0" };
+
+        if (Membership.ValidateUser(username, password))
+        {
+            // Get the Profile of the User
+            loginProfile = (ProfileCommon)ProfileCommon.Create(username, true);
+
+            result.SessionID = AndroidAuthenticationController.GenerateAndroidSessionNumber(loginProfile.EmpNo).ToString();
         }
 
         return result;

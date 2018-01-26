@@ -17,6 +17,10 @@ public interface IService
     [WebGet(UriTemplate = "/test", ResponseFormat = WebMessageFormat.Json)]
     string Test();
 
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/login", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    WCFSessionID AuthenticateUser(String user, String pass);
+
     // Check if Session id is okay
     [OperationContract]
     [WebInvoke(UriTemplate = "/checkSession", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
@@ -31,6 +35,10 @@ public interface IService
     WCFDepartment GetDepartment(int sessionID, String deptCode);
 }
 
+public class WCFSessionID
+{
+    public String SessionID;
+}
 public class WCFDepartment
 {
     public String DeptCode;
