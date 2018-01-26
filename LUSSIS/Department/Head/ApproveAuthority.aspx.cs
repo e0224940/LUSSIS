@@ -12,15 +12,16 @@ public partial class Department_Head_ApproveAuthority : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
 
-        if(!IsPostBack)
+        if (!IsPostBack)
         {
             //get current Acting Head and print on webpage
-            Employee deputyHead = getDeputyHeadOfDepartment(getDepartmentNoFromProfile());
+            //deputyHead = getDeputyHeadOfDepartment(getDepartmentNoFromProfile(Profile.EmpNo));
+            Employee deputyHead = ApproveAuthorityController.getDeputyHeadOfDepartment(ApproveAuthorityController.getDepartmentNoFromProfile(Profile.EmpNo));
 
             txtBox_appAuth_currentHead.Text = deputyHead.EmpName;
 
             //getDepartmentEmployeeList
-            ddl_appAuth_deptEmps.DataSource = getEmployeesNameInDepartment();
+            ddl_appAuth_deptEmps.DataSource = ApproveAuthorityController.getEmployeesNameInDepartment(Profile.EmpNo);
             ddl_appAuth_deptEmps.DataBind();
 
             //set date so that dates past are not allowed.
@@ -30,167 +31,50 @@ public partial class Department_Head_ApproveAuthority : System.Web.UI.Page
             txtbox_dateStart.Text = DateTime.Now.ToString("yyyy-MM-dd");
             txtbox_dateEnd.Text = DateTime.Now.ToString("yyyy-MM-dd");
 
-            if(deputyHead.EmpNo.Equals(Profile.EmpNo))
+            if (deputyHead.EmpNo.Equals(Profile.EmpNo))
             {
                 button_appAuth_remove.Enabled = false;
             }
-
+            else
+            {
+                button_appAuth_remove.Enabled = true;
+            }
         }
+
+
     }
 
     protected void button_appAuth_appoint_Click(object sender, EventArgs e)
     {
         //collecting data from view
         string empName = ddl_appAuth_deptEmps.SelectedItem.Value;
-        int empNo = getEmpNoFromEmpName(empName);
+        int empNo = ApproveAuthorityController.getEmpNoFromEmpName(empName);
         DateTime dateStart = Convert.ToDateTime(txtbox_dateStart.Text);
         DateTime dateEnd = Convert.ToDateTime(txtbox_dateEnd.Text);
-        string deptCode = getDepartmentNoFromProfile();
+        string deptCode = ApproveAuthorityController.getDepartmentNoFromProfile(Profile.EmpNo);
 
         //remove authority 
-        if (getDeputyHeadOfDepartment(deptCode).EmpNo != Profile.EmpNo)
+        if (ApproveAuthorityController.getDeputyHeadOfDepartment(deptCode).EmpNo != Profile.EmpNo)
         {
-            removeAuthority(deptCode, getDeputyHeadOfDepartment(deptCode).EmpNo);
+            ApproveAuthorityController.removeAuthority(Profile.EmpNo,deptCode, ApproveAuthorityController.getDeputyHeadOfDepartment(deptCode).EmpNo);
         }
 
         //add authority
-        addAuthority(deptCode, empNo, dateStart, dateEnd);
+        string newAuthorityName = ApproveAuthorityController.addAuthority(deptCode, empNo, dateStart, dateEnd);    //getting new name from method
+        txtBox_appAuth_currentHead.Text = newAuthorityName;
+
+        button_appAuth_remove.Enabled = true;
     }
 
     protected void button_appAuth_remove_Click(object sender, EventArgs e)
     {
-        int outgoingDeputyHeadCode = getDeputyHeadOfDepartment(getDepartmentNoFromProfile()).EmpNo;
+        int outgoingDeputyHeadCode = ApproveAuthorityController.getDeputyHeadOfDepartment(ApproveAuthorityController.getDepartmentNoFromProfile(Profile.EmpNo)).EmpNo;
 
-        removeAuthority(getDepartmentNoFromProfile(), outgoingDeputyHeadCode);
-    }
+        string newAuthorityName = ApproveAuthorityController.removeAuthority(Profile.EmpNo, ApproveAuthorityController.getDepartmentNoFromProfile(Profile.EmpNo), outgoingDeputyHeadCode);
 
+        txtBox_appAuth_currentHead.Text = newAuthorityName; //getting new name from method
 
-
-    //*****************************************************************************
-
-
-
-
-
-    public Employee getDeputyHeadOfDepartment(String deptCode)
-    {
-        using (LussisEntities context = new LussisEntities())
-        {
-            int w = (int)context.Departments.Where(x => x.DeptCode.Equals(deptCode)).First().DeputyEmpNo;
-          
-            Employee ww = context.Employees.Where(x => x.EmpNo.Equals(w)).First();
-
-            return ww;
-        }
-    }
-
-    public string getDepartmentNoFromProfile()
-    {
-        int empNo = Profile.EmpNo;
-        using (LussisEntities context = new LussisEntities())
-        {
-            return context.Employees.Where(x => x.EmpNo.Equals(empNo)).First().DeptCode;
-        }
-    }
-
-    public List<String> getEmployeesNameInDepartment()
-    {
-        string deptNo = getDepartmentNoFromProfile();
-        List<string> list_names;
-
-        using (LussisEntities context = new LussisEntities())
-        {
-            List<Employee> list = context.Employees.Where(x => x.DeptCode.Equals(deptNo)).ToList();
-            list_names = new List<string>();
-
-            for(int i=0; i<list.Count();i++)
-            {
-                list_names.Add(list[i].EmpName);
-            }
-        }
-
-        return list_names;
-    }
-
-    protected int getEmpNoFromEmpName (string empName)
-    {
-        using (LussisEntities context = new LussisEntities())
-        {
-            Employee dep = context.Employees.Where(x => x.EmpName.Equals(empName)).First();
-            return dep.EmpNo;
-        }
-
-    }
-
-    protected void removeAuthority(string deptCode,int outgoingEmpNo)
-    {
-
-        string recipientEmail;
-        string recipientName;
-        string deptName;
-        using (LussisEntities context = new LussisEntities())
-        {
-            Deputy dep = context.Deputies.Where(x => x.DeptCode.Equals(deptCode)).First();
-            context.Deputies.Remove(dep);
-
-            Department dept = context.Departments.Where(x => x.DeptCode.Equals(deptCode)).First();
-            dept.DeputyEmpNo = Profile.EmpNo;
-            deptName = dept.DeptName;
-
-            context.SaveChanges();
-
-            RoleController.removeRoleFromEmployee(context, outgoingEmpNo, RoleController.LUSSISRoles.DepartmentDeputy);
-
-            Employee newDeputy = context.Employees.Where(x => x.EmpNo.Equals(dept.EmployeeDeputy.EmpNo)).First();
-            txtBox_appAuth_currentHead.Text = newDeputy.EmpName;
-
-
-        }
-
-        using (LussisEntities context = new LussisEntities())
-        {
-            recipientEmail = context.Employees.Where(x => x.EmpNo.Equals(outgoingEmpNo)).First().Email;
-            recipientName = context.Employees.Where(x => x.EmpNo.Equals(outgoingEmpNo)).First().EmpName;
-        }
-
-        EmailBackend.sendEmailStep(recipientEmail,
-            EmailTemplate.GenerateOldDeputyAuthorityRemovedSubject(), 
-            EmailTemplate.GenerateOldDeputyAuthorityRemovedEmail(recipientName,deptName));
-        
-    }
-
-    protected void addAuthority(string deptCode, int empNo, DateTime start, DateTime end)
-    {
-        Deputy d = new Deputy();
-        d.DeptCode = deptCode;
-        d.DeputyEmpNo = empNo;
-        d.FromDate = start;
-        d.ToDate = end;
-
-        string empName;
-        string deptName;
-        string recipientEmail;
-
-        using (LussisEntities context = new LussisEntities())
-        {
-            context.Deputies.Add(d);
-            Department dept = context.Departments.Where(x => x.DeptCode.Equals(deptCode)).First();
-            dept.DeputyEmpNo = empNo;
-            deptName = dept.DeptName;
-            context.SaveChanges();
-            RoleController.addRoleToEmployee(context, empNo, RoleController.LUSSISRoles.DepartmentDeputy);
-
-            Employee newDeputy = context.Employees.Where(x => x.EmpNo.Equals(empNo)).First();
-            empName = newDeputy.EmpName;
-            recipientEmail = newDeputy.Email;
-            txtBox_appAuth_currentHead.Text = empName;
-            
-        }
-
-        EmailBackend.sendEmailStep(recipientEmail,
-        EmailTemplate.GenerateNewDeputyAuthoritySubject(),
-        EmailTemplate.GenerateNewDeputyAuthorityEmail(empName,deptName, start.ToString(), end.ToString()));
-
+        button_appAuth_remove.Enabled = false;
     }
 
     protected void txtbox_dateStart_TextChanged(object sender, EventArgs e)
@@ -198,6 +82,5 @@ public partial class Department_Head_ApproveAuthority : System.Web.UI.Page
         txtbox_dateEnd.Text = txtbox_dateStart.Text;
         txtbox_dateEnd.Attributes["min"] = txtbox_dateStart.Text;
     }
-
 
 }

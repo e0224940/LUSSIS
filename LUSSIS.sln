@@ -29,6 +29,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "LUSSIS", "LUSSIS\", "{B82F9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LUSSIS Email Backend", "Email Backend\LUSSIS Email Backend.csproj", "{A9D5B1C9-69DB-49B3-A4B8-6F207234EBD8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LussisScheduledTasks", "LussisScheduledTasks\LussisScheduledTasks.csproj", "{E62A3BD2-E5CE-48A4-BD61-0517B555505D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{A9D5B1C9-69DB-49B3-A4B8-6F207234EBD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9D5B1C9-69DB-49B3-A4B8-6F207234EBD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9D5B1C9-69DB-49B3-A4B8-6F207234EBD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E62A3BD2-E5CE-48A4-BD61-0517B555505D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E62A3BD2-E5CE-48A4-BD61-0517B555505D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E62A3BD2-E5CE-48A4-BD61-0517B555505D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E62A3BD2-E5CE-48A4-BD61-0517B555505D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
