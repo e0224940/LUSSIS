@@ -17,6 +17,10 @@ public interface IService
     [WebGet(UriTemplate = "/test", ResponseFormat = WebMessageFormat.Json)]
     string Test();
 
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/login", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    WCFSessionID AuthenticateUser(String user, String pass);
+
     // Check if Session id is okay
     [OperationContract]
     [WebInvoke(UriTemplate = "/checkSession", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
@@ -29,8 +33,44 @@ public interface IService
     [OperationContract]
     [WebInvoke(UriTemplate = "/Department", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     WCFDepartment GetDepartment(int sessionID, String deptCode);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/LatestDisbursement", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    WCFDisbursement GetCurrentDisbursementForDepartment(int sessionID, String deptCode);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/Employee", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    WCFEmployee GetEmployeeById(int sessionID, int empNo);
+
+
+
 }
 
+public class WCFEmployee
+{
+    public String EmpNo;
+    public String EmpName;
+    public String DeptCode;
+    public String Email;
+    public String SessionNo;
+    public String SessionExpiry;
+}
+
+public class WCFDisbursement
+{
+    public String DisbursementNo;
+    public String DeptCode;
+    public String DisbursementDate;
+    public String RepEmpNo;
+    public String CollectionPointNo;
+    public String Pin;
+    public String Status;
+}
+
+public class WCFSessionID
+{
+    public String SessionID;
+}
 public class WCFDepartment
 {
     public String DeptCode;

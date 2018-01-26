@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Web.Security;
 
 // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service" in code, svc and config file together.
 public class Service : IService
@@ -52,6 +53,73 @@ public class Service : IService
                     HeadEmpNo = department.HeadEmpNo ?? -1,
                     PhoneNo = department.PhoneNo.ToString(),
                     RepEmpNo = department.RepEmpNo ?? -1
+                };
+            }
+        }
+
+        return result;
+    }
+
+    public WCFSessionID AuthenticateUser(String username, String password)
+    {
+        ProfileCommon loginProfile;
+        WCFSessionID result = new WCFSessionID() { SessionID = "0" };
+
+        if (Membership.ValidateUser(username, password))
+        {
+            // Get the Profile of the User
+            loginProfile = (ProfileCommon)ProfileCommon.Create(username, true);
+
+            result.SessionID = AndroidAuthenticationController.GenerateAndroidSessionNumber(loginProfile.EmpNo).ToString();
+        }
+
+        return result;
+    }
+
+    public WCFDisbursement GetCurrentDisbursementForDepartment(int sessionID, string deptCode)
+    {
+        WCFDisbursement result = null;
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            Disbursement disbursement = AndroidController.GetCurrentDisbursementForDepartment(deptCode);
+
+            if(disbursement != null)
+            {
+                result = new WCFDisbursement()
+                {
+                    CollectionPointNo = disbursement.CollectionPointNo.ToString(),
+                    DeptCode = disbursement.DeptCode,
+                    DisbursementDate = String.Format("{0:d/M/yyyy}", disbursement.DisbursementDate),
+                    DisbursementNo = disbursement.DisbursementNo.ToString(),
+                    Pin = disbursement.Pin.ToString(),
+                    RepEmpNo = disbursement.RepEmpNo.ToString(),
+                    Status = disbursement.Status
+                };
+            }
+        }
+
+        return result;
+    }
+
+    public WCFEmployee GetEmployeeById(int sessionID, int empNo)
+    {
+        WCFEmployee result = null;
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            Employee employee = AndroidController.GetEmployee(empNo);
+
+            if (employee != null)
+            {
+                result = new WCFEmployee()
+                {
+                    DeptCode = employee.DeptCode,
+                    Email = employee.Email,
+                    EmpName = employee.EmpName,
+                    EmpNo = employee.EmpNo.ToString(),
+                    SessionExpiry = String.Format("{0:d/M/yyyy}", employee.SessionExpiry),
+                    SessionNo = employee.SessionNo.ToString()
                 };
             }
         }
