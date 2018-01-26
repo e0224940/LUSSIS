@@ -66,6 +66,10 @@ public interface IService
     [OperationContract]
     [WebInvoke(UriTemplate = "/CatalogueSearch", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     WCFStationeryCatalogue[] CatalogueSearch(int sessionID, String ItemNo, String Category, String Description, String Bin);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/AddRequisitionDetail", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    bool AddRequisitionDetail(int sessionID, WCFRequisitionDetail addRequisitionDetail);
 }
 
 public class WCFDisbursementDetail
@@ -128,5 +132,12 @@ public class WCFDepartment
     public int CollectionPointNo;
     public int RepEmpNo;
     public int DeputyEmpNo;
+}
+
+public class WCFRequisitionDetail
+{
+    public int ReqNo;
+    public string ItemNo;
+    public int Qty;
 }
 

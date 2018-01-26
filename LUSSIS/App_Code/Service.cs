@@ -264,4 +264,23 @@ public class Service : IService
 
         return result;
     }
+
+    public bool AddRequisitionDetail(int sessionID, WCFRequisitionDetail addRequisitionDetail)
+    {
+        bool result = false;
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            RequisitionDetail requisition = new RequisitionDetail()
+            {
+                ReqNo = addRequisitionDetail.ReqNo,
+                ItemNo = addRequisitionDetail.ItemNo,
+                Qty = addRequisitionDetail.Qty
+            };
+
+            result = AndroidController.AddRequisitionDetail(requisition);
+        }
+
+        return result;
+    }
 }

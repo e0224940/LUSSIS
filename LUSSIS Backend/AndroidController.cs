@@ -119,5 +119,34 @@ namespace LUSSIS_Backend
 
             return result;
         }
+
+        public static bool AddRequisitionDetail(RequisitionDetail addRequisitionDetail)
+        {
+            bool result = false;
+            try
+            {
+                LussisEntities context = new LussisEntities();
+                RequisitionDetail requisitionDetail = context.RequisitionDetails
+                    .Where(req => req.ReqNo.Equals(addRequisitionDetail.ReqNo))
+                    .FirstOrDefault();
+
+                if (requisitionDetail != null)
+                {
+                    requisitionDetail.ReqNo = addRequisitionDetail.ReqNo;
+                    requisitionDetail.ItemNo = addRequisitionDetail.ItemNo;
+                    requisitionDetail.Qty = addRequisitionDetail.Qty;
+
+                    context.SaveChanges();
+
+                    result = true;
+                }
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+
+            return result;
+        }
     }
 }
