@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace LUSSIS_Backend
 {
-    class ApproveAuthorityController
+    public class ApproveAuthorityController
     {
 
-        public Employee getDeputyHeadOfDepartment(String deptCode)
+        public static Employee getDeputyHeadOfDepartment(String deptCode)
         {
             using (LussisEntities context = new LussisEntities())
             {
@@ -22,7 +22,7 @@ namespace LUSSIS_Backend
             }
         }
 
-        public string getDepartmentNoFromProfile(int profileEmpNo)
+        public static string getDepartmentNoFromProfile(int profileEmpNo)
         {
             using (LussisEntities context = new LussisEntities())
             {
@@ -30,7 +30,7 @@ namespace LUSSIS_Backend
             }
         }
 
-        public List<String> getEmployeesNameInDepartment(int profileEmpNo)
+        public static List<String> getEmployeesNameInDepartment(int profileEmpNo)
         {
             string deptNo = getDepartmentNoFromProfile(profileEmpNo);
             List<string> list_names;
@@ -49,7 +49,7 @@ namespace LUSSIS_Backend
             return list_names;
         }
 
-        protected int getEmpNoFromEmpName(string empName)
+        public static int getEmpNoFromEmpName(string empName)
         {
             using (LussisEntities context = new LussisEntities())
             {
@@ -59,7 +59,7 @@ namespace LUSSIS_Backend
 
         }
 
-        protected string removeAuthority(int profileEmpNo, string deptCode, int outgoingEmpNo)
+        public static string removeAuthority(int profileEmpNo, string deptCode, int outgoingEmpNo)
         {
 
             string recipientEmail;
@@ -98,7 +98,7 @@ namespace LUSSIS_Backend
             return newDeputyName; //for display in view
         }
 
-        protected string addAuthority(string deptCode, int empNo, DateTime start, DateTime end)
+        public static string addAuthority(string deptCode, int empNo, DateTime start, DateTime end)
         {
             Deputy d = new Deputy();
             d.DeptCode = deptCode;

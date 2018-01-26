@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
+    <div class="container">
     <asp:Label ID="lbl_appAuth_currentHeadTxt" runat="server" Text="Current Acting Head:"></asp:Label>
     <asp:TextBox ID="txtBox_appAuth_currentHead" runat="server" AutoPostBack="True" Enabled="False">DeputyHeadNo</asp:TextBox>
     <br />
@@ -14,16 +15,23 @@
     </asp:DropDownList>
     <br />
     <br />
+    <div class="form-inline">
+        <div class="row">
     <asp:Label ID="lbl_appAuth_startDate" runat="server" Text="Start From: "></asp:Label>
-&nbsp;<asp:TextBox ID="txtbox_dateStart" runat="server" style="margin-top: 0px" TextMode="Date" AutoPostBack="True" OnTextChanged="txtbox_dateStart_TextChanged"></asp:TextBox>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="Label6" runat="server" Text="End At:"></asp:Label>
-&nbsp;<asp:TextBox ID="txtbox_dateEnd" runat="server" TextMode="Date" AutoPostBack="True"></asp:TextBox>
+&nbsp;<asp:TextBox ID="txtbox_dateStart" runat="server" CssClass="form-control" style="margin-top: 0px" TextMode="Date" AutoPostBack="True" OnTextChanged="txtbox_dateStart_TextChanged"></asp:TextBox>
     <br />
+        </div>
+        <div class="row">
+    <asp:Label ID="Label6" runat="server" Text="End At:"></asp:Label>
+&nbsp;<asp:TextBox ID="txtbox_dateEnd" runat="server" CssClass="form-control" TextMode="Date" AutoPostBack="True"></asp:TextBox>
+    <br />
+    </div>
     <br />
     <asp:Button ID="button_appAuth_appoint" runat="server" Text="Confirm Appointment" OnClick="button_appAuth_appoint_Click" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <asp:Button ID="button_appAuth_remove" runat="server" Text="Remove Appointment" OnClick="button_appAuth_remove_Click" />
     <br />
     <br />
+        </div>
 </asp:Content>
 
