@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LUSSIS Backend", "LUSSIS Backend\LUSSIS Backend.csproj", "{F429BE15-EF6E-4404-8767-4245B7E4F8BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lussis WcfService", "Lussis WcfService\Lussis WcfService.csproj", "{C0FD8046-9F78-4F0B-937D-0A51FD735E2E}"
-EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "LUSSIS", "LUSSIS\", "{B82F9103-719C-45C9-95B0-D60A925535E5}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.2"
@@ -41,10 +39,6 @@ Global
 		{F429BE15-EF6E-4404-8767-4245B7E4F8BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F429BE15-EF6E-4404-8767-4245B7E4F8BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F429BE15-EF6E-4404-8767-4245B7E4F8BF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C0FD8046-9F78-4F0B-937D-0A51FD735E2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C0FD8046-9F78-4F0B-937D-0A51FD735E2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C0FD8046-9F78-4F0B-937D-0A51FD735E2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C0FD8046-9F78-4F0B-937D-0A51FD735E2E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B82F9103-719C-45C9-95B0-D60A925535E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B82F9103-719C-45C9-95B0-D60A925535E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B82F9103-719C-45C9-95B0-D60A925535E5}.Release|Any CPU.ActiveCfg = Debug|Any CPU

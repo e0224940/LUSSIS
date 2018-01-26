@@ -33,6 +33,38 @@ public interface IService
     [OperationContract]
     [WebInvoke(UriTemplate = "/Department", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     WCFDepartment GetDepartment(int sessionID, String deptCode);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/LatestDisbursement", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    WCFDisbursement GetCurrentDisbursementForDepartment(int sessionID, String deptCode);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/Employee", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    WCFEmployee GetEmployeeById(int sessionID, int empNo);
+
+
+
+}
+
+public class WCFEmployee
+{
+    public String EmpNo;
+    public String EmpName;
+    public String DeptCode;
+    public String Email;
+    public String SessionNo;
+    public String SessionExpiry;
+}
+
+public class WCFDisbursement
+{
+    public String DisbursementNo;
+    public String DeptCode;
+    public String DisbursementDate;
+    public String RepEmpNo;
+    public String CollectionPointNo;
+    public String Pin;
+    public String Status;
 }
 
 public class WCFSessionID

@@ -75,4 +75,55 @@ public class Service : IService
 
         return result;
     }
+
+    public WCFDisbursement GetCurrentDisbursementForDepartment(int sessionID, string deptCode)
+    {
+        WCFDisbursement result = null;
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            Disbursement disbursement = AndroidController.GetCurrentDisbursementForDepartment(deptCode);
+
+            if(disbursement != null)
+            {
+                result = new WCFDisbursement()
+                {
+                    CollectionPointNo = disbursement.CollectionPointNo.ToString(),
+                    DeptCode = disbursement.DeptCode,
+                    DisbursementDate = String.Format("{0:d/M/yyyy}", disbursement.DisbursementDate),
+                    DisbursementNo = disbursement.DisbursementNo.ToString(),
+                    Pin = disbursement.Pin.ToString(),
+                    RepEmpNo = disbursement.RepEmpNo.ToString(),
+                    Status = disbursement.Status
+                };
+            }
+        }
+
+        return result;
+    }
+
+    public WCFEmployee GetEmployeeById(int sessionID, int empNo)
+    {
+        WCFEmployee result = null;
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            Employee employee = AndroidController.GetEmployee(empNo);
+
+            if (employee != null)
+            {
+                result = new WCFEmployee()
+                {
+                    DeptCode = employee.DeptCode,
+                    Email = employee.Email,
+                    EmpName = employee.EmpName,
+                    EmpNo = employee.EmpNo.ToString(),
+                    SessionExpiry = String.Format("{0:d/M/yyyy}", employee.SessionExpiry),
+                    SessionNo = employee.SessionNo.ToString()
+                };
+            }
+        }
+
+        return result;
+    }
 }

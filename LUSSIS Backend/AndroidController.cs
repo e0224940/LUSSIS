@@ -29,5 +29,18 @@ namespace LUSSIS_Backend
             LussisEntities context = new LussisEntities();
             return context.Departments.Where(dept => dept.DeptCode.Equals(deptCode)).FirstOrDefault();
         }
+
+        public static Disbursement GetCurrentDisbursementForDepartment(String deptCode)
+        {
+            // TODO : IS IT ASCENDING OR DESCENDING ORDER
+            LussisEntities context = new LussisEntities();
+            return context.Disbursements.Where(dis => dis.DeptCode.Equals(deptCode) && dis.Status.Equals("Pending")).OrderByDescending(dis => dis.DisbursementDate).FirstOrDefault();
+        }
+
+        public static Employee GetEmployee(int empNo)
+        {
+            LussisEntities context = new LussisEntities();
+            return context.Employees.Where(emp => emp.EmpNo.Equals(empNo)).FirstOrDefault();
+        }
     }
 }
