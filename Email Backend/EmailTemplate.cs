@@ -53,5 +53,28 @@ namespace Email_Backend
         {
             return "Your Department Has chosen you as the new Department Representative to collect the next disbursement. Upcoming disbursement details if present can be found when you login. Congrats!";
         }
+
+        public static String GenerateOldDeputyAuthorityRemovedSubject()
+        {
+            return "You have been removed as Approving Authority";
+        }
+
+        public static String GenerateOldDeputyAuthorityRemovedEmail(string empName, string deptName)
+        {
+            return "Dear " + empName + ",<br/><br/>You have been removed as the approving authority of "+deptName+".";
+        }
+
+        public static String GenerateNewDeputyAuthoritySubject()
+        {
+            return "You have been appointed as Approving Authority";
+        }
+
+        public static String GenerateNewDeputyAuthorityEmail(string empName, string deptName, string startDate, string endDate)
+        {
+            return "Dear "+empName+", <br/><br/>You have been appointed as the approving authority of "+deptName+", starting at "+startDate+" and ending at "+endDate+".";
+        }
+
+
+
     }
 }
