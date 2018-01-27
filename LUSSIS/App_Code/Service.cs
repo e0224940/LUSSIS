@@ -445,4 +445,16 @@ public class Service : IService
 
         return result;
     }
+
+    public string[] GetRolesFromSession(int sessionID)
+    {
+        string[] result = null;
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            result = AndroidAuthenticationController.GetRolesOf(sessionID);
+        }
+
+        return result;
+    }
 }
