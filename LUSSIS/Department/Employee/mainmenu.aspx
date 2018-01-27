@@ -1,4 +1,5 @@
-﻿<!--  if(!System.Web.HttpContext.Current.User.IsInRole("rolenamehere")) {  -->
+﻿<% if (System.Web.HttpContext.Current.User.IsInRole("DepartmentEmployee"))
+    { %>
 <li class="dropdown">
     <a href="<%= Page.ResolveUrl("~/Department/Employee/Default.aspx") %>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Employee
        
@@ -10,4 +11,4 @@
         <li><a href="<%= Page.ResolveUrl("~/Department/Employee/RequisitionDetailsView.aspx") %>">Requisition Details</a></li>
     </ul>
 </li>
-<!-- } -->
+<%} %>
