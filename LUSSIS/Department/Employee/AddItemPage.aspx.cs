@@ -11,7 +11,7 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
 {
     static List<StationeryCatalogue> itemList;
     static List<RaisedItem> cartitem;
-    static List<RaisedItem> searchitem;
+    //static List<RaisedItem> searchitem;
 
     DateTime dateIssue;
 

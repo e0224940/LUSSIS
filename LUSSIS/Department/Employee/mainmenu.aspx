@@ -1,6 +1,4 @@
-﻿<% if (System.Web.HttpContext.Current.User.IsInRole("DepartmentEmployee"))
-    { %>
-<li class="dropdown">
+﻿<li class="dropdown">
     <a href="<%= Page.ResolveUrl("~/Department/Employee/Default.aspx") %>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Employee
        
         <span class="caret"></span>
@@ -11,4 +9,3 @@
         <li><a href="<%= Page.ResolveUrl("~/Department/Employee/RequisitionDetailsView.aspx") %>">Requisition Details</a></li>
     </ul>
 </li>
-<%} %>

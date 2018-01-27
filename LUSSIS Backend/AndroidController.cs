@@ -112,7 +112,7 @@ namespace LUSSIS_Backend
 
                     result = true;
                 }                
-            }catch(Exception e)
+            }catch(Exception)
             {
                 result = false;
             }
@@ -147,7 +147,7 @@ namespace LUSSIS_Backend
                     result = true;
                 }
 
-            catch (Exception e)
+            catch (Exception)
             {
                 result = false;
             }
@@ -175,7 +175,7 @@ namespace LUSSIS_Backend
                     result = true;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 result = false;
             }
@@ -204,7 +204,7 @@ namespace LUSSIS_Backend
                     result = true;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 result = false;
             }
