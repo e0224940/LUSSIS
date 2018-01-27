@@ -211,5 +211,113 @@ namespace LUSSIS_Backend
 
             return result;
         }
+
+        public static bool AddRequisition(Requisition requisition)
+        {
+            bool result = false;
+            try
+            {
+                using (LussisEntities context = new LussisEntities())
+                {
+                    context.Requisitions.Add(requisition);
+                    context.SaveChanges();
+                    result = true;
+                }
+            }
+            catch (Exception e)
+            {
+                result = false;
+            }
+
+            return result;
+
+        }
+
+        public static List<Requisition> GetPendingRequisitions(string employeeCode)
+        {
+            List<Requisition> list_result = new List<Requisition>();
+
+            using (LussisEntities context = new LussisEntities())
+            {
+                string departmentCode = context.Departments.Where(x => x.HeadEmpNo.Equals(employeeCode)).First().DeptCode;
+                List<Employee> list_e = context.Employees.Where(x => x.DeptCode.Equals(departmentCode)).ToList();
+                List<Requisition> list_r = context.Requisitions.ToList();
+
+
+                foreach (Employee e in list_e)
+                {
+                    foreach(Requisition rr in list_r)
+                    {
+                        if(e.EmpNo.Equals(rr.IssuedBy) && rr.Status.Equals("Pending"))        //to tally with the rest of the code if its pending
+                        {
+                            list_result.Add(rr);
+                        }
+                    }
+                }
+            }
+            return list_result;
+        }
+
+        public static Requisition GetRequisitionById(int reqNo)
+        {
+            Requisition req;
+            using (LussisEntities context = new LussisEntities())
+            {
+                req = context.Requisitions.Where(x => x.ReqNo.Equals(reqNo)).First();
+            }
+
+            return req;
+        }
+
+        public static bool UpdateRequisition(Requisition requisition)
+        {
+            bool result = false;
+
+            try
+            {
+                using (LussisEntities context = new LussisEntities())
+                {
+                    Requisition req = context.Requisitions.Where(x => x.ReqNo.Equals(requisition.ReqNo)).First();
+
+                    if (req!=null)
+                    {
+                        req.IssuedBy = requisition.IssuedBy;
+                        req.DateIssued = requisition.DateIssued;
+                        req.ApprovedBy= requisition.ApprovedBy;
+                        req.DateReviewed = requisition.DateReviewed;
+                        req.Status = requisition.Status;
+                        req.Remarks = requisition.Remarks;
+                    }
+                    context.SaveChanges();
+                    result = true;
+                }
+            }
+            catch (Exception e)
+            {
+                result = false;
+            }
+            return result;
+        }
+
+        public static bool RemoveRequisition(Requisition requisition)
+        {
+            bool result = false;
+            try
+            {
+                using (LussisEntities context = new LussisEntities())
+                {
+                    context.Requisitions.Remove(requisition);
+                    context.SaveChanges();
+                    result = true;
+                }
+            }
+            catch (Exception e)
+            {
+                result = false;
+            }
+
+            return result;
+
+        }
     }
 }
