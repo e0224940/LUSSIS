@@ -9,6 +9,7 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        // Nothing to show on this page, go straight to Login Page
+        Response.Redirect(Page.ResolveUrl("~/Login.aspx"));
     }
 }

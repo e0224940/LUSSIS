@@ -1,5 +1,4 @@
-﻿<!--  if(!System.Web.HttpContext.Current.User.IsInRole("rolenamehere")) {  -->
-<li class="dropdown">
+﻿<li class="dropdown">
     <a href="<%= Page.ResolveUrl("~/Store/Manager/Default.aspx") %>" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manager
         <span class="caret"></span>
     </a>
@@ -7,4 +6,3 @@
         <li><a href="<%= Page.ResolveUrl("~/Store/Manager/Default.aspx") %>">Submenu1</a></li>
     </ul>
 </li>
-<!-- } -->
