@@ -71,5 +71,145 @@ namespace LUSSIS_Backend
                 return errorList;
             }
         }
+
+        public static List<DisbursementDetail> GetDisbursementDetailsOf(int disbursementNo)
+        {
+            LussisEntities context = new LussisEntities();
+            return context.DisbursementDetails.Where(dis => dis.DisbursementNo.Equals(disbursementNo)).ToList();
+        }
+
+        public static string GetDisbursementNoForCurrentDepartmentOf(int sessionID)
+        {
+            Employee employee = AndroidAuthenticationController.GetDetailsOfEmployee(sessionID);
+            return employee
+                .Department
+                .Disbursements
+                .Where(dis => dis.Status.Equals("Pending"))
+                .OrderByDescending(dis => dis.DisbursementDate)
+                .FirstOrDefault()
+                .DisbursementNo
+                .ToString();
+        }
+
+        public static bool UpdateDisbursement(DisbursementDetail updatedDisbursementDetail)
+        {
+            bool result = false;
+            try
+            {
+                LussisEntities context = new LussisEntities();
+                DisbursementDetail disbursementDetail = context.DisbursementDetails
+                    .Where(dis => dis.DisbursementNo.Equals(updatedDisbursementDetail.DisbursementNo)
+                    && dis.ItemNo.Equals(updatedDisbursementDetail.ItemNo))
+                    .FirstOrDefault();
+
+                if(disbursementDetail != null)
+                {
+                    disbursementDetail.Needed = updatedDisbursementDetail.Needed;
+                    disbursementDetail.Promised = updatedDisbursementDetail.Promised;
+                    disbursementDetail.Received = updatedDisbursementDetail.Received;
+
+                    context.SaveChanges();
+
+                    result = true;
+                }                
+            }catch(Exception e)
+            {
+                result = false;
+            }
+
+            return result;
+        }
+
+        public static bool AddRequisitionDetail(RequisitionDetail addRequisitionDetail)
+        {
+            bool result = false;
+            try
+            {
+                LussisEntities context = new LussisEntities();
+                /*RequisitionDetail requisitionDetail = context.RequisitionDetails
+                    .Where(req => req.ReqNo.Equals(addRequisitionDetail.ReqNo))
+                    .FirstOrDefault();
+
+                if (requisitionDetail != null)
+                {
+                    requisitionDetail.ReqNo = addRequisitionDetail.ReqNo;
+                    requisitionDetail.ItemNo = addRequisitionDetail.ItemNo;
+                    requisitionDetail.Qty = addRequisitionDetail.Qty;*/
+
+                RequisitionDetail requisitionDetail = new RequisitionDetail();
+                requisitionDetail.ReqNo = addRequisitionDetail.ReqNo;
+                requisitionDetail.ItemNo = addRequisitionDetail.ItemNo;
+                requisitionDetail.Qty = addRequisitionDetail.Qty;
+
+                context.RequisitionDetails.Add(requisitionDetail);
+                context.SaveChanges();
+
+                    result = true;
+                }
+
+            catch (Exception e)
+            {
+                result = false;
+            }
+
+            return result;
+        }
+
+        public static bool RemoveRequisitionDetail(RequisitionDetail removeRequisitionDetail)
+        {
+            bool result = false;
+            try
+            {
+                LussisEntities context = new LussisEntities();
+                RequisitionDetail requisitionDetail = context.RequisitionDetails
+                    .Where(req => req.ReqNo.Equals(removeRequisitionDetail.ReqNo)
+                    && req.ItemNo.Equals(removeRequisitionDetail.ItemNo)
+                    && req.Qty.Equals(removeRequisitionDetail.Qty)).FirstOrDefault();
+
+                if (requisitionDetail != null)
+                {
+
+                    context.RequisitionDetails.Remove(requisitionDetail);
+                    context.SaveChanges();
+
+                    result = true;
+                }
+            }
+            catch (Exception e)
+            {
+                result = false;
+            }
+
+            return result;
+        }
+
+        public static bool UpdateRequisitionDetail(RequisitionDetail updateRequisitionDetail)
+        {
+            bool result = false;
+            try
+            {
+                LussisEntities context = new LussisEntities();
+                RequisitionDetail requisitionDetail = context.RequisitionDetails
+                    .Where(req => req.ReqNo.Equals(updateRequisitionDetail.ReqNo)
+                    && req.ItemNo.Equals(updateRequisitionDetail.ItemNo)).FirstOrDefault();
+
+                if (requisitionDetail != null)
+                {
+                    requisitionDetail.ReqNo = updateRequisitionDetail.ReqNo;
+                    requisitionDetail.ItemNo = updateRequisitionDetail.ItemNo;
+                    requisitionDetail.Qty = updateRequisitionDetail.Qty;
+
+                    context.SaveChanges();
+
+                    result = true;
+                }
+            }
+            catch (Exception e)
+            {
+                result = false;
+            }
+
+            return result;
+        }
     }
 }
