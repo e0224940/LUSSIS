@@ -325,13 +325,122 @@ public class Service : IService
         return result;
     }
 
-    public string[] GetRolesFromSession(int sessionID)
+    public bool AddRequisition(int sessionID, WCFRequisition addRequisition)
     {
-        string[] result = null;
+        bool result = false;
 
         if (AndroidAuthenticationController.IsValidSessionId(sessionID))
-        {            
-            result = AndroidAuthenticationController.GetRolesOf(sessionID);
+        {
+            Requisition requisition = new Requisition()
+            {
+                ReqNo = addRequisition.ReqNo,
+                DateIssued = Convert.ToDateTime(addRequisition.DateIssued),
+                ApprovedBy = addRequisition.ApprovedBy,
+                DateReviewed = Convert.ToDateTime(addRequisition.DateReviewed),
+                Status = addRequisition.Status,
+                Remarks = addRequisition.Remarks
+};
+
+            result = AndroidController.AddRequisition(requisition);
+        }
+
+        return result;
+    }
+
+    public WCFRequisition[] GetPendingRequisitions(int sessionID, string empNo)
+    {
+        List<WCFRequisition> result = new List<WCFRequisition>();
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            List<Requisition> items = AndroidController.GetPendingRequisitions(empNo);
+
+            if (items != null)
+            {
+                foreach (var item in items)
+                {
+                    result.Add(new WCFRequisition
+                    {
+                        ReqNo = item.ReqNo,
+                        DateIssued = item.DateIssued.ToString(),
+                        ApprovedBy = (int)item.ApprovedBy,
+                        DateReviewed = item.DateReviewed.ToString(),
+                        Status = item.Status,
+                        Remarks = item.Remarks
+                    });
+                }
+            }
+        }
+
+        return result.ToArray();
+    }
+
+    public WCFRequisition GetRequisitionById(int sessionID, int reqNo)
+    {
+       WCFRequisition result = null;
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            Requisition item = AndroidController.GetRequisitionById(reqNo);
+
+            if (item != null)
+            {
+                    result = new WCFRequisition
+                    {
+                        ReqNo = item.ReqNo,
+                        DateIssued = item.DateIssued.ToString(),
+                        ApprovedBy = (int)item.ApprovedBy,
+                        DateReviewed = item.DateReviewed.ToString(),
+                        Status = item.Status,
+                        Remarks = item.Remarks
+                    };
+            }
+        }
+
+        return result;
+    }
+
+    public bool UpdateRequisition(int sessionID, WCFRequisition updatedRequisition)
+    {
+        bool result = false;
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            Requisition requisition = new Requisition()
+            {
+                ReqNo = updatedRequisition.ReqNo,
+                DateIssued = Convert.ToDateTime(updatedRequisition.DateIssued),
+                ApprovedBy = updatedRequisition.ApprovedBy,
+                DateReviewed = Convert.ToDateTime(updatedRequisition.DateReviewed),
+                Status = updatedRequisition.Status,
+                Remarks = updatedRequisition.Remarks
+            };
+
+            result = AndroidController.UpdateRequisition(requisition);
+        }
+
+        return result;
+    }
+
+
+
+    public bool RemoveRequisition(int sessionID, WCFRequisition removedRequisition)
+    {
+        bool result = false;
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            Requisition requisition = new Requisition()
+            {
+                ReqNo = removedRequisition.ReqNo,
+                DateIssued = Convert.ToDateTime(removedRequisition.DateIssued),
+                ApprovedBy = removedRequisition.ApprovedBy,
+                DateReviewed = Convert.ToDateTime(removedRequisition.DateReviewed),
+                Status = removedRequisition.Status,
+                Remarks = removedRequisition.Remarks
+            };
+
+            result = AndroidController.RemoveRequisition(requisition);
         }
 
         return result;

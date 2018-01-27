@@ -83,6 +83,26 @@ public interface IService
     [OperationContract]
     [WebInvoke(UriTemplate = "/UpdateRequisitionDetail", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     bool UpdateRequisitionDetail(int sessionID, WCFRequisitionDetail updateRequisitionDetail);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/AddRequisition", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    bool AddRequisition(int sessionID, WCFRequisition addedRequisition);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/PendingRequisitions", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    WCFRequisition[] GetPendingRequisitions(int sessionID, string empNo);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/GetRequisitionById", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    WCFRequisition GetRequisitionById(int sessionID, int reqNo);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/UpdateRequisition", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    bool UpdateRequisition(int sessionID, WCFRequisition updatedRequisition);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/RemoveRequisition", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    bool RemoveRequisition(int sessionID, WCFRequisition removedRequisition);
 }
 
 public class WCFDisbursementDetail
