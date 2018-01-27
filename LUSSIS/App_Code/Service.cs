@@ -67,6 +67,9 @@ public class Service : IService
 
         if (Membership.ValidateUser(username, password))
         {
+            // Update the roles of the logged in user
+            LoginController.setupRolesAfterAuthentication(username);
+
             // Get the Profile of the User
             loginProfile = (ProfileCommon)ProfileCommon.Create(username, true);
 
@@ -317,6 +320,18 @@ public class Service : IService
             };
 
             result = AndroidController.UpdateRequisitionDetail(requisition);
+        }
+
+        return result;
+    }
+
+    public string[] GetRolesFromSession(int sessionID)
+    {
+        string[] result = null;
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {            
+            result = AndroidAuthenticationController.GetRolesOf(sessionID);
         }
 
         return result;

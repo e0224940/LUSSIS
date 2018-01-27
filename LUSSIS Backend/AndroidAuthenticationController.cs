@@ -96,7 +96,7 @@ namespace LUSSIS_Backend
             return result;
         }
 
-        public String[] GetRolesOf(int sessionID)
+        public static String[] GetRolesOf(int sessionID)
         {
             String[] result = new String[] { };
             LussisEntities context = new LussisEntities();

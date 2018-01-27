@@ -26,6 +26,11 @@ public interface IService
     [WebInvoke(UriTemplate = "/GetEmployeeIDFromSession", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     String GetLoggedInEmployeeNumber(int sessionID);
 
+    // Get Roles Assigned from session
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/GetRolesFromSession", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    String[] GetRolesFromSession(int sessionID);
+
     // Check if Session id is okay
     [OperationContract]
     [WebInvoke(UriTemplate = "/checkSession", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
