@@ -44,7 +44,7 @@
                             </div>
 
                             <div class="form-group"></div>
-                            <asp:CheckBoxList ID="AssignedRoles" runat="server">
+                            <asp:CheckBoxList ID="AssignedRoles" runat="server" Visible="false">
                                 <asp:ListItem Text="DepartmentHead" Value="DepartmentHead" />
                                 <asp:ListItem Text="DepartmentDeputy" Value="DepartmentDeputy" />
                                 <asp:ListItem Text="DepartmentEmployee" Value="DepartmentEmployee" />

@@ -65,6 +65,7 @@
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="ItemList.cs" />
+    <Compile Include="LoginController.cs" />
     <Compile Include="model\OrderItem.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

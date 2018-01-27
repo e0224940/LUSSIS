@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LUSSIS_Backend;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -25,7 +26,8 @@ public partial class login : System.Web.UI.Page
     protected void LoginForm_LoggedIn(object sender, EventArgs e)
     {
         String username = LoginForm.UserName;
-        String[] userRoles = Roles.GetRolesForUser(username);
+        String[] userRoles = LoginController.setupRolesAfterAuthentication(username);
+        String[] actualRoles = Roles.GetRolesForUser(username);
 
         redirectLoggedInUser(username, userRoles, Response);
     }
