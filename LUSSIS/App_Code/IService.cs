@@ -104,3 +104,14 @@ public class WCFDepartment
     public int DeputyEmpNo;
 }
 
+public class WCFRequisition
+{
+    public int ReqNo;
+    public int IssuedBy;
+    public String DateIssued;
+    public int ApprovedBy;
+    public String DateReviewed;
+    public String Status;
+    public String Remarks;
+}
+
