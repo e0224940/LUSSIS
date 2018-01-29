@@ -242,6 +242,7 @@ public class Service : IService
                     {
                         DisbursementNo = item.DisbursementNo.ToString(),
                         ItemNo = item.ItemNo.ToString(),
+                        Description = item.StationeryCatalogue.Description,
                         Needed = item.Needed.ToString(),
                         Promised = item.Promised.ToString(),
                         Received = item.Received.ToString()

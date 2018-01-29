@@ -117,6 +117,7 @@ public class WCFDisbursementDetail
 {
     public String DisbursementNo;
     public String ItemNo;
+    public String Description;
     public String Needed;
     public String Promised;
     public String Received;
