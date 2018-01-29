@@ -11,21 +11,26 @@
     <br />
 
     <asp:Label ID="reuNo" runat="server" Text="Requisition No:"></asp:Label>
-    <asp:Label ID="Num" runat="server" Text=" "></asp:Label>
+    <asp:Label ID="ReqId" runat="server" Text=""></asp:Label>
 
     <br />
     <br />
 
-    <asp:GridView ID="detailGrid" runat="server" AutoGenerateColumns="False" OnRowDeleting="detailGrid_Delete" OnRowEditing="detailGrid_Edit">
+    <asp:GridView ID="GridViewForDetail" runat="server" DataKeyNames="ReqNo" AutoGenerateColumns="False" OnRowDeleting="detailGrid_Delete" OnRowEditing="detailGrid_Edit">
         <Columns>
-            <asp:TemplateField HeaderText="ItemNo" SortExpression="ItemNo" Visible="false">
+                <asp:TemplateField HeaderText="ItemNo" SortExpression="ItemNo" >
+                <ItemTemplate>
+                    <asp:Label ID="ItemNO" runat="server" Text='<%# Bind("itemNo") %>' ></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="ReqNo" SortExpression="ReqNo" >
                 <ItemTemplate>
                     <asp:Label ID="No" runat="server" Text='<%# Bind("reqNo") %>' ></asp:Label>
                 </ItemTemplate>
-            </asp:TemplateField>
+                </asp:TemplateField>
             <asp:TemplateField HeaderText="Description" SortExpression="description">
                 <ItemTemplate>
-                    <asp:Label ID="No" runat="server" Text='<%# Bind("description") %>'></asp:Label>
+                    <asp:Label ID="des" runat="server" Text='<%# Bind("description") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Qty">
@@ -44,6 +49,8 @@
         </Columns>
 
     </asp:GridView>
+
+    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
 
     <br />
     <asp:Button ID="submit" runat="server" Text="Submit" />

@@ -371,6 +371,28 @@ public class Service : IService
                 Remarks = addRequisition.Remarks
 };
 
+            result = (AndroidController.AddRequisition(requisition) >= 0);
+        }
+
+        return result;
+    }
+
+    public int AddRequisitionAndGetReqNo(int sessionID, WCFRequisition addRequisition)
+    {
+        int result = -1;
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            Requisition requisition = new Requisition()
+            {
+                ReqNo = addRequisition.ReqNo,
+                DateIssued = Convert.ToDateTime(addRequisition.DateIssued),
+                ApprovedBy = addRequisition.ApprovedBy,
+                DateReviewed = Convert.ToDateTime(addRequisition.DateReviewed),
+                Status = addRequisition.Status,
+                Remarks = addRequisition.Remarks
+            };
+
             result = AndroidController.AddRequisition(requisition);
         }
 
