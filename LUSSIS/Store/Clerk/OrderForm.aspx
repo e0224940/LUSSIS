@@ -1,26 +1,28 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="OrderFormUI.aspx.cs" Inherits="Store_Clerk_OrderFormUI" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="OrderForm.aspx.cs" Inherits="Store_Clerk_OrderForm" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
 
-     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
+    <div class="container">
 
-        <div>
-            <asp:Label ID="HeaderText1" runat="server" Text="Order Form" Font-Bold="True" Font-Size="X-Large"></asp:Label>
+        <div class="row">
+            <h1 class="sub-header">Order Form    
+                <asp:Button ID="BlankButton" runat="server" Text="Blank" OnClick="BlankButton_Click" />
+                <asp:Button ID="AutoGenerateButton" runat="server" Text="AutoGenerate" OnClick="AutoGenerateButton_Click" />
+            </h1>
         </div>
 
-        <div>
-            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                <ContentTemplate>
-                    <div>
-                        <br />
-                        <asp:Button ID="BlankButton" runat="server" Text="Blank" Width="100px" OnClick="BlankButton_Click" />
-                        &nbsp;
-                        <asp:Button ID="AutoGenerateButton" runat="server" Text="Auto-Gen" Width="100px" OnClick="AutoGenerateButton_Click" />
-                    </div>
-                    <div>
-                        <table>
+        <% if (Session["OProcessed"] == null)
+            {  %>
+
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <ContentTemplate>
+                <div>
+
+                    <div class="row">
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th rowspan="2" style="vertical-align: middle;">Item No</th>
@@ -80,46 +82,60 @@
                             </tbody>
                         </table>
                     </div>
-                    <div>
-                        <br />
+
+                    <div class="row">
                         <asp:DropDownList ID="StockDropDownList" runat="server">
                         </asp:DropDownList>
                         <asp:Button ID="AddButton" runat="server" Text="Add Item" OnClick="AddButton_Click" />
                         <asp:Button ID="SubmitButton" runat="server" Text="Submit Order Form" Style="grid-column-align" OnClick="SubmitButton_Click" />
                     </div>
-                </ContentTemplate>
-            </asp:UpdatePanel>
+
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+
+        <div class="row">
+            <h2>View Supplier Details</h2>
         </div>
 
-        <div>
-            <br />
-            <asp:Label ID="HeaderText2" runat="server" Text="View Supplier Details" Font-Bold="True" Font-Size="X-Large"></asp:Label>
+        <asp:UpdatePanel ID="SupplierUpdatePanel" runat="server">
+            <ContentTemplate>
+                <div>
+                    <asp:DropDownList ID="SupplierDropDownList" runat="server" OnSelectedIndexChanged="SupplierDropDownList_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                    <table>
+                        <tr>
+                            <td>Person-In-Charge</td>
+                            <td>Contact Number</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:TextBox ID="SupplierTextBox" runat="server" Enabled="false"></asp:TextBox></td>
+                            <td>
+                                <asp:TextBox ID="ContactTextBox" runat="server" Enabled="false"></asp:TextBox></td>
+                        </tr>
+                    </table>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+
+        <% }
+            else
+            { %>
+
+        <div class="row">
+            <div class="alert alert-danger">
+                Order Sent for Approval.
+            </div>
         </div>
 
-        <div>
-            <asp:UpdatePanel ID="SupplierUpdatePanel" runat="server">
-                <ContentTemplate>
-                    <div>
-                        <br />
-                        <asp:DropDownList ID="SupplierDropDownList" runat="server" OnSelectedIndexChanged="SupplierDropDownList_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
-                        <table>
-                            <tr>
-                                <td>
-                                    <asp:Label ID="Label1" runat="server" Text="Person-In-Charge"></asp:Label></td>
-                                <td>
-                                    <asp:Label ID="Label2" runat="server" Text="Contact Number"></asp:Label></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:TextBox ID="SupplierTextBox" runat="server" Enabled="false"></asp:TextBox></td>
-                                <td>
-                                    <asp:TextBox ID="ContactTextBox" runat="server" Enabled="false"></asp:TextBox></td>
-                            </tr>
-                        </table>
-                    </div>
-                </ContentTemplate>
-            </asp:UpdatePanel>
+        <div class="row">
+            <a href="OrderForm.aspx">New Order</a>
         </div>
 
+        <% 
+            Session.Remove("OProcessed");
+        %>
+        <% } %>
+    </div>
 </asp:Content>
 

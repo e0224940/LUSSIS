@@ -8,39 +8,48 @@ namespace LUSSIS_Backend.model
 {
     public class OrderItem
     {
+        // ATTRIBUTES
+        StationeryCatalogue stock;
+        List<string> supplierCodeList;
+        List<int?> orderQtyList;
+
         // CONSTRUCTOR
 
         public OrderItem(StationeryCatalogue stock)
         {
-            Stock = stock;
-            SupplierCodeList = new List<string> { stock.Supplier.SupplierCode, stock.Supplier4.SupplierCode, stock.Supplier5.SupplierCode };
-            OrderQtyList = new List<int?> { 0, 0, 0 };
-
-            ItemNo = Stock.ItemNo;
-            Description = Stock.Description;
-            QtyOnHand = Stock.CurrentQty;
-            ReorderLevel = Stock.ReorderLevel;
-            ReorderQty = Stock.ReorderQty;
-            Supplier1 = Stock.Supplier.SupplierName;
-            Supplier2 = Stock.Supplier4.SupplierName;
-            Supplier3 = Stock.Supplier5.SupplierName;
+            this.stock = stock;
+            supplierCodeList = new List<string> { stock.Supplier.SupplierCode, stock.Supplier4.SupplierCode, stock.Supplier5.SupplierCode };
+            orderQtyList = new List<int?> { 0, 0, 0 };
         }
 
         // PROPERTIES
 
-        public StationeryCatalogue Stock { get; }
-        public List<string> SupplierCodeList { get; }
-        public List<int?> OrderQtyList { get; }
-        public string ItemNo { get; }
-        public string Description { get; }
-        public int? QtyOnHand { get; }
-        public int? ReorderLevel { get; }
-        public int? ReorderQty { get; }
-        public string Supplier1 { get; }
-        public string Supplier2 { get; }
-        public string Supplier3 { get; }
-        public int? Qty1 { get { return OrderQtyList[0]; } set { OrderQtyList[0] = value; } }
-        public int? Qty2 { get { return OrderQtyList[1]; } set { OrderQtyList[1] = value; } }
-        public int? Qty3 { get { return OrderQtyList[2]; } set { OrderQtyList[2] = value; } }
+        public StationeryCatalogue Stock { get { return stock; } set { stock = value; } }
+
+        public string ItemNo { get { return stock.ItemNo; } }
+
+        public string Description { get { return stock.Description; } }
+
+        public int? QtyOnHand { get { return stock.CurrentQty; } }
+
+        public int? ReorderLevel { get { return stock.ReorderLevel; } }
+
+        public int? ReorderQty { get { return stock.ReorderQty; } }
+
+        public List<string> SupplierCodeList { get { return supplierCodeList; } }
+
+        public string Supplier1 { get { return stock.Supplier1; } }
+
+        public string Supplier2 { get { return stock.Supplier2; } }
+
+        public string Supplier3 { get { return stock.Supplier3; } }
+
+        public List<int?> OrderQtyList { get { return orderQtyList; } }
+
+        public int? Qty1 { get { return orderQtyList[0]; } set { orderQtyList[0] = value; } }
+
+        public int? Qty2 { get { return orderQtyList[1]; } set { orderQtyList[1] = value; } }
+
+        public int? Qty3 { get { return orderQtyList[2]; } set { orderQtyList[2] = value; } }
     }
 }

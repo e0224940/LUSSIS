@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LUSSIS_Backend;
-using LUSSIS_Backend.controller;
 using LUSSIS_Backend.dao;
 using LUSSIS_Backend.model;
 
@@ -44,6 +42,12 @@ namespace LUSSIS_Backend.controller
             }
 
             return orderList;
+        }
+
+        public static int GetStoreSupervisorEmpNo()
+        {
+            LussisEntities context = new LussisEntities();
+            return context.StoreAssignments.Where(x => x.Role.Equals("Supervisor")).FirstOrDefault().EmpNo;
         }
 
         public static List<StationeryCatalogue> GetStockList(List<OrderItem> orderList)
