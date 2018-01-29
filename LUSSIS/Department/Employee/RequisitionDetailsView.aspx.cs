@@ -8,9 +8,9 @@ using System.Web.UI.WebControls;
 
 public partial class Department_Employee_RequisitionDetailsView : System.Web.UI.Page
 {
-    static List<Requisition> requsition;
+    //static List<Requisition> requsition;
     static List<Detail> reqhistory;
-    static List<RequisitionDetail> reqDetail;
+    //static List<RequisitionDetail> reqDetail;
 
 
     protected void Page_Load(object sender, EventArgs e)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LUSSIS_Backend;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,28 +11,39 @@ public partial class login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        String username = LoginForm.UserName;
+        String[] userRoles = Roles.GetRolesForUser(username);
 
+        // If Already Logged in, redirect and don't show this page
+        if (User.Identity.IsAuthenticated)
+        {
+            username = User.Identity.Name;
+            userRoles = Roles.GetRolesForUser(username);
+            redirectLoggedInUser(username, userRoles, Response);
+        }
     }
 
     protected void LoginForm_LoggedIn(object sender, EventArgs e)
     {
-        redirectLoggedInUser();
+        String username = LoginForm.UserName;
+        String[] userRoles = LoginController.setupRolesAfterAuthentication(username);
+        String[] actualRoles = Roles.GetRolesForUser(username);
+
+        redirectLoggedInUser(username, userRoles, Response);
     }
 
-    void redirectLoggedInUser()
+    void redirectLoggedInUser(String username, String[] userRoles, HttpResponse response)
     {
+        // NOTE : The order of the roles in these arrays is in decreasing order of "rank"
         String[] departmentRoles =
         {
-            "DepartmentHead", "DepartmentDeputy", "DepartmentEmployee", "DepartmentRepresentative"
+            "DepartmentHead", "DepartmentDeputy", "DepartmentRepresentative", "DepartmentEmployee"
         };
 
         String[] storeRoles =
         {
             "StoreSupervisor", "StoreManager", "StoreClerk"
-        };
-
-        String username = LoginForm.UserName;
-        String[] userRoles = Roles.GetRolesForUser(username);
+        };        
 
         // Redirect to Store if There is a Store Role
         foreach (String role in storeRoles)
@@ -40,7 +52,7 @@ public partial class login : System.Web.UI.Page
             {
                 if (role == userRole)
                 {
-                    Response.Redirect("./Store/" + role.Remove(0, "Store".Length) + "/Default.aspx");
+                    response.Redirect("./Store/" + role.Remove(0, "Store".Length) + "/Default.aspx");
                     return;
                 }
             }            
@@ -53,7 +65,7 @@ public partial class login : System.Web.UI.Page
             {
                 if (role == userRole)
                 {
-                    Response.Redirect("./Department/" + role.Remove(0, "Department".Length) + "/Default.aspx");
+                    response.Redirect("./Department/" + role.Remove(0, "Department".Length) + "/Default.aspx");
                     return;
                 }
             }           

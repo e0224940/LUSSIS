@@ -12,7 +12,7 @@ public partial class Department_Employee_ItemAdding : System.Web.UI.Page
     static List<StationeryCatalogue> catList;
     static List<RaisedItem> catitem;
   
-    string quantity;
+    //string quantity;
     protected void Page_Load(object sender, EventArgs e)
     {
         ItemList.GetDescription();

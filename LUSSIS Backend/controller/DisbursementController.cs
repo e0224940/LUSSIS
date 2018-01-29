@@ -10,80 +10,65 @@ namespace LUSSIS_Backend.controller
 {
     public static class DisbursementController
     {
-        // ATTRIBUTES
-
-        static LussisEntities context = new LussisEntities();
-
-        // METHODS
-
-        public static Disbursement GetDisbursement(int disbursementNo)
+        public static List<Disbursement> GetPendingDisbursements()
         {
-            return StoreClerkDao.GetDisbursement(context, disbursementNo);
+            LussisEntities context = new LussisEntities();
+            return context.Disbursements.Where(x => x.Status.Equals("Pending")).ToList<Disbursement>();
         }
 
-        public static List<DisbursementItem> GetDisbursementItemList(int disbursementNo)
+        public static List<DisbursementDetail> GetDisbursementDetails(int dNo)
         {
-            List<DisbursementItem> dItemList = new List<DisbursementItem>();
-
-            // Get DisbursementDetail List
-            List<DisbursementDetail> dDetailList = StoreClerkDao.GetDisbursementDetailList(context, disbursementNo);
-
-            // For each DisbursementDetail
-            for (int i = 0; i < dDetailList.Count; i++)
-            {
-                // Create DisbursementItem
-                DisbursementItem dItem = new DisbursementItem();
-                dItem.ItemNo = dDetailList[i].ItemNo;
-                dItem.ItemDescription = dDetailList[i].StationeryCatalogue.Description;
-                dItem.Qty = dDetailList[i].Promised;
-                dItem.Delivered = dDetailList[i].Received;
-                dItemList.Add(dItem);
-            }
-
-            return dItemList;
+            LussisEntities context = new LussisEntities();
+            return context.DisbursementDetails.Where(x => x.DisbursementNo == dNo).ToList();
         }
 
-        public static bool CompleteDisbursement(int disbursementNo, decimal? pin, List<string> itemNoList, List<int> receivedQtyList)
+        public static Disbursement GetDisbursement(int dNo)
         {
-            // Validate Pin
-            bool isValidPin = StoreClerkDao.ValidatePin(context, disbursementNo, pin);
+            LussisEntities context = new LussisEntities();
+            return context.Disbursements.Where(x => x.DisbursementNo == dNo).FirstOrDefault();
+        }
 
-            if (isValidPin)
+        public static void UpdateReceivedQty(int dNo, string itemNo, int qty)
+        {
+            LussisEntities context = new LussisEntities();
+            DisbursementDetail dDetail = context.DisbursementDetails.Where(x => x.DisbursementNo == dNo && x.ItemNo.Equals(itemNo)).FirstOrDefault();
+            dDetail.Received = qty;
+            context.SaveChanges();
+        }
+
+        public static void CompleteDisbursement(int dNo, decimal? pin)
+        {
+            LussisEntities context = new LussisEntities();
+            Disbursement d = context.Disbursements.Where(x => x.DisbursementNo == dNo).FirstOrDefault();
+            List<DisbursementDetail> dDetails = d.DisbursementDetails.ToList();
+
+            // If Pin is Valid
+            if (d.Pin == pin)
             {
-                using (var dbcxtransaction = context.Database.Connection.BeginTransaction())
+                // Update Disbursement Status
+                d.Status = "Completed";
+
+                // Create Backlogs
+                for (int i = 0; i < dDetails.Count; i++)
                 {
-                    try
+                    if (dDetails[i].Needed - dDetails[i].Received > 0)
                     {
-                        // Update Disbursement (Status)
-                        StoreClerkDao.UpdateDisbursementStatus(context, disbursementNo);
-
-                        // Update DisbursementDetails (Received Qty)
-                        StoreClerkDao.UpdateDisbursementDetails(context, disbursementNo, itemNoList, receivedQtyList);
-
-                        // Create Backlogs
-                        StoreClerkDao.CreateBacklogs(context, disbursementNo);
-
-                        // Send Email
-                        SendEmail();
-                        dbcxtransaction.Commit();
-                        return true;
-                    }
-                    catch (Exception e)
-                    {
-                        dbcxtransaction.Rollback();
-                        throw e;
+                        BackLog backlog = new BackLog();
+                        backlog.DeptCode = dDetails[i].Disbursement.DeptCode;
+                        backlog.ItemNo = dDetails[i].ItemNo;
+                        backlog.BackLogQty = dDetails[i].Needed - dDetails[i].Received;
+                        context.BackLogs.Add(backlog);
                     }
                 }
+
+                context.SaveChanges();
+
+                // Send Email
             }
             else
             {
-                return false;
+                throw new Exception("Invalid Pin");
             }
-        }
-
-        private static void SendEmail()
-        {
-
         }
     }
 }

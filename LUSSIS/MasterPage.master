@@ -35,7 +35,34 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <!--#include file="mainmenu.aspx"-->
+                        <% if (System.Web.HttpContext.Current.User.IsInRole("DepartmentDeputy"))
+                            { %>
+                        <!--#include file="Department/Deputy/mainmenu.aspx"-->
+                        <% } %>
+                        <% if (System.Web.HttpContext.Current.User.IsInRole("DepartmentEmployee"))
+                            { %>
+                        <!--#include file="Department/Employee/mainmenu.aspx"-->
+                         <% } %>
+                        <% if (System.Web.HttpContext.Current.User.IsInRole("DepartmentHead"))
+                            { %>
+                        <!--#include file="Department/Head/mainmenu.aspx"-->
+                         <% } %>
+                        <% if (System.Web.HttpContext.Current.User.IsInRole("DepartmentRepresentative"))
+                            { %>
+                        <!--#include file="Department/Representative/mainmenu.aspx"-->
+                         <% } %>
+                        <% if (System.Web.HttpContext.Current.User.IsInRole("StoreClerk"))
+                            { %>
+                        <!--#include file="Store/Clerk/mainmenu.aspx"-->
+                         <% } %>
+                        <% if (System.Web.HttpContext.Current.User.IsInRole("StoreManager"))
+                            { %>
+                        <!--#include file="Store/Manager/mainmenu.aspx"-->
+                         <% } %>
+                        <% if (System.Web.HttpContext.Current.User.IsInRole("StoreSupervisor"))
+                            { %>
+                        <!--#include file="Store/Supervisor/mainmenu.aspx"-->
+                         <% } %>
                         <li class="dropdown">
                             <asp:LoginView runat="server">
                                 <AnonymousTemplate>
@@ -43,9 +70,9 @@
                                 </AnonymousTemplate>
                                 <LoggedInTemplate>
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <asp:LoginName runat="server"/>
+                                        <asp:LoginName runat="server" />
                                         <span class="caret"></span>
-                                    </a>                                    
+                                    </a>
                                     <ul class="dropdown-menu">
                                         <li>
                                             <asp:HyperLink runat="server" NavigateUrl="~/Account/ChangePassword.aspx">Change Password</asp:HyperLink>
