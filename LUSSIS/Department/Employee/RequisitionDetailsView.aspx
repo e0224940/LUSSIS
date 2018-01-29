@@ -23,26 +23,34 @@
                     <asp:Label ID="ItemNO" runat="server" Text='<%# Bind("itemNo") %>' ></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="ReqNo" SortExpression="ReqNo" >
+            <%--<asp:TemplateField HeaderText="ReqNo" SortExpression="ReqNo" >
                 <ItemTemplate>
                     <asp:Label ID="No" runat="server" Text='<%# Bind("reqNo") %>' ></asp:Label>
                 </ItemTemplate>
-                </asp:TemplateField>
+                </asp:TemplateField>--%>
             <asp:TemplateField HeaderText="Description" SortExpression="description">
                 <ItemTemplate>
                     <asp:Label ID="des" runat="server" Text='<%# Bind("description") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Qty">
+           <%-- <asp:TemplateField HeaderText="Qty">
                 <ItemTemplate>
                     <asp:Label ID="lblQuantity" runat="server" Width="50px" Text='<%# Bind("quantity") %>'></asp:Label>
                 </ItemTemplate>
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="New Qty">
+            </asp:TemplateField>--%>
+             <asp:TemplateField HeaderText="Qty" SortExpression="quantity">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("quantity") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("quantity") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+           <%-- <asp:TemplateField HeaderText="New Qty">
                 <ItemTemplate>
                     <asp:TextBox ID="changeQty" runat="server" Width="80px" Text="" TextMode="Number"></asp:TextBox>
                 </ItemTemplate>
-            </asp:TemplateField>
+            </asp:TemplateField>--%>
 
             <asp:CommandField ShowEditButton="true" />
             <asp:CommandField ShowDeleteButton="True" />
@@ -50,7 +58,7 @@
 
     </asp:GridView>
 
-    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+    
 
     <br />
     <asp:Button ID="submit" runat="server" Text="Submit" />

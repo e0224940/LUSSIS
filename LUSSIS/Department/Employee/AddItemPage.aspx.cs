@@ -40,8 +40,7 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
         RaisedItem cart = new RaisedItem();
         cart.ItemNo = row.Cells[0].Text;
         cart.description = row.Cells[1].Text;
-        if ((row.Cells[2].FindControl("Quantity") as TextBox).Text.ToString() == "" || Int32.Parse((row.Cells[2].FindControl("Quantity") as TextBox).Text) <= 0
-            )
+        if ((row.Cells[2].FindControl("Quantity") as TextBox).Text.ToString() == "" || Int32.Parse((row.Cells[2].FindControl("Quantity") as TextBox).Text) <= 0)
         {
             Msg.Text = "The input number has to be greater than 0.";
         }

@@ -26,18 +26,9 @@ public partial class Department_Employee_RequisitionDetailsView : System.Web.UI.
 
             string ss = Request.QueryString["ReqNo"];
             int reqNo = int.Parse(ss);
-            ReqId.Text = ss;
-
-            //reqNo = (int)Session["sessionvalue"];
-            //ReqId.Text = reqNo.ToString();
-            //requsition = new List<Requisition>();
-            //reqDetail = new List<RequisitionDetail>();
+            ReqId.Text = ss; 
             reqhistory = new List<Detail>();
-
-            //if(Session["sessionID"] != null) {
-
-            
-                List<RequisitionDetail> reqHistory = EmployeeController.ViewRequisitionDetail(reqNo);
+            List<RequisitionDetail> reqHistory = EmployeeController.ViewRequisitionDetail(reqNo);
             foreach(RequisitionDetail r in reqHistory)
             {
                 Detail d = new Detail();
@@ -50,9 +41,6 @@ public partial class Department_Employee_RequisitionDetailsView : System.Web.UI.
             }
             GridViewForDetail.DataSource = reqhistory;
             GridViewForDetail.DataBind();
-
-           // }
-
         }
     }
     protected void cancel_Click(object sender, EventArgs e)
@@ -62,18 +50,46 @@ public partial class Department_Employee_RequisitionDetailsView : System.Web.UI.
 
     protected void detailGrid_Delete(object sender, GridViewDeleteEventArgs e)
     {
-        int requisitionNo = 42;
-        string item = GridViewForDetail.DataKeys[e.RowIndex].ToString();
-        //int reqId = Convert.ToInt32(detailGrid.DataKeys[e.RowIndex].Values[0]);
-        //Session["sessionID"] = reqId;
-        EmployeeController.DeleteForDetail(requisitionNo, item);
-        GridViewForDetail.DataSource = EmployeeController.ViewRequisitionDetail(requisitionNo);
-        GridViewForDetail.DataBind();
+        GridViewRow row = GridViewForDetail.Rows[e.RowIndex];
+        string aa = Request.QueryString["ReqNo"];
+        int requisitionNo = int.Parse(aa);
+        string item = (row.FindControl("ItemNO") as Label).Text;
+        
+        if(GridViewForDetail.Rows.Count == 0)
+        {
 
+        }
+       
+       else {
+            //Delete row
+            EmployeeController.DeleteForDetail(requisitionNo, item);
+
+            //show back gridview
+            reqhistory = new List<Detail>();
+            List<RequisitionDetail> reqHistory = EmployeeController.ViewRequisitionDetail(requisitionNo);
+            foreach (RequisitionDetail r in reqHistory)
+            {
+                Detail d = new Detail();
+
+                d.itemNo = r.ItemNo;
+                d.reqNo = r.ReqNo;
+                d.quantity = r.Qty;
+                d.description = r.StationeryItem.Description;
+                reqhistory.Add(d);
+            }
+            GridViewForDetail.DataSource = reqhistory;
+            GridViewForDetail.DataBind();
+        }
+        //else
+        //{
+        //    EmployeeController.DeleteReqHistory(requisitionNo);
+            
+        //}
     }
 
     protected void detailGrid_Edit(object sender, GridViewEditEventArgs e)
     {
-        
+        GridViewForDetail.EditIndex = e.NewEditIndex;
+        GridViewForDetail.DataBind();
     }
 }

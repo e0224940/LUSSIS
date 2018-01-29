@@ -121,8 +121,10 @@ namespace LUSSIS_Backend
             //RequisitionDetail rr = new RequisitionDetail();
             //RequisitionDetail rd = entity.RequisitionDetails.Where(p => p.ItemNo == item).FirstOrDefault<RequisitionDetail>();
            
-            RequisitionDetail rr = entity.RequisitionDetails.Where(u => u.ReqNo == requisitionNo && u.ItemNo.Equals(item)).FirstOrDefault<RequisitionDetail>();
-           // RequisitionDetail req = entity.RequisitionDetails.Where(p => p.ItemNo.Equals(item)).FirstOrDefault<RequisitionDetail>();
+            RequisitionDetail rr = entity.RequisitionDetails
+                .Where(u => u.ReqNo == requisitionNo && u.ItemNo.Equals(item))
+                .FirstOrDefault();
+          
             entity.RequisitionDetails.Remove(rr);
             entity.SaveChanges();
         }

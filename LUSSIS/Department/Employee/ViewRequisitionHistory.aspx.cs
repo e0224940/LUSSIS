@@ -63,15 +63,12 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
     protected void DetailGridView_SelectedIndexChanged(object sender, EventArgs e)
     {
         int ReqNo = (int)DetailGridView.SelectedDataKey.Values[0];
-        //Session.Add("sessionId", reqNo);
-        // int point = (int)DetailGridView.SelectedDataKey.Value;
         Response.Redirect("RequisitionDetailsView.aspx?ReqNo="+ReqNo);
 
     }
 
-    protected void view_Click(object sender, EventArgs e)
-    {
-       // GridViewRow row = DetailGridView.Rows[e];
-        //Response.Redirect("RequisitionDetailsView.aspx");
-    }
+    //protected void view_Click(object sender, EventArgs e)
+    //{
+       
+    //}
 }
