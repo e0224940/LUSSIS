@@ -325,5 +325,23 @@ namespace LUSSIS_Backend
             return result;
 
         }
+
+        public static List<RequisitionDetail> GetRequisitionDetailsOf(string reqNo)
+        {
+            List<RequisitionDetail> result = null;
+            try
+            {
+                using (LussisEntities context = new LussisEntities())
+                {
+                    result = context.RequisitionDetails.Where(req => req.ReqNo.Equals(reqNo)).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                result = null;
+            }
+
+            return result;
+        }
     }
 }
