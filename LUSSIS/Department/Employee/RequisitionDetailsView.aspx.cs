@@ -15,31 +15,43 @@ public partial class Department_Employee_RequisitionDetailsView : System.Web.UI.
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        
         int empNo = Profile.EmpNo;
-       
+        
         if (!IsPostBack)
         {
+           
             string empName = EmployeeController.GetName(empNo);
+            empNameshow.Text = empName;
+
+            string ss = Request.QueryString["ReqNo"];
+            int reqNo = int.Parse(ss);
+            ReqId.Text = ss;
+
+            //reqNo = (int)Session["sessionvalue"];
+            //ReqId.Text = reqNo.ToString();
             //requsition = new List<Requisition>();
             //reqDetail = new List<RequisitionDetail>();
             reqhistory = new List<Detail>();
 
-            if(Session["sessionID"] != null) {
-                
-             int reqNo = 42;
+            //if(Session["sessionID"] != null) {
+
+            
                 List<RequisitionDetail> reqHistory = EmployeeController.ViewRequisitionDetail(reqNo);
             foreach(RequisitionDetail r in reqHistory)
             {
                 Detail d = new Detail();
+                
+                d.itemNo = r.ItemNo;
                 d.reqNo = r.ReqNo;
                 d.quantity = r.Qty;
                 d.description = r.StationeryItem.Description;
                 reqhistory.Add(d);
             }
-            detailGrid.DataSource = reqhistory;
-            detailGrid.DataBind();
+            GridViewForDetail.DataSource = reqhistory;
+            GridViewForDetail.DataBind();
 
-            }
+           // }
 
         }
     }
@@ -50,11 +62,13 @@ public partial class Department_Employee_RequisitionDetailsView : System.Web.UI.
 
     protected void detailGrid_Delete(object sender, GridViewDeleteEventArgs e)
     {
-        //string ItemNo = detailGrid.DataKeys[e.RowIndex].Values[0].ToString();
-        //RaisedItem selected = Reqitem.Where(item => item.ItemNo == ItemNo && item.ReqNo == Num.ToString()).FirstOrDefault();
-        //Reqitem.Remove(selected);
-        //detailGrid.DataSource = Reqitem;
-        //detailGrid.DataBind();
+        int requisitionNo = 42;
+        string item = GridViewForDetail.DataKeys[e.RowIndex].ToString();
+        //int reqId = Convert.ToInt32(detailGrid.DataKeys[e.RowIndex].Values[0]);
+        //Session["sessionID"] = reqId;
+        EmployeeController.DeleteForDetail(requisitionNo, item);
+        GridViewForDetail.DataSource = EmployeeController.ViewRequisitionDetail(requisitionNo);
+        GridViewForDetail.DataBind();
 
     }
 
