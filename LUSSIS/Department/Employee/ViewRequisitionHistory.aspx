@@ -8,10 +8,17 @@
     <asp:Label ID="label" runat="server" Text="Employee Name:"></asp:Label>
     <asp:Label ID="name" runat="server"></asp:Label>
     <br />
-    <asp:GridView ID="DetailGridView" runat="server" DataKeyNames="ReqNo" AutoGenerateColumns="False" OnRowDeleting="detailGridView_Delete" OnSelectedIndexChanged="DetailGridView_SelectedIndexChanged">
+    <asp:GridView
+        runat="server"
+        ID="DetailGridView"
+        DataKeyNames="ReqNo"
+        AutoGenerateColumns="False"
+        CssClass="table table-striped"
+        OnRowDeleting="detailGridView_Delete"
+        OnSelectedIndexChanged="DetailGridView_SelectedIndexChanged">
       <Columns>
             <asp:BoundField DataField="ReqNo" HeaderText="ReqNo" SortExpression="ReqNo" Visible="false" />
-            <asp:BoundField DataField="DateIssued" HeaderText="Date" SortExpression="DateIssued" />
+            <asp:BoundField DataField="DateIssued" DataFormatString="{0:dd MMM yyyy}" HeaderText="Date" SortExpression="DateIssued" />
             <asp:BoundField DataField="ReqNo" HeaderText="Requisition Form" SortExpression="ReqNo" />
             <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
         
