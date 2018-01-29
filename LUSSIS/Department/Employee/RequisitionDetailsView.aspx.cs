@@ -32,8 +32,6 @@ public partial class Department_Employee_RequisitionDetailsView : System.Web.UI.
 
     private void BindGrid()
     {
-       
-        
         reqhistory = new List<Detail>();
         List<RequisitionDetail> reqHistory = EmployeeController.ViewRequisitionDetail(reqNo);
         foreach (RequisitionDetail r in reqHistory)
