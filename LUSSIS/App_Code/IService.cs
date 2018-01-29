@@ -89,6 +89,10 @@ public interface IService
     bool AddRequisition(int sessionID, WCFRequisition addedRequisition);
 
     [OperationContract]
+    [WebInvoke(UriTemplate = "/AddRequisitionAndGetReqNo", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    int AddRequisitionAndGetReqNo(int sessionID, WCFRequisition addedRequisition);
+
+    [OperationContract]
     [WebInvoke(UriTemplate = "/PendingRequisitions", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     WCFRequisition[] GetPendingRequisitions(int sessionID, string empNo);
 
