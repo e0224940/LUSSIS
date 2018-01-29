@@ -532,4 +532,49 @@ public class Service : IService
 
         return result.ToArray();
     }
+
+    public WCFRetrieval GetLatestRetrieval(int sessionID)
+    {
+         WCFRetrieval result = null;
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            Retrieval latestRetrieval = AndroidController.GetLatestRetrieval();
+
+            if (latestRetrieval != null)
+            {
+                result = new WCFRetrieval()
+                {
+                    RetrievalNo = latestRetrieval.RetrievalNo.ToString(),
+                    Date = String.Format("{0:dd/MM/yyyy}", latestRetrieval.Date)
+                };
+            }
+        }
+        return result;
+    }
+
+    public WCFRetrievalDetail[] GetRetrievalDetails(int sessionID, string retrievalNo)
+    {
+        List<WCFRetrievalDetail> result = new List<WCFRetrievalDetail>();
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            var retrievalDetails = AndroidController.GetRetrievalDetails(retrievalNo);
+
+            foreach (var item in retrievalDetails)
+            {
+                result.Add(new WCFRetrievalDetail()
+                {
+                    RetrievalNo = item.RetrievalNo,
+                    DeptCode = item.DeptCode,
+                    ItemNo = item.ItemNo,
+                    Needed = item.Needed.HasValue ? item.Needed.Value : 0,
+                    BacklogQty = item.BackLogQty.HasValue ? item.BackLogQty.Value : 0,
+                    Actual = item.Actual.HasValue ? item.Actual.Value : 0
+                });
+            }
+        }
+
+        return result.ToArray();
+    }
 }

@@ -116,6 +116,14 @@ public interface IService
     [WebInvoke(UriTemplate = "/RequisitionDetails", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     WCFRequisitionDetail[] GetRequisitionDetails(int sessionID, String ReqNo);
 
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/LatestRetrieval", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    WCFRetrieval GetLatestRetrieval(int sessionID);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/RetrievalDetails", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    WCFRetrievalDetail[] GetRetrievalDetails(int sessionID, string retrievalNo);
+
 
 }
 
@@ -209,11 +217,11 @@ public class WCFRetrieval
 
 public class WCFRetrievalDetail
 {
-    public String RetrievalNo;
+    public int RetrievalNo;
     public String DeptCode;
     public String ItemNo;
-    public String Needed;
-    public String BacklogQty;
-    public String Actual;
+    public int Needed;
+    public int BacklogQty;
+    public int Actual;
 }
 

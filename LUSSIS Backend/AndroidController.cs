@@ -342,5 +342,41 @@ namespace LUSSIS_Backend
 
             return result;
         }
+
+        public static Retrieval GetLatestRetrieval()
+        {
+            Retrieval result = null;
+            try
+            {
+                using (LussisEntities context = new LussisEntities())
+                {
+                    result = context.Retrievals.Last();
+                }
+            }
+            catch (Exception)
+            {
+                result = null;
+            }
+
+            return result;
+        }
+
+        public static List<RetrievalDetail> GetRetrievalDetails(string retrievalNo)
+        {
+            List<RetrievalDetail> result = null;
+            try
+            {
+                using (LussisEntities context = new LussisEntities())
+                {
+                    result = context.RetrievalDetails.Where(ret => ret.RetrievalNo.Equals(retrievalNo)).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                result = null;
+            }
+
+            return result;
+        }
     }
 }
