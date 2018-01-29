@@ -398,13 +398,13 @@ public class Service : IService
         return result;
     }
 
-    public WCFRequisition[] GetPendingRequisitions(int sessionID, string empNo)
+    public WCFRequisition[] GetPendingRequisitions(int sessionID, string sessionEmpNo)
     {
         List<WCFRequisition> result = new List<WCFRequisition>();
 
         if (AndroidAuthenticationController.IsValidSessionId(sessionID))
         {
-            List<Requisition> items = AndroidController.GetPendingRequisitions(empNo);
+            List<Requisition> items = AndroidController.GetPendingRequisitions(sessionEmpNo);
 
             if (items != null)
             {
