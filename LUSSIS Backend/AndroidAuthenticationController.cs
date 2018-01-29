@@ -75,8 +75,8 @@ namespace LUSSIS_Backend
                 // Retrieve the employee
                 Employee employee = context.Employees.Where(emp => emp.SessionNo == sessionID).FirstOrDefault();
 
-                // Get the session number
-                result = (int)employee.SessionNo;
+                // Get the employee number
+                result = employee.EmpNo;
             }
 
             return result;
