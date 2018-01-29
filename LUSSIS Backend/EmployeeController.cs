@@ -109,12 +109,26 @@ namespace LUSSIS_Backend
                     entities.RequisitionDetails.Remove(ff);
 
                 }
-
                 Requisition req = entities.Requisitions.Where(p => p.ReqNo == reqId).FirstOrDefault<Requisition>();
                 entities.Requisitions.Remove(req);
                 entities.SaveChanges();
             }
         }
+
+        public static void DeleteForDetail(int requisitionNo, string item)
+        {
+            LussisEntities entity = new LussisEntities();
+            //RequisitionDetail rr = new RequisitionDetail();
+            //RequisitionDetail rd = entity.RequisitionDetails.Where(p => p.ItemNo == item).FirstOrDefault<RequisitionDetail>();
+           
+            RequisitionDetail rr = entity.RequisitionDetails.Where(u => u.ReqNo == requisitionNo && u.ItemNo.Equals(item)).FirstOrDefault<RequisitionDetail>();
+           // RequisitionDetail req = entity.RequisitionDetails.Where(p => p.ItemNo.Equals(item)).FirstOrDefault<RequisitionDetail>();
+            entity.RequisitionDetails.Remove(rr);
+            entity.SaveChanges();
+        }
+
+
+        
     }
 }
 

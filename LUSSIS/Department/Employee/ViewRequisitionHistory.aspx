@@ -9,18 +9,14 @@
     <asp:Label ID="name" runat="server"></asp:Label>
     <br />
     <asp:GridView ID="DetailGridView" runat="server" DataKeyNames="ReqNo" AutoGenerateColumns="False" OnRowDeleting="detailGridView_Delete" OnSelectedIndexChanged="DetailGridView_SelectedIndexChanged">
-        <Columns>
-             <asp:BoundField DataField="ReqNo" HeaderText="ReqNo" SortExpression="ReqNo" Visible="false" />
+      <Columns>
+            <asp:BoundField DataField="ReqNo" HeaderText="ReqNo" SortExpression="ReqNo" />
             <asp:BoundField DataField="DateIssued" HeaderText="Date" SortExpression="DateIssued" />
             <asp:BoundField DataField="ReqNo" HeaderText="Requisition Form" SortExpression="ReqNo" />
             <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
-            <asp:TemplateField>
-                <ItemTemplate>
-                    <asp:Button ID="view" runat="server" Text="View Details" OnClick="view_Click"/>
-                </ItemTemplate>
-            </asp:TemplateField>
-            <asp:CommandField ShowDeleteButton="true" />
-             
+        
+             <asp:CommandField ShowSelectButton="True" />
+             <asp:CommandField ShowDeleteButton="true" />
         </Columns>
     </asp:GridView>
 </asp:Content>

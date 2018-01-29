@@ -11,7 +11,7 @@ public partial class _Default : System.Web.UI.Page
     {
         if (Request.Url.AbsolutePath.Contains("Default.aspx"))
         {
-            Response.Redirect(Page.ResolveUrl("~/Store/Clerk/ViewPurchaseOrderHistory.aspx"));
+            Response.Redirect(Page.ResolveUrl("~/Store/Clerk/DisbursementList.aspx"));
         }
     }
 }

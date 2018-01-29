@@ -17,6 +17,7 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
         int empNo = Profile.EmpNo;
         if (!IsPostBack)
         {
+            
             string empName = EmployeeController.GetName(empNo);
             name.Text = empName;  
             DetailGridView.Visible = true;
@@ -61,14 +62,16 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
 
     protected void DetailGridView_SelectedIndexChanged(object sender, EventArgs e)
     {
-       
-        Response.Redirect("RequisitionDetailsView.aspx");
+        int ReqNo = (int)DetailGridView.SelectedDataKey.Values[0];
+        //Session.Add("sessionId", reqNo);
+        // int point = (int)DetailGridView.SelectedDataKey.Value;
+        Response.Redirect("RequisitionDetailsView.aspx?ReqNo="+ReqNo);
 
     }
 
     protected void view_Click(object sender, EventArgs e)
     {
        // GridViewRow row = DetailGridView.Rows[e];
-        Response.Redirect("RequisitionDetailsView.aspx");
+        //Response.Redirect("RequisitionDetailsView.aspx");
     }
 }
