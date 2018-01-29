@@ -111,12 +111,19 @@ public interface IService
     [OperationContract]
     [WebInvoke(UriTemplate = "/RemoveRequisition", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     bool RemoveRequisition(int sessionID, WCFRequisition removedRequisition);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/RequisitionDetails", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    WCFRequisitionDetail[] GetRequisitionDetails(int sessionID, String ReqNo);
+
+
 }
 
 public class WCFDisbursementDetail
 {
     public String DisbursementNo;
     public String ItemNo;
+    public String Description;
     public String Needed;
     public String Promised;
     public String Received;
@@ -179,6 +186,7 @@ public class WCFRequisitionDetail
 {
     public int ReqNo;
     public string ItemNo;
+    public string Description;
     public int Qty;
 }
 

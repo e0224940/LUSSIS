@@ -242,6 +242,7 @@ public class Service : IService
                     {
                         DisbursementNo = item.DisbursementNo.ToString(),
                         ItemNo = item.ItemNo.ToString(),
+                        Description = item.StationeryCatalogue.Description,
                         Needed = item.Needed.ToString(),
                         Promised = item.Promised.ToString(),
                         Received = item.Received.ToString()
@@ -508,5 +509,28 @@ public class Service : IService
         }
 
         return result;
+    }
+
+    public WCFRequisitionDetail[] GetRequisitionDetails(int sessionID, string ReqNo)
+    {
+        List<WCFRequisitionDetail> result = new List<WCFRequisitionDetail>();
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            var requisitionDetails = AndroidController.GetRequisitionDetailsOf(ReqNo);
+
+            foreach(var item in requisitionDetails)
+            {
+                result.Add(new WCFRequisitionDetail()
+                {
+                    Description = item.StationeryItem.Description,
+                    ItemNo = item.ItemNo,
+                    Qty = item.Qty.HasValue ? item.Qty.Value : 0,
+                    ReqNo = item.ReqNo
+                });
+            }
+        }
+
+        return result.ToArray();
     }
 }
