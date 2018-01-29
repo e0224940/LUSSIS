@@ -150,7 +150,7 @@ namespace LUSSIS_Backend
             }
         }
 
-        private static String[] identifyRolesOfEmployee(LussisEntities context, int employeeNo)
+        public static String[] identifyRolesOfEmployee(LussisEntities context, int employeeNo)
         {
             List<String> result = new List<string>();
             Employee employee = context.Employees.Where(emp => emp.EmpNo.Equals(employeeNo)).SingleOrDefault();
