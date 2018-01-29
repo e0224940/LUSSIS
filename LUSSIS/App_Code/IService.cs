@@ -185,8 +185,8 @@ public class WCFDepartment
 public class WCFRequisitionDetail
 {
     public int ReqNo;
-    public string ItemNo;
-    public string Description;
+    public String ItemNo;
+    public String Description;
     public int Qty;
 }
 
