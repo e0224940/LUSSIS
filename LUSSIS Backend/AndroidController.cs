@@ -30,6 +30,12 @@ namespace LUSSIS_Backend
             return context.Departments.Where(dept => dept.DeptCode.Equals(deptCode)).FirstOrDefault();
         }
 
+        public static List<Department> GetAllDepartments()
+        {
+            LussisEntities context = new LussisEntities();
+            return context.Departments.ToList();
+        }
+
         public static Disbursement GetCurrentDisbursementForDepartment(String deptCode)
         {
             // TODO : IS IT ASCENDING OR DESCENDING ORDER

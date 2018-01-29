@@ -45,6 +45,10 @@ public interface IService
     WCFDepartment GetDepartment(int sessionID, String deptCode);
 
     [OperationContract]
+    [WebInvoke(UriTemplate = "/DeptListAll", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    WCFDepartment[] GetAllDepartments(int sessionID);
+
+    [OperationContract]
     [WebInvoke(UriTemplate = "/LatestDisbursement", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     WCFDisbursement GetCurrentDisbursementForDepartment(int sessionID, String deptCode);
 
