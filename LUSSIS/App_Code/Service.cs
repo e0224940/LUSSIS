@@ -390,6 +390,7 @@ public class Service : IService
             requisition.ReqNo = 0;
             requisition.IssuedBy = issuingEmpNo;
             requisition.DateIssued = DateTime.Today;
+            requisition.Status = "Pending";
 
             result = AndroidController.AddRequisition(requisition);
         }
