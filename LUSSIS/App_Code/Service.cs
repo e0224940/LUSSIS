@@ -523,8 +523,8 @@ public class Service : IService
             {
                 result.Add(new WCFRequisitionDetail()
                 {
-                    Description = item.StationeryItem.Description,
                     ItemNo = item.ItemNo,
+                    Description = item.StationeryItem.Description,
                     Qty = item.Qty.HasValue ? item.Qty.Value : 0,
                     ReqNo = item.ReqNo
                 });
