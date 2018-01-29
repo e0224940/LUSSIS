@@ -94,7 +94,7 @@ public interface IService
 
     [OperationContract]
     [WebInvoke(UriTemplate = "/AddRequisitionAndGetReqNo", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-    int AddRequisitionAndGetReqNo(int sessionID, WCFRequisition addedRequisition);
+    int AddRequisitionAndGetReqNo(int sessionID);
 
     [OperationContract]
     [WebInvoke(UriTemplate = "/PendingRequisitions", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
@@ -192,10 +192,10 @@ public class WCFRequisitionDetail
 
 public class WCFRequisition
 {
-    public int ReqNo;
-    public int IssuedBy;
+    public String ReqNo;
+    public String IssuedBy;
     public String DateIssued;
-    public int ApprovedBy;
+    public String ApprovedBy;
     public String DateReviewed;
     public String Status;
     public String Remarks;

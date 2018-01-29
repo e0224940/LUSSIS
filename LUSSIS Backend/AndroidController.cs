@@ -266,13 +266,12 @@ namespace LUSSIS_Backend
 
         public static Requisition GetRequisitionById(int reqNo)
         {
-            Requisition req;
+            Requisition req = null;
             using (LussisEntities context = new LussisEntities())
             {
-                req = context.Requisitions.Where(x => x.ReqNo.Equals(reqNo)).First();
+                req = context.Requisitions.Where(x => x.ReqNo.Equals(reqNo)).FirstOrDefault();
+                return req;
             }
-
-            return req;
         }
 
         public static bool UpdateRequisition(Requisition requisition)

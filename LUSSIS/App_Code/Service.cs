@@ -364,13 +364,13 @@ public class Service : IService
         {
             Requisition requisition = new Requisition()
             {
-                ReqNo = addRequisition.ReqNo,
+                ReqNo = Convert.ToInt32(addRequisition.ReqNo),
                 DateIssued = Convert.ToDateTime(addRequisition.DateIssued),
-                ApprovedBy = addRequisition.ApprovedBy,
+                ApprovedBy = Convert.ToInt32(addRequisition.ApprovedBy),
                 DateReviewed = Convert.ToDateTime(addRequisition.DateReviewed),
                 Status = addRequisition.Status,
                 Remarks = addRequisition.Remarks
-};
+            };
 
             result = (AndroidController.AddRequisition(requisition) >= 0);
         }
@@ -378,21 +378,18 @@ public class Service : IService
         return result;
     }
 
-    public int AddRequisitionAndGetReqNo(int sessionID, WCFRequisition addRequisition)
+    public int AddRequisitionAndGetReqNo(int sessionID)
     {
         int result = -1;
 
         if (AndroidAuthenticationController.IsValidSessionId(sessionID))
         {
-            Requisition requisition = new Requisition()
-            {
-                ReqNo = addRequisition.ReqNo,
-                DateIssued = Convert.ToDateTime(addRequisition.DateIssued),
-                ApprovedBy = addRequisition.ApprovedBy,
-                DateReviewed = Convert.ToDateTime(addRequisition.DateReviewed),
-                Status = addRequisition.Status,
-                Remarks = addRequisition.Remarks
-            };
+            Requisition requisition = new Requisition();
+            int issuingEmpNo = AndroidAuthenticationController.GetEmployeeIdFromSessionId(sessionID);
+
+            requisition.ReqNo = 0;
+            requisition.IssuedBy = issuingEmpNo;
+            requisition.DateIssued = DateTime.Today;
 
             result = AndroidController.AddRequisition(requisition);
         }
@@ -414,9 +411,9 @@ public class Service : IService
                 {
                     result.Add(new WCFRequisition
                     {
-                        ReqNo = item.ReqNo,
+                        ReqNo = item.ReqNo.ToString(),
                         DateIssued = item.DateIssued.ToString(),
-                        ApprovedBy = (int)item.ApprovedBy,
+                        ApprovedBy = item.ApprovedBy.ToString(),
                         DateReviewed = item.DateReviewed.ToString(),
                         Status = item.Status,
                         Remarks = item.Remarks
@@ -430,7 +427,7 @@ public class Service : IService
 
     public WCFRequisition GetRequisitionById(int sessionID, int reqNo)
     {
-       WCFRequisition result = null;
+        WCFRequisition result = null;
 
         if (AndroidAuthenticationController.IsValidSessionId(sessionID))
         {
@@ -438,15 +435,16 @@ public class Service : IService
 
             if (item != null)
             {
-                    result = new WCFRequisition
-                    {
-                        ReqNo = item.ReqNo,
-                        DateIssued = item.DateIssued.ToString(),
-                        ApprovedBy = (int)item.ApprovedBy,
-                        DateReviewed = item.DateReviewed.ToString(),
-                        Status = item.Status,
-                        Remarks = item.Remarks
-                    };
+                result = new WCFRequisition
+                {
+                    ReqNo = item.ReqNo.ToString(),
+                    DateIssued = item.DateIssued.ToString(),
+                    IssuedBy = item.IssuedBy.ToString(),
+                    ApprovedBy = item.ApprovedBy != null ? item.ApprovedBy.ToString() : "",
+                    DateReviewed = item.DateReviewed != null ? item.DateReviewed.ToString() : "",
+                    Status = item.Status != null ? item.Status : "",
+                    Remarks = item.Remarks != null ? item.Remarks : ""
+                };
             }
         }
 
@@ -461,9 +459,9 @@ public class Service : IService
         {
             Requisition requisition = new Requisition()
             {
-                ReqNo = updatedRequisition.ReqNo,
+                ReqNo = Convert.ToInt32(updatedRequisition.ReqNo),
                 DateIssued = Convert.ToDateTime(updatedRequisition.DateIssued),
-                ApprovedBy = updatedRequisition.ApprovedBy,
+                ApprovedBy = Convert.ToInt32(updatedRequisition.ApprovedBy),
                 DateReviewed = Convert.ToDateTime(updatedRequisition.DateReviewed),
                 Status = updatedRequisition.Status,
                 Remarks = updatedRequisition.Remarks
@@ -485,9 +483,9 @@ public class Service : IService
         {
             Requisition requisition = new Requisition()
             {
-                ReqNo = removedRequisition.ReqNo,
+                ReqNo = Convert.ToInt32(removedRequisition.ReqNo),
                 DateIssued = Convert.ToDateTime(removedRequisition.DateIssued),
-                ApprovedBy = removedRequisition.ApprovedBy,
+                ApprovedBy = Convert.ToInt32(removedRequisition.ApprovedBy),
                 DateReviewed = Convert.ToDateTime(removedRequisition.DateReviewed),
                 Status = removedRequisition.Status,
                 Remarks = removedRequisition.Remarks
@@ -519,7 +517,7 @@ public class Service : IService
         {
             var requisitionDetails = AndroidController.GetRequisitionDetailsOf(ReqNo);
 
-            foreach(var item in requisitionDetails)
+            foreach (var item in requisitionDetails)
             {
                 result.Add(new WCFRequisitionDetail()
                 {
