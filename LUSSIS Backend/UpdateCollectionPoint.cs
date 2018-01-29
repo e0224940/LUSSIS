@@ -12,11 +12,9 @@ namespace LUSSIS_Backend
     public class UpdateCollectionPoint
     {
 
-
         public static string SearchLocation(int empNo)
         {
             LussisEntities entity = new LussisEntities();
-            // bool result = false;
             Employee currEmployee = entity.Employees.Where(emp => emp.EmpNo == empNo).First();
             Department currDepartment = entity.Departments.Where(dep => dep.DeptCode.Equals(currEmployee.DeptCode)).First();
             return currDepartment.CollectionPoint.CollectionPointDetails;

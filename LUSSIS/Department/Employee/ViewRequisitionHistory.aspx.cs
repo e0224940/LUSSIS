@@ -16,8 +16,7 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
     {
         int empNo = Profile.EmpNo;
         if (!IsPostBack)
-        {
-            
+        {   
             string empName = EmployeeController.GetName(empNo);
             name.Text = empName;  
             DetailGridView.Visible = true;
@@ -28,7 +27,7 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
         }
         //if()
 
-        ////Zeng Rui' stupid code(Make Me Angry)
+        ////Zeng Rui' code
         //GridViewRow row = DetailGridView.SelectedRow;
         //string Rnum = DetailGridView.Rows[row.RowIndex].Cells[2].Text.ToString();
         //if (Rnum == "Approved")
@@ -41,7 +40,7 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
 
     }
 
-    //Zeng Rui'stupid code again
+    //Zeng Rui'code 
     //protected void detailGridView_Delete(object sender, GridViewDeleteEventArgs e)
     //{
     //    int reqId = Convert.ToInt32(DetailGridView.DataKeys[e.RowIndex].Values[0]);
@@ -62,9 +61,17 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
 
     protected void DetailGridView_SelectedIndexChanged(object sender, EventArgs e)
     {
-        int ReqNo = (int)DetailGridView.SelectedDataKey.Values[0];
-        Response.Redirect("RequisitionDetailsView.aspx?ReqNo="+ReqNo);
-
+        //GridViewRow row = DetailGridView.Rows.ToStrin;
+        string check = DetailGridView.SelectedDataKey.Values[3].ToString();
+        if (check.Equals("Approved"))
+        {
+            DetailGridView.Columns[4].Visible = false;
+        }
+        else
+        { 
+            int ReqNo = (int)DetailGridView.SelectedDataKey.Values[0];
+            Response.Redirect("RequisitionDetailsView.aspx?ReqNo="+ReqNo);
+        }
     }
 
     //protected void view_Click(object sender, EventArgs e)
