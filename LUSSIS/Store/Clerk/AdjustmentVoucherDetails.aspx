@@ -18,8 +18,8 @@
                 Voucher#: <%= Session["AVNo"] %>
             </div>
             <div class="col-xs-4">
-                Date Issued: <%= aV.DateIssued %>
-            </div>
+                Date Issued: <%= aV.DateIssued.Value.ToString("dd MMM yyyy") %>
+            </div>  
             <div class="col-xs-4">
                 Status: <%= aV.Status %>
             </div>
