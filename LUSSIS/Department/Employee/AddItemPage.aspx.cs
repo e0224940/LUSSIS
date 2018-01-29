@@ -60,7 +60,7 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
         cartitem = (List<RaisedItem>)Session["session"];
         int isissueBy = Profile.EmpNo;
         dateIssue = DateTime.Today;
-        string status = "Pending";
+        string status = "Approved";
         List<RequisitionDetail> detailList = new List<RequisitionDetail>();
         foreach (RaisedItem k in cartitem)
         {
@@ -74,6 +74,7 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
         Response.Redirect("ViewRequisitionHistory.aspx");
 
         Msg.Text = "Success!";
+
     }
 
     protected void Search_Click(object sender, EventArgs e)

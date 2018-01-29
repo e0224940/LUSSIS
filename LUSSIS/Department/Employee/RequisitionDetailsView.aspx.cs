@@ -8,45 +8,53 @@ using System.Web.UI.WebControls;
 
 public partial class Department_Employee_RequisitionDetailsView : System.Web.UI.Page
 {
-    //static List<Requisition> requsition;
+  
     static List<Detail> reqhistory;
-    //static List<RequisitionDetail> reqDetail;
+    static int reqNo;
 
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        
         int empNo = Profile.EmpNo;
-        
+        string ss = Request.QueryString["ReqNo"];
+        reqNo = int.Parse(ss);
+        ReqId.Text = ss;
         if (!IsPostBack)
         {
-           
+            
             string empName = EmployeeController.GetName(empNo);
             empNameshow.Text = empName;
-
-            string ss = Request.QueryString["ReqNo"];
-            int reqNo = int.Parse(ss);
-            ReqId.Text = ss; 
-            reqhistory = new List<Detail>();
-            List<RequisitionDetail> reqHistory = EmployeeController.ViewRequisitionDetail(reqNo);
-            foreach(RequisitionDetail r in reqHistory)
-            {
-                Detail d = new Detail();
-                
-                d.itemNo = r.ItemNo;
-                d.reqNo = r.ReqNo;
-                d.quantity = r.Qty;
-                d.description = r.StationeryItem.Description;
-                reqhistory.Add(d);
-            }
-            GridViewForDetail.DataSource = reqhistory;
-            GridViewForDetail.DataBind();
+            BindGrid();
         }
+           
     }
+
+
+    private void BindGrid()
+    {
+        reqhistory = new List<Detail>();
+        List<RequisitionDetail> reqHistory = EmployeeController.ViewRequisitionDetail(reqNo);
+        foreach (RequisitionDetail r in reqHistory)
+        {
+            Detail d = new Detail();
+
+            d.itemNo = r.ItemNo;
+            d.reqNo = r.ReqNo;
+            d.quantity = r.Qty;
+            d.description = r.StationeryItem.Description;
+            reqhistory.Add(d);
+        }
+        GridViewForDetail.DataSource = reqhistory;
+        GridViewForDetail.DataBind();
+    
+}
+
     protected void cancel_Click(object sender, EventArgs e)
     {
         Response.Redirect("ViewRequisitionHistory.aspx");
     }
+
+   
 
     protected void detailGrid_Delete(object sender, GridViewDeleteEventArgs e)
     {
@@ -90,6 +98,27 @@ public partial class Department_Employee_RequisitionDetailsView : System.Web.UI.
     protected void detailGrid_Edit(object sender, GridViewEditEventArgs e)
     {
         GridViewForDetail.EditIndex = e.NewEditIndex;
-        GridViewForDetail.DataBind();
+        BindGrid();
     }
+
+    protected void OnRowUpdating(object sender, GridViewUpdateEventArgs e)
+    {
+
+        GridViewRow row = GridViewForDetail.Rows[e.RowIndex];
+        //string itemNo = GridViewForDetail.DataKeys[e.RowIndex].Values[0].ToString();
+        string itemNo = (row.FindControl("ItemNO") as Label).Text;
+        int qty = Int32.Parse((row.FindControl("TextBox2") as TextBox).Text);
+
+        EmployeeController.UpdateItem(reqNo, itemNo, qty);
+        GridViewForDetail.EditIndex = -1;
+        BindGrid();
+    }
+
+    protected void OnRowCancelingEdit(object sender, EventArgs e)
+    {
+        GridViewForDetail.EditIndex = -1;
+        BindGrid();
+    }
+
+
 }
