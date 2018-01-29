@@ -74,6 +74,7 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
         Response.Redirect("ViewRequisitionHistory.aspx");
 
         Msg.Text = "Success!";
+
     }
 
     protected void Search_Click(object sender, EventArgs e)
