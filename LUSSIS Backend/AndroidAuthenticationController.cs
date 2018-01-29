@@ -106,7 +106,7 @@ namespace LUSSIS_Backend
                 // Retrieve the employee
                 Employee employee = context.Employees.Where(emp => emp.SessionNo == sessionID).FirstOrDefault();
 
-                result = RoleController.getRolesOfEmployee(context, employee.EmpNo);
+                result = RoleController.identifyRolesOfEmployee(context, employee.EmpNo);
             }
 
             return result;

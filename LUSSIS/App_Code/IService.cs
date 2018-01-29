@@ -201,3 +201,19 @@ public class WCFRequisition
     public String Remarks;
 }
 
+public class WCFRetrieval
+{
+    public String RetrievalNo;
+    public String Date;
+}
+
+public class WCFRetrievalDetail
+{
+    public String RetrievalNo;
+    public String DeptCode;
+    public String ItemNo;
+    public String Needed;
+    public String BacklogQty;
+    public String Actual;
+}
+
