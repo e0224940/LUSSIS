@@ -60,6 +60,36 @@ public class Service : IService
         return result;
     }
 
+    public WCFDepartment[] GetAllDepartments(int sessionID)
+    {
+        List<WCFDepartment> result = new List<WCFDepartment>();
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            List<Department> items = AndroidController.GetAllDepartments();
+
+            if (items != null)
+            {
+                foreach (var item in items)
+                {
+                    result.Add(new WCFDepartment()
+                    {
+                        CollectionPointNo = item.CollectionPointNo ?? -1,
+                        ContactName = item.ContactName,
+                        DeptCode = item.DeptCode,
+                        DeptName = item.DeptName,
+                        DeputyEmpNo = item.DeputyEmpNo ?? -1,
+                        FaxNo = item.FaxNo.ToString(),
+                        HeadEmpNo = item.HeadEmpNo ?? -1,
+                        PhoneNo = item.PhoneNo.ToString(),
+                        RepEmpNo = item.RepEmpNo ?? -1
+                    });
+                }
+            }
+        }
+        return result.ToArray();
+    }
+
     public WCFSessionID AuthenticateUser(String username, String password)
     {
         ProfileCommon loginProfile;
@@ -340,6 +370,28 @@ public class Service : IService
                 Status = addRequisition.Status,
                 Remarks = addRequisition.Remarks
 };
+
+            result = (AndroidController.AddRequisition(requisition) >= 0);
+        }
+
+        return result;
+    }
+
+    public int AddRequisitionAndGetReqNo(int sessionID, WCFRequisition addRequisition)
+    {
+        int result = -1;
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            Requisition requisition = new Requisition()
+            {
+                ReqNo = addRequisition.ReqNo,
+                DateIssued = Convert.ToDateTime(addRequisition.DateIssued),
+                ApprovedBy = addRequisition.ApprovedBy,
+                DateReviewed = Convert.ToDateTime(addRequisition.DateReviewed),
+                Status = addRequisition.Status,
+                Remarks = addRequisition.Remarks
+            };
 
             result = AndroidController.AddRequisition(requisition);
         }
