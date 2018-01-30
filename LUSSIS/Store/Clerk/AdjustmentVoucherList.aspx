@@ -22,7 +22,7 @@
                 <Columns>
 
                     <asp:BoundField DataField="AVNo" HeaderText="AV#" SortExpression="AVNo" />
-                    <asp:BoundField DataField="DateIssued" HeaderText="Date Issued" SortExpression="DateIssued" />
+                    <asp:BoundField DataField="DateIssued" DataFormatString="{0:dd MMM yyyy}" HeaderText="Date Issued" SortExpression="DateIssued" />
                     <asp:BoundField DataField="ApproveEmpName" HeaderText="Approver" SortExpression="ApproveEmpName" />
                     <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
 

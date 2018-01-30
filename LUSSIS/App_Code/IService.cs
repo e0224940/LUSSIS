@@ -45,6 +45,10 @@ public interface IService
     WCFDepartment GetDepartment(int sessionID, String deptCode);
 
     [OperationContract]
+    [WebInvoke(UriTemplate = "/DeptListAll", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    WCFDepartment[] GetAllDepartments(int sessionID);
+
+    [OperationContract]
     [WebInvoke(UriTemplate = "/LatestDisbursement", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     WCFDisbursement GetCurrentDisbursementForDepartment(int sessionID, String deptCode);
 
@@ -89,8 +93,12 @@ public interface IService
     bool AddRequisition(int sessionID, WCFRequisition addedRequisition);
 
     [OperationContract]
+    [WebInvoke(UriTemplate = "/AddRequisitionAndGetReqNo", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    int AddRequisitionAndGetReqNo(int sessionID);
+
+    [OperationContract]
     [WebInvoke(UriTemplate = "/PendingRequisitions", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-    WCFRequisition[] GetPendingRequisitions(int sessionID, string empNo);
+    WCFRequisition[] GetPendingRequisitions(int sessionID, string sessionEmpNo);
 
     [OperationContract]
     [WebInvoke(UriTemplate = "/GetRequisitionById", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
@@ -103,12 +111,27 @@ public interface IService
     [OperationContract]
     [WebInvoke(UriTemplate = "/RemoveRequisition", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     bool RemoveRequisition(int sessionID, WCFRequisition removedRequisition);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/RequisitionDetails", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    WCFRequisitionDetail[] GetRequisitionDetails(int sessionID, String ReqNo);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/LatestRetrieval", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    WCFRetrieval GetLatestRetrieval(int sessionID);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/RetrievalDetails", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    WCFRetrievalDetail[] GetRetrievalDetails(int sessionID, string retrievalNo);
+
+
 }
 
 public class WCFDisbursementDetail
 {
     public String DisbursementNo;
     public String ItemNo;
+    public String Description;
     public String Needed;
     public String Promised;
     public String Received;
@@ -170,18 +193,35 @@ public class WCFDepartment
 public class WCFRequisitionDetail
 {
     public int ReqNo;
-    public string ItemNo;
+    public String ItemNo;
+    public String Description;
     public int Qty;
 }
 
 public class WCFRequisition
 {
-    public int ReqNo;
-    public int IssuedBy;
+    public String ReqNo;
+    public String IssuedBy;
     public String DateIssued;
-    public int ApprovedBy;
+    public String ApprovedBy;
     public String DateReviewed;
     public String Status;
     public String Remarks;
+}
+
+public class WCFRetrieval
+{
+    public String RetrievalNo;
+    public String Date;
+}
+
+public class WCFRetrievalDetail
+{
+    public int RetrievalNo;
+    public String DeptCode;
+    public String ItemNo;
+    public int Needed;
+    public int BacklogQty;
+    public int Actual;
 }
 

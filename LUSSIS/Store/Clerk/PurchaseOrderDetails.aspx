@@ -21,7 +21,7 @@
                 Supplier: <%= pO.Supplier.SupplierName %>
             </div>
             <div class="col-xs-3">
-                Date Issued: <%= pO.DateIssued %>
+                Date Issued: <%= pO.DateIssued.Value.ToString("dd MMM yyyy") %>
             </div>
             <div class="col-xs-3">
                 Status: <%= pO.Status %>

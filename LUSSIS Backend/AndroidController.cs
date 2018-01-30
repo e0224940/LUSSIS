@@ -30,6 +30,12 @@ namespace LUSSIS_Backend
             return context.Departments.Where(dept => dept.DeptCode.Equals(deptCode)).FirstOrDefault();
         }
 
+        public static List<Department> GetAllDepartments()
+        {
+            LussisEntities context = new LussisEntities();
+            return context.Departments.ToList();
+        }
+
         public static Disbursement GetCurrentDisbursementForDepartment(String deptCode)
         {
             // TODO : IS IT ASCENDING OR DESCENDING ORDER
@@ -212,21 +218,21 @@ namespace LUSSIS_Backend
             return result;
         }
 
-        public static bool AddRequisition(Requisition requisition)
+        public static int AddRequisition(Requisition requisition)
         {
-            bool result = false;
+            int result = -1;
             try
             {
                 using (LussisEntities context = new LussisEntities())
                 {
                     context.Requisitions.Add(requisition);
                     context.SaveChanges();
-                    result = true;
+                    result = requisition.ReqNo;
                 }
             }
             catch (Exception)
             {
-                result = false;
+                result = -1;
             }
 
             return result;
@@ -260,13 +266,12 @@ namespace LUSSIS_Backend
 
         public static Requisition GetRequisitionById(int reqNo)
         {
-            Requisition req;
+            Requisition req = null;
             using (LussisEntities context = new LussisEntities())
             {
-                req = context.Requisitions.Where(x => x.ReqNo.Equals(reqNo)).First();
+                req = context.Requisitions.Where(x => x.ReqNo.Equals(reqNo)).FirstOrDefault();
+                return req;
             }
-
-            return req;
         }
 
         public static bool UpdateRequisition(Requisition requisition)
@@ -318,6 +323,60 @@ namespace LUSSIS_Backend
 
             return result;
 
+        }
+
+        public static List<RequisitionDetail> GetRequisitionDetailsOf(string reqNo)
+        {
+            List<RequisitionDetail> result = null;
+            try
+            {
+                using (LussisEntities context = new LussisEntities())
+                {
+                    result = context.RequisitionDetails.Where(req => req.ReqNo.Equals(reqNo)).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                result = null;
+            }
+
+            return result;
+        }
+
+        public static Retrieval GetLatestRetrieval()
+        {
+            Retrieval result = null;
+            try
+            {
+                using (LussisEntities context = new LussisEntities())
+                {
+                    result = context.Retrievals.Last();
+                }
+            }
+            catch (Exception)
+            {
+                result = null;
+            }
+
+            return result;
+        }
+
+        public static List<RetrievalDetail> GetRetrievalDetails(string retrievalNo)
+        {
+            List<RetrievalDetail> result = null;
+            try
+            {
+                using (LussisEntities context = new LussisEntities())
+                {
+                    result = context.RetrievalDetails.Where(ret => ret.RetrievalNo.Equals(retrievalNo)).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                result = null;
+            }
+
+            return result;
         }
     }
 }

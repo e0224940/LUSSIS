@@ -18,7 +18,7 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         int empNo = Profile.EmpNo;
-        date.Text = DateTime.Today.ToString("d");
+        date.Text = DateTime.Today.ToString("dd MMM yyyy");
         if (!IsPostBack)
         {
 
@@ -40,8 +40,7 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
         RaisedItem cart = new RaisedItem();
         cart.ItemNo = row.Cells[0].Text;
         cart.description = row.Cells[1].Text;
-        if ((row.Cells[2].FindControl("Quantity") as TextBox).Text.ToString() == "" || Int32.Parse((row.Cells[2].FindControl("Quantity") as TextBox).Text) <= 0
-            )
+        if ((row.Cells[2].FindControl("Quantity") as TextBox).Text.ToString() == "" || Int32.Parse((row.Cells[2].FindControl("Quantity") as TextBox).Text) <= 0)
         {
             Msg.Text = "The input number has to be greater than 0.";
         }
@@ -61,7 +60,7 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
         cartitem = (List<RaisedItem>)Session["session"];
         int isissueBy = Profile.EmpNo;
         dateIssue = DateTime.Today;
-        string status = "Not Approved yet.";
+        string status = "Approved";
         List<RequisitionDetail> detailList = new List<RequisitionDetail>();
         foreach (RaisedItem k in cartitem)
         {
@@ -75,6 +74,7 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
         Response.Redirect("ViewRequisitionHistory.aspx");
 
         Msg.Text = "Success!";
+
     }
 
     protected void Search_Click(object sender, EventArgs e)

@@ -4,6 +4,10 @@
 </asp:Content>
 
 <asp:Content ID="ContentBody" ContentPlaceHolderID="body" runat="server">
+<div class="form-group">
+<%Response.Write(Profile.EmpNo);  %>        
+</div>
+
     <div class="form-group">
         <asp:TextBox CssClass="form-control" ID="OldPassword" runat="server" placeholder="Old Password"/>
         <asp:RequiredFieldValidator runat="server" ControlToValidate="OldPassword" ErrorMessage="Old Password Required" />

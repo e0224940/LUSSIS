@@ -36,9 +36,9 @@
                     <asp:Label ID="LabelReqNo" runat="server" Text='<%# Bind("ReqNo") %>' />
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Date Issued">
+            <asp:TemplateField HeaderText="Date Issued" >
                 <ItemTemplate>
-                    <asp:Label ID="LabelDateIssued" runat="server" Text='<%# Bind("DateIssued") %>' />
+                    <asp:Label ID="LabelDateIssued" runat="server" Text='<%# Eval("DateIssued", "{0:dd MMM yyyy}") %>' />
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Employee">

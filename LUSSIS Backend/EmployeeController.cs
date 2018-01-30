@@ -117,18 +117,31 @@ namespace LUSSIS_Backend
 
         public static void DeleteForDetail(int requisitionNo, string item)
         {
-            LussisEntities entity = new LussisEntities();
-            //RequisitionDetail rr = new RequisitionDetail();
-            //RequisitionDetail rd = entity.RequisitionDetails.Where(p => p.ItemNo == item).FirstOrDefault<RequisitionDetail>();
-           
-            RequisitionDetail rr = entity.RequisitionDetails.Where(u => u.ReqNo == requisitionNo && u.ItemNo.Equals(item)).FirstOrDefault<RequisitionDetail>();
-           // RequisitionDetail req = entity.RequisitionDetails.Where(p => p.ItemNo.Equals(item)).FirstOrDefault<RequisitionDetail>();
+            LussisEntities entity = new LussisEntities();    
+            RequisitionDetail rr = entity.RequisitionDetails
+                .Where(u => u.ReqNo == requisitionNo && u.ItemNo.Equals(item))
+                .FirstOrDefault();
+          
             entity.RequisitionDetails.Remove(rr);
             entity.SaveChanges();
         }
 
+        //Update data for detail page
+        public static void UpdateItem(int requisitionNo, string itemNo,int qty)
+        {
+            LussisEntities entity = new LussisEntities();
+            //RequisitionDetail rrdd = new RequisitionDetail();
+            //rrdd = entity.RequisitionDetails.Where(u => u.ItemNo.Equals(itemNo)).FirstOrDefault();
+            RequisitionDetail rrdd = entity.RequisitionDetails
+               .Where(u => u.ReqNo == requisitionNo && u.ItemNo.Equals(itemNo))
+               .FirstOrDefault();
 
-        
+            rrdd.Qty = qty;
+            entity.SaveChanges();
+        }
+
+     
+
     }
 }
 
