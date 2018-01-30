@@ -63,22 +63,22 @@ namespace LUSSIS_Backend
             {
                 var items = context.StationeryCatalogues.ToList();
 
-                if(!String.IsNullOrEmpty(itemNo))
+                if(!String.IsNullOrWhiteSpace(itemNo))
                 {
                     items = items.Where(item => item.ItemNo.Contains(itemNo)).ToList();
                 }
 
-                if (!String.IsNullOrEmpty(category))
+                if (!String.IsNullOrWhiteSpace(category))
                 {
                     items = items.Where(item => item.Category.Contains(category)).ToList();
                 }
 
-                if (!String.IsNullOrEmpty(description))
+                if (!String.IsNullOrWhiteSpace(description))
                 {
                     items = items.Where(item => item.Description.Contains(description)).ToList();
                 }
 
-                if (!String.IsNullOrEmpty(bin))
+                if (!String.IsNullOrWhiteSpace(bin))
                 {
                     items = items.Where(item => item.Bin.Contains(bin)).ToList();
                 }
