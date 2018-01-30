@@ -23,5 +23,8 @@
                 }
             %>
         </div>
+            <div style="float: none">
+        <asp:Button ID="view" runat="server" Text="View History Page" OnClick="view_Click"/>
+                </div>
 </div>
 </asp:Content>
