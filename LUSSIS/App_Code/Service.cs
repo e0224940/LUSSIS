@@ -463,10 +463,11 @@ public class Service : IService
             Requisition requisition = new Requisition()
             {
                 ReqNo = Convert.ToInt32(updatedRequisition.ReqNo),
+                IssuedBy = Convert.ToInt32(updatedRequisition.IssuedBy),
                 DateIssued = Convert.ToDateTime(updatedRequisition.DateIssued),
                 ApprovedBy = Convert.ToInt32(updatedRequisition.ApprovedBy),
                 Status = updatedRequisition.Status,
-                Remarks = updatedRequisition.Remarks
+                Remarks = updatedRequisition.Remarks,
             };
 
             if (updatedRequisition.Status.Equals("Approved"))
