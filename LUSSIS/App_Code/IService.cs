@@ -124,7 +124,9 @@ public interface IService
     [WebInvoke(UriTemplate = "/RetrievalDetails", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     WCFRetrievalDetail[] GetRetrievalDetails(int sessionID, string retrievalNo);
 
-
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/sendEmail", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    bool SendEmail(int sessionID, String email, String subject, String message);
 }
 
 public class WCFDisbursementDetail

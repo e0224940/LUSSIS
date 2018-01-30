@@ -1,4 +1,5 @@
-﻿using LUSSIS_Backend;
+﻿using Email_Backend;
+using LUSSIS_Backend;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -576,5 +577,17 @@ public class Service : IService
         }
 
         return result.ToArray();
+    }
+
+    public bool SendEmail(int sessionID, String email, String subject, String message)
+    {
+        bool result = false;
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            result = EmailBackend.sendEmailStep(email, subject, message);
+        }
+
+        return result;
     }
 }
