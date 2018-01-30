@@ -170,8 +170,7 @@ namespace LUSSIS_Backend
                 LussisEntities context = new LussisEntities();
                 RequisitionDetail requisitionDetail = context.RequisitionDetails
                     .Where(req => req.ReqNo.Equals(removeRequisitionDetail.ReqNo)
-                    && req.ItemNo.Equals(removeRequisitionDetail.ItemNo)
-                    && req.Qty.Equals(removeRequisitionDetail.Qty)).FirstOrDefault();
+                    && req.ItemNo.Equals(removeRequisitionDetail.ItemNo)).FirstOrDefault();
 
                 if (requisitionDetail != null)
                 {
