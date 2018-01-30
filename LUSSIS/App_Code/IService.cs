@@ -127,6 +127,10 @@ public interface IService
     [OperationContract]
     [WebInvoke(UriTemplate = "/sendEmail", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     bool SendEmail(int sessionID, String email, String subject, String message);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/CreateAdjustmentVoucher", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    bool CreateAdjustmentVoucher(int sessionID, String ItemNo, int Qty, String Reason);
 }
 
 public class WCFDisbursementDetail

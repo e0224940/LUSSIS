@@ -465,10 +465,18 @@ public class Service : IService
                 ReqNo = Convert.ToInt32(updatedRequisition.ReqNo),
                 DateIssued = Convert.ToDateTime(updatedRequisition.DateIssued),
                 ApprovedBy = Convert.ToInt32(updatedRequisition.ApprovedBy),
-                DateReviewed = Convert.ToDateTime(updatedRequisition.DateReviewed),
                 Status = updatedRequisition.Status,
                 Remarks = updatedRequisition.Remarks
             };
+
+            if (updatedRequisition.Status.Equals("Approved"))
+            {
+                requisition.DateReviewed = DateTime.Today;
+            }
+            else
+            {
+                requisition.DateReviewed = null;
+            }
 
             result = AndroidController.UpdateRequisition(requisition);
         }
@@ -537,7 +545,7 @@ public class Service : IService
 
     public WCFRetrieval GetLatestRetrieval(int sessionID)
     {
-         WCFRetrieval result = null;
+        WCFRetrieval result = null;
 
         if (AndroidAuthenticationController.IsValidSessionId(sessionID))
         {
@@ -589,6 +597,18 @@ public class Service : IService
         if (AndroidAuthenticationController.IsValidSessionId(sessionID))
         {
             result = EmailBackend.sendEmailStep(email, subject, message);
+        }
+
+        return result;
+    }
+
+    public bool CreateAdjustmentVoucher(int sessionID, string ItemNo, int Qty, string Reason)
+    {
+        bool result = false;
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            result = AndroidController.CreateAdjustmentVoucher(sessionID, ItemNo, Qty, Reason);
         }
 
         return result;

@@ -63,7 +63,7 @@ namespace LUSSIS_Backend
             {
                 var items = context.StationeryCatalogues.ToList();
 
-                if(!String.IsNullOrWhiteSpace(itemNo))
+                if (!String.IsNullOrWhiteSpace(itemNo))
                 {
                     items = items.Where(item => item.ItemNo.Contains(itemNo)).ToList();
                 }
@@ -270,7 +270,7 @@ namespace LUSSIS_Backend
                     req.EmployeeWhoIssued.DeptCode.Equals(departmentCode)
                     ).ToList();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 // TODO : Put a decent handler here
                 list_result.Add(new Requisition()
@@ -278,7 +278,7 @@ namespace LUSSIS_Backend
                     Remarks = e.Message
                 });
             }
-            
+
             return list_result;
         }
 
@@ -390,6 +390,48 @@ namespace LUSSIS_Backend
             catch (Exception)
             {
                 result = null;
+            }
+
+            return result;
+        }
+
+        public static bool CreateAdjustmentVoucher(int sessionID, string itemNo, int qty, string reason)
+        {
+            bool result = false;
+
+            try
+            {
+                LussisEntities context = new LussisEntities();
+
+                Employee employee = AndroidAuthenticationController.GetDetailsOfEmployee(sessionID);
+                StationeryCatalogue itemToChange = context.StationeryCatalogues.Where(item => item.ItemNo.Equals(itemNo)).FirstOrDefault();
+
+                // Create new Adjustment Voucher
+                AdjustmentVoucher newVoucher = new AdjustmentVoucher()
+                {
+                    DateIssued = DateTime.Today,
+                    IssueEmpNo = employee.EmpNo,
+                    Status = "Pending"
+                };
+                context.AdjustmentVouchers.Add(newVoucher);
+                context.SaveChanges();
+
+                // Add Voucher Detail
+                AdjustmentVoucherDetail newAdjustment = new AdjustmentVoucherDetail()
+                {
+                    AvNo = newVoucher.AvNo,
+                    ItemNo = itemNo,
+                    Qty = itemToChange.CurrentQty - qty,
+                    Reason = reason
+                };
+                context.AdjustmentVoucherDetails.Add(newAdjustment);
+                context.SaveChanges();
+
+                result = true;
+            }
+            catch (Exception)
+            {
+                result = false;
             }
 
             return result;
