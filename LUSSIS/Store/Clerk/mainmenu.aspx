@@ -9,6 +9,6 @@
         <li><a href="<%= Page.ResolveUrl("~/Store/Clerk/OrderForm.aspx") %>">Order Form</a></li>
         <li><a href="<%= Page.ResolveUrl("~/Store/Clerk/PurchaseOrderList.aspx") %>">Purchase Orders</a></li>
         <li><a href="<%= Page.ResolveUrl("~/Store/Clerk/Retrieval.aspx") %>">Retrievals</a></li>
-        <li><a href="<%= Page.ResolveUrl("~/Store/Clerk/Retrieval.aspx") %>">Stockcards</a></li>
+        <li><a href="<%= Page.ResolveUrl("~/Store/Clerk/StockList.aspx") %>">Stockcards</a></li>
     </ul>
 </li>

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LUSSIS_Backend.model;
-using LUSSIS_Backend.dao;
 
 namespace LUSSIS_Backend.controller
 {
