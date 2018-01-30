@@ -22,6 +22,18 @@
                 <div>
 
                     <div class="row">
+                        <% if (Session["Error"] != null)
+                            { %>
+                        <div class="alert alert-danger">
+                            <%= (string)Session["Error"] %>
+                        </div>
+                        <% 
+                                Session.Remove("Error");
+                            }
+                        %>
+                    </div>
+
+                    <div class="row">
                         <table class="table">
                             <thead>
                                 <tr>
@@ -123,7 +135,7 @@
             { %>
 
         <div class="row">
-            <div class="alert alert-danger">
+            <div class="alert alert-success">
                 Order Sent for Approval.
             </div>
         </div>
