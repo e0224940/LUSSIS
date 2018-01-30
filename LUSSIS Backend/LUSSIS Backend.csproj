@@ -59,6 +59,7 @@
     <Compile Include="controller\OrderController.cs" />
     <Compile Include="controller\POController.cs" />
     <Compile Include="controller\RetrievalController.cs" />
+    <Compile Include="controller\StockController.cs" />
     <Compile Include="dao\StoreClerkDao.cs" />
     <Compile Include="CrystalReportController.cs" />
     <Compile Include="DataSet1.Designer.cs">
