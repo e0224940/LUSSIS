@@ -10,11 +10,8 @@ using LUSSIS_Backend.controller;
 
 public partial class Store_Clerk_DisbursementDetails : System.Web.UI.Page
 {
-    // ATTRIBUTES
     protected static int dNo;
     protected Disbursement d;
-
-    // EVENTS
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -96,9 +93,12 @@ public partial class Store_Clerk_DisbursementDetails : System.Web.UI.Page
         {
             Session["Error"] = "An Error Has Occured: " + exception.Message;
         }
-    }
 
-    // METHODS
+        if (Session["DProcessed"] != null)
+        {
+            Response.Redirect("DisbursementList.aspx");
+        }
+    }
 
     private void BindGrid()
     {

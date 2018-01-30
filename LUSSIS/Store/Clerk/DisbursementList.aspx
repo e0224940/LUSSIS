@@ -4,10 +4,22 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
-
     <div class="container">
+
         <div class="row">
             <h1>Pending Disbursements</h1>
+        </div>
+
+        <div class="row">
+            <% if (Session["DProcessed"] != null)
+                { %>
+            <div class="alert alert-success">
+                Disbursement #<%= Session["DProcessed"] %> Delievered Successfully.
+            </div>
+            <% 
+                    Session.Remove("DProcessed");
+                }
+            %>
         </div>
 
         <div class="row">
@@ -22,7 +34,7 @@
 
                     <asp:BoundField DataField="DisbursementNo" HeaderText="Disbursement #" SortExpression="DisbursementNo" />
                     <asp:BoundField DataField="DepartmentName" HeaderText="Department" SortExpression="DepartmentName" />
-                    <asp:BoundField DataField="Date" DataFormatString="{0:dd MMM yyyy}" HeaderText="Collection Date" SortExpression="Dates" />
+                    <asp:BoundField DataField="Date" HeaderText="Collection Date" SortExpression="Dates" />
                     <asp:BoundField DataField="CollectionPoint" HeaderText="Collection Point" SortExpression="CollectionPoint" />
                     <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
 
@@ -37,6 +49,5 @@
             </asp:GridView>
         </div>
     </div>
-
 </asp:Content>
 

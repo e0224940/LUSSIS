@@ -4,11 +4,22 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
-
     <div class="container">
 
         <div class="row">
             <h1>Details of Disbursement #<%= Session["DNo"] %></h1>
+        </div>
+
+        <div class="row">
+            <% if (Session["Error"] != null)
+                { %>
+            <div class="alert alert-danger">
+                <%= (string) Session["Error"] %>
+            </div>
+            <% 
+                    Session.Remove("Error");
+                }
+            %>
         </div>
 
         <%if (Session["DNo"] != null)
@@ -19,7 +30,7 @@
                 Department: <%= d.Department.DeptName %>
             </div>
             <div class="col-xs-4">
-                Collection Date: <%= d.DisbursementDate.Value.ToString("dd MMM yyyy") %>
+                Collection Date: <%= d.DisbursementDate %>
             </div>
             <div class="col-xs-4">
                 Collection Point: <%= d.CollectionPoint.CollectionPointDetails %>
@@ -92,36 +103,11 @@
             <asp:Button ID="SubmitButton" CssClass="btn btn-primary" runat="server" Text="Confirm Delivery" OnClick="SubmitButton_Click" />
         </div>
 
-        <div class="row">
-            <% if (Session["Error"] != null)
-                { %>
-            <div class="alert alert-danger">
-                <%= (string) Session["Error"] %>
-            </div>
-            <% 
-                    Session.Remove("Error");
-                }
-            %>
-        </div>
-
         <% } %>
-
-        <div class="row">
-            <% if (Session["DProcessed"] != null)
-                { %>
-            <div class="alert alert-danger">
-                Disbursement #<%= (int)Session["DProcessed"] %> Completed Successfully
-            </div>
-            <% 
-                    Session.Remove("DProcessed");
-                }
-            %>
-        </div>
 
         <div class="row">
             <a href="DisbursementList.aspx">Back to Disbursement List Page</a>
         </div>
     </div>
-
 </asp:Content>
 
