@@ -61,14 +61,29 @@ namespace LUSSIS_Backend
 
             try
             {
-                return context.StationeryCatalogues
-                    .Where(item =>
-                       item.ItemNo.Contains(itemNo)
-                       || item.Category.Contains(category)
-                       || item.Description.Contains(description)
-                       || item.Bin.Contains(bin)
-                    )
-                    .ToList();
+                var items = context.StationeryCatalogues.ToList();
+
+                if(!String.IsNullOrEmpty(itemNo))
+                {
+                    items = items.Where(item => item.ItemNo.Contains(itemNo)).ToList();
+                }
+
+                if (!String.IsNullOrEmpty(category))
+                {
+                    items = items.Where(item => item.Category.Contains(category)).ToList();
+                }
+
+                if (!String.IsNullOrEmpty(description))
+                {
+                    items = items.Where(item => item.Description.Contains(description)).ToList();
+                }
+
+                if (!String.IsNullOrEmpty(bin))
+                {
+                    items = items.Where(item => item.Bin.Contains(bin)).ToList();
+                }
+
+                return items;
             }
             catch (Exception e)
             {
