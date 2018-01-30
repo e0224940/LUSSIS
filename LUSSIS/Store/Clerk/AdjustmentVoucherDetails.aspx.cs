@@ -122,6 +122,8 @@ public partial class Store_Clerk_AdjustmentVoucherDetails : System.Web.UI.Page
                 ItemNo = aVD.ItemNo,
                 ItemDescription = aVD.StationeryCatalogue.Description,
                 Qty = aVD.Qty,
+                UnitPrice = AVController.GetUnitPrice(aVD.ItemNo, aVD.StationeryCatalogue.Supplier1),
+                AdjustmentAmount = AVController.GetUnitPrice(aVD.ItemNo, aVD.StationeryCatalogue.Supplier1) * aVD.Qty,
                 Reason = aVD.Reason
             });
 

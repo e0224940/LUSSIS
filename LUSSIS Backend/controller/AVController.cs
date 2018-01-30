@@ -28,6 +28,12 @@ namespace LUSSIS_Backend.controller
             return context.AdjustmentVouchers.Where(x => x.AvNo == aVNo).FirstOrDefault();
         }
 
+        public static decimal? GetUnitPrice(string itemNo, string supplier1)
+        {
+            LussisEntities context = new LussisEntities();
+            return context.SupplyTenders.Where(x => x.ItemNo.Equals(itemNo) && x.SupplierCode.Equals(supplier1)).FirstOrDefault().UnitPrice;
+        }
+
         public static void UpdateAVDetailQty(int aVNo, string itemNo, int qty, string reason)
         {
             LussisEntities context = new LussisEntities();

@@ -3,6 +3,7 @@
         <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
-        <li><a href="<%= Page.ResolveUrl("~/Store/Manager/Default.aspx") %>">Submenu1</a></li>
+        <li><a href="<%= Page.ResolveUrl("~/Store/Manager/StoreManagerCreateSupplier.aspx") %>">Create Supplier</a></li>
+        <li><a href="<%= Page.ResolveUrl("~/Store/Manager/StoreManagerUpdate.aspx") %>">Update Supplier</a></li>
     </ul>
 </li>

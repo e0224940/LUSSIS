@@ -1,14 +1,13 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="StoreManagerUpdate.aspx.cs" Inherits="Store_Manager_StoreManagerUpdate" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="StoreManagerUpdate.aspx.cs" Inherits="Store_Manager_StoreManagerUpdate" MasterPageFile="~/MasterPage.master"%>
 
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+</asp:Content>
 
+<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
+    
+    <form id="form1">
+        <div>
         <asp:Label ID="Label1" runat="server" Text="Supplier List"></asp:Label>
 
         </div>
@@ -41,7 +40,5 @@
         </div>
         <% Session.Remove("SupplierProcessed");
             }%>
-        <div>
     </form>
-</body>
-</html>
+</asp:Content>

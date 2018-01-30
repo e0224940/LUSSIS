@@ -10,7 +10,6 @@
             <h2>Details of AdjustmentVoucher #<%= Session["AVNo"] %>
                 <asp:Button runat="server" CommandArgument="Delete" ID="DeleteButton" CssClass="btn btn-danger" Text="Delete Voucher" OnClick="Button_Click" />
             </h2>
-
         </div>
 
         <div class="row">
@@ -18,8 +17,8 @@
                 Voucher#: <%= Session["AVNo"] %>
             </div>
             <div class="col-xs-4">
-                Date Issued: <%= aV.DateIssued.Value.ToString("dd MMM yyyy") %>
-            </div>  
+                Date Issued: <%= aV.DateIssued %>
+            </div>
             <div class="col-xs-4">
                 Status: <%= aV.Status %>
             </div>
@@ -51,8 +50,24 @@
                         </ItemTemplate>
                     </asp:TemplateField>
 
+                    <asp:TemplateField HeaderText="Unit Price">
+                        <ItemTemplate>
+                            <asp:Label ID="LabelUnitPrice" runat="server" Text='<%# Bind("UnitPrice") %>' />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
                     <asp:BoundField DataField="Qty" HeaderText="Qty Adjusted" SortExpression="Qty" />
+
+                    <asp:TemplateField HeaderText="AdjustmentAmount">
+                        <ItemTemplate>
+                            <asp:Label ID="AdjustmentAmount" runat="server" Text='<%# Bind("AdjustmentAmount") %>' />
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+
                     <asp:BoundField DataField="Reason" HeaderText="Reason" SortExpression="Reason" />
+
                     <asp:CommandField
                         HeaderText="Action"
                         ButtonType="Button"
@@ -62,18 +77,6 @@
                 </Columns>
                 <EmptyDataTemplate>No Items In This Adjustment Voucher</EmptyDataTemplate>
             </asp:GridView>
-        </div>
-
-        <div class="row">
-            <% if (Session["Error"] != null)
-                { %>
-            <div class="alert alert-danger">
-                An error has occured : <%= (string)Session["Error"] %>
-            </div>
-            <% 
-                    Session.Remove("Error");
-                }
-            %>
         </div>
 
         <div class="row">
