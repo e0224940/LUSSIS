@@ -593,4 +593,16 @@ public class Service : IService
 
         return result;
     }
+
+    public bool CreateAdjustmentVoucher(int sessionID, string ItemNo, int Qty, string Reason)
+    {
+        bool result = false;
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            result = AndroidController.CreateAdjustmentVoucher(sessionID, ItemNo, Qty, Reason);
+        }
+
+        return result;
+    }
 }
