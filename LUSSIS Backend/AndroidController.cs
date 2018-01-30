@@ -62,18 +62,18 @@ namespace LUSSIS_Backend
             try
             {
                 return context.StationeryCatalogues
-                    .Where( item =>
-                        item.ItemNo.Contains(itemNo)
-                        || item.Category.Contains(category)
-                        || item.Description.Contains(description)
-                        || item.Bin.Contains(bin)
+                    .Where(item =>
+                       item.ItemNo.Contains(itemNo)
+                       || item.Category.Contains(category)
+                       || item.Description.Contains(description)
+                       || item.Bin.Contains(bin)
                     )
                     .ToList();
             }
             catch (Exception e)
             {
                 List<StationeryCatalogue> errorList = new List<StationeryCatalogue>();
-                errorList.Add(new StationeryCatalogue() { Description = e.Message.Substring(0,50) });
+                errorList.Add(new StationeryCatalogue() { Description = e.Message.Substring(0, 50) });
                 return errorList;
             }
         }
@@ -108,7 +108,7 @@ namespace LUSSIS_Backend
                     && dis.ItemNo.Equals(updatedDisbursementDetail.ItemNo))
                     .FirstOrDefault();
 
-                if(disbursementDetail != null)
+                if (disbursementDetail != null)
                 {
                     disbursementDetail.Needed = updatedDisbursementDetail.Needed;
                     disbursementDetail.Promised = updatedDisbursementDetail.Promised;
@@ -117,8 +117,9 @@ namespace LUSSIS_Backend
                     context.SaveChanges();
 
                     result = true;
-                }                
-            }catch(Exception)
+                }
+            }
+            catch (Exception)
             {
                 result = false;
             }
@@ -150,8 +151,8 @@ namespace LUSSIS_Backend
                 context.RequisitionDetails.Add(requisitionDetail);
                 context.SaveChanges();
 
-                    result = true;
-                }
+                result = true;
+            }
 
             catch (Exception)
             {
@@ -252,9 +253,9 @@ namespace LUSSIS_Backend
 
                 foreach (Employee e in list_e)
                 {
-                    foreach(Requisition rr in list_r)
+                    foreach (Requisition rr in list_r)
                     {
-                        if(e.EmpNo.Equals(rr.IssuedBy) && rr.Status.Equals("Pending"))        //to tally with the rest of the code if its pending
+                        if (e.EmpNo.Equals(rr.IssuedBy) && rr.Status.Equals("Pending"))        //to tally with the rest of the code if its pending
                         {
                             list_result.Add(rr);
                         }
@@ -284,11 +285,11 @@ namespace LUSSIS_Backend
                 {
                     Requisition req = context.Requisitions.Where(x => x.ReqNo.Equals(requisition.ReqNo)).First();
 
-                    if (req!=null)
+                    if (req != null)
                     {
                         req.IssuedBy = requisition.IssuedBy;
                         req.DateIssued = requisition.DateIssued;
-                        req.ApprovedBy= requisition.ApprovedBy;
+                        req.ApprovedBy = requisition.ApprovedBy;
                         req.DateReviewed = requisition.DateReviewed;
                         req.Status = requisition.Status;
                         req.Remarks = requisition.Remarks;
@@ -325,15 +326,13 @@ namespace LUSSIS_Backend
 
         }
 
-        public static List<RequisitionDetail> GetRequisitionDetailsOf(string reqNo)
+        public static List<RequisitionDetail> GetRequisitionDetailsOf(int reqNo)
         {
-            List<RequisitionDetail> result = null;
+            List<RequisitionDetail> result = new List<RequisitionDetail>();
             try
             {
-                using (LussisEntities context = new LussisEntities())
-                {
-                    result = context.RequisitionDetails.Where(req => req.ReqNo.Equals(reqNo)).ToList();
-                }
+                LussisEntities context = new LussisEntities();
+                result = context.RequisitionDetails.Where(req => req.ReqNo.Equals(reqNo)).ToList();
             }
             catch (Exception)
             {

@@ -114,7 +114,7 @@ public interface IService
 
     [OperationContract]
     [WebInvoke(UriTemplate = "/RequisitionDetails", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-    WCFRequisitionDetail[] GetRequisitionDetails(int sessionID, String ReqNo);
+    WCFRequisitionDetail[] GetRequisitionDetails(int sessionID, int ReqNo);
 
     [OperationContract]
     [WebInvoke(UriTemplate = "/LatestRetrieval", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]

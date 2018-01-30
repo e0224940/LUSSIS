@@ -510,7 +510,7 @@ public class Service : IService
         return result;
     }
 
-    public WCFRequisitionDetail[] GetRequisitionDetails(int sessionID, string ReqNo)
+    public WCFRequisitionDetail[] GetRequisitionDetails(int sessionID, int ReqNo)
     {
         List<WCFRequisitionDetail> result = new List<WCFRequisitionDetail>();
 
