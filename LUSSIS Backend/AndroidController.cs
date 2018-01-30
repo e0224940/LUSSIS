@@ -298,8 +298,8 @@ namespace LUSSIS_Backend
 
             try
             {
-                using (LussisEntities context = new LussisEntities())
-                {
+                LussisEntities context = new LussisEntities();
+                
                     Requisition req = context.Requisitions.Where(x => x.ReqNo.Equals(requisition.ReqNo)).First();
 
                     if (req != null)
@@ -313,7 +313,7 @@ namespace LUSSIS_Backend
                     }
                     context.SaveChanges();
                     result = true;
-                }
+                
             }
             catch (Exception)
             {
