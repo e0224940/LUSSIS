@@ -11,8 +11,6 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
 {
     static List<StationeryCatalogue> itemList;
     static List<RaisedItem> cartitem;
-    //static List<RaisedItem> searchitem;
-
     DateTime dateIssue;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -21,7 +19,6 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
         date.Text = DateTime.Today.ToString("dd MMM yyyy");
         if (!IsPostBack)
         {
-
             string empName = EmployeeController.GetName(empNo);
             NameLB.Text = empName;
             StationeryGridView.Visible = true;
@@ -31,11 +28,15 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
             StationeryGridView.DataSource = EmployeeController.ViewItem();
             StationeryGridView.DataBind();
         }
+        else
+        {
+
+        }
     }
 
+    //Select the selected item
     protected void StationeryGridView_SelectedIndexChanged(object sender, EventArgs e)
-    {
-     
+    { 
         GridViewRow row = StationeryGridView.SelectedRow;
         RaisedItem cart = new RaisedItem();
         cart.ItemNo = row.Cells[0].Text;
@@ -52,15 +53,17 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
             Session["session"] = cartitem;
             Cart.DataSource = cartitem;
             Cart.DataBind();
+            Confirm.Visible = true;
         }
     }
 
+    //Create the requisition
     protected void Confirm_Click(object sender, EventArgs e)
     {
         cartitem = (List<RaisedItem>)Session["session"];
         int isissueBy = Profile.EmpNo;
         dateIssue = DateTime.Today;
-        string status = "Approved";
+        string status = "Pending";
         List<RequisitionDetail> detailList = new List<RequisitionDetail>();
         foreach (RaisedItem k in cartitem)
         {
@@ -69,27 +72,30 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
             rd.Qty = Convert.ToInt32(k.quantity);
             detailList.Add(rd);
         }
+        
         EmployeeController.RaisedRequisition(isissueBy, dateIssue, status, detailList);
-        Session.Abandon();
-        Response.Redirect("ViewRequisitionHistory.aspx");
-
+        Session["success"] = dateIssue;
+       
+        Response.Redirect("RaisedRequisitionSuccessPage.aspx");
+        Session.Remove("session");
         Msg.Text = "Success!";
-
     }
 
+    //Search the item 
     protected void Search_Click(object sender, EventArgs e)
-    {
-      
+    {  
             string val = SearchItemText.Text;
             StationeryGridView.DataSource = EmployeeController.SearchDes(val);
             StationeryGridView.DataBind();
     }
 
+    //Cancel the crate requisition
     protected void Cancel_Click(object sender, EventArgs e)
     {
         Response.Redirect("Default.aspx");
     }
 
+    //Delete the selected item
     protected void Cart_GridViewDelete(object sender, GridViewDeleteEventArgs e)
     {
         string ItemNo = Cart.DataKeys[e.RowIndex].Values[0].ToString();
@@ -101,12 +107,12 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
         
     }
 
+
+    //Cancel search button
     protected void CancelSearch_Click(object sender, EventArgs e)
     {
         if (IsPostBack)
         {
-            itemList = new List<StationeryCatalogue>();
-            cartitem = new List<RaisedItem>();
             StationeryGridView.DataSource = EmployeeController.ViewItem();
             StationeryGridView.DataBind();
             Session["session"] = cartitem;

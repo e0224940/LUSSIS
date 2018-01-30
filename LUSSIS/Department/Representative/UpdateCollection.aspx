@@ -14,7 +14,7 @@
     
     
     <asp:DropDownList ID="NewLocationDDL" runat="server" OnSelectedIndexChanged="ChooseLocation_DDList" AutoPostBack="true">
-        <asp:ListItem>Choose New Location</asp:ListItem>
+        <asp:ListItem Value="-1">Choose New Location</asp:ListItem>
         <asp:ListItem Value="0">Management Store</asp:ListItem>
         <asp:ListItem Value="1">Stationery Store - Administration Building</asp:ListItem>
         <asp:ListItem Value="2">Management School</asp:ListItem>
@@ -25,6 +25,9 @@
 
 
     </asp:DropDownList>
+
+    <br />
+    <asp:Label ID="Label4" runat="server" Text="" style="color:red"></asp:Label>
 
 
     <br />
@@ -37,6 +40,8 @@
     <br /><br />
     <asp:Button ID="confirm" runat="server" Text="Confirm" OnClick="confirm_Click" />
     
-    <asp:Button ID="cancel" runat="server" Text="Cancel" />
+    <asp:Button ID="cancel" runat="server" Text="Cancel" OnClick="cancel_Click" />
+
+    <asp:Label ID="Label5" runat="server" Text="" Visible="false"></asp:Label>
 
 </asp:Content>
