@@ -6,8 +6,10 @@
 <asp:Content ID="ContentBody" ContentPlaceHolderID="body" runat="server">
     <h1>Requisition History</h1>
     <asp:Label ID="label" runat="server" Text="Employee Name:"></asp:Label>
+    <b>
     <asp:Label ID="name" runat="server"></asp:Label>
-    <br />
+    </b>
+    <br /><br />
     <asp:GridView
         runat="server"
         ID="DetailGridView"
