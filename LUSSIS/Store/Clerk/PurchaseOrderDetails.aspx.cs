@@ -9,12 +9,8 @@ using LUSSIS_Backend.controller;
 
 public partial class Store_Clerk_PurchaseOrderDetails : System.Web.UI.Page
 {
-    // ATTRIBUTES
-
     protected int pONo;
     protected PurchaseOrder pO;
-
-    // EVENTS
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -28,11 +24,11 @@ public partial class Store_Clerk_PurchaseOrderDetails : System.Web.UI.Page
             else
             {
                 // Set DataGrid
+                pONo = (int)Session["PONo"];
+                pO = POController.GetPurchaseOrder(pONo);
                 BindGrid();
             }
         }
-
-        // Set Everytime
         pONo = (int)Session["PONo"];
         pO = POController.GetPurchaseOrder(pONo);
     }
@@ -101,8 +97,6 @@ public partial class Store_Clerk_PurchaseOrderDetails : System.Web.UI.Page
         BindGrid();
     }
 
-    // METHODS
-
     private void GoToPurchaseOrderListPage()
     {
         Response.Redirect("PurchaseOrderList.aspx");
@@ -111,7 +105,6 @@ public partial class Store_Clerk_PurchaseOrderDetails : System.Web.UI.Page
     private void BindGrid()
     {
         // Get PODetails
-        int pONo = (int)Session["PONo"];
         List<PurchaseOrderDetail> pODs = POController.GetPODs(pONo);
 
         // Set DataGrid
@@ -120,7 +113,9 @@ public partial class Store_Clerk_PurchaseOrderDetails : System.Web.UI.Page
             {
                 ItemNo = pOD.ItemNo,
                 ItemDescription = pOD.StationeryCatalogue.Description,
-                Qty = pOD.Qty
+                UnitPrice = POController.GetUnitPrice(pOD.ItemNo, pO.SupplierCode),
+                Qty = pOD.Qty,
+                SubTotal = POController.GetUnitPrice(pOD.ItemNo, pO.SupplierCode) * pOD.Qty
             });
 
         PODetailsGridView.DataBind();

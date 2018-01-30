@@ -10,7 +10,6 @@
             <h2>Details of Purchase Order #<%= Session["PONo"] %>
                 <asp:Button runat="server" CommandArgument="Delete" ID="DeleteButton" CssClass="btn btn-danger" Text="Delete Voucher" OnClick="Button_Click" />
             </h2>
-
         </div>
 
         <div class="row">
@@ -21,7 +20,7 @@
                 Supplier: <%= pO.Supplier.SupplierName %>
             </div>
             <div class="col-xs-3">
-                Date Issued: <%= pO.DateIssued.Value.ToString("dd MMM yyyy") %>
+                Date Issued: <%= pO.DateIssued %>
             </div>
             <div class="col-xs-3">
                 Status: <%= pO.Status %>
@@ -54,7 +53,20 @@
                         </ItemTemplate>
                     </asp:TemplateField>
 
+                    <asp:TemplateField HeaderText="Unit Price">
+                        <ItemTemplate>
+                            <asp:Label ID="LabelUnitPrice" runat="server" Text='<%# Bind("UnitPrice") %>' />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
                     <asp:BoundField DataField="Qty" HeaderText="Qty" SortExpression="Qty" />
+
+                    <asp:TemplateField HeaderText="SubTotal">
+                        <ItemTemplate>
+                            <asp:Label ID="LabelSubTotal" runat="server" Text='<%# Bind("SubTotal") %>' />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
                     <asp:CommandField
                         HeaderText="Action"
                         ButtonType="Button"
