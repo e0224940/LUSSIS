@@ -29,6 +29,9 @@
         <br />
         <br />
         <br />
+
+        <form id="form1"> </form>
+        <div class="form-group">
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="ItemNo" OnRowCommand="GridView1_RowCommand" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
             <Columns>
                 <asp:BoundField DataField="ItemNo" HeaderText="ItemNo" ReadOnly="True" SortExpression="ItemNo" />
@@ -42,7 +45,8 @@
                 <asp:ButtonField CommandName="Click" Text="Button"></asp:ButtonField>
             </Columns>
         </asp:GridView>
-       
+       </div>
+
         <br />
         <br />
         <br />
