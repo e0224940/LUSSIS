@@ -39,6 +39,7 @@ public partial class Store_Clerk_AdjustmentVoucherList : System.Web.UI.Page
             int aVNo = Int32.Parse(PendingAdjustmentVoucherGridView.Rows[e.RowIndex].Cells[0].Text);
             AVController.DeleteAV(aVNo);
             BindGrid();
+            Session["AVProcessed"] = aVNo;
         }
         catch (Exception exception)
         {
