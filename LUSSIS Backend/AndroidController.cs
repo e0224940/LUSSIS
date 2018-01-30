@@ -254,31 +254,31 @@ namespace LUSSIS_Backend
 
         }
 
-        public static List<Requisition> GetPendingRequisitions(string employeeCode)
+        public static List<Requisition> GetPendingRequisitions(int employeeCode)
         {
             List<Requisition> list_result = new List<Requisition>();
             LussisEntities context = new LussisEntities();
 
-            int empCode = Convert.ToInt32(employeeCode);
+            try
+            {
+                Employee e = context.Employees.Where(x => x.EmpNo.Equals(employeeCode)).FirstOrDefault();
+                Department d = e.Department;
+                string departmentCode = d.DeptCode;
 
-            Department d = context.Departments.Where(x => x.HeadEmpNo.Equals(empCode)).First();
-            string departmentCode = d.DeptCode;
-
-                //string departmentCode = context.Departments.Where(x => x.HeadEmpNo.Equals(empCode)).FirstOrDefault().DeptCode;
-                List<Employee> list_e = context.Employees.Where(x => x.DeptCode==departmentCode).ToList();
-                List<Requisition> list_r = context.Requisitions.ToList();
-
-
-                foreach (Employee e in list_e)
+                list_result = context.Requisitions.Where(
+                    req => req.Status.Equals("Pending") &&
+                    req.EmployeeWhoIssued.DeptCode.Equals(departmentCode)
+                    ).ToList();
+            }
+            catch(Exception e)
+            {
+                // TODO : Put a decent handler here
+                list_result.Add(new Requisition()
                 {
-                    foreach (Requisition rr in list_r)
-                    {
-                        if (rr.IssuedBy.Equals(e.EmpNo) && rr.Status.Equals("Pending"))        //to tally with the rest of the code if its pending
-                        {
-                            list_result.Add(rr);
-                        }
-                    }
-                }
+                    Remarks = e.Message
+                });
+            }
+            
             return list_result;
         }
 

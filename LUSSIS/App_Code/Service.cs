@@ -399,7 +399,7 @@ public class Service : IService
         return result;
     }
 
-    public List<WCFRequisition> GetPendingRequisitions(int sessionID, string sessionEmpNo)
+    public WCFRequisition[] GetPendingRequisitions(int sessionID, int sessionEmpNo)
     {
         List<WCFRequisition> result = new List<WCFRequisition>();
 
@@ -418,13 +418,14 @@ public class Service : IService
                         ApprovedBy = item.ApprovedBy.ToString(),
                         DateReviewed = item.DateReviewed.ToString(),
                         Status = item.Status,
-                        Remarks = item.Remarks
+                        Remarks = item.Remarks,
+                        IssuedBy = item.IssuedBy.ToString()
                     });
                 }
             }
         }
 
-        return result;
+        return result.ToArray();
     }
 
     public WCFRequisition GetRequisitionById(int sessionID, int reqNo)

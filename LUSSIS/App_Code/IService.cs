@@ -98,7 +98,7 @@ public interface IService
 
     [OperationContract]
     [WebInvoke(UriTemplate = "/PendingRequisitions", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-    List<WCFRequisition> GetPendingRequisitions(int sessionID, string sessionEmpNo);
+    WCFRequisition[] GetPendingRequisitions(int sessionID, int sessionEmpNo);
 
     [OperationContract]
     [WebInvoke(UriTemplate = "/GetRequisitionById", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
