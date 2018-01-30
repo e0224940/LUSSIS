@@ -11,6 +11,18 @@
         </div>
 
         <div class="row">
+            <% if (Session["POProcessed"] != null)
+                { %>
+            <div class="alert alert-success">
+                Purchase Order #<%= Session["POProcessed"] %> Deleted Successfully.
+            </div>
+            <% 
+                    Session.Remove("POProcessed");
+                }
+            %>
+        </div>
+
+        <div class="row">
             <asp:GridView
                 runat="server"
                 ID="PendingPurchaseOrderGridView"
@@ -21,7 +33,7 @@
                 OnRowDeleting="PendingPurchaseOrderGridView_Delete">
                 <Columns>
                     <asp:BoundField DataField="PONo" HeaderText="PO#" SortExpression="PONo" />
-                    <asp:BoundField DataField="DateIssued" DataFormatString="{0:dd MMM yyyy}" HeaderText="Date" SortExpression="DateIssued" />
+                    <asp:BoundField DataField="DateIssued" HeaderText="Date" SortExpression="DateIssued" />
                     <asp:BoundField DataField="Supplier" HeaderText="Supplier" SortExpression="Supplier" />
                     <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
                     <asp:TemplateField HeaderText="Details">
@@ -33,30 +45,6 @@
                 </Columns>
                 <EmptyDataTemplate>No Pending Purchase Orders Found</EmptyDataTemplate>
             </asp:GridView>
-        </div>
-
-        <div class="row">
-            <% if (Session["POProcessed"] != null)
-                { %>
-            <div class="alert alert-danger">
-                Purchase Order #<%= Session["POProcessed"] %> Deleted Successfully.
-            </div>
-            <% 
-                    Session.Remove("POProcessed");
-                }
-            %>
-        </div>
-
-        <div class="row">
-            <% if (Session["Error"] != null)
-                { %>
-            <div class="alert alert-danger">
-                An error has occured : <%= (string)Session["Error"] %>
-            </div>
-            <% 
-                    Session.Remove("Error");
-                }
-            %>
         </div>
 
     </div>

@@ -9,11 +9,9 @@ using LUSSIS_Backend.controller;
 
 public partial class Store_Clerk_PurchaseOrderList : System.Web.UI.Page
 {
-    // ATTRIBUTES
-
+    int pONo;
+    PurchaseOrder pO;
     List<PurchaseOrder> pendingPOs;
-
-    // METHODS
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -26,8 +24,6 @@ public partial class Store_Clerk_PurchaseOrderList : System.Web.UI.Page
 
     protected void PendingPurchaseOrderGridView_RowCommand(object sender, GridViewCommandEventArgs e)
     {
-        int pONo;
-
         if (e.CommandName == "PODetails")
         {
             pONo = Convert.ToInt32(e.CommandArgument);
@@ -40,9 +36,10 @@ public partial class Store_Clerk_PurchaseOrderList : System.Web.UI.Page
     {
         try
         {
-            int pONo = Int32.Parse(PendingPurchaseOrderGridView.Rows[e.RowIndex].Cells[0].Text);
+            pONo = Int32.Parse(PendingPurchaseOrderGridView.Rows[e.RowIndex].Cells[0].Text);
             POController.DeletePO(pONo);
             BindGrid();
+            Session["POProcessed"] = pONo;
         }
         catch (Exception exception)
         {
