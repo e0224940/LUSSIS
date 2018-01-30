@@ -222,6 +222,8 @@ public class WCFRetrievalDetail
     public int RetrievalNo;
     public String DeptCode;
     public String ItemNo;
+    public String Description;
+    public String Bin;
     public int Needed;
     public int BacklogQty;
     public int Actual;

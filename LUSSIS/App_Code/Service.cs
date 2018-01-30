@@ -569,6 +569,8 @@ public class Service : IService
                     RetrievalNo = item.RetrievalNo,
                     DeptCode = item.DeptCode,
                     ItemNo = item.ItemNo,
+                    Description = item.StationeryCatalogue.Description,
+                    Bin = item.StationeryCatalogue.Bin.ToString(),
                     Needed = item.Needed.HasValue ? item.Needed.Value : 0,
                     BacklogQty = item.BackLogQty.HasValue ? item.BackLogQty.Value : 0,
                     Actual = item.Actual.HasValue ? item.Actual.Value : 0
