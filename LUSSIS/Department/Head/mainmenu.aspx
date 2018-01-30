@@ -3,6 +3,6 @@
         <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
-        <li><a href="<%= Page.ResolveUrl("~/Department/Head/Default.aspx") %>">Submenu1</a></li>
+        <li><a href="<%= Page.ResolveUrl("~/Department/Head/ApproveAuthority.aspx") %>">Approve Authority</a></li>
     </ul>
 </li>

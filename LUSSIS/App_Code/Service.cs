@@ -399,7 +399,7 @@ public class Service : IService
         return result;
     }
 
-    public WCFRequisition[] GetPendingRequisitions(int sessionID, string sessionEmpNo)
+    public List<WCFRequisition> GetPendingRequisitions(int sessionID, string sessionEmpNo)
     {
         List<WCFRequisition> result = new List<WCFRequisition>();
 
@@ -424,7 +424,7 @@ public class Service : IService
             }
         }
 
-        return result.ToArray();
+        return result;
     }
 
     public WCFRequisition GetRequisitionById(int sessionID, int reqNo)

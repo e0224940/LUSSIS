@@ -242,11 +242,15 @@ namespace LUSSIS_Backend
         public static List<Requisition> GetPendingRequisitions(string employeeCode)
         {
             List<Requisition> list_result = new List<Requisition>();
+            LussisEntities context = new LussisEntities();
 
-            using (LussisEntities context = new LussisEntities())
-            {
-                string departmentCode = context.Departments.Where(x => x.HeadEmpNo.Equals(employeeCode)).First().DeptCode;
-                List<Employee> list_e = context.Employees.Where(x => x.DeptCode.Equals(departmentCode)).ToList();
+            int empCode = Convert.ToInt32(employeeCode);
+
+            Department d = context.Departments.Where(x => x.HeadEmpNo.Equals(empCode)).First();
+            string departmentCode = d.DeptCode;
+
+                //string departmentCode = context.Departments.Where(x => x.HeadEmpNo.Equals(empCode)).FirstOrDefault().DeptCode;
+                List<Employee> list_e = context.Employees.Where(x => x.DeptCode==departmentCode).ToList();
                 List<Requisition> list_r = context.Requisitions.ToList();
 
 
@@ -254,13 +258,12 @@ namespace LUSSIS_Backend
                 {
                     foreach (Requisition rr in list_r)
                     {
-                        if (e.EmpNo.Equals(rr.IssuedBy) && rr.Status.Equals("Pending"))        //to tally with the rest of the code if its pending
+                        if (rr.IssuedBy.Equals(e.EmpNo) && rr.Status.Equals("Pending"))        //to tally with the rest of the code if its pending
                         {
                             list_result.Add(rr);
                         }
                     }
                 }
-            }
             return list_result;
         }
 
