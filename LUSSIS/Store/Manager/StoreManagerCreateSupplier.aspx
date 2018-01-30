@@ -1,13 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="StoreManagerCreateSupplier.aspx.cs" Inherits="Store_Manager_StoreManagerCreateSupplier" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="StoreManagerCreateSupplier.aspx.cs" Inherits="Store_Manager_StoreManagerCreateSupplier" MasterPageFile="../../MasterPage.master" %>
 
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
+    <form id="form1">
     <div>
     
     </div>
@@ -71,5 +69,5 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Add" />
     </form>
-</body>
-</html>
+
+    </asp:Content>
