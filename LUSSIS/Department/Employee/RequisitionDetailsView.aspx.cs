@@ -12,7 +12,6 @@ public partial class Department_Employee_RequisitionDetailsView : System.Web.UI.
     static List<Detail> reqhistory;
     static int reqNo;
 
-
     protected void Page_Load(object sender, EventArgs e)
     {
         int empNo = Profile.EmpNo;
@@ -20,16 +19,15 @@ public partial class Department_Employee_RequisitionDetailsView : System.Web.UI.
         reqNo = int.Parse(ss);
         ReqId.Text = ss;
         if (!IsPostBack)
-        {
-            
+        {        
             string empName = EmployeeController.GetName(empNo);
             empNameshow.Text = empName;
             BindGrid();
-        }
-           
+        }        
     }
 
 
+    //Data Bind Method for main page load
     private void BindGrid()
     {
         reqhistory = new List<Detail>();
@@ -47,15 +45,17 @@ public partial class Department_Employee_RequisitionDetailsView : System.Web.UI.
         GridViewForDetail.DataSource = reqhistory;
         GridViewForDetail.DataBind();
     
-}
+    }
 
+
+    //Cancel 
     protected void cancel_Click(object sender, EventArgs e)
     {
         Response.Redirect("ViewRequisitionHistory.aspx");
     }
 
    
-
+    //Delte individual item by row deleting
     protected void detailGrid_Delete(object sender, GridViewDeleteEventArgs e)
     {
         GridViewRow row = GridViewForDetail.Rows[e.RowIndex];
@@ -88,19 +88,17 @@ public partial class Department_Employee_RequisitionDetailsView : System.Web.UI.
             GridViewForDetail.DataSource = reqhistory;
             GridViewForDetail.DataBind();
         }
-        //else
-        //{
-        //    EmployeeController.DeleteReqHistory(requisitionNo);
-            
-        //}
     }
 
+    //Edit for quantity
     protected void detailGrid_Edit(object sender, GridViewEditEventArgs e)
     {
         GridViewForDetail.EditIndex = e.NewEditIndex;
         BindGrid();
     }
 
+
+    //Update New Quantity
     protected void OnRowUpdating(object sender, GridViewUpdateEventArgs e)
     {
 
@@ -114,6 +112,7 @@ public partial class Department_Employee_RequisitionDetailsView : System.Web.UI.
         BindGrid();
     }
 
+    //Cancel Editing
     protected void OnRowCancelingEdit(object sender, EventArgs e)
     {
         GridViewForDetail.EditIndex = -1;

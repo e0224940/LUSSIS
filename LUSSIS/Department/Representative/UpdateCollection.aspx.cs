@@ -17,7 +17,6 @@ public partial class Department_Representative_UpdateCollection : System.Web.UI.
         oldLocationText.Text = oldPoint;
         
     }
-
     
     protected void ChooseLocation_DDList(object sender, EventArgs e)
     {
@@ -26,10 +25,11 @@ public partial class Department_Representative_UpdateCollection : System.Web.UI.
         if (value == 1 )
         {
             newCollectionTimeText.Text = "9:30 AM";
+           
         }
         else if(value == 2)
         {
-            newCollectionTimeText.Text = "11:00 AM";
+            newCollectionTimeText.Text = "11:00 AM";  
         }
         else if(value == 3)
         {
@@ -41,11 +41,11 @@ public partial class Department_Representative_UpdateCollection : System.Web.UI.
         }
         else if(value == 5)
         {
-            newCollectionTimeText.Text = "9:30 AM";
+            newCollectionTimeText.Text = "9:30 AM";  
         }
         else if (value == 6)
         {
-            newCollectionTimeText.Text = "11:00 AM";
+            newCollectionTimeText.Text = "11:00 AM";  
         }
         else if(value == 0 )
         {
@@ -55,22 +55,74 @@ public partial class Department_Representative_UpdateCollection : System.Web.UI.
         {
             newCollectionTimeText.Text = "";
         }
-       
-
     }
 
+    
     protected void confirm_Click(object sender, EventArgs e)
     {
-        int empNo = Profile.EmpNo;
-        //try
-        //{
         int newPoint = Int32.Parse(NewLocationDDL.SelectedItem.Value);
-        UpdateCollectionPoint.UpdatePoint(empNo, newPoint);
-            Response.Redirect("Default.aspx");
-        //}
-        //catch (Exception exp)
-        //{
-        //    Response.Write(exp.ToString());
-        //}
+        int empNo = Profile.EmpNo;
+            
+        if(newPoint<0 || newPoint>6)
+        {
+            Label4.Text = "Choose New Location.";
+        }
+        else
+        { 
+            UpdateCollectionPoint.UpdatePoint(empNo, newPoint);
+
+            //Choose Loc and Time
+            if (newPoint == 1)
+            {
+                newCollectionTimeText.Text = "9:30 AM";
+                Label5.Text = "Stationery Store - Administration Building";
+            }
+            else if (newPoint == 2)
+            {
+                newCollectionTimeText.Text = "11:00 AM";
+                Label5.Text = "Management School";
+            }
+            else if (newPoint == 3)
+            {
+                newCollectionTimeText.Text = "9:30 AM";
+                Label5.Text = "Medical School";
+            }
+            else if (newPoint == 4)
+            {
+                newCollectionTimeText.Text = "11:00 AM";
+                Label5.Text = "Engineering School";
+            }
+            else if (newPoint == 5)
+            {
+                newCollectionTimeText.Text = "9:30 AM";
+                Label5.Text = "Science School";
+            }
+            else if (newPoint == 6)
+            {
+                newCollectionTimeText.Text = "11:00 AM";
+                Label5.Text = "University Hospital";
+            }
+            else if (newPoint == 0)
+            {
+                newCollectionTimeText.Text = "9:30 AM";
+                Label5.Text = "Management Store";
+            }
+            else
+            {
+                newCollectionTimeText.Text = "";
+            }
+
+            Session["NewTime"] = newCollectionTimeText.Text;
+            Session["NewLoc"] = Label5.Text;
+
+            Response.Redirect("UpdateCollectionSuccessPage.aspx");
+            
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Updated'); window.location = 'UpdateCollection.aspx';", true);
+        }
+    }
+
+    protected void cancel_Click(object sender, EventArgs e)
+    {
+        Label4.Visible = false;
     }
 }

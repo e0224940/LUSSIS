@@ -17,7 +17,7 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
         int empNo = Profile.EmpNo;
 
             if (!IsPostBack)
-        {
+            {
             //GridViewRow row = DetailGridView.Rows[DetailGridView.SelectedIndex];
             // string check = (row.FindControl("Status") as Label).Text;\
             //for (int i = 0; i < DetailGridView.Rows.Count; i++)
@@ -47,31 +47,25 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
             DetailGridView.DataBind();         
         }
     }
+
+    //Delete Requisition History
     protected void detailGridView_Delete(object sender, GridViewDeleteEventArgs e)
     {
+        
         int reqId = Convert.ToInt32(DetailGridView.DataKeys[e.RowIndex].Values[0]);
         Session["sessionID"] = reqId;
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Are you sure want to delete the History?')</script>");
         EmployeeController.DeleteReqHistory(reqId);
         DetailGridView.DataSource = EmployeeController.ViewRequisition();
         DetailGridView.DataBind();
     }
 
+
+    //Go to detail Page
     protected void DetailGridView_SelectedIndexChanged(object sender, EventArgs e)
     {
-        //GridViewRow row = DetailGridView.Rows.ToStrin;
-        //if (check.Equals("Approved"))
-        //{
-
-        ////GridViewRow row = DetailGridView.Rows[DetailGridView.SelectedIndex];
-        //DetailGridView.Columns[4].Visible = false;
-        //}
-
-            //else
-            //{
-                int ReqNo = (int)DetailGridView.SelectedDataKey.Values[0];
-                Response.Redirect("RequisitionDetailsView.aspx?ReqNo=" + ReqNo);
-            //}
-        
+        int ReqNo = (int)DetailGridView.SelectedDataKey.Values[0];
+        Response.Redirect("RequisitionDetailsView.aspx?ReqNo=" + ReqNo);
     }
 
     //protected void view_Click(object sender, EventArgs e)

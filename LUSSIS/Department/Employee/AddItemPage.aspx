@@ -73,7 +73,7 @@
             <br />
             <br />
             <br />
-            <asp:Button ID="Confirm" runat="server" OnClick="Confirm_Click" Text="Confirm" />
+            <asp:Button ID="Confirm" runat="server" OnClick="Confirm_Click" Text="Confirm" Visible="false" />
             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp;
             <asp:Button runat="server" Text="Cancel" ID="Cancel" OnClick="Cancel_Click" />
             <br />
