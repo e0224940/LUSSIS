@@ -381,10 +381,10 @@ namespace LUSSIS_Backend
             List<RetrievalDetail> result = null;
             try
             {
-                using (LussisEntities context = new LussisEntities())
-                {
-                    result = context.RetrievalDetails.Where(ret => ret.RetrievalNo.Equals(retrievalNo)).ToList();
-                }
+                LussisEntities context = new LussisEntities();
+
+                result = context.RetrievalDetails.Where(ret => ret.RetrievalNo.Equals(retrievalNo)).ToList();
+
             }
             catch (Exception)
             {
