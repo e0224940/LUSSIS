@@ -86,12 +86,6 @@
                                                 <asp:Button ID="SubmitAdjustmentVoucherButton" runat="server" Visible="false" Text="Submit" OnClick="SubmitAdjustmentVoucherButton_Click" CommandArgument='<%# Eval("ItemNo") %>' OnClientClick="$get('Dog').click();return false;" />
                                                 <asp:Button ID="CancelAdjustmentVoucherButton" runat="server" Visible="false" Text="Cancel" OnClick="CancelAdjustmentVoucherButton_Click" />
                                             </td>
-
-                                            <td>
-                                                <div class="alert alert-success">
-                                                    <strong>Success!</strong> Adjustment Voucher sent for Approval.
-                                                </div>
-                                            </td>
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </tbody>

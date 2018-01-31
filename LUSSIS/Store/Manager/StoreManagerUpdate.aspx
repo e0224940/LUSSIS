@@ -43,6 +43,7 @@
         <div class="form-group">
             <asp:Button ID="Button1" runat="server" CssClass="btn btn-primary" align="center" OnClick="Button1_Click" Text="Add New Supplier" Font-Size="Medium" Height="80%" />
         </div>
+
         <div class="form-group">
             <%if (Session["SupplierProcessed"] != null)
                 { %>
