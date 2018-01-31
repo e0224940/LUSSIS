@@ -299,21 +299,21 @@ namespace LUSSIS_Backend
             try
             {
                 LussisEntities context = new LussisEntities();
-                
-                    Requisition req = context.Requisitions.Where(x => x.ReqNo.Equals(requisition.ReqNo)).First();
 
-                    if (req != null)
-                    {
-                        req.IssuedBy = requisition.IssuedBy;
-                        req.DateIssued = requisition.DateIssued;
-                        req.ApprovedBy = requisition.ApprovedBy;
-                        req.DateReviewed = requisition.DateReviewed;
-                        req.Status = requisition.Status;
-                        req.Remarks = requisition.Remarks;
-                    }
-                    context.SaveChanges();
-                    result = true;
-                
+                Requisition req = context.Requisitions.Where(x => x.ReqNo.Equals(requisition.ReqNo)).First();
+
+                if (req != null)
+                {
+                    req.IssuedBy = requisition.IssuedBy;
+                    req.DateIssued = requisition.DateIssued;
+                    req.ApprovedBy = requisition.ApprovedBy;
+                    req.DateReviewed = requisition.DateReviewed;
+                    req.Status = requisition.Status;
+                    req.Remarks = requisition.Remarks;
+                }
+                context.SaveChanges();
+                result = true;
+
             }
             catch (Exception)
             {
@@ -432,6 +432,42 @@ namespace LUSSIS_Backend
             catch (Exception)
             {
                 result = false;
+            }
+
+            return result;
+        }
+
+        public static List<string> GetCategoryList()
+        {
+            List<string> result = new List<string>();
+
+            try
+            {
+                LussisEntities context = new LussisEntities();
+
+                result = context.StationeryCatalogues.Select(item => item.Category).Distinct().ToList();
+            }
+            catch (Exception)
+            {
+                result.Clear();
+            }
+
+            return result;
+        }
+
+        public static List<string> GetBinList()
+        {
+            List<string> result = new List<string>();
+
+            try
+            {
+                LussisEntities context = new LussisEntities();
+
+                result = context.StationeryCatalogues.Select(item => item.Bin).Distinct().ToList();
+            }
+            catch (Exception)
+            {
+                result.Clear();
             }
 
             return result;

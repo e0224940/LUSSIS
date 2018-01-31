@@ -131,6 +131,14 @@ public interface IService
     [OperationContract]
     [WebInvoke(UriTemplate = "/CreateAdjustmentVoucher", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     bool CreateAdjustmentVoucher(int sessionID, String ItemNo, int Qty, String Reason);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/GetCatalogueCatList", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    String[] GetCatalogueCatList(int sessionID);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/GetCatalogueBinList", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    String[] GetCatalogueBinList(int sessionID);
 }
 
 public class WCFDisbursementDetail

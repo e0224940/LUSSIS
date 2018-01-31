@@ -624,4 +624,28 @@ public class Service : IService
 
         return result;
     }
+
+    public String[] GetCatalogueCatList(int sessionID)
+    {
+        List<String> result = new List<string>();
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            result = AndroidController.GetCategoryList();
+        }
+
+        return result.ToArray();
+    }
+
+    public String[] GetCatalogueBinList(int sessionID)
+    {
+        List<String> result = new List<string>();
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            result = AndroidController.GetBinList();
+        }
+
+        return result.ToArray();
+    }
 }
