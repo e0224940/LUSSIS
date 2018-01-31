@@ -24,7 +24,7 @@
             %>
         </div>
             <div style="float: none">
-        <asp:Button ID="view" runat="server" Text="View History Page" OnClick="view_Click"/>
+        <asp:Button ID="view" runat="server" Text="View History Page" class="btn btn-primary" OnClick="view_Click"/>
                 </div>
 </div>
 </asp:Content>

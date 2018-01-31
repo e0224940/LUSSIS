@@ -32,14 +32,14 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
 
     //Select the selected item
     protected void StationeryGridView_SelectedIndexChanged(object sender, EventArgs e)
-    { 
+    {
         GridViewRow row = StationeryGridView.SelectedRow;
         RaisedItem cart = new RaisedItem();
         cart.ItemNo = row.Cells[0].Text;
         cart.description = row.Cells[1].Text;
         if ((row.Cells[2].FindControl("Quantity") as TextBox).Text.ToString() == "" || Int32.Parse((row.Cells[2].FindControl("Quantity") as TextBox).Text) <= 0)
         {
-            Msg.Text = "The input number has to be greater than 0.";
+            Msg.Text = "The input number has to be integer (greater than 0).";
         }
         else
         {
@@ -49,45 +49,54 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
             cartitem.Add(cart);
             Session["session"] = cartitem;
             Cart.DataSource = cartitem;
-            Cart.DataBind();         
+            Cart.DataBind();
+            Confirm.Visible = true;
+            Delete.Visible = true;
         }
     }
 
     //Create the requisition
     protected void Confirm_Click(object sender, EventArgs e)
     {
-        cartitem = (List<RaisedItem>)Session["session"];
-        int isissueBy = Profile.EmpNo;
-        dateIssue = DateTime.Today;
-        string status = "Pending";
-        List<RequisitionDetail> detailList = new List<RequisitionDetail>();
-        foreach (RaisedItem k in cartitem)
+        if (Cart.Rows.Count == 0)
         {
-            RequisitionDetail rd = new RequisitionDetail();
-            rd.ItemNo = k.ItemNo;
-            rd.Qty = Convert.ToInt32(k.quantity);
-            detailList.Add(rd);
+            Msg.Text = "You must select at least one item.";
         }
-        
-        EmployeeController.RaisedRequisition(isissueBy, dateIssue, status, detailList);
-        Session["success"] = dateIssue;
-       
-        Response.Redirect("RaisedRequisitionSuccessPage.aspx");
-        Session.Remove("session");
-        Msg.Text = "Success!";
+        else
+        {
+            cartitem = (List<RaisedItem>)Session["session"];
+            int isissueBy = Profile.EmpNo;
+            dateIssue = DateTime.Today;
+            string status = "Pending";
+            List<RequisitionDetail> detailList = new List<RequisitionDetail>();
+            foreach (RaisedItem k in cartitem)
+            {
+                RequisitionDetail rd = new RequisitionDetail();
+                rd.ItemNo = k.ItemNo;
+                rd.Qty = Convert.ToInt32(k.quantity);
+                detailList.Add(rd);
+            }
+
+            EmployeeController.RaisedRequisition(isissueBy, dateIssue, status, detailList);
+            Session["success"] = dateIssue;
+
+            Response.Redirect("RaisedRequisitionSuccessPage.aspx");
+            Session.Remove("session");
+            Msg.Text = "Success!";
+        }
     }
 
     //Search the item 
     protected void Search_Click(object sender, EventArgs e)
     {
         GridViewRow point = (GridViewRow)Session["Test"];
-       
-            string val = SearchItemText.Text;
-            point.Visible = false;
-            StationeryGridView.DataSource = EmployeeController.SearchDes(val);
+
+        string val = SearchItemText.Text;
+        point.Visible = false;
+        StationeryGridView.DataSource = EmployeeController.SearchDes(val);
         point.Visible = false;
         StationeryGridView.DataBind();
-             
+
     }
 
     //Cancel the crate requisition
@@ -105,7 +114,7 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
         Session["session"] = cartitem;
         Cart.DataSource = cartitem;
         Cart.DataBind();
-        
+
     }
 
 
@@ -118,5 +127,13 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
             StationeryGridView.DataBind();
             Session["session"] = cartitem;
         }
+    }
+    protected void Delete_Click(object sender, EventArgs e)
+    {
+        //Session.Remove("session");
+        //Cart.Visible = false;
+        //Confirm.Visible = false;
+        //Delete.Visible = false;
+        Response.Redirect("AddItemPage.aspx");
     }
 }

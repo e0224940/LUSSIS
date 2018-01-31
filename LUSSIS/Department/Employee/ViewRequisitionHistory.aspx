@@ -4,20 +4,30 @@
 </asp:Content>
 
 <asp:Content ID="ContentBody" ContentPlaceHolderID="body" runat="server">
-    <h1>Requisition History</h1>
-    <asp:Label ID="label" runat="server" Text="Employee Name:"></asp:Label>
-    <b>
-    <asp:Label ID="name" runat="server"></asp:Label>
-    </b>
-    <br /><br />
-    <asp:GridView
-        runat="server"
-        ID="DetailGridView"
-        DataKeyNames="ReqNo"
-        AutoGenerateColumns="False"
-        CssClass="table table-striped"
-        OnRowDeleting="detailGridView_Delete"
-        OnSelectedIndexChanged="DetailGridView_SelectedIndexChanged">
+    <div class="container">
+        <asp:label id="lbl_emp_raisedItem" runat="server" font-bold="True" font-size="XX-Large" text="Requisition History"></asp:label>
+        <br />
+        <br />
+        <div class="row">
+            <div class="form-inline">
+                <div class="col-xs-2">
+                    
+                    <asp:label id="label" runat="server" text="Employee Name:"></asp:label>
+                </div>
+                <div class="col-xs-1">
+                    <asp:textbox id="name" runat="server" cssclass="btn-default form-control" autopostback="True" enabled="False">DeputyHeadNo</asp:textbox>
+                </div>
+                <br /><br /><br />
+                <br />
+                <asp:gridview
+                    runat="server"
+                    id="DetailGridView"
+                    datakeynames="ReqNo"
+                    autogeneratecolumns="False"
+                    GridLines="None"
+                    cssclass="table table-striped"
+                    onrowdeleting="detailGridView_Delete"
+                    onselectedindexchanged="DetailGridView_SelectedIndexChanged">
       <Columns>
             <asp:BoundField DataField="ReqNo" HeaderText="ReqNo" SortExpression="ReqNo" Visible="false" />
             <asp:BoundField DataField="DateIssued" DataFormatString="{0:dd MMM yyyy}" HeaderText="Date" SortExpression="DateIssued" />
@@ -27,5 +37,5 @@
              <asp:CommandField ShowSelectButton="True" />
              <asp:CommandField ShowDeleteButton="true" />
         </Columns>
-    </asp:GridView>
+    </asp:gridview>
 </asp:Content>
