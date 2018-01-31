@@ -28,10 +28,6 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
             StationeryGridView.DataSource = EmployeeController.ViewItem();
             StationeryGridView.DataBind();
         }
-        else
-        {
-
-        }
     }
 
     //Select the selected item
@@ -47,13 +43,13 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
         }
         else
         {
+            Session["Test"] = row;
             Msg.Text = "";
             cart.quantity = (row.Cells[2].FindControl("Quantity") as TextBox).Text;
             cartitem.Add(cart);
             Session["session"] = cartitem;
             Cart.DataSource = cartitem;
-            Cart.DataBind();
-            Confirm.Visible = true;
+            Cart.DataBind();         
         }
     }
 
@@ -83,10 +79,15 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
 
     //Search the item 
     protected void Search_Click(object sender, EventArgs e)
-    {  
+    {
+        GridViewRow point = (GridViewRow)Session["Test"];
+       
             string val = SearchItemText.Text;
+            point.Visible = false;
             StationeryGridView.DataSource = EmployeeController.SearchDes(val);
-            StationeryGridView.DataBind();
+        point.Visible = false;
+        StationeryGridView.DataBind();
+             
     }
 
     //Cancel the crate requisition
