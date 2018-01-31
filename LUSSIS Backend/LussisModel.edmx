@@ -347,6 +347,80 @@
           <Property Name="SupplierCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="UnitPrice" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Lussis.dbo.ApprovePurchaseOrderView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ApprovePurchaseOrderView">
+          <Key>
+            <PropertyRef Name="PONo" />
+            <PropertyRef Name="ItemNo" />
+          </Key>
+          <Property Name="PONo" Type="int" Nullable="false" />
+          <Property Name="ItemNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="CurrentQty" Type="int" />
+          <Property Name="UnitPrice" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Lussis.dbo.PURCHASEORDERVIEW' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PURCHASEORDERVIEW">
+          <Key>
+            <PropertyRef Name="PONo" />
+            <PropertyRef Name="SupplierCode" />
+            <PropertyRef Name="ItemNo" />
+          </Key>
+          <Property Name="PONo" Type="int" Nullable="false" />
+          <Property Name="SupplierCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SupplierName" Type="nvarchar" MaxLength="50" />
+          <Property Name="OrderedBy" Type="int" />
+          <Property Name="DateIssued" Type="date" />
+          <Property Name="ApprovedBy" Type="int" />
+          <Property Name="DateReviewed" Type="date" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+          <Property Name="ItemNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReorderLevel" Type="int" />
+          <Property Name="ReorderQty" Type="int" />
+          <Property Name="CurrentQty" Type="int" />
+          <Property Name="UnitPrice" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Lussis.dbo.ReorderTrendView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ReorderTrendView">
+          <Key>
+            <PropertyRef Name="PONo" />
+            <PropertyRef Name="ItemNo" />
+            <PropertyRef Name="SupplierCode" />
+          </Key>
+          <Property Name="PONo" Type="int" Nullable="false" />
+          <Property Name="DateReviewed" Type="date" />
+          <Property Name="ItemNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="SupplierCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SupplierName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Lussis.dbo.RequisitionTrendView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RequisitionTrendView">
+          <Key>
+            <PropertyRef Name="ReqNo" />
+            <PropertyRef Name="ItemNo" />
+            <PropertyRef Name="EmpNo" />
+            <PropertyRef Name="DeptName" />
+          </Key>
+          <Property Name="ReqNo" Type="int" Nullable="false" />
+          <Property Name="IssuedBy" Type="int" />
+          <Property Name="DateReviewed" Type="date" />
+          <Property Name="ItemNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmpNo" Type="int" Nullable="false" />
+          <Property Name="DeptCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="DeptName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <Association Name="FK__aspnet_Me__Appli__70DDC3D8">
           <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
           <End Role="aspnet_Membership" Type="Self.aspnet_Membership" Multiplicity="*" />
@@ -955,6 +1029,60 @@
           <EntitySet Name="StoreAssignments" EntityType="Self.StoreAssignments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SupplyTender" EntityType="Self.SupplyTender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApprovePurchaseOrderView" EntityType="Self.ApprovePurchaseOrderView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[ApprovePurchaseOrderView].[PONo] AS [PONo], 
+[ApprovePurchaseOrderView].[ItemNo] AS [ItemNo], 
+[ApprovePurchaseOrderView].[Qty] AS [Qty], 
+[ApprovePurchaseOrderView].[Description] AS [Description], 
+[ApprovePurchaseOrderView].[CurrentQty] AS [CurrentQty], 
+[ApprovePurchaseOrderView].[UnitPrice] AS [UnitPrice]
+FROM [dbo].[ApprovePurchaseOrderView] AS [ApprovePurchaseOrderView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PURCHASEORDERVIEW" EntityType="Self.PURCHASEORDERVIEW" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[PURCHASEORDERVIEW].[PONo] AS [PONo], 
+[PURCHASEORDERVIEW].[SupplierCode] AS [SupplierCode], 
+[PURCHASEORDERVIEW].[SupplierName] AS [SupplierName], 
+[PURCHASEORDERVIEW].[OrderedBy] AS [OrderedBy], 
+[PURCHASEORDERVIEW].[DateIssued] AS [DateIssued], 
+[PURCHASEORDERVIEW].[ApprovedBy] AS [ApprovedBy], 
+[PURCHASEORDERVIEW].[DateReviewed] AS [DateReviewed], 
+[PURCHASEORDERVIEW].[Status] AS [Status], 
+[PURCHASEORDERVIEW].[Remarks] AS [Remarks], 
+[PURCHASEORDERVIEW].[ItemNo] AS [ItemNo], 
+[PURCHASEORDERVIEW].[Qty] AS [Qty], 
+[PURCHASEORDERVIEW].[Description] AS [Description], 
+[PURCHASEORDERVIEW].[ReorderLevel] AS [ReorderLevel], 
+[PURCHASEORDERVIEW].[ReorderQty] AS [ReorderQty], 
+[PURCHASEORDERVIEW].[CurrentQty] AS [CurrentQty], 
+[PURCHASEORDERVIEW].[UnitPrice] AS [UnitPrice]
+FROM [dbo].[PURCHASEORDERVIEW] AS [PURCHASEORDERVIEW]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ReorderTrendView" EntityType="Self.ReorderTrendView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[ReorderTrendView].[PONo] AS [PONo], 
+[ReorderTrendView].[DateReviewed] AS [DateReviewed], 
+[ReorderTrendView].[ItemNo] AS [ItemNo], 
+[ReorderTrendView].[Qty] AS [Qty], 
+[ReorderTrendView].[Description] AS [Description], 
+[ReorderTrendView].[SupplierCode] AS [SupplierCode], 
+[ReorderTrendView].[SupplierName] AS [SupplierName]
+FROM [dbo].[ReorderTrendView] AS [ReorderTrendView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RequisitionTrendView" EntityType="Self.RequisitionTrendView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[RequisitionTrendView].[ReqNo] AS [ReqNo], 
+[RequisitionTrendView].[IssuedBy] AS [IssuedBy], 
+[RequisitionTrendView].[DateReviewed] AS [DateReviewed], 
+[RequisitionTrendView].[ItemNo] AS [ItemNo], 
+[RequisitionTrendView].[Qty] AS [Qty], 
+[RequisitionTrendView].[Description] AS [Description], 
+[RequisitionTrendView].[EmpNo] AS [EmpNo], 
+[RequisitionTrendView].[DeptCode] AS [DeptCode], 
+[RequisitionTrendView].[DeptName] AS [DeptName]
+FROM [dbo].[RequisitionTrendView] AS [RequisitionTrendView]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__aspnet_Me__Appli__70DDC3D8" Association="Self.FK__aspnet_Me__Appli__70DDC3D8">
             <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
             <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
@@ -1626,6 +1754,10 @@
             <End Role="Employee" EntitySet="Employees" />
             <End Role="StoreAssignment" EntitySet="StoreAssignments" />
           </AssociationSet>
+          <EntitySet Name="ApprovePurchaseOrderViews" EntityType="LussisModel.ApprovePurchaseOrderView" />
+          <EntitySet Name="PURCHASEORDERVIEWs" EntityType="LussisModel.PURCHASEORDERVIEW" />
+          <EntitySet Name="ReorderTrendViews" EntityType="LussisModel.ReorderTrendView" />
+          <EntitySet Name="RequisitionTrendViews" EntityType="LussisModel.RequisitionTrendView" />
         </EntityContainer>
         <EntityType Name="AdjustmentVoucher">
           <Key>
@@ -2355,6 +2487,72 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ApprovePurchaseOrderView">
+          <Key>
+            <PropertyRef Name="PONo" />
+            <PropertyRef Name="ItemNo" />
+          </Key>
+          <Property Name="PONo" Type="Int32" Nullable="false" />
+          <Property Name="ItemNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentQty" Type="Int32" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="PURCHASEORDERVIEW">
+          <Key>
+            <PropertyRef Name="PONo" />
+            <PropertyRef Name="SupplierCode" />
+            <PropertyRef Name="ItemNo" />
+          </Key>
+          <Property Name="PONo" Type="Int32" Nullable="false" />
+          <Property Name="SupplierCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrderedBy" Type="Int32" />
+          <Property Name="DateIssued" Type="DateTime" Precision="0" />
+          <Property Name="ApprovedBy" Type="Int32" />
+          <Property Name="DateReviewed" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ItemNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReorderLevel" Type="Int32" />
+          <Property Name="ReorderQty" Type="Int32" />
+          <Property Name="CurrentQty" Type="Int32" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="ReorderTrendView">
+          <Key>
+            <PropertyRef Name="PONo" />
+            <PropertyRef Name="ItemNo" />
+            <PropertyRef Name="SupplierCode" />
+          </Key>
+          <Property Name="PONo" Type="Int32" Nullable="false" />
+          <Property Name="DateReviewed" Type="DateTime" Precision="0" />
+          <Property Name="ItemNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SupplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="RequisitionTrendView">
+          <Key>
+            <PropertyRef Name="ReqNo" />
+            <PropertyRef Name="ItemNo" />
+            <PropertyRef Name="EmpNo" />
+            <PropertyRef Name="DeptName" />
+          </Key>
+          <Property Name="ReqNo" Type="Int32" Nullable="false" />
+          <Property Name="IssuedBy" Type="Int32" />
+          <Property Name="DateReviewed" Type="DateTime" Precision="0" />
+          <Property Name="ItemNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmpNo" Type="Int32" Nullable="false" />
+          <Property Name="DeptCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeptName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2721,6 +2919,68 @@
               <MappingFragment StoreEntitySet="StoreAssignments">
                 <ScalarProperty Name="Role" ColumnName="Role" />
                 <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApprovePurchaseOrderViews">
+            <EntityTypeMapping TypeName="LussisModel.ApprovePurchaseOrderView">
+              <MappingFragment StoreEntitySet="ApprovePurchaseOrderView">
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="CurrentQty" ColumnName="CurrentQty" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
+                <ScalarProperty Name="PONo" ColumnName="PONo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PURCHASEORDERVIEWs">
+            <EntityTypeMapping TypeName="LussisModel.PURCHASEORDERVIEW">
+              <MappingFragment StoreEntitySet="PURCHASEORDERVIEW">
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="CurrentQty" ColumnName="CurrentQty" />
+                <ScalarProperty Name="ReorderQty" ColumnName="ReorderQty" />
+                <ScalarProperty Name="ReorderLevel" ColumnName="ReorderLevel" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DateReviewed" ColumnName="DateReviewed" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="DateIssued" ColumnName="DateIssued" />
+                <ScalarProperty Name="OrderedBy" ColumnName="OrderedBy" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
+                <ScalarProperty Name="PONo" ColumnName="PONo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReorderTrendViews">
+            <EntityTypeMapping TypeName="LussisModel.ReorderTrendView">
+              <MappingFragment StoreEntitySet="ReorderTrendView">
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
+                <ScalarProperty Name="DateReviewed" ColumnName="DateReviewed" />
+                <ScalarProperty Name="PONo" ColumnName="PONo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequisitionTrendViews">
+            <EntityTypeMapping TypeName="LussisModel.RequisitionTrendView">
+              <MappingFragment StoreEntitySet="RequisitionTrendView">
+                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+                <ScalarProperty Name="DeptCode" ColumnName="DeptCode" />
+                <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
+                <ScalarProperty Name="DateReviewed" ColumnName="DateReviewed" />
+                <ScalarProperty Name="IssuedBy" ColumnName="IssuedBy" />
+                <ScalarProperty Name="ReqNo" ColumnName="ReqNo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

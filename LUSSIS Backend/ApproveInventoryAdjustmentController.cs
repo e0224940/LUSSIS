@@ -32,6 +32,7 @@ namespace LUSSIS_Backend
             var result = context.AdjustmentVouchers.Where(x => x.AvNo == iAV).FirstOrDefault();
             result.Status = "Approved";
             context.SaveChanges();
+
         }
 
         //Button(Reject) function
@@ -41,6 +42,36 @@ namespace LUSSIS_Backend
             var result = context.AdjustmentVouchers.Where(x => x.AvNo == iAV).FirstOrDefault();
             result.Status = "Rejected";
             context.SaveChanges();
+        }
+
+        //insert new stock transaction details into stocktxndetails
+        public static void updateStockTransactioninDB(StockTxnDetail stkdetails)
+        {
+            LussisEntities context = new LussisEntities();
+            context.StockTxnDetails.Add(stkdetails);
+            context.SaveChanges();
+        }
+
+        //update currentqty in stationery catalogue after adjustments
+        public static void updateStationeryCatalogue(string itemNoText, int qtyAmt)
+        {
+            LussisEntities context = new LussisEntities();
+            var stockRequireUpdating = context.StationeryCatalogues.SingleOrDefault
+                (x => x.ItemNo == itemNoText);
+            if (stockRequireUpdating != null)
+            {
+                stockRequireUpdating.CurrentQty = qtyAmt;
+                context.SaveChanges();
+            }
+        }
+
+        //Update ApproveEmpNo in Adjustment Voucher
+        public static void setApprovedBy(int iAV, int empNo)
+        {
+            LussisEntities context = new LussisEntities();
+            var avd = context.AdjustmentVouchers.Where(x => x.AvNo == iAV).FirstOrDefault();
+                avd.ApproveEmpNo = empNo;
+                context.SaveChanges();
         }
 
     }

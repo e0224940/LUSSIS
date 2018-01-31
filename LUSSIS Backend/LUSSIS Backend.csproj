@@ -42,6 +42,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,6 +55,9 @@
     <Compile Include="ApproveAuthorityController.cs" />
     <Compile Include="ApproveInventoryAdjustmentController.cs" />
     <Compile Include="ApprovePurchaseOrderController.cs" />
+    <Compile Include="ApprovePurchaseOrderView.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="controller\AVController.cs" />
     <Compile Include="controller\DisbursementController.cs" />
     <Compile Include="controller\OrderController.cs" />
@@ -66,6 +70,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="GenerateTrendController.cs" />
     <Compile Include="ItemList.cs" />
     <Compile Include="LoginController.cs" />
     <Compile Include="model\OrderItem.cs" />
@@ -75,6 +80,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="model\DisbursementItem.cs" />
+    <Compile Include="PURCHASEORDERVIEW.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="RejectRequisitionController.cs" />
     <Compile Include="AcceptRequisitionController.cs" />
     <Compile Include="AdjustmentVoucher.cs">
@@ -157,10 +165,16 @@
     <Compile Include="PurchaseOrderDetail.cs">
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ReorderTrendView.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Requisition.cs">
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="RequisitionDetail.cs">
+      <DependentUpon>LussisModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RequisitionTrendView.cs">
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Retrieval.cs">

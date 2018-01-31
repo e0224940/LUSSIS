@@ -4,45 +4,77 @@
 </asp:Content>
 
 <asp:Content ID="ContentBody" ContentPlaceHolderID="body" runat="server">
-    <h1>Raised Requisition</h1>
-    <br />
-    <asp:Label ID="Label1" runat="server" Text="Employee Name:"></asp:Label>
-    <asp:Label ID="NameLB" runat="server"></asp:Label>
-    <br />
-    <asp:Label runat="server" Text="Date:" ID="Label2"></asp:Label>
-    <asp:Label runat="server" Text=" " ID="date"></asp:Label>
-    <br />
-    <div style="float: right">
-        <asp:TextBox ID="SearchItemText" runat="server"></asp:TextBox>
+    <div class="container">
+        <asp:label id="lbl_emp_raisedItem" runat="server" font-bold="True" font-size="XX-Large" text="Raised Requisition"></asp:label>
         <br />
         <br />
-        <asp:Button ID="Search" runat="server" Text="Search" OnClick="Search_Click" />
+        <div class="row">
+            <div class="form-inline">
+                <div class="col-xs-2">
+                    <asp:label id="Label1" runat="server" text="Employee Name:"></asp:label>
+                </div>
+                <div class="col-xs-2">
+                    <asp:textbox id="NameLB" runat="server" cssclass="btn-default form-control" autopostback="True" enabled="False">DeputyHeadNo</asp:textbox>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="form-inline">
+                <div class="col-xs-2">
+                    <asp:label id="Label2" runat="server" text="Date:"></asp:label>
+                </div>
+                <div class="col-xs-2">
+                    <asp:textbox id="date" runat="server" cssclass="btn-default form-control" autopostback="True" enabled="False">Date</asp:textbox>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
 
-        <asp:Button ID="CancelSearch" runat="server" Text="Cancel" OnClick="CancelSearch_Click" />
-
+        <div class="row">
+            <div class="form-inline">
+                <div class="col-xs">
+                    &nbsp&nbsp&nbsp<asp:label id="Label3" runat="server" text="Search by description:"></asp:label>
+                </div>
+                <div class="col-xs-3">
+                    <asp:textbox id="SearchItemText" runat="server" cssclass="btn-default form-control" autopostback="false" enabled="True"></asp:textbox>
+                </div>
+                <div class="col-xs-1">
+                    <asp:button id="Button1" runat="server" text="Search" cssclass="btn btn-primary" onclick="Search_Click" />
+                </div>
+                <div class="col-xs-4">
+                    <asp:button id="Button2" runat="server" text="Cancel" onclick="CancelSearch_Click" cssclass="btn btn-danger" />
+                </div>
+                <div class="col-xs-2">
+                    <asp:button runat="server" text="Back To Last Page" width="300px" id="Cancel" cssclass="btn btn-default" onclick="Cancel_Click" />
+                </div>
+            </div>
+        </div>
     </div>
+
 
     <br />
     <br />
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
-                <asp:GridView GridLines="None" runat="server" ID="StationeryGridView" AutoGenerateColumns="False" OnSelectedIndexChanged="StationeryGridView_SelectedIndexChanged">
+                <asp:gridview gridlines="None" runat="server" cssclass="table table-striped" id="StationeryGridView" autogeneratecolumns="False" onselectedindexchanged="StationeryGridView_SelectedIndexChanged">
                     <Columns>
                         <asp:BoundField DataField="ItemNo" HeaderText="ItemNo" SortExpression="ItemNo" />
                         <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
                         <asp:TemplateField HeaderText="Quantity">
                             <ItemTemplate>
-                                <asp:TextBox ID="Quantity" runat="server" TextMode="Number"></asp:TextBox>
+                                <asp:TextBox ID="Quantity" runat="server" TextMode="Number" cssclass="btn-default form-control" ></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:CommandField ShowSelectButton="true" />
                     </Columns>
-                </asp:GridView>
-                <asp:Label ID="showerrorLb" runat="server" Text=""></asp:Label>
+                </asp:gridview>
+                <asp:label id="showerrorLb" runat="server" text=""></asp:label>
             </div>
             <div class="col-sm-6">
-                <asp:GridView GridLines="Horizontal" DataKeyNames="ItemNo" runat="server" ID="Cart" AutoGenerateColumns="False" OnRowDeleting="Cart_GridViewDelete">
+                <asp:gridview GridLines="None" datakeynames="ItemNo" runat="server" cssclass="table table-striped" id="Cart" autogeneratecolumns="False" onrowdeleting="Cart_GridViewDelete">
                     <Columns>
                         <asp:TemplateField HeaderText="ItemNo" SortExpression="ItemNo">
                             <ItemTemplate>
@@ -66,18 +98,18 @@
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
-                </asp:GridView>
+                </asp:gridview>
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <asp:Button ID="Confirm" runat="server" OnClick="Confirm_Click" Text="Confirm" Visible="false" />
-            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp;
-            <asp:Button runat="server" Text="Cancel" ID="Cancel" OnClick="Cancel_Click" />
-            <br />
-            <asp:Label ID="Msg" runat="server" Text=""></asp:Label>
+            <br /><br /><br /><br /><br /><br /><br />
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            <asp:button id="Confirm" runat="server" onclick="Confirm_Click" text="Submit" cssclass="btn btn-success" width="100px" visible="false" />
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            <asp:button id="Delete" runat="server" onclick="Delete_Click" text="Delete" cssclass="btn btn-danger" width="100px" visible="false" />
+
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <br /><br /><br />
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            <asp:label id="Msg" runat="server" style="color:red"></asp:label>
         </div>
     </div>
 

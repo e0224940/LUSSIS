@@ -399,7 +399,7 @@ public class Service : IService
         return result;
     }
 
-    public WCFRequisition[] GetPendingRequisitions(int sessionID, string sessionEmpNo)
+    public WCFRequisition[] GetPendingRequisitions(int sessionID, int sessionEmpNo)
     {
         List<WCFRequisition> result = new List<WCFRequisition>();
 
@@ -418,7 +418,8 @@ public class Service : IService
                         ApprovedBy = item.ApprovedBy.ToString(),
                         DateReviewed = item.DateReviewed.ToString(),
                         Status = item.Status,
-                        Remarks = item.Remarks
+                        Remarks = item.Remarks,
+                        IssuedBy = item.IssuedBy.ToString()
                     });
                 }
             }
@@ -462,12 +463,21 @@ public class Service : IService
             Requisition requisition = new Requisition()
             {
                 ReqNo = Convert.ToInt32(updatedRequisition.ReqNo),
+                IssuedBy = Convert.ToInt32(updatedRequisition.IssuedBy),
                 DateIssued = Convert.ToDateTime(updatedRequisition.DateIssued),
                 ApprovedBy = Convert.ToInt32(updatedRequisition.ApprovedBy),
-                DateReviewed = Convert.ToDateTime(updatedRequisition.DateReviewed),
                 Status = updatedRequisition.Status,
-                Remarks = updatedRequisition.Remarks
+                Remarks = updatedRequisition.Remarks,
             };
+
+            if (updatedRequisition.Status.Equals("Approved"))
+            {
+                requisition.DateReviewed = DateTime.Today;
+            }
+            else
+            {
+                requisition.DateReviewed = null;
+            }
 
             result = AndroidController.UpdateRequisition(requisition);
         }
@@ -536,7 +546,7 @@ public class Service : IService
 
     public WCFRetrieval GetLatestRetrieval(int sessionID)
     {
-         WCFRetrieval result = null;
+        WCFRetrieval result = null;
 
         if (AndroidAuthenticationController.IsValidSessionId(sessionID))
         {
@@ -554,7 +564,7 @@ public class Service : IService
         return result;
     }
 
-    public WCFRetrievalDetail[] GetRetrievalDetails(int sessionID, string retrievalNo)
+    public WCFRetrievalDetail[] GetRetrievalDetails(int sessionID, int retrievalNo)
     {
         List<WCFRetrievalDetail> result = new List<WCFRetrievalDetail>();
 
@@ -562,17 +572,29 @@ public class Service : IService
         {
             var retrievalDetails = AndroidController.GetRetrievalDetails(retrievalNo);
 
+            // No need for breakup by department for android
             foreach (var item in retrievalDetails)
             {
-                result.Add(new WCFRetrievalDetail()
+                WCFRetrievalDetail temp = result.Where(detail => detail.ItemNo.Equals(item.ItemNo)).FirstOrDefault();
+                if (temp == null)
                 {
-                    RetrievalNo = item.RetrievalNo,
-                    DeptCode = item.DeptCode,
-                    ItemNo = item.ItemNo,
-                    Needed = item.Needed.HasValue ? item.Needed.Value : 0,
-                    BacklogQty = item.BackLogQty.HasValue ? item.BackLogQty.Value : 0,
-                    Actual = item.Actual.HasValue ? item.Actual.Value : 0
-                });
+                    result.Add(new WCFRetrievalDetail()
+                    {
+                        RetrievalNo = item.RetrievalNo,
+                        ItemNo = item.ItemNo,
+                        Description = item.StationeryCatalogue.Description,
+                        Bin = item.StationeryCatalogue.Bin.ToString(),
+                        Needed = item.Needed.HasValue ? item.Needed.Value : 0,
+                        BacklogQty = item.BackLogQty.HasValue ? item.BackLogQty.Value : 0,
+                        Actual = item.Actual.HasValue ? item.Actual.Value : 0
+                    });
+                }
+                else
+                {
+                    temp.Needed += item.Needed.HasValue ? item.Needed.Value : 0;
+                    temp.BacklogQty += item.BackLogQty.HasValue ? item.BackLogQty.Value : 0;
+                    temp.Actual += item.Actual.HasValue ? item.Actual.Value : 0;
+                }
             }
         }
 
@@ -589,5 +611,41 @@ public class Service : IService
         }
 
         return result;
+    }
+
+    public bool CreateAdjustmentVoucher(int sessionID, string ItemNo, int Qty, string Reason)
+    {
+        bool result = false;
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            result = AndroidController.CreateAdjustmentVoucher(sessionID, ItemNo, Qty, Reason);
+        }
+
+        return result;
+    }
+
+    public String[] GetCatalogueCatList(int sessionID)
+    {
+        List<String> result = new List<string>();
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            result = AndroidController.GetCategoryList();
+        }
+
+        return result.ToArray();
+    }
+
+    public String[] GetCatalogueBinList(int sessionID)
+    {
+        List<String> result = new List<string>();
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            result = AndroidController.GetBinList();
+        }
+
+        return result.ToArray();
     }
 }

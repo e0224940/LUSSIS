@@ -8,13 +8,6 @@ namespace LUSSIS_Backend
 {
     public class ApprovePurchaseOrderController
     {
-        public static List<PurchaseOrder> ViewPurchaseOrder(int empNo)
-        {
-            LussisEntities context = new LussisEntities();
-            var result = context.PurchaseOrders.Where(x => x.OrderedBy == empNo).ToList();
-            return result;
-        }
-        
         //ApprovePOList functions
         public static List<PurchaseOrder> getPendingOrdersList()
         {
@@ -24,12 +17,12 @@ namespace LUSSIS_Backend
         }
 
         //ApprovePODetails functions
-        //public static List<ApprovePurchaseOrderView> getPurchaseOrderDetails(int poNO)
-        //{
-        //    LussisEntities context = new LussisEntities();
-        //    var result = context.ApprovePurchaseOrderViews.Where(x => x.PONo == poNO).ToList();
-        //    return result;
-        //}
+        public static List<PURCHASEORDERVIEW> getPurchaseOrderDetails(int poNO, string supplierSelected)
+        {
+            LussisEntities context = new LussisEntities();
+            var result = context.PURCHASEORDERVIEWs.Where(x => x.PONo == poNO && x.SupplierCode == supplierSelected).ToList();
+            return result;
+        }
 
         //Button(Approve) function
         public static void setStatusApprove(int poNO)
@@ -46,6 +39,34 @@ namespace LUSSIS_Backend
             LussisEntities context = new LussisEntities();
             var approvePurchaseOrderview = context.PurchaseOrders.Where(x => x.PONo == poNO).FirstOrDefault();
             approvePurchaseOrderview.Status = "Rejected";
+            context.SaveChanges();
+        }
+
+        //set ApproveBy
+        public static void updateApproveBy(int poNO, int empNo)
+        {
+            LussisEntities context = new LussisEntities();
+        
+            var query = context.PurchaseOrders.Where(x => x.PONo == poNO).SingleOrDefault();
+            query.ApprovedBy = empNo;
+            context.SaveChanges();
+        }
+
+        //set dateReviewed
+        public static void updateDateReviewed(int poNO)
+        {
+            LussisEntities context = new LussisEntities();
+            var query = context.PurchaseOrders.Where(x => x.PONo == poNO).SingleOrDefault();
+            query.DateReviewed = DateTime.Now.Date;
+            context.SaveChanges();
+        }
+
+        //set Remarks
+        public static void updateRemarks(int poNO, string remarks)
+        {
+            LussisEntities context = new LussisEntities();
+            var query = context.PurchaseOrders.Where(x => x.PONo == poNO).SingleOrDefault();
+            query.Remarks = remarks;
             context.SaveChanges();
         }
 

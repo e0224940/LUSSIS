@@ -98,7 +98,7 @@ public interface IService
 
     [OperationContract]
     [WebInvoke(UriTemplate = "/PendingRequisitions", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-    WCFRequisition[] GetPendingRequisitions(int sessionID, string sessionEmpNo);
+    WCFRequisition[] GetPendingRequisitions(int sessionID, int sessionEmpNo);
 
     [OperationContract]
     [WebInvoke(UriTemplate = "/GetRequisitionById", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
@@ -122,11 +122,23 @@ public interface IService
 
     [OperationContract]
     [WebInvoke(UriTemplate = "/RetrievalDetails", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-    WCFRetrievalDetail[] GetRetrievalDetails(int sessionID, string retrievalNo);
+    WCFRetrievalDetail[] GetRetrievalDetails(int sessionID, int retrievalNo);
 
     [OperationContract]
     [WebInvoke(UriTemplate = "/sendEmail", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     bool SendEmail(int sessionID, String email, String subject, String message);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/CreateAdjustmentVoucher", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    bool CreateAdjustmentVoucher(int sessionID, String ItemNo, int Qty, String Reason);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/GetCatalogueCatList", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    String[] GetCatalogueCatList(int sessionID);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/GetCatalogueBinList", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    String[] GetCatalogueBinList(int sessionID);
 }
 
 public class WCFDisbursementDetail
@@ -220,8 +232,9 @@ public class WCFRetrieval
 public class WCFRetrievalDetail
 {
     public int RetrievalNo;
-    public String DeptCode;
     public String ItemNo;
+    public String Description;
+    public String Bin;
     public int Needed;
     public int BacklogQty;
     public int Actual;

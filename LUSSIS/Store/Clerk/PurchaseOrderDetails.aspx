@@ -8,7 +8,7 @@
 
         <div class="row">
             <h2>Details of Purchase Order #<%= Session["PONo"] %>
-                <asp:Button runat="server" CommandArgument="Delete" ID="DeleteButton" CssClass="btn btn-danger" Text="Delete Voucher" OnClick="Button_Click" />
+                <asp:Button runat="server" CommandArgument="Delete" ID="DeleteButton" CssClass="btn btn-danger" Text="Delete PO" OnClick="Button_Click" />
             </h2>
         </div>
 
@@ -20,7 +20,7 @@
                 Supplier: <%= pO.Supplier.SupplierName %>
             </div>
             <div class="col-xs-3">
-                Date Issued: <%= pO.DateIssued %>
+                Date Issued: <%= ((DateTime)pO.DateIssued).ToString("dd-MM-yyyy") %>
             </div>
             <div class="col-xs-3">
                 Status: <%= pO.Status %>
@@ -33,7 +33,7 @@
                 ID="PODetailsGridView"
                 AutoGenerateColumns="False"
                 GridLines="None"
-                CssClass="table table-striped"
+                CssClass="table table-striped"  
                 OnRowDeleting="OnRowDeleting"
                 OnRowEditing="OnRowEditing"
                 OnRowCancelingEdit="OnRowCancelingEdit"
@@ -70,7 +70,7 @@
                     <asp:CommandField
                         HeaderText="Action"
                         ButtonType="Button"
-                        ShowEditButton="True"
+                        ShowEditButton="True" 
                         ShowDeleteButton="True" />
 
                 </Columns>

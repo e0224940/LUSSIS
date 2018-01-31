@@ -129,6 +129,12 @@ public partial class _Default : System.Web.UI.Page
         List<String> itemNos = new List<string>();
         List<int> actualList = new List<int>();
 
+        if(!IsValid)
+        {
+            // Page Validation failed somewhere, don't do anything
+            return;
+        }
+
         if (Session["RetrievalNo"] == null)
         {
             Session["Error"] = "No Retrieval detected, please select one first.";
@@ -192,6 +198,7 @@ public partial class _Default : System.Web.UI.Page
 
     protected void BigRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
+        // Display if empty
         if (BigRepeater.Items.Count < 1)
         {
             if (e.Item.ItemType == ListItemType.Footer)
@@ -200,6 +207,61 @@ public partial class _Default : System.Web.UI.Page
                 lblFooter.Visible = true;
             }
         }
+    }
+
+    protected void ActualTextBoxValidator_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        String departmentCode;
+        String itemNo;
+        int value;
+        bool result = false;
+        int sum;
+        CustomValidator customValidator = (CustomValidator)source;
+        HiddenField hiddenFieldItemNo = customValidator.Controls[0] as HiddenField;
+        HiddenField hiddenFieldDepartment = customValidator.Controls[1] as HiddenField;
+
+        if(int.TryParse(args.Value, out value))
+        {
+            departmentCode = hiddenFieldDepartment.Value;
+            itemNo = hiddenFieldItemNo.Value;
+
+            // Get the Big row that this field belongs to
+            foreach (RepeaterItem item in BigRepeater.Items)
+            {
+                HiddenField bigItemNoHiddenField = (HiddenField)item.FindControl("BigItemNoHiddenField");
+                if (bigItemNoHiddenField.Value.Equals(itemNo))
+                {
+                    // Find the current sum of items retrieved
+                    sum = 0;
+                    Repeater SmallRepeater = (Repeater)item.FindControl("SmallRepeater");
+                    foreach (RepeaterItem smallItem in SmallRepeater.Items)
+                    {
+                        TextBox inputTextBox = (TextBox)smallItem.FindControl("ActualTextBox");
+                        if (int.TryParse(inputTextBox.Text, out value))
+                        {
+                            sum += value;
+                        }
+                    }
+
+                    // Check if sum is greater than stock cart value
+                    result = RetrievalFormController.IsThereEnoughItemsInStock(sum, itemNo);
+
+                    break;
+                }
+            }
+
+            // If an invalid sum was found, then display message
+            if (!result)
+            {
+                customValidator.Text = "There are only " + RetrievalFormController.GetQuantityInStock(itemNo) + " in stock";
+            }
+            else
+            {
+                customValidator.Text = "";
+            }
+        }
+
+        args.IsValid = result;
     }
 }
 
@@ -223,6 +285,12 @@ public class SmallRow
     public int Needed { get; set; }
     public int Backlog { get; set; }
     public int Actual { get; set; }
+    public int TotalNeeded {
+        get
+        {
+            return Backlog + Needed;
+        }
+    }
     public String CssClass { get; set; }
     public String Message { get; set; }
     public String ItemNo { get; set; }

@@ -7,11 +7,12 @@
     <div class="container">
 
         <div class="row">
+            <div class="form-inline">
             <h1>Stock Details <%= (string)Session["stockNo"] %></h1>
         </div>
-
+        </div>
         <div class="row">
-            <table>
+            <table class="table table-striped">
                 <tr>
                     <td>Item No:</td>
                     <td>

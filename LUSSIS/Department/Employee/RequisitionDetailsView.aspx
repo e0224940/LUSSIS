@@ -4,24 +4,49 @@
 </asp:Content>
 
 <asp:Content ID="ContentBody" ContentPlaceHolderID="body" runat="server">
-    <h1>View Requisition Details</h1>
-    <asp:Label ID="empName" runat="server" Text="Employee Name:"></asp:Label>
-    <asp:Label ID="empNameshow" runat="server" Text=" "></asp:Label>
+    <div class="container">
+        <asp:label id="lbl_emp_raisedItem" runat="server" font-bold="True" font-size="XX-Large" text="View Requisition Details"></asp:label>
+        <br />
+        <br />
+        <div class="row">
+            <div class="form-inline">
+                <div class="col-xs-2">
+                    <asp:label id="empName" runat="server" text="Employee Name:"></asp:label>
+                </div>
+                <div class="col-xs-2">
+                    <asp:textbox id="empNameshow" runat="server" cssclass="btn-default form-control" autopostback="True" enabled="False">DeputyHeadNo</asp:textbox>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="form-inline">
+
+                <div class="col-xs-2">
+                    <asp:label id="reuNo" runat="server" text="Requisition No:"></asp:label>
+                </div>
+                <div class="col-xs-2">
+                    <asp:textbox id="ReqId" runat="server" cssclass="btn-default form-control" autopostback="True" enabled="False">DeputyHeadNo</asp:textbox>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <br />
-
-    <asp:Label ID="reuNo" runat="server" Text="Requisition No:"></asp:Label>
-    <asp:Label ID="ReqId" runat="server" Text=""></asp:Label>
-
     <br />
     <br />
-
-    <asp:GridView ID="GridViewForDetail" runat="server" DataKeyNames="ReqNo" 
-        AutoGenerateColumns="False" 
-        OnRowCancelingEdit="OnRowCancelingEdit"
-        OnRowUpdating="OnRowUpdating" 
-        OnRowDeleting="detailGrid_Delete" 
-        OnRowEditing="detailGrid_Edit">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <asp:gridview gridlines="None" data
+                    keynames="ReqNo" runat="server"
+                    cssclass="table table-striped"
+                    id="GridViewForDetail"
+                    autogeneratecolumns="False"
+                    onrowcancelingedit="OnRowCancelingEdit"
+                    onrowupdating="OnRowUpdating"
+                    onrowdeleting="detailGrid_Delete"
+                    onrowediting="detailGrid_Edit">
         <Columns>
                 <asp:TemplateField HeaderText="ItemNo" SortExpression="ItemNo" >
                 <ItemTemplate>
@@ -43,23 +68,19 @@
                         <asp:Label ID="Label2" runat="server" Text='<%# Bind("quantity") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-           <%-- <asp:TemplateField HeaderText="New Qty">
-                <ItemTemplate>
-                    <asp:TextBox ID="changeQty" runat="server" Width="80px" Text="" TextMode="Number"></asp:TextBox>
-                </ItemTemplate>
-            </asp:TemplateField>--%>
-
-            
             <asp:CommandField ShowEditButton="true"/>
             <asp:CommandField ShowDeleteButton="True" />
         </Columns>
-
-    </asp:GridView>
-
-    
-
+    </asp:gridview>
+            </div>
+        </div>
+    </div>
     <br />
-   <%-- <asp:Button ID="submit" runat="server" Text="Submit" />
-    &nbsp&nbsp&nbsp&nbsp--%>
-    <asp:Button ID="cancel" runat="server" Text="Back to History Page" OnClick="cancel_Click" />
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <asp:button id="cancel" runat="server" text="Back to History Page"  cssclass="btn btn-primary"  onclick="cancel_Click" />
+            </div>
+        </div>
+    </div>
 </asp:Content>

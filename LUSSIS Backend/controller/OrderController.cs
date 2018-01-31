@@ -199,7 +199,7 @@ namespace LUSSIS_Backend.controller
                     for (int j = 0; j < aVDList.Count; j++)
                     {
                         // Add to Qty if itemNo matches
-                        AdjustmentVoucherDetail aVD = aVDList[i];
+                        AdjustmentVoucherDetail aVD = aVDList[j];
                         if (aVD.ItemNo.Equals(itemNo))
                         {
                             qty += aVD.Qty;

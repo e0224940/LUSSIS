@@ -45,7 +45,7 @@ namespace LUSSIS_Backend.controller
             return context.StationeryCatalogues.Where(x => x.ItemNo.Equals(itemNo)).FirstOrDefault();
         }
 
-        public static void SubmitAdjustmentVoucher(string itemNo, DateTime dateIssued, int qty, string reason, int issueEmpNo, int approveEmpNo)
+        public static void SubmitAdjustmentVoucher(string itemNo, DateTime dateIssued, int qty, string reason, int issueEmpNo)
         {
             LussisEntities context = new LussisEntities();
             using (var txn = new TransactionScope())
@@ -54,7 +54,6 @@ namespace LUSSIS_Backend.controller
                 AdjustmentVoucher aV = new AdjustmentVoucher();
                 aV.DateIssued = dateIssued;
                 aV.IssueEmpNo = issueEmpNo;
-                aV.ApproveEmpNo = approveEmpNo;
                 aV.Status = "Pending";
                 context.AdjustmentVouchers.Add(aV);
                 context.SaveChanges();
