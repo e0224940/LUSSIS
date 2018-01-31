@@ -88,12 +88,11 @@ public partial class Store_Clerk_StockList : System.Web.UI.Page
         int issueEmpNo = Profile.EmpNo;
         StationeryCatalogue stock = StockController.GetStock(itemNo);
         decimal? amount = OrderController.GetUnitPrice(itemNo, stock.Supplier1) * qty;
-        int approveEmpNo = (amount < 250) ? StockController.GetStoreSupervisorEmpNo() : StockController.GetStoreManagerEmpNo();
 
         try
         {
             // Submit AdjustmentVoucher
-            StockController.SubmitAdjustmentVoucher(itemNo, dateIssued, qty, reason, issueEmpNo, approveEmpNo);
+            StockController.SubmitAdjustmentVoucher(itemNo, dateIssued, qty, reason, issueEmpNo);
 
             // Toggle Control Visibility
             Button b = (Button)sender;

@@ -47,7 +47,6 @@
 
                     <asp:BoundField DataField="AVNo" HeaderText="AV#" SortExpression="AVNo" />
                     <asp:BoundField DataField="DateIssued" HeaderText="Date Issued" DataFormatString="{0:dd-MM-yyyy}" SortExpression="DateIssued" />
-                    <asp:BoundField DataField="ApproveEmpName" HeaderText="Approver" SortExpression="ApproveEmpName" />
                     <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
 
                     <asp:TemplateField HeaderText="Details">
