@@ -63,6 +63,42 @@ namespace LUSSIS_Backend
             return result;
         }
 
+        public static bool IsThereEnoughItemsInStock(int qty, String ItemNo)
+        {
+            LussisEntities context = new LussisEntities();
+            bool result = false;
+
+            StationeryCatalogue item = context.StationeryCatalogues
+                .Where(stationeryItem => stationeryItem.ItemNo.Equals(ItemNo))
+                .FirstOrDefault();
+
+            if(item != null)
+            {
+                result = item.CurrentQty >= qty;
+            }
+
+
+            return result;
+        }
+
+        public static int GetQuantityInStock(String ItemNo)
+        {
+            LussisEntities context = new LussisEntities();
+            int result = 0;
+
+            StationeryCatalogue item = context.StationeryCatalogues
+                .Where(stationeryItem => stationeryItem.ItemNo.Equals(ItemNo))
+                .FirstOrDefault();
+
+            if (item != null)
+            {
+                result = item.CurrentQty.Value;
+            }
+
+
+            return result;
+        }
+
         public static int CreateNewRetrieval()
         {
             return RetrievalController.CreateWeeklyRetrieval();

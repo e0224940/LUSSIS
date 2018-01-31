@@ -56,7 +56,7 @@
                                         <th rowspan="2" style="vertical-align: middle;">Bin #</th>
                                         <th rowspan="2" style="vertical-align: middle;">Stationery Description</th>
                                         <th colspan="3">Total Quantity</th>
-                                        <th colspan="4">Breakdown By Department</th>
+                                        <th colspan="5">Breakdown By Department</th>
                                     </tr>
                                     <tr>
                                         <th>Needed</th>
@@ -66,6 +66,7 @@
                                         <th>Needed</th>
                                         <th>Backlog</th>
                                         <th>Actual</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,7 +80,7 @@
                             <td class='<%# Eval("CssClass") %>' rowspan='<%# Eval("DepartmentCount") %>' style="vertical-align: middle;"><%# Eval("Needed") %></td>
                             <td class='<%# Eval("CssClass") %>' rowspan='<%# Eval("DepartmentCount") %>' style="vertical-align: middle;"><%# Eval("Backlog") %></td>
                             <td class='<%# Eval("CssClass") %>' rowspan='<%# Eval("DepartmentCount") %>' style="vertical-align: middle;"><%# Eval("Reterived") %></td>
-
+                            <asp:HiddenField runat="server" ID="BigItemNoHiddenField" Value='<%# Eval("ItemCode")%>'/>
                             <asp:Repeater
                                 runat="server"
                                 ID="SmallRepeater"
@@ -105,6 +106,32 @@
                                         <%# Eval("Actual") %>
                                         <%} %>
                                     </td>
+                                    <td>
+                                        <% if ((bool)Session["Editable"] == true)
+                                            { %>
+                                        <asp:CustomValidator
+                                            runat="server"
+                                            ID="ActualTextBoxValidator"
+                                            ControlToValidate="ActualTextBox"
+                                            OnServerValidate="ActualTextBoxValidator_ServerValidate" >
+                                            <asp:HiddenField runat="server" ID="HiddenItemNo" Value='<%# Eval("ItemNo")%>' />
+                                            <asp:HiddenField runat="server" ID="HiddenDepartment" Value='<%# Eval("Department")%>' />
+                                            </asp:CustomValidator>
+                                        <asp:RangeValidator
+                                            runat="server"
+                                            ID="ActualTextBoxRangeValidator"
+                                            ControlToValidate="ActualTextBox"
+                                            MinimumValue="0"
+                                            MaximumValue='<%# Eval("TotalNeeded") %>' 
+                                            ErrorMessage="Value out of range"/>
+                                        <asp:RequiredFieldValidator
+                                            runat="server"
+                                            ID="ActualTextBoxRequiredValidator"
+                                            ControlToValidate="ActualTextBox"                                           
+                                            ErrorMessage="*"/>
+
+                                        <% } %>
+                                    </td>
                                     </tr>
                         <tr>
                             <!--SMALL ROW END-->
@@ -116,7 +143,7 @@
                     </ItemTemplate>
                     <FooterTemplate>
                         <tr>
-                            <td colspan="9">
+                            <td colspan="10">
                                 <asp:Label ID="lblEmptyData" Text="No Requisitions to Process" runat="server" Visible="false"></asp:Label>
                             </td>
                         </tr>
