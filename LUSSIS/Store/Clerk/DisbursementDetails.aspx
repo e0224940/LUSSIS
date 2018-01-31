@@ -87,20 +87,20 @@
         </div>
 
         <div class="row">
-             <div class="col-xs-2">
-    <asp:Label ID="lbl1" runat="server" Text="Delivery Confirmation:"></asp:Label>
-                </div>
-          
+            <div class="col-xs-2">
+                <asp:Label ID="lbl1" runat="server" Text="Delivery Confirmation:"></asp:Label>
+            </div>
+
         </div>
 
         <div class="row">
-             <div class="col-xs-2">
-    <asp:Label ID="Label1" runat="server" Text="Department Representative:"></asp:Label>
-                </div>
-            
-            <asp:TextBox runat="server" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False" ID="RepTextBox" Width="250px" Enabled="False"></asp:TextBox><br />
+            <div class="col-xs-2">
+                <asp:Label ID="Label1" runat="server" Text="Department Representative:"></asp:Label>
+            </div>
+
+            <asp:TextBox runat="server" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False" ID="RepTextBox" Width="250px"></asp:TextBox><br />
             Employee Number:<br />
-            <asp:TextBox runat="server" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False" ID="RepNoTextBox" Width="250px" Enabled="False"></asp:TextBox><br />
+            <asp:TextBox runat="server" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False" ID="RepNoTextBox" Width="250px"></asp:TextBox><br />
             Enter PIN to Confirm Received:<br />
             <asp:TextBox ID="PinTextBox" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False" runat="server" Width="250px"></asp:TextBox>
         </div>
