@@ -89,12 +89,12 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
     //Search the item 
     protected void Search_Click(object sender, EventArgs e)
     {
-        GridViewRow point = (GridViewRow)Session["Test"];
+        //GridViewRow point = (GridViewRow)Session["Test"];
 
         string val = SearchItemText.Text;
-        point.Visible = false;
+        //point.Visible = false;
         StationeryGridView.DataSource = EmployeeController.SearchDes(val);
-        point.Visible = false;
+        //point.Visible = false;
         StationeryGridView.DataBind();
 
     }
