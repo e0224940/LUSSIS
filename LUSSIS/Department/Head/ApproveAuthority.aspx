@@ -17,8 +17,10 @@
                     </div>
         </div>
     </div>
-                <br />
     <br />
+    <br />
+
+
     <asp:Label ID="lbl_appAuth_appActingHeadTxt" runat="server" Font-Bold="True" Font-Underline="True" Text="Appoint Acting Head"></asp:Label>
     <br />
     <asp:Label ID="lbl_appAuth_appointHeadToTxt" runat="server" Text="Appoint Acting Head Authority To:"></asp:Label>

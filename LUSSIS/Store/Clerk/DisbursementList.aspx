@@ -7,7 +7,8 @@
     <div class="container">
 
         <div class="row">
-            <h1>Pending Disbursements</h1>
+             <asp:Label ID="lbl_header_appAuth" runat="server" Font-Bold="True" Font-Size="XX-Large" Text="Pending Disbursements"></asp:Label>
+           
         </div>
 
         <div class="row">

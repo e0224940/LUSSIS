@@ -36,13 +36,15 @@
             <div class="form-group">
                 <label>Change Department Representative To : </label>
                 <br />
-                <asp:DropDownList runat="server" ID="DepRepDropDownList"></asp:DropDownList>
+                <asp:DropDownList CssClass="btn btn-default dropdown-toggle" runat="server" ID="DepRepDropDownList"></asp:DropDownList>
             </div>
         </div>
         <div class="row">
             <div class="form-group">
+                 <div class="form-inline">
                 <asp:Button runat="server" CommandArgument="ChangeRepresentative" ID="ChangeRepresentativeButton" CssClass="btn btn-primary" Text="Change" OnClick="Button_Click" />
             </div>
+                </div>
         </div>
     </div>
 </asp:Content>

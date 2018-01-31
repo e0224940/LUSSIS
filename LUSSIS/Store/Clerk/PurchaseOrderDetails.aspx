@@ -33,7 +33,7 @@
                 ID="PODetailsGridView"
                 AutoGenerateColumns="False"
                 GridLines="None"
-                CssClass="table table-striped"
+                CssClass="table table-striped"  
                 OnRowDeleting="OnRowDeleting"
                 OnRowEditing="OnRowEditing"
                 OnRowCancelingEdit="OnRowCancelingEdit"
@@ -70,7 +70,7 @@
                     <asp:CommandField
                         HeaderText="Action"
                         ButtonType="Button"
-                        ShowEditButton="True"
+                        ShowEditButton="True" 
                         ShowDeleteButton="True" />
 
                 </Columns>

@@ -7,8 +7,10 @@
     <div class="container">
 
         <div class="row">
-            <h1>Inventory</h1>
+            <div class="form-inline">
+           <asp:Label ID="lbl_header_appAuth" runat="server" Font-Bold="True" Font-Size="XX-Large" Text="Inventory"></asp:Label>
         </div>
+            </div>
 
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -16,19 +18,32 @@
                 <div>
 
                     <div class="row">
-                        Select Bin
-                        <asp:DropDownList ID="BinDropDownList" runat="server" OnSelectedIndexChanged="BinDropDownList_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
-                    </div>
-
+                        <div class="form-inline">
+                        <asp:Label ID="lbl" runat="server" Text="Select Bin"></asp:Label>    
+                        <asp:DropDownList ID="BinDropDownList" CssClass="btn btn-default dropdown-toggle" runat="server" OnSelectedIndexChanged="BinDropDownList_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                    
+                        </div>
+                    <br />
+                        </div>
                     <div class="row">
+                        <div class="form-inline">
                         <strong>OR</strong>
                     </div>
+                        </div><br />
 
                     <div class="row">
-                        Search
-                        <asp:TextBox ID="SearchTextBox" runat="server" Placeholder="Search"></asp:TextBox>
-                        <asp:Button ID="SearchButton" runat="server" Text="Search" OnClick="SearchButton_Click" />
-                    </div>
+                        <div class="form-inline">
+                           
+                        <asp:Label ID="Label1" runat="server" Text="Search"></asp:Label>
+                              
+                                
+                        <asp:TextBox ID="SearchTextBox" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False" runat="server" Placeholder="Search"></asp:TextBox>
+                        
+                           
+                        <asp:Button ID="SearchButton" CssClass="btn btn-primary" runat="server" Text="Search" OnClick="SearchButton_Click" />
+                
+                            </div>
+                        </div>
 
                     <div class="row">
 
@@ -42,9 +57,9 @@
                             }
                         %>
                     </div>
-
+                    <br />
                     <div class="row">
-                        <h1>Stock List</h1>
+                       <asp:Label ID="Labe" runat="server" Font-Bold="True" Font-Size="XX-Large" Text="Stock List"></asp:Label>    
                     </div>
 
                     <div class="row">
@@ -75,16 +90,16 @@
                                                 <asp:Label ID="QtyOnHandLabel" runat="server" Text='<%# Eval("CurrentQty") %>'></asp:Label>
                                             </td>
 
-                                            <td>
-                                                <asp:Button ID="DetailsButton" runat="server" Text="Details" OnClick="DetailsButton_Click" CommandArgument='<%# Eval("ItemNo") %>' />
+                                            <td style="vertical-align: middle;">
+                                                <asp:Button ID="DetailsButton" CssClass="btn btn-primary" runat="server" Text="Details" OnClick="DetailsButton_Click" CommandArgument='<%# Eval("ItemNo") %>' />
                                             </td>
 
                                             <td style="vertical-align: middle;">
-                                                <asp:Button ID="AdjustmentVoucherButton" runat="server" Text="Adjustment Voucher" OnClick="AdjustmentVoucherButton_Click" CommandArgument='<%# Eval("ItemNo") %>' />
-                                                <asp:TextBox ID="NewQtyTextBox" runat="server" Visible="false" EnableViewState="False" placeholder="Enter Correct Qty"></asp:TextBox>
-                                                <asp:TextBox ID="RemarksTextBox" runat="server" Visible="false" EnableViewState="False" placeholder="Enter Reason"></asp:TextBox>
-                                                <asp:Button ID="SubmitAdjustmentVoucherButton" runat="server" Visible="false" Text="Submit" OnClick="SubmitAdjustmentVoucherButton_Click" CommandArgument='<%# Eval("ItemNo") %>' OnClientClick="$get('Dog').click();return false;" />
-                                                <asp:Button ID="CancelAdjustmentVoucherButton" runat="server" Visible="false" Text="Cancel" OnClick="CancelAdjustmentVoucherButton_Click" />
+                                                <asp:Button ID="AdjustmentVoucherButton" CssClass="btn btn-info" runat="server" Text="Adjustment Voucher" OnClick="AdjustmentVoucherButton_Click" CommandArgument='<%# Eval("ItemNo") %>' />
+                                                <asp:TextBox ID="NewQtyTextBox" runat="server" CssClass="btn-default form-control" Visible="false" EnableViewState="False" placeholder="Enter Correct Qty"></asp:TextBox>
+                                                <asp:TextBox ID="RemarksTextBox" runat="server" CssClass="btn-default form-control" Visible="false" EnableViewState="False" placeholder="Enter Reason"></asp:TextBox>
+                                                <asp:Button ID="SubmitAdjustmentVoucherButton" CssClass="btn btn-success" runat="server" Visible="false" Text="Submit" OnClick="SubmitAdjustmentVoucherButton_Click" CommandArgument='<%# Eval("ItemNo") %>' OnClientClick="$get('Dog').click();return false;" />
+                                                <asp:Button ID="CancelAdjustmentVoucherButton" CssClass="btn btn-warning" runat="server" Visible="false" Text="Cancel" OnClick="CancelAdjustmentVoucherButton_Click" />
                                             </td>
 
                                             <td>
