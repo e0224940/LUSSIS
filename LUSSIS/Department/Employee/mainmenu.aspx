@@ -6,6 +6,5 @@
     <ul class="dropdown-menu">
         <li><a href="<%= Page.ResolveUrl("~/Department/Employee/AddItemPage.aspx") %>">Raised Requisition</a></li>
         <li><a href="<%= Page.ResolveUrl("~/Department/Employee/ViewRequisitionHistory.aspx") %>">Requisition History</a></li>
-        <li><a href="<%= Page.ResolveUrl("~/Department/Employee/RequisitionDetailsView.aspx") %>">Requisition Details</a></li>
     </ul>
 </li>

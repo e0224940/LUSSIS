@@ -25,6 +25,7 @@ namespace LUSSIS_Backend
         {
             using (LussisEntities entities = new LussisEntities())
             {
+                
                 return entities.StationeryCatalogues.Where(p => p.Description.Contains(value.Trim())).ToList();
             }
         }
