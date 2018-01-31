@@ -9,56 +9,50 @@ using LUSSIS_Backend.controller;
 
 public partial class Store_Clerk_AdjustmentVoucherDetails : System.Web.UI.Page
 {
-    // ATTRIBUTES
-
     protected int aVNo;
     protected AdjustmentVoucher aV;
-
-    // EVENTS
+    protected List<AdjustmentVoucherDetail> aVDetails;
 
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
-            // If no AVNo is passed, go back to List Page
+            // If no AVNo is passed
             if (Session["AVNo"] == null)
             {
+                // Go back to AdjustmentVoucherListPage
                 GoToAdjustmentVoucherListPage();
-            }
-            else
-            {
-                // Set DataGrid
-                BindGrid();
             }
         }
 
-        // Set Everytime
-        aVNo = (int)Session["AVNo"];
-        aV = AVController.GetAdjustmentVoucher(aVNo);
+        // Set page attributes
+        SetPageAttributes();
+
+        if (!IsPostBack)
+        {
+            // Bind gridview
+            BindGrid();
+        }
     }
 
     protected void Button_Click(object sender, EventArgs e)
     {
-        Button buttonPressed = (Button)sender;
-        aVNo = (int)Session["AVNo"];
-
-        // Delete Button
-        if (buttonPressed.CommandArgument == "Delete")
+        try
         {
-            // Delete Adjustment Voucher
-            try
+            Button buttonPressed = (Button)sender;
+
+            if (buttonPressed.CommandArgument == "Delete")
             {
+                // Delete AV
                 AVController.DeleteAV(aVNo);
                 Session["AVProcessed"] = (int)Session["AVNo"];
-            }
-            catch (Exception exception)
-            {
-                Session["Error"] = "An Error Has Occured: " + exception.Message;
-            }
-            if (Session["Error"] == null)
-            {
                 GoToAdjustmentVoucherListPage();
             }
+        }
+        catch (Exception exception)
+        {
+            // Alert user of error
+            Session["Error"] = "An Error Has Occured: " + exception.Message;
         }
     }
 
@@ -70,20 +64,27 @@ public partial class Store_Clerk_AdjustmentVoucherDetails : System.Web.UI.Page
 
     protected void OnRowUpdating(object sender, GridViewUpdateEventArgs e)
     {
-        // Get Selected Row
-        GridViewRow row = AVDetailsGridView.Rows[e.RowIndex];
-
         try
         {
+            // Get selected row
+            GridViewRow row = AVDetailsGridView.Rows[e.RowIndex];
+
+            // Get page data
             string itemNo = (row.FindControl("LabelItemNo") as Label).Text;
             int qty = Int32.Parse((string)e.NewValues["Qty"]);
             string reason = (string)e.NewValues["Reason"];
+
+            // Update AVD (qty & reason)
             AVController.UpdateAVDetailQty(aVNo, itemNo, qty, reason);
+
+            // Update page
             AVDetailsGridView.EditIndex = -1;
+            SetPageAttributes();
             BindGrid();
         }
         catch (Exception exception)
         {
+            // Alert user of error
             Session["Error"] = "An Error Has Occured: " + exception.Message;
         }
     }
@@ -96,25 +97,42 @@ public partial class Store_Clerk_AdjustmentVoucherDetails : System.Web.UI.Page
 
     protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        GridViewRow row = AVDetailsGridView.Rows[e.RowIndex];
-        string itemNo = (row.FindControl("LabelItemNo") as Label).Text;
-        AVController.DeleteAVD(aVNo, itemNo);
-        BindGrid();
-    }
+        try
+        {
+            // Get selected row
+            GridViewRow row = AVDetailsGridView.Rows[e.RowIndex];
 
-    // METHODS
+            // Get page data
+            string itemNo = (row.FindControl("LabelItemNo") as Label).Text;
+
+            // Delete AVD
+            AVController.DeleteAVD(aVNo, itemNo);
+
+            // UpdatePage
+            SetPageAttributes();
+            BindGrid();
+        }
+        catch (Exception exception)
+        {
+            // Alert user of error
+            Session["Error"] = "An Error Has Occured: " + exception.Message;
+        }
+    }
 
     private void GoToAdjustmentVoucherListPage()
     {
         Response.Redirect("AdjustmentVoucherList.aspx");
     }
 
+    private void SetPageAttributes()
+    {
+        aVNo = (int)Session["AVNo"];
+        aV = AVController.GetAdjustmentVoucher(aVNo);
+        aVDetails = AVController.GetAVDetails(aVNo);
+    }
+
     private void BindGrid()
     {
-        // Get AV Details
-        int aVNo = (int)Session["AVNo"];
-        List<AdjustmentVoucherDetail> aVDetails = AVController.GetAVDetails(aVNo);
-
         // Set DataGrid
         AVDetailsGridView.DataSource = aVDetails.Select(
             aVD => new

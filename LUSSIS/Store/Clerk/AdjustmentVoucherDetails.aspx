@@ -13,6 +13,18 @@
         </div>
 
         <div class="row">
+            <% if (Session["Error"] != null)
+                { %>
+            <div class="alert alert-danger">
+                <%= (string) Session["Error"] %>
+            </div>
+            <% 
+                    Session.Remove("Error");
+                }
+            %>
+        </div>
+
+        <div class="row">
             <div class="col-xs-4">
                 Voucher#: <%= Session["AVNo"] %>
             </div>
@@ -35,7 +47,6 @@
                 OnRowEditing="OnRowEditing"
                 OnRowCancelingEdit="OnRowCancelingEdit"
                 OnRowUpdating="OnRowUpdating">
-
                 <Columns>
 
                     <asp:TemplateField HeaderText="Item No">
@@ -63,11 +74,8 @@
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBoxQty" runat="server" Text='<%# Bind("Qty") %>'></asp:TextBox>
                             <div>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
-                                    ControlToValidate="TextBoxQty" ErrorMessage="Qty Field is Empty" Display="Dynamic" Style="color: red"></asp:RequiredFieldValidator>
-                                <asp:CompareValidator runat="server" 
-                                    Operator="DataTypeCheck" Type="Integer"
-                                    ControlToValidate="TextBoxQty" ErrorMessage="Value must be a Number" Display="Dynamic" Style="color: red" />
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBoxQty" ErrorMessage="Field cannot be empty" Display="Dynamic" Style="color: red;"></asp:RequiredFieldValidator>
+                                <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="TextBoxQty" Operator="DataTypeCheck" Type="Integer" ErrorMessage="Enter only integer" Display="Dynamic" Style="color: red;"></asp:CompareValidator>
                             </div>
                         </EditItemTemplate>
                     </asp:TemplateField>
