@@ -8,7 +8,7 @@
 
         <div class="row">
             <h2>Details of Purchase Order #<%= Session["PONo"] %>
-                <asp:Button runat="server" CommandArgument="Delete" ID="DeleteButton" CssClass="btn btn-danger" Text="Delete Voucher" OnClick="Button_Click" />
+                <asp:Button runat="server" CommandArgument="Delete" ID="DeleteButton" CssClass="btn btn-danger" Text="Delete PO" OnClick="Button_Click" />
             </h2>
         </div>
 
