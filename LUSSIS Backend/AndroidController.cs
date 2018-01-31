@@ -376,7 +376,7 @@ namespace LUSSIS_Backend
             return result;
         }
 
-        public static List<RetrievalDetail> GetRetrievalDetails(string retrievalNo)
+        public static List<RetrievalDetail> GetRetrievalDetails(int retrievalNo)
         {
             List<RetrievalDetail> result = null;
             try

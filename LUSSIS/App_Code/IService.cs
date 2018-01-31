@@ -122,7 +122,7 @@ public interface IService
 
     [OperationContract]
     [WebInvoke(UriTemplate = "/RetrievalDetails", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-    WCFRetrievalDetail[] GetRetrievalDetails(int sessionID, string retrievalNo);
+    WCFRetrievalDetail[] GetRetrievalDetails(int sessionID, int retrievalNo);
 
     [OperationContract]
     [WebInvoke(UriTemplate = "/sendEmail", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
