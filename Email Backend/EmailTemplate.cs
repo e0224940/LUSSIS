@@ -83,6 +83,15 @@ namespace Email_Backend
             return
                 "Dear " + manager + "<br/>" + "A new requisition has been raised by" + requestEmployee + ",please approve it soon.";
         }
+        public static String GenerateRaisedRequisitionSubject(string requestEmployee)
+        {
+            return "You raised a new requisition.";
+        }
+        public static String GenerateRaisedRequisition(string employee, string reqNo)
+        {
+            return
+                "Dear " + employee + "<br/>" + "Your new requisiton number is "+reqNo+".";
+        }
 
 
     }

@@ -11,4 +11,9 @@ public partial class Department_Employee_RaisedRequisitionSuccessPage : System.W
     {
 
     }
+
+    protected void view_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("ViewRequisitionHistory.aspx");
+    }
 }

@@ -98,7 +98,7 @@ public interface IService
 
     [OperationContract]
     [WebInvoke(UriTemplate = "/PendingRequisitions", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-    WCFRequisition[] GetPendingRequisitions(int sessionID, string sessionEmpNo);
+    WCFRequisition[] GetPendingRequisitions(int sessionID, int sessionEmpNo);
 
     [OperationContract]
     [WebInvoke(UriTemplate = "/GetRequisitionById", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
@@ -127,6 +127,10 @@ public interface IService
     [OperationContract]
     [WebInvoke(UriTemplate = "/sendEmail", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     bool SendEmail(int sessionID, String email, String subject, String message);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/CreateAdjustmentVoucher", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    bool CreateAdjustmentVoucher(int sessionID, String ItemNo, int Qty, String Reason);
 }
 
 public class WCFDisbursementDetail
@@ -222,6 +226,8 @@ public class WCFRetrievalDetail
     public int RetrievalNo;
     public String DeptCode;
     public String ItemNo;
+    public String Description;
+    public String Bin;
     public int Needed;
     public int BacklogQty;
     public int Actual;

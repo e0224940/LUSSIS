@@ -399,7 +399,7 @@ public class Service : IService
         return result;
     }
 
-    public WCFRequisition[] GetPendingRequisitions(int sessionID, string sessionEmpNo)
+    public WCFRequisition[] GetPendingRequisitions(int sessionID, int sessionEmpNo)
     {
         List<WCFRequisition> result = new List<WCFRequisition>();
 
@@ -418,7 +418,8 @@ public class Service : IService
                         ApprovedBy = item.ApprovedBy.ToString(),
                         DateReviewed = item.DateReviewed.ToString(),
                         Status = item.Status,
-                        Remarks = item.Remarks
+                        Remarks = item.Remarks,
+                        IssuedBy = item.IssuedBy.ToString()
                     });
                 }
             }
@@ -462,12 +463,21 @@ public class Service : IService
             Requisition requisition = new Requisition()
             {
                 ReqNo = Convert.ToInt32(updatedRequisition.ReqNo),
+                IssuedBy = Convert.ToInt32(updatedRequisition.IssuedBy),
                 DateIssued = Convert.ToDateTime(updatedRequisition.DateIssued),
                 ApprovedBy = Convert.ToInt32(updatedRequisition.ApprovedBy),
-                DateReviewed = Convert.ToDateTime(updatedRequisition.DateReviewed),
                 Status = updatedRequisition.Status,
-                Remarks = updatedRequisition.Remarks
+                Remarks = updatedRequisition.Remarks,
             };
+
+            if (updatedRequisition.Status.Equals("Approved"))
+            {
+                requisition.DateReviewed = DateTime.Today;
+            }
+            else
+            {
+                requisition.DateReviewed = null;
+            }
 
             result = AndroidController.UpdateRequisition(requisition);
         }
@@ -536,7 +546,7 @@ public class Service : IService
 
     public WCFRetrieval GetLatestRetrieval(int sessionID)
     {
-         WCFRetrieval result = null;
+        WCFRetrieval result = null;
 
         if (AndroidAuthenticationController.IsValidSessionId(sessionID))
         {
@@ -569,6 +579,8 @@ public class Service : IService
                     RetrievalNo = item.RetrievalNo,
                     DeptCode = item.DeptCode,
                     ItemNo = item.ItemNo,
+                    Description = item.StationeryCatalogue.Description,
+                    Bin = item.StationeryCatalogue.Bin.ToString(),
                     Needed = item.Needed.HasValue ? item.Needed.Value : 0,
                     BacklogQty = item.BackLogQty.HasValue ? item.BackLogQty.Value : 0,
                     Actual = item.Actual.HasValue ? item.Actual.Value : 0
@@ -586,6 +598,18 @@ public class Service : IService
         if (AndroidAuthenticationController.IsValidSessionId(sessionID))
         {
             result = EmailBackend.sendEmailStep(email, subject, message);
+        }
+
+        return result;
+    }
+
+    public bool CreateAdjustmentVoucher(int sessionID, string ItemNo, int Qty, string Reason)
+    {
+        bool result = false;
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            result = AndroidController.CreateAdjustmentVoucher(sessionID, ItemNo, Qty, Reason);
         }
 
         return result;

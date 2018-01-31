@@ -60,7 +60,6 @@
     <Compile Include="controller\POController.cs" />
     <Compile Include="controller\RetrievalController.cs" />
     <Compile Include="controller\StockController.cs" />
-    <Compile Include="dao\StoreClerkDao.cs" />
     <Compile Include="CrystalReportController.cs" />
     <Compile Include="DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -247,7 +246,9 @@
       <Name>LUSSIS Email Backend</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="dao\" />
+  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

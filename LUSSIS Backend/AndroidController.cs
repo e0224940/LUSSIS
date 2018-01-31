@@ -61,14 +61,29 @@ namespace LUSSIS_Backend
 
             try
             {
-                return context.StationeryCatalogues
-                    .Where(item =>
-                       item.ItemNo.Contains(itemNo)
-                       || item.Category.Contains(category)
-                       || item.Description.Contains(description)
-                       || item.Bin.Contains(bin)
-                    )
-                    .ToList();
+                var items = context.StationeryCatalogues.ToList();
+
+                if (!String.IsNullOrWhiteSpace(itemNo))
+                {
+                    items = items.Where(item => item.ItemNo.Contains(itemNo)).ToList();
+                }
+
+                if (!String.IsNullOrWhiteSpace(category))
+                {
+                    items = items.Where(item => item.Category.Contains(category)).ToList();
+                }
+
+                if (!String.IsNullOrWhiteSpace(description))
+                {
+                    items = items.Where(item => item.Description.Contains(description)).ToList();
+                }
+
+                if (!String.IsNullOrWhiteSpace(bin))
+                {
+                    items = items.Where(item => item.Bin.Contains(bin)).ToList();
+                }
+
+                return items;
             }
             catch (Exception e)
             {
@@ -239,28 +254,31 @@ namespace LUSSIS_Backend
 
         }
 
-        public static List<Requisition> GetPendingRequisitions(string employeeCode)
+        public static List<Requisition> GetPendingRequisitions(int employeeCode)
         {
             List<Requisition> list_result = new List<Requisition>();
+            LussisEntities context = new LussisEntities();
 
-            using (LussisEntities context = new LussisEntities())
+            try
             {
-                string departmentCode = context.Departments.Where(x => x.HeadEmpNo.Equals(employeeCode)).First().DeptCode;
-                List<Employee> list_e = context.Employees.Where(x => x.DeptCode.Equals(departmentCode)).ToList();
-                List<Requisition> list_r = context.Requisitions.ToList();
+                Employee e = context.Employees.Where(x => x.EmpNo.Equals(employeeCode)).FirstOrDefault();
+                Department d = e.Department;
+                string departmentCode = d.DeptCode;
 
-
-                foreach (Employee e in list_e)
-                {
-                    foreach (Requisition rr in list_r)
-                    {
-                        if (e.EmpNo.Equals(rr.IssuedBy) && rr.Status.Equals("Pending"))        //to tally with the rest of the code if its pending
-                        {
-                            list_result.Add(rr);
-                        }
-                    }
-                }
+                list_result = context.Requisitions.Where(
+                    req => req.Status.Equals("Pending") &&
+                    req.EmployeeWhoIssued.DeptCode.Equals(departmentCode)
+                    ).ToList();
             }
+            catch (Exception e)
+            {
+                // TODO : Put a decent handler here
+                list_result.Add(new Requisition()
+                {
+                    Remarks = e.Message
+                });
+            }
+
             return list_result;
         }
 
@@ -280,8 +298,8 @@ namespace LUSSIS_Backend
 
             try
             {
-                using (LussisEntities context = new LussisEntities())
-                {
+                LussisEntities context = new LussisEntities();
+                
                     Requisition req = context.Requisitions.Where(x => x.ReqNo.Equals(requisition.ReqNo)).First();
 
                     if (req != null)
@@ -295,7 +313,7 @@ namespace LUSSIS_Backend
                     }
                     context.SaveChanges();
                     result = true;
-                }
+                
             }
             catch (Exception)
             {
@@ -372,6 +390,48 @@ namespace LUSSIS_Backend
             catch (Exception)
             {
                 result = null;
+            }
+
+            return result;
+        }
+
+        public static bool CreateAdjustmentVoucher(int sessionID, string itemNo, int qty, string reason)
+        {
+            bool result = false;
+
+            try
+            {
+                LussisEntities context = new LussisEntities();
+
+                Employee employee = AndroidAuthenticationController.GetDetailsOfEmployee(sessionID);
+                StationeryCatalogue itemToChange = context.StationeryCatalogues.Where(item => item.ItemNo.Equals(itemNo)).FirstOrDefault();
+
+                // Create new Adjustment Voucher
+                AdjustmentVoucher newVoucher = new AdjustmentVoucher()
+                {
+                    DateIssued = DateTime.Today,
+                    IssueEmpNo = employee.EmpNo,
+                    Status = "Pending"
+                };
+                context.AdjustmentVouchers.Add(newVoucher);
+                context.SaveChanges();
+
+                // Add Voucher Detail
+                AdjustmentVoucherDetail newAdjustment = new AdjustmentVoucherDetail()
+                {
+                    AvNo = newVoucher.AvNo,
+                    ItemNo = itemNo,
+                    Qty = itemToChange.CurrentQty - qty,
+                    Reason = reason
+                };
+                context.AdjustmentVoucherDetails.Add(newAdjustment);
+                context.SaveChanges();
+
+                result = true;
+            }
+            catch (Exception)
+            {
+                result = false;
             }
 
             return result;

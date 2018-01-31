@@ -68,8 +68,4 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
         Response.Redirect("RequisitionDetailsView.aspx?ReqNo=" + ReqNo);
     }
 
-    //protected void view_Click(object sender, EventArgs e)
-    //{
-       
-    //}
 }
