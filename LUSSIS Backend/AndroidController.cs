@@ -364,10 +364,9 @@ namespace LUSSIS_Backend
             Retrieval result = null;
             try
             {
-                using (LussisEntities context = new LussisEntities())
-                {
-                    result = context.Retrievals.Last();
-                }
+                LussisEntities context = new LussisEntities();
+
+                result = context.Retrievals.OrderByDescending(x => x.Date).FirstOrDefault();
             }
             catch (Exception)
             {
