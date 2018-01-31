@@ -22,6 +22,24 @@ namespace LUSSIS_Backend
             }
         }
 
+        public static Deputy getDeputyDetails(String deptCode)
+        {
+            LussisEntities context = new LussisEntities();
+
+            return context.Deputies.Where(x => x.DeptCode.Equals(deptCode)).FirstOrDefault();
+        }
+
+        public static Employee getHeadOfDepartment(String deptCode)
+        {
+            LussisEntities context = new LussisEntities();
+            Department d = context.Departments.Where(c => c.DeptCode.Equals(deptCode)).FirstOrDefault();
+            int headEmpNo = Convert.ToInt32(d.HeadEmpNo);
+            Employee emp = context.Employees.Where(x => x.EmpNo.Equals(headEmpNo)).FirstOrDefault();
+
+            return emp;
+        }
+
+
         public static string getDepartmentNoFromProfile(int profileEmpNo)
         {
             using (LussisEntities context = new LussisEntities())

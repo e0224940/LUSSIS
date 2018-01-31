@@ -564,7 +564,7 @@ public class Service : IService
         return result;
     }
 
-    public WCFRetrievalDetail[] GetRetrievalDetails(int sessionID, string retrievalNo)
+    public WCFRetrievalDetail[] GetRetrievalDetails(int sessionID, int retrievalNo)
     {
         List<WCFRetrievalDetail> result = new List<WCFRetrievalDetail>();
 

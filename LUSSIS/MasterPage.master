@@ -42,27 +42,27 @@
                         <% if (System.Web.HttpContext.Current.User.IsInRole("DepartmentEmployee"))
                             { %>
                         <!--#include file="Department/Employee/mainmenu.aspx"-->
-                         <% } %>
+                        <% } %>
                         <% if (System.Web.HttpContext.Current.User.IsInRole("DepartmentHead"))
                             { %>
                         <!--#include file="Department/Head/mainmenu.aspx"-->
-                         <% } %>
+                        <% } %>
                         <% if (System.Web.HttpContext.Current.User.IsInRole("DepartmentRepresentative"))
                             { %>
                         <!--#include file="Department/Representative/mainmenu.aspx"-->
-                         <% } %>
+                        <% } %>
                         <% if (System.Web.HttpContext.Current.User.IsInRole("StoreClerk"))
                             { %>
                         <!--#include file="Store/Clerk/mainmenu.aspx"-->
-                         <% } %>
+                        <% } %>
                         <% if (System.Web.HttpContext.Current.User.IsInRole("StoreManager"))
                             { %>
                         <!--#include file="Store/Manager/mainmenu.aspx"-->
-                         <% } %>
+                        <% } %>
                         <% if (System.Web.HttpContext.Current.User.IsInRole("StoreSupervisor"))
                             { %>
                         <!--#include file="Store/Supervisor/mainmenu.aspx"-->
-                         <% } %>
+                        <% } %>
                         <li class="dropdown">
                             <asp:LoginView runat="server">
                                 <AnonymousTemplate>

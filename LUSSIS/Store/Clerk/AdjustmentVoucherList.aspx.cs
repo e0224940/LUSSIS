@@ -57,7 +57,6 @@ public partial class Store_Clerk_AdjustmentVoucherList : System.Web.UI.Page
         {
             AvNo = aV.AvNo,
             DateIssued = aV.DateIssued,
-            ApproveEmpName = aV.Employee1.EmpName,
             Status = aV.Status
         });
         PendingAdjustmentVoucherGridView.DataBind();

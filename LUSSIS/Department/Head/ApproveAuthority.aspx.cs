@@ -28,8 +28,20 @@ public partial class Department_Head_ApproveAuthority : System.Web.UI.Page
             txtbox_dateStart.Attributes["min"] = DateTime.Now.ToString("yyyy-MM-dd");
             txtbox_dateEnd.Attributes["min"] = DateTime.Now.ToString("yyyy-MM-dd");
 
-            txtbox_dateStart.Text = DateTime.Now.ToString("yyyy-MM-dd");
-            txtbox_dateEnd.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            Employee head = ApproveAuthorityController.getHeadOfDepartment(ApproveAuthorityController.getDepartmentNoFromProfile(Profile.EmpNo));
+
+            if(head.EmpNo!=deputyHead.EmpNo)
+            {
+            Deputy d = ApproveAuthorityController.getDeputyDetails(ApproveAuthorityController.getDepartmentNoFromProfile(Profile.EmpNo).ToString());
+
+                txtbox_dateStart.Text = Convert.ToDateTime(d.FromDate).ToString("yyyy-MM-dd");
+                txtbox_dateEnd.Text = Convert.ToDateTime(d.ToDate).ToString("yyyy-MM-dd");
+            }
+            else
+            {
+                txtbox_dateStart.Text = DateTime.Now.ToString("yyyy-MM-dd");
+                txtbox_dateEnd.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            }
 
             if (deputyHead.EmpNo.Equals(Profile.EmpNo))
             {
