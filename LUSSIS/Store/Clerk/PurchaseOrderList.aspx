@@ -33,7 +33,7 @@
                 OnRowDeleting="PendingPurchaseOrderGridView_Delete">
                 <Columns>
                     <asp:BoundField DataField="PONo" HeaderText="PO#" SortExpression="PONo" />
-                    <asp:BoundField DataField="DateIssued" HeaderText="Date" SortExpression="DateIssued" />
+                    <asp:BoundField DataField="DateIssued" HeaderText="Date" SortExpression="DateIssued" DataFormatString="{0:dd-MM-yyyy}" />
                     <asp:BoundField DataField="Supplier" HeaderText="Supplier" SortExpression="Supplier" />
                     <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
                     <asp:TemplateField HeaderText="Details">

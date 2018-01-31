@@ -30,7 +30,7 @@
                 Department: <%= d.Department.DeptName %>
             </div>
             <div class="col-xs-4">
-                Collection Date: <%= d.DisbursementDate %>
+                Collection Date: <%= ((DateTime)d.DisbursementDate).ToString("dd-MM-yyyy") %>
             </div>
             <div class="col-xs-4">
                 Collection Point: <%= d.CollectionPoint.CollectionPointDetails %>
