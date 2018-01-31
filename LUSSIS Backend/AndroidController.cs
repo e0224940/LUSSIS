@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LUSSIS_Backend.controller;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -470,6 +471,11 @@ namespace LUSSIS_Backend
             }
 
             return result;
+        }
+
+        public static bool MarkDisbursementAsCollected(int DisbursementNo, Decimal Pin)
+        {
+            return DisbursementController.CompleteDisbursement(DisbursementNo, Pin);
         }
     }
 }

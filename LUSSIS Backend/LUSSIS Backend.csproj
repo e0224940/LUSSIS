@@ -62,6 +62,7 @@
     <Compile Include="controller\DisbursementController.cs" />
     <Compile Include="controller\OrderController.cs" />
     <Compile Include="controller\POController.cs" />
+    <Compile Include="controller\PurchaseOrderController.cs" />
     <Compile Include="controller\RetrievalController.cs" />
     <Compile Include="controller\StockController.cs" />
     <Compile Include="CrystalReportController.cs" />

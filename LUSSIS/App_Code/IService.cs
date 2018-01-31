@@ -139,6 +139,10 @@ public interface IService
     [OperationContract]
     [WebInvoke(UriTemplate = "/GetCatalogueBinList", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     String[] GetCatalogueBinList(int sessionID);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/MarkDisbursementAsCollected", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    bool MarkDisbursementAsCollected(int sessionID, int DisbursementNo, String Pin);
 }
 
 public class WCFDisbursementDetail

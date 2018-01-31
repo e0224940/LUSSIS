@@ -648,4 +648,16 @@ public class Service : IService
 
         return result.ToArray();
     }
+
+    public bool MarkDisbursementAsCollected(int sessionID, int DisbursementNo, string Pin)
+    {
+        bool result = false;
+        Decimal pin;
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID) && Decimal.TryParse(Pin, out pin))
+        {
+            result = AndroidController.MarkDisbursementAsCollected(DisbursementNo, pin);
+        }
+
+        return result;
+    }
 }

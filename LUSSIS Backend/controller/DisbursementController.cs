@@ -35,8 +35,9 @@ namespace LUSSIS_Backend.controller
             context.SaveChanges();
         }
 
-        public static void CompleteDisbursement(int dNo, decimal? pin)
+        public static bool CompleteDisbursement(int dNo, decimal? pin)
         {
+            bool result = false;
             LussisEntities context = new LussisEntities();
             Disbursement d = context.Disbursements.Where(x => x.DisbursementNo == dNo).FirstOrDefault();
             List<DisbursementDetail> dDetails = d.DisbursementDetails.ToList();
@@ -62,12 +63,17 @@ namespace LUSSIS_Backend.controller
 
                 context.SaveChanges();
 
+                result = true;
+
                 // Send Email
             }
             else
             {
                 throw new Exception("Invalid Pin");
+                result = false;
             }
+
+            return result;
         }
     }
 }
