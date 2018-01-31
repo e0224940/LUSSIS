@@ -224,7 +224,6 @@ public class WCFRetrieval
 public class WCFRetrievalDetail
 {
     public int RetrievalNo;
-    public String DeptCode;
     public String ItemNo;
     public String Description;
     public String Bin;

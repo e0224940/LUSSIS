@@ -572,19 +572,29 @@ public class Service : IService
         {
             var retrievalDetails = AndroidController.GetRetrievalDetails(retrievalNo);
 
+            // No need for breakup by department for android
             foreach (var item in retrievalDetails)
             {
-                result.Add(new WCFRetrievalDetail()
+                WCFRetrievalDetail temp = result.Where(detail => detail.ItemNo.Equals(item.ItemNo)).FirstOrDefault();
+                if (temp == null)
                 {
-                    RetrievalNo = item.RetrievalNo,
-                    DeptCode = item.DeptCode,
-                    ItemNo = item.ItemNo,
-                    Description = item.StationeryCatalogue.Description,
-                    Bin = item.StationeryCatalogue.Bin.ToString(),
-                    Needed = item.Needed.HasValue ? item.Needed.Value : 0,
-                    BacklogQty = item.BackLogQty.HasValue ? item.BackLogQty.Value : 0,
-                    Actual = item.Actual.HasValue ? item.Actual.Value : 0
-                });
+                    result.Add(new WCFRetrievalDetail()
+                    {
+                        RetrievalNo = item.RetrievalNo,
+                        ItemNo = item.ItemNo,
+                        Description = item.StationeryCatalogue.Description,
+                        Bin = item.StationeryCatalogue.Bin.ToString(),
+                        Needed = item.Needed.HasValue ? item.Needed.Value : 0,
+                        BacklogQty = item.BackLogQty.HasValue ? item.BackLogQty.Value : 0,
+                        Actual = item.Actual.HasValue ? item.Actual.Value : 0
+                    });
+                }
+                else
+                {
+                    temp.Needed += item.Needed.HasValue ? item.Needed.Value : 0;
+                    temp.BacklogQty += item.BackLogQty.HasValue ? item.BackLogQty.Value : 0;
+                    temp.Actual += item.Actual.HasValue ? item.Actual.Value : 0;
+                }
             }
         }
 
