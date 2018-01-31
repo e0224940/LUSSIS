@@ -56,14 +56,24 @@
                         </ItemTemplate>
                     </asp:TemplateField>
 
-                    <asp:BoundField DataField="Qty" HeaderText="Qty Adjusted" SortExpression="Qty" />
+                    <asp:TemplateField HeaderText="Qty Adjusted">
+                        <ItemTemplate>
+                            <asp:Label ID="LabelQty" runat="server" Text='<%# Bind("Qty") %>' />
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBoxQty" runat="server" Text='<%# Bind("Qty") %>'></asp:TextBox>
+                            <div>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBoxQty" ErrorMessage="Qty Field is Empty" Display="Dynamic" Style="color: red"></asp:RequiredFieldValidator>
+                                <asp:CompareValidator runat="server" Operator="DataTypeCheck" Type="Integer"
+                                    ControlToValidate="TextBoxQty" ErrorMessage="Value must be a Number" Display="Dynamic" Style="color: red" />
+                            </div>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
 
                     <asp:TemplateField HeaderText="AdjustmentAmount">
                         <ItemTemplate>
                             <asp:Label ID="AdjustmentAmount" runat="server" Text='<%# Bind("AdjustmentAmount") %>' />
                         </ItemTemplate>
-                        <EditItemTemplate>
-                        </EditItemTemplate>
                     </asp:TemplateField>
 
                     <asp:BoundField DataField="Reason" HeaderText="Reason" SortExpression="Reason" />

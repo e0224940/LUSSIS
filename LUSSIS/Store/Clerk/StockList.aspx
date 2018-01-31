@@ -99,10 +99,10 @@
                                                 <asp:TextBox ID="NewQtyTextBox" runat="server" CssClass="btn-default form-control" Visible="false" EnableViewState="False" placeholder="Enter Correct Qty"></asp:TextBox>
                                                 <asp:TextBox ID="RemarksTextBox" runat="server" CssClass="btn-default form-control" Visible="false" EnableViewState="False" placeholder="Enter Reason"></asp:TextBox>
                                                 <asp:Button ID="SubmitAdjustmentVoucherButton" CssClass="btn btn-success" runat="server" Visible="false" Text="Submit" OnClick="SubmitAdjustmentVoucherButton_Click" CommandArgument='<%# Eval("ItemNo") %>' OnClientClick="$get('Dog').click();return false;" />
-                                                <asp:Button ID="CancelAdjustmentVoucherButton" CssClass="btn btn-danger" runat="server" Visible="false" Text="Cancel" OnClick="CancelAdjustmentVoucherButton_Click" />
+                                                <asp:Button ID="CancelAdjustmentVoucherButton" CssClass="btn btn-warning" runat="server" Visible="false" Text="Cancel" OnClick="CancelAdjustmentVoucherButton_Click" />
                                             </td>
 
-                                            <td >
+                                            <td>
                                                 <div class="alert alert-success">
                                                     <strong>Success!</strong> Adjustment Voucher sent for Approval.
                                                 </div>
