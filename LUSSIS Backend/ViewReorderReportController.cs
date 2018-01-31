@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 namespace LUSSIS_Backend
 {
     public class ViewReorderReportController
-    {
-
+    { 
         public static List<PurchaseOrder> showReorderReport()
         {
             var minusOneMth = 0;
@@ -28,7 +27,7 @@ namespace LUSSIS_Backend
                 DateTime year = DateTime.Now.AddYears(-minusOneYear);
                 var yearName = year.ToString("yyyy");
 
-                poObj.DateReviewed = month;
+                poObj.DateIssued = month;
                 dtList.Add(poObj);
 
                 minusOneMth++;
@@ -40,19 +39,40 @@ namespace LUSSIS_Backend
             return dtList;
         }
 
-        //public static List<PURCHASEORDERVIEW> showReorderReportDetails(int SNO)
-        //{
-        //    LussisEntities context = new LussisEntities();
-        //    var currentYear = DateTime.Now.Year;
-        //    var currentMonth = DateTime.Now.Month;
-        //    int monthsToDeduct = SNO;
-        //    DateTime selectedDate = DateTime.Now.AddMonths(-monthsToDeduct);
-        //    int getSelectedMonth = selectedDate.Month;
-        //    int getSelectedYear = selectedDate.Year;
+        public static List<PURCHASEORDERVIEW> showReorderReportDetails(int SNO, string supplierSelected)
+        {
+            LussisEntities context = new LussisEntities();
+            var currentYear = DateTime.Now.Year;
+            var currentMonth = DateTime.Now.Month;
+            int monthsToDeduct = SNO;
+            DateTime selectedDate = DateTime.Now.AddMonths(-monthsToDeduct);
+            int getSelectedMonth = selectedDate.Month;
+            int getSelectedYear = selectedDate.Year;
 
-        //    var result = context.PURCHASEORDERVIEWs.Where(p => p.DateReviewed.Value.Month == getSelectedMonth && p.DateReviewed.Value.Year == getSelectedYear).ToList();
-        //    return result;
-        //}
+            var result = context.PURCHASEORDERVIEWs
+                .Where(p => p.DateIssued.Value.Month == getSelectedMonth 
+                && p.DateIssued.Value.Year == getSelectedYear && p.SupplierCode == supplierSelected)
+                .ToList();
+            return result;
+        }
+
+
+        public static PurchaseOrder checkForPO(int SNO)
+        {
+            LussisEntities context = new LussisEntities();
+            var currentYear = DateTime.Now.Year;
+            var currentMonth = DateTime.Now.Month;
+            int monthsToDeduct = SNO;
+            DateTime selectedDate = DateTime.Now.AddMonths(-monthsToDeduct);
+            int getSelectedMonth = selectedDate.Month;
+            int getSelectedYear = selectedDate.Year;
+
+            var result = context.PurchaseOrders
+                .Where(p => p.DateIssued.Value.Month == getSelectedMonth
+                && p.DateIssued.Value.Year == getSelectedYear)
+                .FirstOrDefault();
+            return result;
+        }
 
     }
 }

@@ -82,6 +82,10 @@
         <AssociationConnector Association="LussisModel.FK_SupplyTender_Supplier" />
         <EntityTypeShape EntityType="LussisModel.StoreAssignment" Width="1.5" PointX="20.125" PointY="27" />
         <AssociationConnector Association="LussisModel.FK__StoreAssi__EmpNo__571DF1D5" />
+        <EntityTypeShape EntityType="LussisModel.ApprovePurchaseOrderView" Width="1.5" PointX="7.75" PointY="5.75" />
+        <EntityTypeShape EntityType="LussisModel.PURCHASEORDERVIEW" Width="1.5" PointX="9.75" PointY="5.75" />
+        <EntityTypeShape EntityType="LussisModel.ReorderTrendView" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="LussisModel.RequisitionTrendView" Width="1.5" PointX="0.75" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
