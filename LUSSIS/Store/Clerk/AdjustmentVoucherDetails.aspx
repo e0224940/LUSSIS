@@ -63,8 +63,10 @@
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBoxQty" runat="server" Text='<%# Bind("Qty") %>'></asp:TextBox>
                             <div>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBoxQty" ErrorMessage="Qty Field is Empty" Display="Dynamic" Style="color: red"></asp:RequiredFieldValidator>
-                                <asp:CompareValidator runat="server" Operator="DataTypeCheck" Type="Integer"
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                                    ControlToValidate="TextBoxQty" ErrorMessage="Qty Field is Empty" Display="Dynamic" Style="color: red"></asp:RequiredFieldValidator>
+                                <asp:CompareValidator runat="server" 
+                                    Operator="DataTypeCheck" Type="Integer"
                                     ControlToValidate="TextBoxQty" ErrorMessage="Value must be a Number" Display="Dynamic" Style="color: red" />
                             </div>
                         </EditItemTemplate>
