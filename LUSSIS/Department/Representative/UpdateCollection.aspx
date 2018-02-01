@@ -69,6 +69,7 @@
     <div class="form-inline">
     <div class="col-xs-2">
     <asp:Button ID="confirm" runat="server" CssClass="btn btn-success" Text="Confirm New Location" OnClick="confirm_Click" />
+        <asp:Label ID="Label6" runat="server" Text=""></asp:Label>
     </div>
     <div class="col-xs-2">
     <asp:Button ID="cancel" runat="server" CssClass="btn btn-danger" Text="Cancel Update Location" OnClick="cancel_Click" />

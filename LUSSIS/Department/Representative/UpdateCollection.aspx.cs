@@ -55,16 +55,20 @@ public partial class Department_Representative_UpdateCollection : System.Web.UI.
         {
             newCollectionTimeText.Text = "";
         }
+       
     }
 
     
     protected void confirm_Click(object sender, EventArgs e)
     {
-        int newPoint = Int32.Parse(NewLocationDDL.SelectedItem.Value);
+        
         int empNo = Profile.EmpNo;
+
         string oldloc = oldLocationText.Text;
         string newloc = NewLocationDDL.SelectedItem.Text;
+       
 
+        int newPoint = Int32.Parse(NewLocationDDL.SelectedItem.Value);
         if (newPoint<0 || newPoint>6)
         {
             Label4.Text = "Choose New Location.";
@@ -72,13 +76,14 @@ public partial class Department_Representative_UpdateCollection : System.Web.UI.
         else
         {
            
-            if (oldloc.Equals(newloc))
+            if (oldloc != newloc)
             {
-                Label4.Text = "Choose the New Location";
+                UpdateCollectionPoint.UpdatePoint(empNo, newPoint);
             }
             else
             {
-                UpdateCollectionPoint.UpdatePoint(empNo, newPoint);
+                Label6.Text = "Choose the New Location";
+               
             }
             
             
