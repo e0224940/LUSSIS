@@ -69,7 +69,7 @@
 
                     <asp:TemplateField HeaderText="Qty Adjusted">
                         <ItemTemplate>
-                            <asp:Label ID="LabelQty" runat="server" Text='<%# Bind("Qty") %>' />
+                            <asp:Label ID="LabelQty" runat="server" Text='<%# Bind("Qty") %>'  />
                         </ItemTemplate>
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBoxQty" runat="server" Text='<%# Bind("Qty") %>'></asp:TextBox>

@@ -33,10 +33,11 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
                 string check = DetailGridView.Rows[i].Cells[3].Text.ToString();
                 if (check.Equals("Approved"))
                 {
-                    DetailGridView.Rows[i].Cells[4].Visible = false;
-                    DetailGridView.Rows[i].Cells[5].Visible = false;
+                    DetailGridView.Rows[i].Cells[1].Visible = false;
+                    //DetailGridView.Rows[i]..Visible = false;
                 }
             }
+
             string empName = EmployeeController.GetName(empNo);
             name.Text = empName;  
             DetailGridView.Visible = true;
@@ -44,7 +45,8 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
             reqhistory = new List<ReqHistory>();
            
             DetailGridView.DataSource = EmployeeController.ViewRequisition();
-            DetailGridView.DataBind();         
+            DetailGridView.DataBind();      
+               
         }
     }
 
@@ -68,4 +70,15 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
         Response.Redirect("RequisitionDetailsView.aspx?ReqNo=" + ReqNo);
     }
 
+
+    protected void DeleteButton_Click(object sender, EventArgs e)
+    {
+        Button b = (Button)sender;
+        int reqId = Convert.ToInt32(b.CommandArgument);
+        Session["sessionID"] = reqId;
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Are you sure want to delete the History?')</script>");
+        EmployeeController.DeleteReqHistory(reqId);
+        DetailGridView.DataSource = EmployeeController.ViewRequisition();
+        DetailGridView.DataBind();
+    }
 }
