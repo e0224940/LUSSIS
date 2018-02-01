@@ -11,7 +11,7 @@
     <div class="row">
     <div class="form-inline">
         <div class="col-xs-2">
-    <asp:Label ID="Label1" runat="server" Text="Old Location:"></asp:Label>
+    <asp:Label ID="Label1" runat="server" Text="Current Location:"></asp:Label>
         </div>
     <div class="col-xs-2">
         <asp:TextBox ID="oldLocationText" runat="server" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False"></asp:TextBox>
