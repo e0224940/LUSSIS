@@ -471,15 +471,6 @@ public class Service : IService
             };
             requisition.DateReviewed = DateTime.Today;
 
-            //if (updatedRequisition.Status.Equals("Approved"))
-            //{
-
-            //}
-            //else
-            //{
-            //    requisition.DateReviewed = null;
-            //}
-
             result = AndroidController.UpdateRequisition(requisition);
         }
 
