@@ -18,13 +18,19 @@ namespace LUSSIS_Backend.controller
             // Get all Stocks
             List<StationeryCatalogue> allStockList = GetAllStocks();
 
+            // Get Pending Vouchers
+            List<AdjustmentVoucher> aVList = new LussisEntities().AdjustmentVouchers.Where(x => x.Status.Equals("Pending")).ToList<AdjustmentVoucher>();
+
+            // Get Pending PO
+            List<PurchaseOrder> pOList = new LussisEntities().PurchaseOrders.Where(x => x.Status.Equals("Pending")).ToList<PurchaseOrder>();
+
             // For each Stock
             for (int i = 0; i < allStockList.Count; i++)
             {
                 StationeryCatalogue stock = allStockList[i];
 
                 // Get OrderQty
-                int? orderQty = GetOrderQty(stock.ItemNo);
+                int? orderQty = GetOrderQty(stock.ItemNo, aVList, pOList);
 
                 // If OrderQty > 0, create OrderItem
                 if (orderQty > 0)
@@ -111,7 +117,7 @@ namespace LUSSIS_Backend.controller
 
         // PRIVATE METHODS
 
-        private static int? GetOrderQty(string itemNo)
+        private static int? GetOrderQty(string itemNo, List<AdjustmentVoucher> aVList, List<PurchaseOrder> pOList)
         {
             // Find Stock
             StationeryCatalogue stock = GetStock(itemNo);
@@ -123,10 +129,10 @@ namespace LUSSIS_Backend.controller
             int? currentQty = stock.CurrentQty;
 
             // Find TotalAdjustmentQty
-            int? adjustmentQty = GetTotalPendingAdjustmentQtyForStock(itemNo);
+            int? adjustmentQty = GetTotalPendingAdjustmentQtyForStock(itemNo, aVList);
 
             // Find TotalPurchaseOrderQty
-            int? purchaseQty = GetTotalPendingPurchaseQtyForStock(itemNo);
+            int? purchaseQty = GetTotalPendingPurchaseQtyForStock(itemNo, pOList);
 
             // Find OrderQty
             int? orderQty = (reorderLevel - currentQty - adjustmentQty - purchaseQty);
@@ -138,13 +144,10 @@ namespace LUSSIS_Backend.controller
             return orderQty;
         }
 
-        private static int? GetTotalPendingPurchaseQtyForStock(string itemNo)
+        private static int? GetTotalPendingPurchaseQtyForStock(string itemNo, List<PurchaseOrder> pOList)
         {
             int? qty = 0;
             LussisEntities context = new LussisEntities();
-
-            // Get Pending PO
-            List<PurchaseOrder> pOList = context.PurchaseOrders.Where(x => x.Status.Equals("Pending")).ToList<PurchaseOrder>();
 
             // If no Pending PO
             if (pOList.Count == 0)
@@ -174,13 +177,10 @@ namespace LUSSIS_Backend.controller
             }
         }
 
-        private static int? GetTotalPendingAdjustmentQtyForStock(string itemNo)
+        private static int? GetTotalPendingAdjustmentQtyForStock(string itemNo, List<AdjustmentVoucher> aVList)
         {
             int? qty = 0;
             LussisEntities context = new LussisEntities();
-
-            // Get Pending Vouchers
-            List<AdjustmentVoucher> aVList = context.AdjustmentVouchers.Where(x => x.Status.Equals("Pending")).ToList<AdjustmentVoucher>();
 
             // If no Pending Vouchers found
             if (aVList.Count == 0)
@@ -252,9 +252,15 @@ namespace LUSSIS_Backend.controller
             // Get Stock
             StationeryCatalogue stock = GetStock(itemNo);
 
+            // Get Pending Vouchers
+            List<AdjustmentVoucher> aVList = new LussisEntities().AdjustmentVouchers.Where(x => x.Status.Equals("Pending")).ToList<AdjustmentVoucher>();
+
+            // Get Pending PO
+            List<PurchaseOrder> pOList = new LussisEntities().PurchaseOrders.Where(x => x.Status.Equals("Pending")).ToList<PurchaseOrder>();
+
             // Create orderItem
             OrderItem orderItem = new OrderItem(stock);
-            int? orderQty = GetOrderQty(itemNo);
+            int? orderQty = GetOrderQty(itemNo, aVList, pOList);
             if (orderQty > 0)
             {
                 orderItem.OrderQtyList[0] = orderQty;

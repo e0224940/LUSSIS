@@ -47,7 +47,7 @@
                     <asp:button id="Button2" runat="server" text="Cancel" onclick="CancelSearch_Click" cssclass="btn btn-danger" />
                 </div>
                 <div class="col-xs-2">
-                    <asp:button runat="server" text="Back To Last Page" width="300px" id="Cancel" cssclass="btn btn-default" onclick="Cancel_Click" />
+                    <asp:button runat="server" text="Back To History Page" width="300px" id="Cancel" cssclass="btn btn-default" onclick="Cancel_Click" />
                 </div>
             </div>
         </div>

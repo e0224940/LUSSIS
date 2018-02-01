@@ -4,8 +4,7 @@
 </asp:Content>
 
 <asp:Content ID="ContentBody" ContentPlaceHolderID="body" runat="server">
-<div class="form-group">
-<%Response.Write(Profile.EmpNo);  %>        
+<div class="form-group">       
 </div>
 
     <div class="form-group">
