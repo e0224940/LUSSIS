@@ -1,14 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="DisbursementList.aspx.cs" Inherits="Store_Clerk_DisbursementList" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+
+    <% Session.Remove("DNo"); %>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
     <div class="container">
 
         <div class="row">
-             <asp:Label ID="lbl_header_appAuth" runat="server" Font-Bold="True" Font-Size="XX-Large" Text="Pending Disbursements"></asp:Label>
-           
+            <h1>Pending Disbursements</h1>
         </div>
 
         <div class="row">
