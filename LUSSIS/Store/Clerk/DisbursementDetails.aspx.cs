@@ -12,6 +12,7 @@ public partial class Store_Clerk_DisbursementDetails : System.Web.UI.Page
 {
     protected static int dNo;
     protected Disbursement d;
+    protected List<DisbursementDetail> dDetails;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -20,26 +21,26 @@ public partial class Store_Clerk_DisbursementDetails : System.Web.UI.Page
             // If no DNo found
             if (Session["DNo"] == null)
             {
-                // Redirect to List Page
+                // Redirect to list page
                 Response.Redirect("DisbursementList.aspx");
             }
+        }
 
-            // Get Disbursement
-            dNo = (int)Session["DNo"];
-            d = DisbursementController.GetDisbursement(dNo);
-            Session["Disbursement"] = d;
+        // Set page attributes
+        dNo = (int)Session["DNo"];
+        d = DisbursementController.GetDisbursement(dNo);
 
-            // Load GridView
+        if (!IsPostBack)
+        {
+            // Load gridview
             BindGrid();
 
-            // Load Controls
+            // Load controls
             RepTextBox.Text = d.Employee.EmpName;
             RepNoTextBox.Text = d.RepEmpNo.ToString();
         }
-
-        dNo = (int)Session["DNo"];
-        d = (Disbursement)Session["Disbursement"];
     }
+
 
     protected void OnRowEditing(object sender, GridViewEditEventArgs e)
     {
@@ -51,13 +52,12 @@ public partial class Store_Clerk_DisbursementDetails : System.Web.UI.Page
     {
         try
         {
-            // Get Page Data
+            // Get page data
             GridViewRow row = DisbursementDetailsGridView.Rows[e.RowIndex];
-            int dNo = (int)Session["DNo"];
             string itemNo = (string)DisbursementDetailsGridView.DataKeys[e.RowIndex].Values[0];
             int qty = Int32.Parse((row.FindControl("TextBoxDelivered") as TextBox).Text);
 
-            // Update Disbursement Detail
+            // Update DDetail
             DisbursementController.UpdateReceivedQty(dNo, itemNo, qty);
             DisbursementDetailsGridView.EditIndex = -1;
             BindGrid();
@@ -78,8 +78,7 @@ public partial class Store_Clerk_DisbursementDetails : System.Web.UI.Page
     {
         try
         {
-            // Get Page Data
-            int dNo = (int)Session["DNo"];
+            // Get page data
             decimal pin = Decimal.Parse(PinTextBox.Text);
 
             // Complete Disbursement
@@ -103,10 +102,9 @@ public partial class Store_Clerk_DisbursementDetails : System.Web.UI.Page
     private void BindGrid()
     {
         // Get DDetails
-        int dNo = (int)Session["DNo"];
-        List<DisbursementDetail> dDetails = DisbursementController.GetDisbursementDetails(dNo);
+        dDetails = DisbursementController.GetDisbursementDetails(dNo);
 
-        // Set DataGrid
+        // Set gridview
         DisbursementDetailsGridView.DataSource = dDetails.Select(
             dD => new
             {

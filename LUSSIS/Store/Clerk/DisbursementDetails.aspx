@@ -22,6 +22,8 @@
             %>
         </div>
 
+
+
         <%if (Session["DNo"] != null)
             { %>
 
@@ -76,6 +78,10 @@
                         </ItemTemplate>
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBoxDelivered" runat="server" Text='<%# Bind("Delivered") %>'></asp:TextBox>
+                            <div>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBoxDelivered" ErrorMessage="Field cannot be empty" Display="Dynamic" Style="color: red;"></asp:RequiredFieldValidator>
+                                <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="TextBoxDelivered" Operator="DataTypeCheck" Type="Integer" ErrorMessage="Enter only integer" Display="Dynamic" Style="color: red;"></asp:CompareValidator>
+                            </div>
                         </EditItemTemplate>
                     </asp:TemplateField>
 
@@ -87,22 +93,23 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-2">
-                <asp:Label ID="lbl1" runat="server" Text="Delivery Confirmation:"></asp:Label>
-            </div>
-
+            <h2>Delivery Confirmation:</h2>
         </div>
 
         <div class="row">
-            <div class="col-xs-2">
-                <asp:Label ID="Label1" runat="server" Text="Department Representative:"></asp:Label>
+            <h5>Department Representative:</h5>
+            <div>
+                <asp:TextBox runat="server" CssClass="btn-default form-control" Enabled="False" ID="RepTextBox" Width="250px"></asp:TextBox><br />
             </div>
-
-            <asp:TextBox runat="server" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False" ID="RepTextBox" Width="250px"></asp:TextBox><br />
-            Employee Number:<br />
-            <asp:TextBox runat="server" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False" ID="RepNoTextBox" Width="250px"></asp:TextBox><br />
-            Enter PIN to Confirm Received:<br />
-            <asp:TextBox ID="PinTextBox" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False" runat="server" Width="250px"></asp:TextBox>
+            <h5>Employee Number:</h5>
+            <div>
+                <asp:TextBox runat="server" CssClass="btn-default form-control" Enabled="False" ID="RepNoTextBox" Width="250px"></asp:TextBox><br />
+            </div>
+            <h5>Enter PIN  Confirm Received:</h5>
+            <div>
+                <asp:TextBox runat="server" CssClass="btn-default form-control" ID="PinTextBox" Width="250px"></asp:TextBox>
+                <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="PinTextBox" Operator="DataTypeCheck" Type="Integer" ErrorMessage="Enter 5 Digit Pin" Display="Dynamic" Style="color: red;"></asp:CompareValidator>
+            </div>
         </div>
 
         <div class="row">
@@ -110,6 +117,8 @@
         </div>
 
         <% } %>
+
+
 
         <div class="row">
             <a href="DisbursementList.aspx">Back to Disbursement List Page</a>
