@@ -7,7 +7,7 @@
     <div class="container">
 
     <asp:Label ID="lbl_header_appAuth" runat="server" Font-Bold="True" Font-Size="XX-Large" Text="Update Collection Point"></asp:Label>
-    <br /><br />
+    <br /><br /><br />
     <div class="row">
     <div class="form-inline">
         <div class="col-xs-2">
@@ -33,14 +33,15 @@
         <asp:ListItem Value="4">Engineering School</asp:ListItem>
         <asp:ListItem Value="5">Science School</asp:ListItem>
         <asp:ListItem Value="6">University Hospital</asp:ListItem>
-    </asp:DropDownList>
-    
+    </asp:DropDownList> &nbsp;&nbsp;&nbsp;
+    <asp:Label ID="Label4" runat="server" Text=" " style="color:red"></asp:Label>
     <br /><br />
+        
          <div class="row">
     <div class="form-inline">
      
      <%--Hidden Label--%>         
-    <asp:Label ID="Label4" runat="server" Text="" style="color:red"></asp:Label>
+    
     
 
     <div class="col-xs-2">

@@ -47,11 +47,13 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
             Msg.Text = "";
             cart.quantity = (row.Cells[2].FindControl("Quantity") as TextBox).Text;
             cartitem.Add(cart);
-            Session["session"] = cartitem;
-            Cart.DataSource = cartitem;
-            Cart.DataBind();
-            Confirm.Visible = true;
-            Delete.Visible = true;
+            
+            Session["session"] = cartitem;   
+                Cart.DataSource = cartitem;
+                Cart.DataBind();
+                Confirm.Visible = true;
+                Delete.Visible = true;
+  
         }
     }
 
@@ -89,12 +91,8 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
     //Search the item 
     protected void Search_Click(object sender, EventArgs e)
     {
-        //GridViewRow point = (GridViewRow)Session["Test"];
-
         string val = SearchItemText.Text;
-        //point.Visible = false;
         StationeryGridView.DataSource = EmployeeController.SearchDes(val);
-        //point.Visible = false;
         StationeryGridView.DataBind();
 
     }
