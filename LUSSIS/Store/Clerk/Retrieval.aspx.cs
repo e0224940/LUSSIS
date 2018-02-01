@@ -129,7 +129,7 @@ public partial class _Default : System.Web.UI.Page
         List<String> itemNos = new List<string>();
         List<int> actualList = new List<int>();
 
-        if(!IsValid)
+        if (!IsValid)
         {
             // Page Validation failed somewhere, don't do anything
             return;
@@ -150,7 +150,7 @@ public partial class _Default : System.Web.UI.Page
             Repeater SmallRepeater = (Repeater)item.FindControl("SmallRepeater");
             BigRow bigRow = data[i];
             j = 0;
-            foreach(RepeaterItem smallItem in SmallRepeater.Items)
+            foreach (RepeaterItem smallItem in SmallRepeater.Items)
             {
                 TextBox inputTextBox = (TextBox)smallItem.FindControl("ActualTextBox");
                 bigRow.Breakdown[j].Actual = Convert.ToInt32(inputTextBox.Text);
@@ -160,7 +160,7 @@ public partial class _Default : System.Web.UI.Page
             i++;
         }
 
-        if(allZeroes)
+        if (allZeroes)
         {
             Session["Error"] = "At least one item must be retrieved in order to submit.";
             return;
@@ -225,13 +225,13 @@ public partial class _Default : System.Web.UI.Page
         bool result = false;
         int sum;
         CustomValidator customValidator = (CustomValidator)source;
-        HiddenField hiddenFieldItemNo = customValidator.Controls[0] as HiddenField;
-        HiddenField hiddenFieldDepartment = customValidator.Controls[1] as HiddenField;
+        int i = customValidator.Controls.Count - 2;
+        String infoString = customValidator.ErrorMessage;
 
-        if(int.TryParse(args.Value, out value))
+        if (int.TryParse(args.Value, out value))
         {
-            departmentCode = hiddenFieldDepartment.Value;
-            itemNo = hiddenFieldItemNo.Value;
+            departmentCode = customValidator.ToolTip;
+            itemNo = customValidator.ErrorMessage;
 
             // Get the Big row that this field belongs to
             foreach (RepeaterItem item in BigRepeater.Items)
@@ -269,8 +269,9 @@ public partial class _Default : System.Web.UI.Page
             }
         }
 
+        customValidator.ErrorMessage = infoString;
         args.IsValid = result;
-    }
+    }    
 }
 
 public class BigRow
@@ -293,7 +294,8 @@ public class SmallRow
     public int Needed { get; set; }
     public int Backlog { get; set; }
     public int Actual { get; set; }
-    public int TotalNeeded {
+    public int TotalNeeded
+    {
         get
         {
             return Backlog + Needed;

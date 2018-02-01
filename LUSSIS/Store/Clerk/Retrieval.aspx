@@ -112,12 +112,10 @@
                                         <asp:CustomValidator
                                             runat="server"
                                             ID="ActualTextBoxValidator"
+                                            ErrorMessage='<%# Eval("ItemNo")%>'
+                                            ToolTip='<%# Eval("Department")%>'
                                             ControlToValidate="ActualTextBox"
-                                            OnServerValidate="ActualTextBoxValidator_ServerValidate" >
-                                            <asp:HiddenField runat="server" ID="HiddenItemNo" Value='<%# Eval("ItemNo")%>' />
-                                            <asp:HiddenField runat="server" ID="HiddenDepartment" Value='<%# Eval("Department")%>' />
-                                            </asp:CustomValidator>
-                                        <asp:RangeValidator
+                                            OnServerValidate="ActualTextBoxValidator_ServerValidate"/>                                                                                    <asp:RangeValidator
                                             runat="server"
                                             ID="ActualTextBoxRangeValidator"
                                             ControlToValidate="ActualTextBox"
