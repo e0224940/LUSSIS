@@ -143,6 +143,7 @@ public partial class _Default : System.Web.UI.Page
 
         // Save values to data
         int i = 0, j = 0;
+        bool allZeroes = true;
         data = (List<BigRow>)Session["DisplayedData"];
         foreach (RepeaterItem item in BigRepeater.Items)
         {
@@ -153,9 +154,16 @@ public partial class _Default : System.Web.UI.Page
             {
                 TextBox inputTextBox = (TextBox)smallItem.FindControl("ActualTextBox");
                 bigRow.Breakdown[j].Actual = Convert.ToInt32(inputTextBox.Text);
+                allZeroes = allZeroes && (bigRow.Breakdown[j].Actual == 0);
                 j++;
             }
             i++;
+        }
+
+        if(allZeroes)
+        {
+            Session["Error"] = "At least one item must be retrieved in order to submit.";
+            return;
         }
 
         // Fill the arguments
