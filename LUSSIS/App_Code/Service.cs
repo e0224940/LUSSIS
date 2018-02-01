@@ -124,7 +124,7 @@ public class Service : IService
                 {
                     CollectionPointNo = disbursement.CollectionPointNo.ToString(),
                     DeptCode = disbursement.DeptCode,
-                    DisbursementDate = String.Format("{0:d/M/yyyy}", disbursement.DisbursementDate),
+                    DisbursementDate = String.Format("{0:dd/MMM/yyyy}", disbursement.DisbursementDate),
                     DisbursementNo = disbursement.DisbursementNo.ToString(),
                     Pin = disbursement.Pin.ToString(),
                     RepEmpNo = disbursement.RepEmpNo.ToString(),
@@ -152,7 +152,7 @@ public class Service : IService
                     Email = employee.Email,
                     EmpName = employee.EmpName,
                     EmpNo = employee.EmpNo.ToString(),
-                    SessionExpiry = String.Format("{0:d/M/yyyy}", employee.SessionExpiry),
+                    SessionExpiry = String.Format("{0:dd/MMM/yyyy}", employee.SessionExpiry),
                     SessionNo = employee.SessionNo.ToString()
                 };
             }
