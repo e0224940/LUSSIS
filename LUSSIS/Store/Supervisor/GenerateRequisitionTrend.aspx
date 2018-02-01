@@ -19,17 +19,14 @@
                     <tr>
                         <td>
                             <asp:Button ID="rqToLB2" runat="server" Text="---->" OnClick="rqToLB2_Click" />
-                        </td>
-                        
+                        </td>  
                     </tr>
                     <tr>
                         <td>
                              <asp:Button ID="rqToLB1" runat="server" Text="<----" OnClick="rqToLB1_Click" />
                         </td>
-               
                     </tr>
                 </table>
-
             </td>
 
             <td>
@@ -41,7 +38,7 @@
 
     <br />
     <br />
-    <asp:DropDownList ID="ItemsDDL" runat="server"></asp:DropDownList>
+    <asp:DropDownList ID="ItemsDDL" CssClass="btn btn-default dropdown-toggle"  runat="server"></asp:DropDownList>
     <br />
     <br />
     <asp:TextBox ID="FromDate" runat="server" TextMode="Date"></asp:TextBox>
