@@ -469,15 +469,16 @@ public class Service : IService
                 Status = updatedRequisition.Status,
                 Remarks = updatedRequisition.Remarks,
             };
+            requisition.DateReviewed = DateTime.Today;
 
-            if (updatedRequisition.Status.Equals("Approved"))
-            {
-                requisition.DateReviewed = DateTime.Today;
-            }
-            else
-            {
-                requisition.DateReviewed = null;
-            }
+            //if (updatedRequisition.Status.Equals("Approved"))
+            //{
+
+            //}
+            //else
+            //{
+            //    requisition.DateReviewed = null;
+            //}
 
             result = AndroidController.UpdateRequisition(requisition);
         }
