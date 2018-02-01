@@ -69,7 +69,7 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
             cartitem = (List<RaisedItem>)Session["session"];
             int isissueBy = Profile.EmpNo;
             dateIssue = DateTime.Today;
-            string status = "Pending";
+            string status = "Approved";
             List<RequisitionDetail> detailList = new List<RequisitionDetail>();
             foreach (RaisedItem k in cartitem)
             {

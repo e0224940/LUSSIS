@@ -36,14 +36,14 @@
                         <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
 
 
-                        <asp:TemplateField HeaderText="Status">
+                       <%-- <asp:TemplateField HeaderText="Status">
                             <ItemTemplate>
                                 <asp:Label ID="LabelStatus" runat="server" Text='<%# Bind("Status") %>' />
                             </ItemTemplate>
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextStatus" runat="server" Text='<%# Bind("Status") %>'></asp:TextBox>
                             </EditItemTemplate>
-                        </asp:TemplateField>
+                        </asp:TemplateField>--%>
 
                         <asp:CommandField ShowSelectButton="True" />
 
