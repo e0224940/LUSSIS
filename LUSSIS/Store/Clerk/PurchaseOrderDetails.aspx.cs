@@ -11,50 +11,51 @@ public partial class Store_Clerk_PurchaseOrderDetails : System.Web.UI.Page
 {
     protected int pONo;
     protected PurchaseOrder pO;
+    protected List<PurchaseOrderDetail> pODetails;
 
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
-            // If no PONo is passed, go back to List Page
+            // If no PONo is passed, go back to list page
             if (Session["PONo"] == null)
             {
                 GoToPurchaseOrderListPage();
             }
-            else
-            {
-                // Set DataGrid
-                pONo = (int)Session["PONo"];
-                pO = POController.GetPurchaseOrder(pONo);
-                BindGrid();
-            }
         }
+
+        // Set page attributes
         pONo = (int)Session["PONo"];
         pO = POController.GetPurchaseOrder(pONo);
+
+        if (!IsPostBack)
+        {
+            // Set gridview
+            BindGrid();
+        }
     }
 
     protected void Button_Click(object sender, EventArgs e)
     {
-        Button buttonPressed = (Button)sender;
-        pONo = (int)Session["PONo"];
-
-        // Delete Button
-        if (buttonPressed.CommandArgument == "Delete")
+        try
         {
-            // Delete Purchase Order
-            try
+            Button buttonPressed = (Button)sender;
+
+            // Delete Button
+            if (buttonPressed.CommandArgument == "Delete")
             {
+                // Delete Purchase Order
                 POController.DeletePO(pONo);
                 Session["POProcessed"] = (int)Session["PONo"];
             }
-            catch (Exception exception)
-            {
-                Session["Error"] = "An Error Has Occured: " + exception.Message;
-            }
-            if (Session["Error"] == null)
-            {
-                GoToPurchaseOrderListPage();
-            }
+        }
+        catch (Exception exception)
+        {
+            Session["Error"] = "An Error Has Occured: " + exception.Message;
+        }
+        if (Session["Error"] == null)
+        {
+            GoToPurchaseOrderListPage();
         }
     }
 
@@ -66,7 +67,7 @@ public partial class Store_Clerk_PurchaseOrderDetails : System.Web.UI.Page
 
     protected void OnRowUpdating(object sender, GridViewUpdateEventArgs e)
     {
-        // Get Selected Row
+        // Get selected row
         GridViewRow row = PODetailsGridView.Rows[e.RowIndex];
 
         try
@@ -105,10 +106,10 @@ public partial class Store_Clerk_PurchaseOrderDetails : System.Web.UI.Page
     private void BindGrid()
     {
         // Get PODetails
-        List<PurchaseOrderDetail> pODs = POController.GetPODs(pONo);
+        pODetails = POController.GetPODs(pONo);
 
-        // Set DataGrid
-        PODetailsGridView.DataSource = pODs.Select(
+        // Set gridview
+        PODetailsGridView.DataSource = pODetails.Select(
             pOD => new
             {
                 ItemNo = pOD.ItemNo,

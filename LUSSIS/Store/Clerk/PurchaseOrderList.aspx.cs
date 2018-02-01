@@ -9,15 +9,16 @@ using LUSSIS_Backend.controller;
 
 public partial class Store_Clerk_PurchaseOrderList : System.Web.UI.Page
 {
-    int pONo;
-    PurchaseOrder pO;
+    int empNo;
     List<PurchaseOrder> pendingPOs;
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        empNo = Profile.EmpNo;
+
         if (!IsPostBack)
         {
-            // Load GridView
+            // Set gridview
             BindGrid();
         }
     }
@@ -26,7 +27,7 @@ public partial class Store_Clerk_PurchaseOrderList : System.Web.UI.Page
     {
         if (e.CommandName == "PODetails")
         {
-            pONo = Convert.ToInt32(e.CommandArgument);
+            int pONo = Convert.ToInt32(e.CommandArgument);
             Session["PONo"] = pONo;
             Response.Redirect("PurchaseOrderDetails.aspx");
         }
@@ -36,7 +37,7 @@ public partial class Store_Clerk_PurchaseOrderList : System.Web.UI.Page
     {
         try
         {
-            pONo = Int32.Parse(PendingPurchaseOrderGridView.Rows[e.RowIndex].Cells[0].Text);
+            int pONo = Int32.Parse(PendingPurchaseOrderGridView.Rows[e.RowIndex].Cells[0].Text);
             POController.DeletePO(pONo);
             BindGrid();
             Session["POProcessed"] = pONo;
@@ -50,7 +51,7 @@ public partial class Store_Clerk_PurchaseOrderList : System.Web.UI.Page
     private void BindGrid()
     {
         // Get Pending Purchase Orders belonging to this User
-        pendingPOs = POController.GetPendingPOsByOrderedEmp(Profile.EmpNo);
+        pendingPOs = POController.GetPendingPOsByOrderedEmp(empNo);
 
         // Set GridView
         PendingPurchaseOrderGridView.DataSource = pendingPOs.Select(

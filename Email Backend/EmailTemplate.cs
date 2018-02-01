@@ -61,7 +61,7 @@ namespace Email_Backend
 
         public static String GenerateOldDeputyAuthorityRemovedEmail(string empName, string deptName)
         {
-            return "Dear " + empName + ",<br/><br/>You have been removed as the approving authority of "+deptName+".";
+            return "Dear " + empName + ",<br/><br/>You have been removed as the approving authority of " + deptName + ".";
         }
 
         public static String GenerateNewDeputyAuthoritySubject()
@@ -71,7 +71,7 @@ namespace Email_Backend
 
         public static String GenerateNewDeputyAuthorityEmail(string empName, string deptName, string startDate, string endDate)
         {
-            return "Dear "+empName+", <br/><br/>You have been appointed as the approving authority of "+deptName+", starting at "+startDate+" and ending at "+endDate+".";
+            return "Dear " + empName + ", <br/><br/>You have been appointed as the approving authority of " + deptName + ", starting at " + startDate + " and ending at " + endDate + ".";
         }
 
         public static String GeneratePendingRequisitionSubject(string requestEmployee)
@@ -90,9 +90,32 @@ namespace Email_Backend
         public static String GenerateRaisedRequisition(string employee, string reqNo)
         {
             return
-                "Dear " + employee + "<br/>" + "Your new requisiton number is "+reqNo+".";
+                "Dear " + employee + "<br/>" + "Your new requisiton number is " + reqNo + ".";
         }
 
+        public static String GenerateOrderFormEmailSubject()
+        {
+            return "New Purchase Orders Pending Approval";
+        }
 
+        public static String GenerateOrderFormEmail(string supervisor, List<string> pOList)
+        {
+            string message =
+                "Dear " + supervisor + ","
+                + "<br/><br/>The following Purchase Orders have been created and are pending your approval:"
+                 + "<br/>";
+
+            int count = 1;
+            foreach (string pO in pOList)
+            {
+                message += String.Format("<br/>{0}. {1}", count, pO);
+                count++;
+            }
+
+            message += "<br/><br/>Thank you."
+                + "<br/><br/>[This is an automated Message. Please do not reply.]";
+
+            return message;
+        }
     }
 }

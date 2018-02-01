@@ -33,7 +33,7 @@
                 ID="PODetailsGridView"
                 AutoGenerateColumns="False"
                 GridLines="None"
-                CssClass="table table-striped"  
+                CssClass="table table-striped"
                 OnRowDeleting="OnRowDeleting"
                 OnRowEditing="OnRowEditing"
                 OnRowCancelingEdit="OnRowCancelingEdit"
@@ -59,18 +59,31 @@
                         </ItemTemplate>
                     </asp:TemplateField>
 
-                    <asp:BoundField DataField="Qty" HeaderText="Qty" SortExpression="Qty" />
+                    <asp:TemplateField HeaderText="Qty">
+                        <ItemTemplate>
+                            <asp:Label ID="LabelQty" runat="server" Text='<%# Bind("Qty") %>' />
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBoxQty" runat="server" Text='<%# Bind("Qty") %>'></asp:TextBox>
+                            <div>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBoxQty" ErrorMessage="Field cannot be empty" Display="Dynamic" Style="color: red;"></asp:RequiredFieldValidator>
+                                <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="TextBoxQty" Operator="DataTypeCheck" Type="Integer" ErrorMessage="Enter only integer" Display="Dynamic" Style="color: red;"></asp:CompareValidator>
+                            </div>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
 
                     <asp:TemplateField HeaderText="SubTotal">
                         <ItemTemplate>
                             <asp:Label ID="LabelSubTotal" runat="server" Text='<%# Bind("SubTotal") %>' />
                         </ItemTemplate>
+                        <EditItemTemplate>
+                        </EditItemTemplate>
                     </asp:TemplateField>
 
                     <asp:CommandField
                         HeaderText="Action"
                         ButtonType="Button"
-                        ShowEditButton="True" 
+                        ShowEditButton="True"
                         ShowDeleteButton="True" />
 
                 </Columns>
@@ -96,4 +109,3 @@
 
     </div>
 </asp:Content>
-

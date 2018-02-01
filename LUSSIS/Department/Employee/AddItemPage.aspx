@@ -59,7 +59,12 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
-                <asp:gridview gridlines="None" runat="server" cssclass="table table-striped" id="StationeryGridView" autogeneratecolumns="False" onselectedindexchanged="StationeryGridView_SelectedIndexChanged">
+                <asp:gridview gridlines="None" 
+                    runat="server" 
+                    cssclass="table table-striped" 
+                    id="StationeryGridView" 
+                    autogeneratecolumns="False" 
+                    onselectedindexchanged="StationeryGridView_SelectedIndexChanged">
                     <Columns>
                         <asp:BoundField DataField="ItemNo" HeaderText="ItemNo" SortExpression="ItemNo" />
                         <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
@@ -72,6 +77,7 @@
                     </Columns>
                 </asp:gridview>
                 <asp:label id="showerrorLb" runat="server" text=""></asp:label>
+<%--                <asp:Label ID="itemcheckText" runat="server" Text="Label"></asp:Label>--%>
             </div>
             <div class="col-sm-6">
                 <asp:gridview GridLines="None" datakeynames="ItemNo" runat="server" cssclass="table table-striped" id="Cart" autogeneratecolumns="False" onrowdeleting="Cart_GridViewDelete">

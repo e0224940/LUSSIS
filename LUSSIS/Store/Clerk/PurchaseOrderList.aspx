@@ -1,6 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="PurchaseOrderList.aspx.cs" Inherits="Store_Clerk_PurchaseOrderList" MasterPageFile="../../MasterPage.master" %>
 
 <asp:Content ID="ContentHead" ContentPlaceHolderID="head" runat="server">
+
+    <% Session.Remove("PONo"); %>
+
 </asp:Content>
 
 <asp:Content ID="ContentBody" ContentPlaceHolderID="body" runat="server">
