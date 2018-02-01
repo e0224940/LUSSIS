@@ -74,13 +74,15 @@
     <br />
         <div class="row">
             <div class="form-inline">
-              
+     <div class="col-xs-2">          
     <asp:Button ID="approveAdjustmentButton" CssClass="btn btn-success" runat="server" Text="Approve" OnClick="approveAdjustmentButton_Click" />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     </div>
+                <div class="col-xs-2">    
     <asp:Button ID="rejectAdjustmentButton" CssClass="btn btn-danger" runat="server" Text="Reject" OnClick="rejectAdjustmentButton_Click" />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+                <div class="col-xs-2"> 
     <asp:Button ID="approveAVBackBut" CssClass="btn btn-info" runat="server" Text="Back" OnClick="approveAVBackBut_Click" />
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div> 
                     
                 </div>
             </div>
