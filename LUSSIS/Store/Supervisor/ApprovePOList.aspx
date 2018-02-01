@@ -3,10 +3,17 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
-            <h2 class="sub-header">Approve Purchase Order</h2>
-    <br />
-    <h3>Pending Orders List</h3>
-        <asp:GridView ID="ApprovePOListGridView" runat="server" AutoGenerateColumns="False">
+    <div class="container">
+        <asp:Label ID="approve" runat="server" Font-Bold="True" Font-Size="XX-Large" Text="Approve Purchase Order"></asp:Label>
+        <br />
+        <br />
+        <asp:Label ID="pending" runat="server" Font-Bold="True" Font-Size="X-Large" Text="Pending Orders List"></asp:Label>
+        <br />
+
+        <asp:GridView ID="ApprovePOListGridView" 
+            runat="server" 
+            cssclass="table table-striped" 
+            AutoGenerateColumns="False">
                 <Columns>
                     <asp:TemplateField HeaderText="S/N">
                         <ItemTemplate>
@@ -26,6 +33,6 @@
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
-
+</div>
 </asp:Content>
 

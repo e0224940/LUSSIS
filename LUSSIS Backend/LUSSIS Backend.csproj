@@ -77,7 +77,6 @@
     <Compile Include="GenerateTrendController.cs" />
     <Compile Include="ItemList.cs" />
     <Compile Include="LoginController.cs" />
-    <Compile Include="model\OrderItem.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

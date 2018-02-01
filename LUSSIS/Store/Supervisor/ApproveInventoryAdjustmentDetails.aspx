@@ -3,18 +3,51 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
-                    <h2 class="sub-header">Approve Inventory Adjustment</h2>
+    <div class="container">
+    <asp:Label ID="approve" runat="server" Font-Bold="True" Font-Size="XX-Large" Text="Approve Inventory Adjustment"></asp:Label>
+        <br />
+        <br />
+    <div class="row">
+    <div class="form-inline">
+        <div class="col-xs-2">              
+            <asp:Label ID="approveInvAdjLabel" runat="server" Text="Adjustment Voucher# : "></asp:Label>
+        </div>
+        <div class="col-xs-2"> 
+            <asp:TextBox ID="invAdjLabel" runat="server" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False"></asp:TextBox>
+        </div>
+        </div>
+   </div>
+   
+    <br /> <br />
 
-    <asp:Label ID="approveInvAdjLabel" runat="server" Text="Adjustment Voucher# : "></asp:Label>
-    <asp:Label ID="invAdjLabel" runat="server"></asp:Label>
+        <div class="row">
+            <div class="form-inline">
+                <div class="col-xs-2"> 
+                    <asp:Label ID="byLabel" runat="server" Text="By: " ></asp:Label>
+                </div>
+                <div class="col-xs-2">
+                    <asp:TextBox ID="invAdjClerkLabel" runat="server" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False"></asp:TextBox>
+                </div>
+            </div>
+        </div>
+
     <br /> <br />
-    <asp:Label ID="byLabel" runat="server" Text="By: "></asp:Label>
-    <asp:Label ID="invAdjClerkLabel" runat="server"></asp:Label>
-    <br /> <br />
+         <div class="row">
+            <div class="form-inline">
+                <div class="col-xs-2">      
     <asp:Label ID="dateRaisedLabel" runat="server" Text="Date Raised: "></asp:Label>
-    <asp:Label ID="dateLabel" runat="server" Text="30-Dec-2017"></asp:Label>
+                 </div>
+                 <div class="col-xs-2"> 
+                     <asp:TextBox ID="dateLabel" runat="server" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False">30-Dec-2017</asp:TextBox>
+<%--    <asp:Label ID="dateLabel" runat="server" Text="30-Dec-2017"></asp:Label>--%>
+                </div>
+             </div>
+          </div>
     <br /> <br />
-                          <asp:GridView ID="ApproveInventoryAdjustmentDetailsGridView" runat="server" AutoGenerateColumns="False">
+                <asp:GridView ID="ApproveInventoryAdjustmentDetailsGridView" 
+                    runat="server" 
+                    cssclass="table table-striped" 
+                    AutoGenerateColumns="False">
                 <Columns>
                     <asp:TemplateField HeaderText="S/N">
                         <ItemTemplate>
@@ -39,9 +72,18 @@
                 </Columns>
             </asp:GridView>
     <br />
-    <asp:Button ID="approveAdjustmentButton" runat="server" Text="Approve" OnClick="approveAdjustmentButton_Click" />
-    <asp:Button ID="rejectAdjustmentButton" runat="server" Text="Reject" OnClick="rejectAdjustmentButton_Click" />
-    <asp:Button ID="approveAVBackBut" runat="server" Text="Back" OnClick="approveAVBackBut_Click" />
-
+        <div class="row">
+            <div class="form-inline">
+              
+    <asp:Button ID="approveAdjustmentButton" CssClass="btn btn-success" runat="server" Text="Approve" OnClick="approveAdjustmentButton_Click" />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:Button ID="rejectAdjustmentButton" CssClass="btn btn-danger" runat="server" Text="Reject" OnClick="rejectAdjustmentButton_Click" />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:Button ID="approveAVBackBut" CssClass="btn btn-info" runat="server" Text="Back" OnClick="approveAVBackBut_Click" />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    
+                </div>
+            </div>
+</div>
 </asp:Content>
 

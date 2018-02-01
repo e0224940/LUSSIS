@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LUSSIS_Backend.model;
 using System.Transactions;
+using Email_Backend;
 
 namespace LUSSIS_Backend.controller
 {
@@ -210,7 +210,7 @@ namespace LUSSIS_Backend.controller
             }
         }
 
-        private static PurchaseOrder CreatePurchaseOrder(string supplierCode, int orderedBy, DateTime dateIssued, int approvedBy, List<PurchaseOrder> pOList)
+        private static PurchaseOrder CreatePurchaseOrder(string supplierCode, int orderedBy, DateTime dateIssued, List<PurchaseOrder> pOList)
         {
             LussisEntities context = new LussisEntities();
 
@@ -224,7 +224,6 @@ namespace LUSSIS_Backend.controller
                 pO.SupplierCode = supplierCode;
                 pO.OrderedBy = orderedBy;
                 pO.DateIssued = dateIssued;
-                pO.ApprovedBy = approvedBy;
                 pO.Status = "Pending";
                 context.PurchaseOrders.Add(pO);
                 context.SaveChanges();
@@ -283,14 +282,13 @@ namespace LUSSIS_Backend.controller
             }
         }
 
-        public static void SubmitOrder(List<OrderItem> orderList, int orderedBy, int approvedBy, DateTime dateIssued)
+        public static void SubmitOrder(List<OrderItem> orderList, int orderedBy, DateTime dateIssued)
         {
+            // Create empty POList
+            List<PurchaseOrder> pOList = new List<PurchaseOrder>();
+
             using (var txn = new TransactionScope())
             {
-                // Create empty POList
-                List<PurchaseOrder> pOList = new List<PurchaseOrder>();
-
-
                 // For each OrderItem
                 for (int i = 0; i < orderList.Count; i++)
                 {
@@ -304,12 +302,11 @@ namespace LUSSIS_Backend.controller
                         int? qty = orderItem.OrderQtyList[j];
                         if (qty > 0)
                         {
-
-                            // Create or Get PurchaseOrder
-                            PurchaseOrder pO = CreatePurchaseOrder(supplierCode, orderedBy, dateIssued, approvedBy, pOList);
+                            // Create or get PO
+                            PurchaseOrder pO = CreatePurchaseOrder(supplierCode, orderedBy, dateIssued, pOList);
                             int pONo = pO.PONo;
 
-                            // Create PurchaseOrderDetail
+                            // Create POD
                             PurchaseOrderDetail pOD = CreatePurchaseOrderDetail(pONo, itemNo, qty);
                         }
                     }
@@ -317,6 +314,65 @@ namespace LUSSIS_Backend.controller
 
                 txn.Complete();
             }
+
+            // Send Email
+            LussisEntities context = new LussisEntities();
+            var supervisorName = context.StoreAssignments.Where(x => x.Role == "Supervisor").FirstOrDefault().Employee.EmpName;
+            List<string> pOEmailEntries = new List<string>();
+            foreach (PurchaseOrder pO in pOList)
+            {
+                var pONo = pO.PONo;
+                var supplier = context.Suppliers.Where(x => x.SupplierCode.Equals(pO.SupplierCode)).FirstOrDefault().SupplierName;
+                var pOEmailEntry = pONo + " " + supplier;
+                pOEmailEntries.Add(pOEmailEntry);
+            }
+            var recipientEmail = context.StoreAssignments.Where(x => x.Role == "Supervisor").FirstOrDefault().Employee.Email;
+            var emailSubject = EmailTemplate.GenerateOrderFormEmailSubject();
+            var emailContent = EmailTemplate.GenerateOrderFormEmail(supervisorName, pOEmailEntries);
+            EmailBackend.sendEmailStep(recipientEmail, emailSubject, emailContent);
         }
+    }
+
+    public class OrderItem
+    {
+        // ATTRIBUTES
+        StationeryCatalogue stock;
+        List<string> supplierCodeList;
+        List<int?> orderQtyList;
+
+        public OrderItem(StationeryCatalogue stock)
+        {
+            this.stock = stock;
+            supplierCodeList = new List<string> { stock.Supplier.SupplierCode, stock.Supplier4.SupplierCode, stock.Supplier5.SupplierCode };
+            orderQtyList = new List<int?> { 0, 0, 0 };
+        }
+
+        public StationeryCatalogue Stock { get { return stock; } set { stock = value; } }
+
+        public string ItemNo { get { return stock.ItemNo; } }
+
+        public string Description { get { return stock.Description; } }
+
+        public int? QtyOnHand { get { return stock.CurrentQty; } }
+
+        public int? ReorderLevel { get { return stock.ReorderLevel; } }
+
+        public int? ReorderQty { get { return stock.ReorderQty; } }
+
+        public List<string> SupplierCodeList { get { return supplierCodeList; } }
+
+        public string Supplier1 { get { return stock.Supplier1; } }
+
+        public string Supplier2 { get { return stock.Supplier2; } }
+
+        public string Supplier3 { get { return stock.Supplier3; } }
+
+        public List<int?> OrderQtyList { get { return orderQtyList; } }
+
+        public int? Qty1 { get { return orderQtyList[0]; } set { orderQtyList[0] = value; } }
+
+        public int? Qty2 { get { return orderQtyList[1]; } set { orderQtyList[1] = value; } }
+
+        public int? Qty3 { get { return orderQtyList[2]; } set { orderQtyList[2] = value; } }
     }
 }
