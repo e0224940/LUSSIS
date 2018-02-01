@@ -57,6 +57,14 @@
 
                             <asp:Button runat="server" CssClass="btn btn-primary btn-block" ID="NewUserButton" Text="Create User" OnClick="NewUserButton_Click" />
 
+                            <div class="form-group"></div>
+
+                            <div>
+                                <asp:Button runat="server" CssClass="btn btn-primary btn-block" ID="ButtonGenerateAccounts" Text="Populate Database With Predefined Accounts" OnClick="ButtonGenerateAccounts_Click" />
+                            </div>
+
+                            <div class="form-group"></div>
+
                             <div style="color: black;">
                                 <asp:Literal ID="StatusText" runat="server" EnableViewState="False"></asp:Literal>
                             </div>
