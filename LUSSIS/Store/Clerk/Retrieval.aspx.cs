@@ -31,7 +31,7 @@ public partial class _Default : System.Web.UI.Page
             .Select(ret =>
                new
                {
-                   Text = "#" + ret.RetrievalNo + " (" + String.Format("{0:d/M/yyyy}", ret.Date) + ")",
+                   Text = "#" + ret.RetrievalNo + " (" + String.Format("{0:dd/MMM/yyyy}", ret.Date) + ")",
                    Value = ret.RetrievalNo
                }).ToList();
         items.Insert(0, new
