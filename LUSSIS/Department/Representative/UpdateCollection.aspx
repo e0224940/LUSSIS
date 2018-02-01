@@ -20,10 +20,13 @@
     </div>
     <br />
     <br />
+        <div class="row">
+    <div class="form-inline">
     <div class="col-xs-2">    
     <asp:Label ID="Label2" runat="server" Text="Change it to:"></asp:Label>
     </div>
     
+         <div class="col-xs-2">  
     <asp:DropDownList ID="NewLocationDDL" runat="server" CssClass="btn btn-default dropdown-toggle" OnSelectedIndexChanged="ChooseLocation_DDList" AutoPostBack="true">
         <asp:ListItem Value="-1">Choose New Location</asp:ListItem>
         <asp:ListItem Value="0">Management Store</asp:ListItem>
@@ -35,7 +38,10 @@
         <asp:ListItem Value="6">University Hospital</asp:ListItem>
     </asp:DropDownList> &nbsp;&nbsp;&nbsp;
     <asp:Label ID="Label4" runat="server" Text=" " style="color:red"></asp:Label>
-    <br /><br />
+             </div>
+        </div>
+            </div>
+    <br />
         
          <div class="row">
     <div class="form-inline">

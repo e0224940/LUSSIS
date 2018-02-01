@@ -62,15 +62,26 @@ public partial class Department_Representative_UpdateCollection : System.Web.UI.
     {
         int newPoint = Int32.Parse(NewLocationDDL.SelectedItem.Value);
         int empNo = Profile.EmpNo;
-            
-        if(newPoint<0 || newPoint>6)
+        string oldloc = oldLocationText.Text;
+        string newloc = NewLocationDDL.SelectedItem.Text;
+
+        if (newPoint<0 || newPoint>6)
         {
             Label4.Text = "Choose New Location.";
         }
         else
-        { 
-            UpdateCollectionPoint.UpdatePoint(empNo, newPoint);
-
+        {
+           
+            if (oldloc.Equals(newloc))
+            {
+                Label4.Text = "Choose the New Location";
+            }
+            else
+            {
+                UpdateCollectionPoint.UpdatePoint(empNo, newPoint);
+            }
+            
+            
             //Choose Loc and Time
             if (newPoint == 1)
             {
