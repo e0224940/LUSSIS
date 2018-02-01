@@ -153,7 +153,7 @@ public partial class Store_Clerk_OrderForm : System.Web.UI.Page
             orderList = GetOrderListFromPage();
 
             // Submit Order
-            OrderController.SubmitOrder(orderList, orderedBy, approvedBy, dateIssued);
+            OrderController.SubmitOrder(orderList, orderedBy, dateIssued);
         }
         catch (Exception exception)
         {
