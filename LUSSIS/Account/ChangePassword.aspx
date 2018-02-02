@@ -8,15 +8,14 @@
 </div>
 
     <div class="form-group">
-        <asp:TextBox CssClass="form-control" ID="OldPassword" runat="server" placeholder="Old Password"/>
+        <asp:TextBox CssClass="form-control" ID="OldPassword" TextMode="Password" runat="server" placeholder="Old Password"/>
         <asp:RequiredFieldValidator runat="server" ControlToValidate="OldPassword" ErrorMessage="Old Password Required" />
     </div>
     <div class="form-group">
-        <asp:TextBox CssClass="form-control" ID="NewPassword" runat="server" placeholder="New Password"/>
-        <asp:CompareValidator runat="server" ControlToValidate="NewPassword" ControlToCompare="ConfirmPassword" Operator="Equal" ErrorMessage="Password Mismatch" />
+        <asp:TextBox CssClass="form-control" ID="NewPassword" TextMode="Password" runat="server" placeholder="New Password"/>
     </div>
     <div class="form-group">
-        <asp:TextBox CssClass="form-control" ID="ConfirmPassword" runat="server" placeholder="Confirm Password"/>
+        <asp:TextBox CssClass="form-control" ID="ConfirmPassword" TextMode="Password" runat="server" placeholder="Confirm Password"/>
         <asp:CompareValidator runat="server" ControlToValidate="ConfirmPassword" ControlToCompare="NewPassword" Operator="Equal" ErrorMessage="Password Mismatch"/>
     </div>
     <div class="form-group">
