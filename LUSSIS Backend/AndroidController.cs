@@ -416,18 +416,30 @@ namespace LUSSIS_Backend
                 context.AdjustmentVouchers.Add(newVoucher);
                 context.SaveChanges();
 
-                // Add Voucher Detail
-                AdjustmentVoucherDetail newAdjustment = new AdjustmentVoucherDetail()
-                {
-                    AvNo = newVoucher.AvNo,
-                    ItemNo = itemNo,
-                    Qty = itemToChange.CurrentQty - qty,
-                    Reason = reason
-                };
-                context.AdjustmentVoucherDetails.Add(newAdjustment);
-                context.SaveChanges();
-
                 result = true;
+
+                if (result == true)
+                {
+                    try
+                    {
+                        // Add Voucher Detail
+                        AdjustmentVoucherDetail newAdjustment = new AdjustmentVoucherDetail()
+                        {
+                            AvNo = newVoucher.AvNo,
+                            ItemNo = itemNo,
+                            Qty = qty - itemToChange.CurrentQty,
+                            Reason = reason
+                        };
+                        context.AdjustmentVoucherDetails.Add(newAdjustment);
+                        context.SaveChanges();
+
+                        result = true;
+                    }
+                    catch (Exception)
+                    {
+                        result = false;
+                    }
+                }
             }
             catch (Exception)
             {
