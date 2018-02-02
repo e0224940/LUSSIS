@@ -38,7 +38,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
-                <asp:gridview gridlines="None" data
+                <asp:gridview gridlines="None" 
                     keynames="ReqNo" runat="server"
                     cssclass="table table-striped"
                     id="GridViewForDetail"
