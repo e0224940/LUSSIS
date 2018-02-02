@@ -81,11 +81,13 @@ namespace LUSSIS_Backend
                 LussisEntities entity = new LussisEntities();
                 Employee currEmployee = entity.Employees.Where(emp => emp.EmpNo == issueBy).First();
                 Department currDepartment = entity.Departments.Where(dep => dep.DeptCode.Equals(currEmployee.DeptCode)).First();
-                // Send Email
+                // Send Email to Head
                 EmailBackend.sendEmailStep(
                     currDepartment.EmployeeHead.Email,
                     EmailTemplate.GeneratePendingRequisitionSubject(currEmployee.ToString()),
                     EmailTemplate.GeneratePendingRequisition(currDepartment.EmployeeHead.ToString(), currEmployee.ToString()));
+
+                //Send email to Employee
                 EmailBackend.sendEmailStep(
                    currEmployee.Email,
                    EmailTemplate.GenerateRaisedRequisitionSubject(currEmployee.ToString()),

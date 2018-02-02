@@ -11,7 +11,6 @@ namespace LUSSIS_Backend
 
     public class UpdateCollectionPoint
     {
-
         public static string SearchLocation(int empNo)
         {
             LussisEntities entity = new LussisEntities();
