@@ -121,4 +121,9 @@ public partial class Department_Employee_RequisitionDetailsView : System.Web.UI.
     }
 
 
+
+    protected void GridViewForDetail_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+
+    }
 }
