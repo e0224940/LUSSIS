@@ -63,6 +63,9 @@
             <EmptyDataTemplate>No Items in this Disbursement</EmptyDataTemplate>
         </asp:GridView>
     </div>
+    <div class="row">
+        <h3>PIN : <%= d.Pin.ToString() %></h3>
+    </div>
     <%}
         else
         { %>
