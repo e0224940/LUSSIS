@@ -95,7 +95,7 @@ public partial class Store_Clerk_DisbursementDetails : System.Web.UI.Page
 
         if (Session["DProcessed"] != null)
         {
-            Response.Redirect("DisbursementList.aspx");
+            Response.Redirect(Page.ResolveUrl("~/Store/Clerk/DisbursementList.aspx"));
         }
     }
 
