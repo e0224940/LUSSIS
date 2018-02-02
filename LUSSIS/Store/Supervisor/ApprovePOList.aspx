@@ -12,6 +12,7 @@
 
         <asp:GridView ID="ApprovePOListGridView" 
             runat="server" 
+            GridLines="None"
             cssclass="table table-striped" 
             AutoGenerateColumns="False">
                 <Columns>

@@ -15,6 +15,12 @@ namespace LUSSIS_Backend.controller
             return context.Disbursements.Where(x => x.Status.Equals("Pending")).ToList<Disbursement>();
         }
 
+        public static Disbursement GetPendingDisbursementOfDepartment(String deptCode)
+        {
+            LussisEntities context = new LussisEntities();
+            return context.Disbursements.Where(x => x.Status.Equals("Pending") && x.DeptCode.Equals(deptCode)).SingleOrDefault();
+        }
+
         public static List<DisbursementDetail> GetDisbursementDetails(int dNo)
         {
             LussisEntities context = new LussisEntities();

@@ -12,6 +12,7 @@
 
         <asp:GridView ID="approveInventoryAdjustmentListGridView" 
             runat="server" 
+            GridLines="None"
             cssclass="table table-striped" 
             AutoGenerateColumns="False">
                 <Columns>
