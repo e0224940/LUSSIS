@@ -20,18 +20,18 @@ namespace LUSSIS_Backend
             return currDepartment.CollectionPoint.CollectionPointDetails;
         }
 
-        public static void AddCollectionPoint(string newPoint)
-        {
-            using (LussisEntities entities = new LussisEntities())
-            {
-                CollectionPoint point = new CollectionPoint
-                {
-                    CollectionPointDetails = newPoint,
-                };
-                entities.CollectionPoints.Add(point);
-                entities.SaveChanges();
-            }
-        }
+        //public static void AddCollectionPoint(string newPoint)
+        //{
+        //    using (LussisEntities entities = new LussisEntities())
+        //    {
+        //        CollectionPoint point = new CollectionPoint
+        //        {
+        //            CollectionPointDetails = newPoint,
+        //        };
+        //        entities.CollectionPoints.Add(point);
+        //        entities.SaveChanges();
+        //    }
+        //}
 
         public static void UpdatePoint(int empNo, int collectionNewPoint)
         {
