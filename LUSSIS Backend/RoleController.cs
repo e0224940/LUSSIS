@@ -19,7 +19,7 @@ namespace LUSSIS_Backend
             StoreClerk
         }
 
-        private static String[] LUSSISRolesString =
+        public static String[] LUSSISRolesString =
         {
             "DepartmentHead",
             "DepartmentDeputy",
