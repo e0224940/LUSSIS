@@ -116,17 +116,22 @@ namespace LUSSIS_Backend
         {
             using (LussisEntities entities = new LussisEntities())
             {
+                Requisition requisition = entities.Requisitions.Where(r => r.ReqNo.Equals(reqId)).FirstOrDefault();
                 List<RequisitionDetail> rd = entities.RequisitionDetails.Where(u => u.ReqNo == reqId).ToList<RequisitionDetail>();
 
-                foreach (RequisitionDetail ff in rd)
+                // Delete only Pending Requisitions!
+                if (requisition.Status.Equals("Pending"))
                 {
-                    //delete from database
-                    entities.RequisitionDetails.Remove(ff);
+                    foreach (RequisitionDetail ff in rd)
+                    {
+                        //delete from database
+                        entities.RequisitionDetails.Remove(ff);
 
+                    }
+                    Requisition req = entities.Requisitions.Where(p => p.ReqNo == reqId).FirstOrDefault<Requisition>();
+                    entities.Requisitions.Remove(req);
+                    entities.SaveChanges();
                 }
-                Requisition req = entities.Requisitions.Where(p => p.ReqNo == reqId).FirstOrDefault<Requisition>();
-                entities.Requisitions.Remove(req);
-                entities.SaveChanges();
             }
         }
 
