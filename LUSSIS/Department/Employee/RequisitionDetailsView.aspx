@@ -70,8 +70,8 @@
                         </asp:TemplateField>
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:Button ID="EditButton" runat="server" CommandName="Edit" Visible='<%# Bind("isEditable") %>' />
-                                <asp:Button ID="DeleteButton" runat="server" CommandName="Delete" Visible='<%# Bind("isEditable") %>' />
+                                <asp:Button ID="EditButton" Text="Edit" CssClass="btn btn-primary" runat="server" CommandName="Edit" Visible='<%# Bind("isEditable") %>' />
+                                <asp:Button ID="DeleteButton" Text="Delete" CssClass="btn btn-danger" runat="server" CommandName="Delete" Visible='<%# Bind("isEditable") %>' />
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
