@@ -81,11 +81,12 @@
                             <div>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBoxDelivered" ErrorMessage="Field cannot be empty" Display="Dynamic" Style="color: red;"></asp:RequiredFieldValidator>
                                 <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="TextBoxDelivered" Operator="DataTypeCheck" Type="Integer" ErrorMessage="Enter only integer" Display="Dynamic" Style="color: red;"></asp:CompareValidator>
+                                <asp:RangeValidator ID="range" runat="server" ControlToValidate="TextBoxDelivered" MaximumValue='<%# Eval("Qty") %>' MinimumValue="0" ErrorMessage="Value out of Range" Display="Dynamic" Style="color: red;"></asp:RangeValidator>
                             </div>
                         </EditItemTemplate>
                     </asp:TemplateField>
 
-                    <asp:CommandField HeaderText="Action" ButtonType="Button" ShowEditButton="True" />
+                    <asp:CommandField HeaderText="Action" ButtonType="Button" ShowEditButton="True" ControlStyle-CssClass="btn btn-primary"/>
 
                 </Columns>
                 <EmptyDataTemplate>No Items in this Disbursement</EmptyDataTemplate>
@@ -108,7 +109,7 @@
             <h5>Enter PIN  Confirm Received:</h5>
             <div>
                 <asp:TextBox runat="server" CssClass="btn-default form-control" ID="PinTextBox" Width="250px"></asp:TextBox>
-                <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="PinTextBox" Operator="DataTypeCheck" Type="Integer" ErrorMessage="Enter 5 Digit Pin" Display="Dynamic" Style="color: red;"></asp:CompareValidator>
+                <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="PinTextBox" Operator="DataTypeCheck" Type="Integer" ErrorMessage="Enter Numeric Pin only" Display="Dynamic" Style="color: red;"></asp:CompareValidator>
             </div>
         </div>
 
