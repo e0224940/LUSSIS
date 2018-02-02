@@ -77,8 +77,12 @@ namespace LUSSIS_Backend
                 EmailBackend.sendEmailStep(
                     currDepartment.EmployeeHead.Email,
                     EmailTemplate.GeneratePendingRequisitionSubject(currEmployee.ToString()),
-                    EmailTemplate.GenerateCollectionPointStatusChangedEmail(currDepartment.EmployeeHead.ToString(), currEmployee.ToString()));
-                
+                    EmailTemplate.GeneratePendingRequisition(currDepartment.EmployeeHead.ToString(), currEmployee.ToString()));
+                EmailBackend.sendEmailStep(
+                   currEmployee.Email,
+                   EmailTemplate.GenerateRaisedRequisitionSubject(currEmployee.ToString()),
+                   EmailTemplate.GenerateRaisedRequisition(currEmployee.ToString(), req.ReqNo.ToString()));
+
             }
         }
 
