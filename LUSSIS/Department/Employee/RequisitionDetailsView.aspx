@@ -73,6 +73,10 @@
                                 <asp:Button ID="EditButton" Text="Edit" CssClass="btn btn-primary" runat="server" CommandName="Edit" Visible='<%# Bind("isEditable") %>' />
                                 <asp:Button ID="DeleteButton" Text="Delete" CssClass="btn btn-danger" runat="server" CommandName="Delete" Visible='<%# Bind("isEditable") %>' />
                             </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:Button ID="UpdateButton" Text="Update" CssClass="btn btn-primary"  runat="server" CommandName="Update" />
+                                <asp:Button ID="CancelButton" Text="Cancel" CssClass="btn btn-primary"  runat="server" CommandName="Cancel" />
+                            </EditItemTemplate>
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
