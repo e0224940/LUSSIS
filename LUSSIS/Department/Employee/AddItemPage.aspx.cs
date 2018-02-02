@@ -46,7 +46,22 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
             Session["Test"] = row;
             Msg.Text = "";
             cart.quantity = (row.Cells[2].FindControl("Quantity") as TextBox).Text;
-            cartitem.Add(cart);
+
+            bool isAlreadyInCart = false;
+            foreach(var item in cartitem)
+            {
+                if (item.ItemNo.Equals(cart.ItemNo))
+                {
+                    item.quantity += cart.quantity;
+                    isAlreadyInCart = true;
+                    break;
+                }
+            }
+
+            if (!isAlreadyInCart)
+            {
+                cartitem.Add(cart);
+            }
             
             Session["session"] = cartitem;   
                 Cart.DataSource = cartitem;
