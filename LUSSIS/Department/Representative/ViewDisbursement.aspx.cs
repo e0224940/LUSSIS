@@ -28,6 +28,9 @@ public partial class _Default : System.Web.UI.Page
             d = DisbursementController.GetDisbursement(dNo);
 
             BindGrid();
+        } else
+        {
+            Session["DNo"] = null;
         }
     }
 
