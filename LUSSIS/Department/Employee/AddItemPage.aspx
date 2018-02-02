@@ -71,6 +71,7 @@
                         <asp:TemplateField HeaderText="Quantity">
                             <ItemTemplate>
                                 <asp:TextBox ID="Quantity" runat="server" TextMode="Number" cssclass="btn-default form-control" ></asp:TextBox>
+<%--                                <asp:CompareValidator runat="server" Id="validate" ControlToValidate="Quantity" Operator="DataTypeCheck" Type="Integer" ErrorMessage="The input number has to be integer (greater than 0). "></asp:CompareValidator>--%>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:CommandField ShowSelectButton="true" />

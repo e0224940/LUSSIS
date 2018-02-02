@@ -37,7 +37,9 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
         RaisedItem cart = new RaisedItem();
         cart.ItemNo = row.Cells[0].Text;
         cart.description = row.Cells[1].Text;
-        if ((row.Cells[2].FindControl("Quantity") as TextBox).Text.ToString() == "" || Int32.Parse((row.Cells[2].FindControl("Quantity") as TextBox).Text) <= 0)
+        string input = (row.Cells[2].FindControl("Quantity") as TextBox).Text.ToString();
+        int value;
+        if (!int.TryParse(input,out value) || value<0 )
         {
             Msg.Text = "The input number has to be integer (greater than 0).";
         }
@@ -52,7 +54,9 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
             {
                 if (item.ItemNo.Equals(cart.ItemNo))
                 {
-                    item.quantity += cart.quantity;
+                    int oldQty = Int32.Parse(item.quantity);
+                    int newQty = Int32.Parse(cart.quantity);
+                    item.quantity = (oldQty+newQty).ToString();
                     isAlreadyInCart = true;
                     break;
                 }
