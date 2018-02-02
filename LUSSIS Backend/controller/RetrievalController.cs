@@ -185,6 +185,7 @@ namespace LUSSIS_Backend.controller
                 if (disbursement == null)
                 {
                     disbursement = new Disbursement();
+                    disbursement.DisbursementNo = int.MaxValue;
                     disbursement.DeptCode = deptCode;
                     disbursement.DisbursementDate = disbursementDate;
                     disbursement.RepEmpNo = GetDepartment(context, deptCode).RepEmpNo;
