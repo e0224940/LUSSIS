@@ -7,8 +7,7 @@ using System.Web.UI.WebControls;
 using LUSSIS_Backend;
 
 public partial class Department_Representative_UpdateCollection : System.Web.UI.Page
-{
-
+{ 
     protected void Page_Load(object sender, EventArgs e)
     {
         int empno = Profile.EmpNo;
@@ -64,7 +63,8 @@ public partial class Department_Representative_UpdateCollection : System.Web.UI.
         
         int empNo = Profile.EmpNo;
 
-        string oldloc = oldLocationText.Text;
+        string oldLoc = UpdateCollectionPoint.SearchLocation(empNo);
+
         string newloc = NewLocationDDL.SelectedItem.Text;
        
 
@@ -76,14 +76,13 @@ public partial class Department_Representative_UpdateCollection : System.Web.UI.
         else
         {
            
-            if (oldloc != newloc)
+            if (oldLoc != newloc)
             {
                 UpdateCollectionPoint.UpdatePoint(empNo, newPoint);
             }
             else
             {
                 Label6.Text = "Choose the New Location";
-               
             }
             
             
