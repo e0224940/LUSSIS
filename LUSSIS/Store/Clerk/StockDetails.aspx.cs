@@ -31,6 +31,7 @@ public partial class Store_Clerk_StockDetails : System.Web.UI.Page
                 FirstSupplierLabel.Text = stock.Supplier1;
                 SecondSupplierLabel.Text = stock.Supplier2;
                 ThirdSupplierLabel.Text = stock.Supplier3;
+                QtyLabel.Text = stock.CurrentQty.ToString();
 
                 // Set TxnList
                 StockDetailsGridView.DataSource = stock.StockTxnDetails.Select(txn => new
@@ -44,7 +45,19 @@ public partial class Store_Clerk_StockDetails : System.Web.UI.Page
 
                 // Load TxnList
                 StockDetailsGridView.DataBind();
+
+                // Fill Dropdown
+                SupplierDropDownList.Items.Add(new ListItem(stock.Supplier1, stock.Supplier1));
+                SupplierDropDownList.Items.Add(new ListItem(stock.Supplier2, stock.Supplier2));
+                SupplierDropDownList.Items.Add(new ListItem(stock.Supplier3, stock.Supplier3));
             }
         }
+    }
+
+    protected void AddQuantityButton_Click(object sender, EventArgs e)
+    {
+        string stockNo = (string)Session["StockNo"];
+        StockController.IncreaseStockFromSupplier(stockNo, Convert.ToInt32(QuantityTextBox.Text), SupplierDropDownList.SelectedValue);
+        Response.Redirect(Request.RawUrl);
     }
 }

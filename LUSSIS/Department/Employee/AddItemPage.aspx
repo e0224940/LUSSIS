@@ -5,7 +5,7 @@
 
 <asp:Content ID="ContentBody" ContentPlaceHolderID="body" runat="server">
     <div class="container">
-        <asp:label id="lbl_emp_raisedItem" runat="server" font-bold="True" font-size="XX-Large" text="Raised Requisition"></asp:label>
+        <asp:label id="lbl_emp_raisedItem" runat="server" font-bold="True" font-size="XX-Large" text="Create Requisition"></asp:label>
         <br />
         <br />
         <div class="row">
