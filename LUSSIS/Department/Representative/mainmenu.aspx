@@ -5,7 +5,5 @@
     </a>
     <ul class="dropdown-menu">
         <li><a href="<%= Page.ResolveUrl("~/Department/Representative/UpdateCollection.aspx") %>">Update Collection Point</a></li>
-   
-        <li><a href="<%= Page.ResolveUrl("~/Store/Clerk/DisbursementList.aspx") %>">Disbursement List</a></li>
      </ul>
 </li>

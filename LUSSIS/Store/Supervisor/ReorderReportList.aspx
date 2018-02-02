@@ -11,6 +11,7 @@
 
     <asp:GridView ID="reorderReportListGridView" 
         runat="server"
+        GridLines="None"
         cssclass="table table-striped" 
         AutoGenerateColumns="False">
                 <Columns>
