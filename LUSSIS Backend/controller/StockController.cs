@@ -82,5 +82,31 @@ namespace LUSSIS_Backend.controller
             LussisEntities context = new LussisEntities();
             return context.StoreAssignments.Where(x => x.Role.Equals("Manager")).FirstOrDefault().EmpNo;
         }
+
+        public static void IncreaseStockFromSupplier(String itemNo, int quantity, String supplierCode)
+        {
+            LussisEntities context = new LussisEntities();
+
+            // Get Entities
+            StationeryCatalogue stationeryItem = context.StationeryCatalogues.Where(item => item.ItemNo.Equals(itemNo)).FirstOrDefault();
+            Supplier supplier = context.Suppliers.Where(supp => supp.SupplierCode.Equals(supplierCode)).FirstOrDefault();
+            StockTxnDetail detail = new StockTxnDetail()
+            {
+                AdjustQty = quantity,
+                Date = DateTime.Today,
+                ItemNo = itemNo,
+                Remarks = "Supplied by " + supplierCode,
+            };
+
+            // If entities are found, update database
+            if(stationeryItem != null && supplier != null)
+            {
+                detail.RecordedQty = stationeryItem.CurrentQty + detail.AdjustQty;
+                stationeryItem.CurrentQty = detail.RecordedQty;
+                context.StockTxnDetails.Add(detail);
+
+                context.SaveChanges();
+            }
+        }
     }
 }

@@ -8,43 +8,48 @@
 
         <div class="row">
             <div class="form-inline">
-            <h1>Stock Details <%= (string)Session["stockNo"] %></h1>
-        </div>
+                <h1>Stock Details <%= (string)Session["stockNo"] %></h1>
+            </div>
         </div>
         <div class="row">
             <table class="table table-striped">
                 <tr>
-                    <td>Item No:</td>
+                    <th>Item No:</th>
                     <td>
                         <asp:Label ID="ItemNoLabel" runat="server"></asp:Label></td>
                 </tr>
                 <tr>
-                    <td>Item Description:</td>
+                    <th>Item Description:</th>
                     <td>
                         <asp:Label ID="ItemDescriptionLabel" runat="server"></asp:Label></td>
                 </tr>
                 <tr>
-                    <td>Bin#:</td>
+                    <th>Bin#:</th>
                     <td>
                         <asp:Label ID="BinNoLabel" runat="server"></asp:Label></td>
                 </tr>
                 <tr>
-                    <td>UOM:</td>
+                    <th>Quantity:</th>
+                    <td>
+                        <asp:Label ID="QtyLabel" runat="server"></asp:Label></td>
+                </tr>
+                <tr>
+                    <th>UOM:</th>
                     <td>
                         <asp:Label ID="UomLabel" runat="server"></asp:Label></td>
                 </tr>
                 <tr>
-                    <td>1st Supplier:</td>
+                    <th>1st Supplier:</th>
                     <td>
                         <asp:Label ID="FirstSupplierLabel" runat="server"></asp:Label></td>
                 </tr>
                 <tr>
-                    <td>2nd Supplier:</td>
+                    <th>2nd Supplier:</th>
                     <td>
                         <asp:Label ID="SecondSupplierLabel" runat="server"></asp:Label></td>
                 </tr>
                 <tr>
-                    <td>3rd Supplier:</td>
+                    <th>3rd Supplier:</th>
                     <td>
                         <asp:Label ID="ThirdSupplierLabel" runat="server"></asp:Label></td>
                 </tr>
@@ -71,6 +76,26 @@
 
         <div class="row">
             <a href="StockList.aspx">Back to Stock List</a>
+        </div>
+
+        <div class="row">
+            <h4>Add Incoming Quantity From Supplier</h4>
+            <div class="form-group">
+                <label>Choose Supplier : </label>
+                <br />
+                <asp:DropDownList CssClass="btn btn-default dropdown-toggle" runat="server" ID="SupplierDropDownList"></asp:DropDownList>
+            </div>
+
+            <div class="form-group">
+                <label>Enter Quantity: </label>
+                <br />
+                <asp:TextBox CssClass="form-input" runat="server" ID="QuantityTextBox" TextMode="Number" />
+                <asp:RangeValidator runat="server" ControlToValidate="QuantityTextBox" MinimumValue="1" MaximumValue="999999" />
+            </div>
+
+            <div class="form-group">
+                <asp:Button runat="server" ID="AddQuantityButton" Text="Add Quantity" CssClass="btn btn-primary" OnClick="AddQuantityButton_Click" />
+            </div>
         </div>
     </div>
 </asp:Content>
