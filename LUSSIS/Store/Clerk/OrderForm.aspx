@@ -89,7 +89,7 @@
                                                     <asp:TextBox ID="Qty1TextBox" CssClass="btn-default form-control" runat="server" Text='<%# Eval("Qty1") %>'></asp:TextBox>
                                                     <div>
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="Qty1TextBox" ErrorMessage="Field cannot be empty" Display="Dynamic" Style="color: red;"></asp:RequiredFieldValidator>
-                                                        <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="Qty1TextBox" Operator="DataTypeCheck" Type="Integer" ErrorMessage="Enter only integer" Display="Dynamic" Style="color: red;"></asp:CompareValidator>
+                                                        <asp:CompareValidator ID="CompareValidator4" runat="server" ControlToValidate="Qty1TextBox" Operator="GreaterThanEqual" Type="Integer" ValueToCompare="0" ErrorMessage="Valid Numbers only" Display="Dynamic" Style="color: red;"></asp:CompareValidator>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -103,7 +103,7 @@
                                                     <asp:TextBox ID="Qty2TextBox" CssClass="btn-default form-control" runat="server" Text='<%# Eval("Qty2") %>'></asp:TextBox>
                                                     <div>
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="Qty2TextBox" ErrorMessage="Field cannot be empty" Display="Dynamic" Style="color: red;"></asp:RequiredFieldValidator>
-                                                        <asp:CompareValidator ID="CompareValidator2" runat="server" ControlToValidate="Qty2TextBox" Operator="DataTypeCheck" Type="Integer" ErrorMessage="Enter only integer" Display="Dynamic" Style="color: red;"></asp:CompareValidator>
+                                                        <asp:CompareValidator ID="CompareValidator5" runat="server" ControlToValidate="Qty2TextBox" Operator="GreaterThanEqual" ValueToCompare="0" Type="Integer" ErrorMessage="Valid Numbers only" Display="Dynamic" Style="color: red;"></asp:CompareValidator>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -117,7 +117,7 @@
                                                     <asp:TextBox ID="Qty3TextBox" CssClass="btn-default form-control" runat="server" Text='<%# Eval("Qty3") %>'></asp:TextBox>
                                                     <div>
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="Qty3TextBox" ErrorMessage="Field cannot be empty" Display="Dynamic" Style="color: red;"></asp:RequiredFieldValidator>
-                                                        <asp:CompareValidator ID="CompareValidator3" runat="server" ControlToValidate="Qty3TextBox" Operator="DataTypeCheck" Type="Integer" ErrorMessage="Enter only integer" Display="Dynamic" Style="color: red;"></asp:CompareValidator>
+                                                        <asp:CompareValidator ID="CompareValidator6" runat="server" ControlToValidate="Qty3TextBox" Operator="GreaterThanEqual" ValueToCompare="0" Type="Integer" ErrorMessage="Valid Numbers only" Display="Dynamic" Style="color: red;"></asp:CompareValidator>
                                                     </div>
                                                 </td>
                                             </tr>
