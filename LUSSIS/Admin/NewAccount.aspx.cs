@@ -52,7 +52,7 @@ public partial class Admin_NewAccount : System.Web.UI.Page
             String[] passwords = new String[] {
                 "ezraezraezra!", "pamelapamelapamela!", "thetthetthet!", // ENGL Department
                 "weeweewee!", "fattfattfatt!", "zruizruizrui!", // CPSC Department
-                "estherestheresther!", "robinrobinrobin!", "brucebrucebruce" // STOR
+                "estherestheresther!", "robinrobinrobin!", "brucebrucebruce!" // STOR
             };
             String[] employeeIDs = new String[] {
                 "1002", "1001", "1014", // ENGL Department

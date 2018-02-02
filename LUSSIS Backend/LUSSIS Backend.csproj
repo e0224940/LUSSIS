@@ -274,8 +274,8 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>echo WILL ATTEMPT TO RESTORE DATABASE LUSSIS FROM BACKUP IF NOT FOUND...
-COPY /Y "$(ProjectDir)Database\Lussis.bak" "C:\"
+    <PostBuildEvent>COPY /Y "$(ProjectDir)Database\Lussis.bak" "C:\"
+echo WILL ATTEMPT TO RESTORE DATABASE LUSSIS FROM BACKUP IF NOT FOUND...
 SqlCmd -E -S (Local) -Q "IF NOT EXISTS (SELECT name FROM master.sys.databases WHERE name = N'LUSSIS') RESTORE DATABASE LUSSIS FROM DISK='C:\Lussis.bak'"
 DEL "C:\Lussis.bak"
 echo ...DONE</PostBuildEvent>
