@@ -40,6 +40,7 @@ public partial class Department_Employee_RequisitionDetailsView : System.Web.UI.
             d.reqNo = r.ReqNo;
             d.quantity = r.Qty;
             d.description = r.StationeryItem.Description;
+            d.isEditable = r.RequisitionInfo.Status.Equals("Pending");
             reqhistory.Add(d);
         }
         GridViewForDetail.DataSource = reqhistory;

@@ -13,6 +13,8 @@ public class Detail
     public string description { get; set; }
     public int? quantity { get; set; }
 
+    public bool isEditable { get; set; }
+
 
     public Detail()
     {
