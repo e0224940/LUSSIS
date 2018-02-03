@@ -46,13 +46,16 @@ public partial class Store_Clerk_AdjustmentVoucherDetails : System.Web.UI.Page
                 // Delete AV
                 AVController.DeleteAV(aVNo);
                 Session["AVProcessed"] = (int)Session["AVNo"];
-                GoToAdjustmentVoucherListPage();
             }
         }
         catch (Exception exception)
         {
             // Alert user of error
             Session["Error"] = "An Error Has Occured: " + exception.Message;
+        }
+        if (Session["Error"] == null)
+        {
+            GoToAdjustmentVoucherListPage();
         }
     }
 
