@@ -93,6 +93,24 @@ namespace Email_Backend
                 "Dear " + employee + "<br/>" + "Your new requisiton number is " + reqNo + ".";
         }
 
+        public static string GenerateAdjustmentVoucherSubject()
+        {
+            return "New Adjustment Vouchers Pending Approval";
+        }
+
+        public static string GenerateAdjustmentVoucherEmail(string recipient, int aVNo)
+        {
+            string message =
+                "Dear " + recipient + ","
+                + "<br/><br/>Adjustment Voucher #" + aVNo + " has been created and is pending your approval."
+                + "<br/>";
+
+            message += "<br/>Thank you."
+                + "<br/><br/>[This is an automated Message. Please do not reply.]";
+
+            return message;
+        }
+
         public static String GenerateOrderFormEmailSubject()
         {
             return "New Purchase Orders Pending Approval";
