@@ -41,7 +41,6 @@ public partial class Store_Clerk_DisbursementDetails : System.Web.UI.Page
         }
     }
 
-
     protected void OnRowEditing(object sender, GridViewEditEventArgs e)
     {
         DisbursementDetailsGridView.EditIndex = e.NewEditIndex;
@@ -82,11 +81,16 @@ public partial class Store_Clerk_DisbursementDetails : System.Web.UI.Page
             decimal pin = Decimal.Parse(PinTextBox.Text);
 
             // Complete Disbursement
-            DisbursementController.CompleteDisbursement(dNo, pin);
-
-            // Show Success Page
-            Session["DProcessed"] = dNo;
-            Session["DNo"] = null;
+            if (DisbursementController.CompleteDisbursement(dNo, pin))
+            {
+                // Show Success Page
+                Session["DProcessed"] = dNo;
+                Session["DNo"] = null;
+            }
+            else
+            {
+                Session["Error"] = "Invalid Pin";
+            }
         }
         catch (Exception exception)
         {

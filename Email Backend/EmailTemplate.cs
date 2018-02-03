@@ -135,5 +135,39 @@ namespace Email_Backend
 
             return message;
         }
+
+        public static string GenerateCompletedDisbursementSubject(int disbursementNo)
+        {
+            return "Disbursement #" + disbursementNo + " Success";
+        }
+
+        public static string GenerateCompletedDisbursementEmail(string empName, int disbursementNo, DateTime? disbursementDate, IEnumerable<dynamic> dDetailsList)
+        {
+            string message = "Dear " + empName + ",";
+            message += "<br/><br/>";
+            message += "Disbursement #" + disbursementNo + " was completed successfully on " + disbursementDate + ". Please refer below for more details:";
+            message += "<br/><br/>";
+            message += "<table><tr>";
+            message += "<th>Item No</th>";
+            message += "<th>Description</th>";
+            message += "<th>Needed</th>";
+            message += "<th>Delivered</th>";
+            message += "</tr>";
+
+            foreach (dynamic item in dDetailsList)
+            {
+                message += "<tr><td>" + item.ItemNo + "</td>";
+                message += "<td>" + item.ItemDescription + "</td>";
+                message += "<td>" + item.Needed + "</td>";
+                message += "<td>" + item.Delivered + "</td></tr>";
+            }
+
+            message += "</table>";
+            message += "<br/>";
+            message += "Thank you.";
+            message += "<br/><br/>[This is an automated Message. Please do not reply.]";
+
+            return message;
+        }
     }
 }
