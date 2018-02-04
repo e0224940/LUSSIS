@@ -7,15 +7,15 @@
     <div class="container">
 
         <div class="row">
-            <h1>Raised Requisition Successfully.</h1>
+            <h1>Requisition Raised Successfully.</h1>
         </div>
 
         <div class="row">
             <% if (Session["success"] != null)
                 { %>
             <div class="alert alert-success">
-               Thank You...
-               Raised Requistion Successfully. <br />
+               Thank You!
+               Requisition Raised Successfully. <br />
                Status: <b>Pending</b> 
             </div>
             <% 

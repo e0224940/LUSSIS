@@ -30,8 +30,8 @@
                     OnRowDeleting="detailGridView_Delete"
                     OnSelectedIndexChanged="DetailGridView_SelectedIndexChanged">
                     <Columns>
-                        <asp:BoundField DataField="ReqNo" HeaderText="ReqNo" SortExpression="ReqNo" />
-                        <asp:BoundField DataField="DateIssued" DataFormatString="{0:dd MMM yyyy}" HeaderText="Date" SortExpression="DateIssued" />
+                        <asp:BoundField DataField="ReqNo" HeaderText="Req No" SortExpression="ReqNo" />
+                        <asp:BoundField DataField="DateIssued" DataFormatString="{0:dd-MMM-yyyy}" HeaderText="Date" SortExpression="DateIssued" />
                         <%-- <asp:BoundField DataField="ReqNo" HeaderText="Requisition Form" SortExpression="ReqNo" />--%>
                         <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
 

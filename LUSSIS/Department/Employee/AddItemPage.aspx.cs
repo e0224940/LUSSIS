@@ -16,7 +16,7 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         int empNo = Profile.EmpNo;
-        date.Text = DateTime.Today.ToString("dd MMM yyyy");
+        date.Text = DateTime.Today.ToString("dd-MMM-yyyy");
         if (!IsPostBack)
         {
             string empName = EmployeeController.GetName(empNo);

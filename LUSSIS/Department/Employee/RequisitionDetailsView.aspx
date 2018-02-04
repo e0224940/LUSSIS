@@ -49,7 +49,7 @@
                     OnRowEditing="detailGrid_Edit"
                     OnRowCommand="GridViewForDetail_RowCommand">
                     <Columns>
-                        <asp:TemplateField HeaderText="ItemNo" SortExpression="ItemNo">
+                        <asp:TemplateField HeaderText="Item No" SortExpression="ItemNo">
                             <ItemTemplate>
                                 <asp:Label ID="ItemNO" runat="server" Text='<%# Bind("itemNo") %>'></asp:Label>
                             </ItemTemplate>
