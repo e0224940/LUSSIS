@@ -578,14 +578,16 @@ public class Service : IService
                         Bin = item.StationeryCatalogue.Bin.ToString(),
                         Needed = item.Needed.HasValue ? item.Needed.Value : 0,
                         BacklogQty = item.BackLogQty.HasValue ? item.BackLogQty.Value : 0,
-                        Actual = item.Actual.HasValue ? item.Actual.Value : 0
+                       // Actual = item.Actual.HasValue ? item.Actual.Value : 0
+                       Actual = (int)item.Needed+(int)item.BackLogQty
                     });
                 }
                 else
                 {
                     temp.Needed += item.Needed.HasValue ? item.Needed.Value : 0;
                     temp.BacklogQty += item.BackLogQty.HasValue ? item.BackLogQty.Value : 0;
-                    temp.Actual += item.Actual.HasValue ? item.Actual.Value : 0;
+                    //temp.Actual += item.Actual.HasValue ? item.Actual.Value : 0;
+                    temp.Actual += (int)item.Needed + (int)item.BackLogQty;
                 }
             }
         }

@@ -75,22 +75,22 @@ namespace LUSSIS_Backend
                 // Send Email to Head
                 EmailBackend.sendEmailStep(
                     currDepartment.EmployeeHead.Email,
-                    EmailTemplate.GeneratePendingRequisitionSubject(currEmployee.ToString()),
+                    EmailTemplate.GeneratePendingRequisitionSubject(currEmployee.EmpName.ToString()),
                     EmailTemplate.GeneratePendingRequisition(currDepartment.EmployeeHead.ToString(), currEmployee.ToString()));
 
                 //Send email to Employee
                 EmailBackend.sendEmailStep(
                    currEmployee.Email,
-                   EmailTemplate.GenerateRaisedRequisitionSubject(currEmployee.ToString()),
-                   EmailTemplate.GenerateRaisedRequisition(currEmployee.ToString(), req.ReqNo.ToString()));
+                   EmailTemplate.GenerateRaisedRequisitionSubject(),
+                   EmailTemplate.GenerateRaisedRequisition(currEmployee.EmpName.ToString(), req.ReqNo.ToString()));
 
             }
         }
 
-        public static List<Requisition> ViewRequisition()
+        public static List<Requisition> ViewRequisition(int empNo)
         {
             LussisEntities entity = new LussisEntities();
-            return entity.Requisitions.ToList();
+            return entity.Requisitions.Where(x => x.IssuedBy==empNo).ToList();
         }
 
         //View Requisition Detail

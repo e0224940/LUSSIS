@@ -40,9 +40,8 @@ public partial class Store_Supervisor_PurchaseOrderDetails : System.Web.UI.Page
         datedLabel.Text = context.PurchaseOrders
             .Where(p => p.PONo == SNO)
             .FirstOrDefault().DateIssued.Value.ToString("dd MMM yyyy");
-        approvedByLabel.Text = Convert.ToString(context.PurchaseOrders
-                .Where(p => p.PONo == SNO)
-                .FirstOrDefault().Employee1.EmpName);
+        int empNo = (int)context.PurchaseOrders.Where(p => p.PONo == SNO).FirstOrDefault().ApprovedBy;
+        approvedByLabel.Text = context.Employees.Where(x => x.EmpNo == empNo).First().EmpName;
         dated2Label.Text = context.PurchaseOrders
             .Where(p => p.PONo == SNO)
             .FirstOrDefault().DateReviewed.Value.ToString("dd MMM yyyy");

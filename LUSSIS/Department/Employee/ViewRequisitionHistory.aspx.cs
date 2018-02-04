@@ -44,7 +44,7 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
             requsition = new List<Requisition>();
             reqhistory = new List<ReqHistory>();
            
-            DetailGridView.DataSource = EmployeeController.ViewRequisition();
+            DetailGridView.DataSource = EmployeeController.ViewRequisition(empNo);
             DetailGridView.DataBind();      
                
         }
@@ -58,7 +58,7 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
         Session["sessionID"] = reqId;
         Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Are you sure want to delete the History?')</script>");
         EmployeeController.DeleteReqHistory(reqId);
-        DetailGridView.DataSource = EmployeeController.ViewRequisition();
+        DetailGridView.DataSource = EmployeeController.ViewRequisition(Profile.EmpNo);
         DetailGridView.DataBind();
     }
 
@@ -78,7 +78,7 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
         Session["sessionID"] = reqId;
         Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Are you sure want to delete the History?')</script>");
         EmployeeController.DeleteReqHistory(reqId);
-        DetailGridView.DataSource = EmployeeController.ViewRequisition();
+        DetailGridView.DataSource = EmployeeController.ViewRequisition(Profile.EmpNo);
         DetailGridView.DataBind();
     }
 }

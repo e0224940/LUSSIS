@@ -383,7 +383,7 @@ namespace LUSSIS_Backend
             {
                 LussisEntities context = new LussisEntities();
 
-                result = context.Retrievals.OrderByDescending(x => x.Date).FirstOrDefault();
+                result = context.Retrievals.OrderByDescending(x => x.RetrievalNo).First();
             }
             catch (Exception)
             {
