@@ -186,7 +186,7 @@ public partial class _Default : System.Web.UI.Page
             actualList
             ))
         {
-            Session["RetrievalProcessed"] = "Retrieval #" + (int)Session["RetrievalNo"] + "Submitted.";
+            Session["RetrievalProcessed"] = "Retrieval #" + (int)Session["RetrievalNo"] + " Submitted.";
         }
         else
         {

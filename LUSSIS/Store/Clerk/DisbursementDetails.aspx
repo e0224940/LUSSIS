@@ -32,7 +32,7 @@
                 Department: <%= d.Department.DeptName %>
             </div>
             <div class="col-xs-4">
-                Collection Date: <%= ((DateTime)d.DisbursementDate).ToString("dd-MM-yyyy") %>
+                Collection Date: <%= ((DateTime)d.DisbursementDate).ToString("dd-MMM-yyyy") %>
             </div>
             <div class="col-xs-4">
                 Collection Point: <%= d.CollectionPoint.CollectionPointDetails %>
@@ -112,10 +112,11 @@
                 <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="PinTextBox" Operator="DataTypeCheck" Type="Integer" ErrorMessage="Enter Numeric Pin only" Display="Dynamic" Style="color: red;"></asp:CompareValidator>
             </div>
         </div>
-
-        <div class="row">
+        <div><p></p></div>
+        <div class="row" >
             <asp:Button ID="SubmitButton" CssClass="btn btn-primary" runat="server" Text="Confirm Delivery" OnClick="SubmitButton_Click" />
         </div>
+            
 
         <% } %>
 
