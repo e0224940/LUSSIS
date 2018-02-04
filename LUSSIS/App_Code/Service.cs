@@ -652,4 +652,29 @@ public class Service : IService
 
         return result;
     }
+
+    public WCFTransactionDetail[] GetStockTxnDetails(int sessionID, String itemNo)
+    {
+        List<WCFTransactionDetail> result = new List<WCFTransactionDetail>();
+
+        if (AndroidAuthenticationController.IsValidSessionId(sessionID))
+        {
+            var stockTxnDetails = AndroidController.GetStockTxnDetails(itemNo);
+
+            foreach (var item in stockTxnDetails)
+            {
+                result.Add(new WCFTransactionDetail()
+                {
+                    StockTxnNo = item.StockTxnNo,
+                    ItemNo = item.ItemNo,
+                    Date = String.Format("{0:dd/MMM/yyyy}", item.Date),
+                    AdjustQty = item.AdjustQty.HasValue ? item.AdjustQty.Value : 0,
+                    RecordedQty = item.RecordedQty.HasValue ? item.RecordedQty.Value : 0,
+                    Remarks = item.Remarks
+                });
+            }
+        }
+
+        return result.ToArray();
+    }
 }
