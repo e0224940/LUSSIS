@@ -35,8 +35,7 @@
     <asp:Label ID="dateRaisedLabel" runat="server" Text="Date Raised: "></asp:Label>
                                      </div>
                  <div class="col-xs-2"> 
-                     <asp:TextBox ID="TextBox1" runat="server" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False">30-Dec-2017</asp:TextBox>
-    <asp:Label ID="dateLabel" runat="server" Text="30-Dec-2017"></asp:Label>
+                     <asp:TextBox ID="dateRaisedText" runat="server" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False"></asp:TextBox>
                     </div>
              </div>
           </div>

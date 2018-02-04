@@ -61,6 +61,7 @@ public partial class Store_Supervisor_PurchaseOrderDetails : System.Web.UI.Page
 
     protected void purchaseOrderDetailBut_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/Store/Supervisor/ReorderReportDetails.aspx");
+        int SNO = (Convert.ToInt16(Request["SNO"]));
+        Response.Redirect("~/Store/Supervisor/ReorderReportDetails.aspx"+"?SNO="+SNO);
     }
 }

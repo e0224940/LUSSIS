@@ -4,7 +4,7 @@
         <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
-        <li><a href="<%= Page.ResolveUrl("~/Store/Supervisor/ReorderReportDetails.aspx") %>">Reorder Report</a></li>
+        <li><a href="<%= Page.ResolveUrl("~/Store/Supervisor/ReorderReportList.aspx") %>">Reorder Report</a></li>
         <li><a href="<%= Page.ResolveUrl("~/Store/Supervisor/ApprovePOList.aspx") %>">Approve Purchase Order</a></li>
         <li><a href="<%= Page.ResolveUrl("~/Store/Supervisor/ApproveInventoryAdjustmentList.aspx") %>">Approve Adjustment Voucher</a></li>
         <li><a href="<%= Page.ResolveUrl("~/Store/Supervisor/GenerateReorderTrend.aspx") %>">Generate Reorder Trend</a></li>

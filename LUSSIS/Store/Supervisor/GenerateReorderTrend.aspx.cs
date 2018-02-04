@@ -40,7 +40,7 @@ public partial class Store_Supervisor_GenerateReorderTrend : System.Web.UI.Page
             FromDate.Attributes["max"] = DateTime.Now.ToString("yyyy-MM-dd");
             EndDate.Attributes["min"] = firstDayOfMonth.ToString("yyyy-MM-dd");
             EndDate.Attributes["max"] = DateTime.Now.ToString("yyyy-MM-dd");
-
+            
         }
 }
 
@@ -266,6 +266,7 @@ protected void toLB2_Click(object sender, EventArgs e)
 
     private void addItemSeriesToChart(Chart chart, string itemList, String supplierSelect, DateTime startDate, DateTime endDate)
     {
+        List<ReorderTrendView> checkForEmpty = new List<ReorderTrendView>();
         //start to filter items
         var listOfPO = context.ReorderTrendViews
             .Where(x => x.DateReviewed >= startDate && x.DateReviewed <= endDate)
@@ -273,6 +274,11 @@ protected void toLB2_Click(object sender, EventArgs e)
             .Where(x => x.Description == itemList)
             .OrderBy(x => x.DateReviewed)
             .ToList();
+
+        for(int q =0; q < listOfPO.Count; q++)
+        {
+            checkForEmpty.Add(listOfPO[q]);
+        }
 
         //another filter to group the first list by Month
         var listOfPO2 = listOfPO
@@ -425,6 +431,14 @@ protected void toLB2_Click(object sender, EventArgs e)
             if (isAllValuesZero) // If all the values are zero for a series then hiding the legend..
                 s.IsVisibleInLegend = false;
         }
+        if (checkForEmpty.Count == 0)
+        {
+            Label4.Text = "There is no available data.";
+        }
+        else
+        {
+            Label4.Text = "";
+        }
     }
 
 
@@ -433,6 +447,7 @@ protected void toLB2_Click(object sender, EventArgs e)
 
     private void addItemSeriesToChartCat(Chart chart, string catList, String supplierSelect, DateTime startDate, DateTime endDate)
     {
+        List<ReorderTrendView> checkForEmpty = new List<ReorderTrendView>();
         //start to filter items
         var listOfPO = context.ReorderTrendViews
             .Where(x => x.DateReviewed >= startDate && x.DateReviewed <= endDate)
@@ -440,6 +455,11 @@ protected void toLB2_Click(object sender, EventArgs e)
             .Where(x => x.Category == catList)
             .OrderBy(x => x.DateReviewed)
             .ToList();
+
+        for (int q = 0; q < listOfPO.Count; q++)
+        {
+            checkForEmpty.Add(listOfPO[q]);
+        }
 
         var listOfPO2 = listOfPO
     .GroupBy(x => x.DateReviewed.Value.Month)
@@ -598,7 +618,13 @@ protected void toLB2_Click(object sender, EventArgs e)
                 s.IsVisibleInLegend = false;
         }
 
-
+        if (checkForEmpty.Count == 0)
+        {
+            Label4.Text = "There is no available data.";
+        } else
+        {
+            Label4.Text = "";
+        }
         //GridView2.DataSource = listOfPO2;
         //GridView2.DataBind();
     }

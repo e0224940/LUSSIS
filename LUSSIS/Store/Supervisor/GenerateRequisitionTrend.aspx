@@ -26,9 +26,9 @@
                             </div>
             <div class="col-xs-1">
                 &nbsp;&nbsp;&nbsp;
-                            <asp:Button ID="rqToLB2" CssClass="btn btn-success" runat="server" Text="---->" OnClick="rqToLB2_Click" />
+                            <asp:Button ID="rqToLB2" CssClass="btn btn-success" runat="server" Text=">>>" OnClick="rqToLB2_Click" />
                                 &nbsp;&nbsp;&nbsp;
-                             <asp:Button ID="rqToLB1" CssClass="btn btn-danger" runat="server" Text="<----" OnClick="rqToLB1_Click" />
+                             <asp:Button ID="rqToLB1" CssClass="btn btn-danger" runat="server" Text="<<<" OnClick="rqToLB1_Click" />
                             </div>       
             <div class="col-xs-4">
                 <asp:ListBox ID="SelectedDeptListBox" class="list-group-item" runat="server" Width="400px" Height="130px" SelectionMode="Multiple"></asp:ListBox>
@@ -57,6 +57,8 @@
     <br />
     <br />
     <asp:Button ID="generateReqReportBut" CssClass="btn btn-success" runat="server" Text="Generate Trend" OnClick="generateReportBut_Click" />
+            <br />
+            <asp:Label ID="noDataLabel" runat="server"></asp:Label>
     <br />
     <br />
                             <asp:GridView ID="GridView3" GridLines="None" cssclass="table table-striped" runat="server" AutoGenerateColumns="False">

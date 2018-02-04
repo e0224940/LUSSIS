@@ -17,6 +17,8 @@ public partial class Store_Supervisor_ApproveInventoryAdjustmentDetails : System
         var getIAVDetails = ApproveInventoryAdjustmentController.getInvAdjDetails(iAV);
         var EmpName = context.AdjustmentVouchers.Where(x => x.AvNo == iAV).FirstOrDefault().Employee1.EmpName;
         invAdjClerkLabel.Text = EmpName;
+        var dateRaised = context.AdjustmentVouchers.Where(x => x.AvNo == iAV).FirstOrDefault().DateIssued.Value;
+        dateRaisedText.Text = dateRaised.ToString("dd MMM yyyy");
         ApproveInventoryAdjustmentDetailsGridView.DataSource = getIAVDetails;
         ApproveInventoryAdjustmentDetailsGridView.DataBind();
 

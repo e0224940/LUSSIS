@@ -103,6 +103,7 @@
     <br />
     <asp:Button ID="generateReportBut" runat="server" CssClass="btn btn-success" Text="GENERATE Trend" OnClick="generateReportBut_Click" />
     <br />
+        <asp:Label ID="Label4" runat="server"></asp:Label>
     <br />
 <%--    <asp:GridView ID="GridView1" cssclass="table table-striped"  runat="server"></asp:GridView>--%>
                 <asp:GridView ID="GridView1" GridLines="None" cssclass="table table-striped" runat="server" AutoGenerateColumns="False">

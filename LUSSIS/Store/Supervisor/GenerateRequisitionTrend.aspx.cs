@@ -149,6 +149,7 @@ public partial class Store_Supervisor_GenerateRequisitionTrend : System.Web.UI.P
     private void addItemSeriesToChart(Chart Chart1, string deptList, String itemSelect, DateTime startDate, DateTime endDate)
     {
         LussisEntities context = new LussisEntities();
+        List<RequisitionTrendView> checkIfEmpty = new List<RequisitionTrendView>();
 
             //start to filter items
             var listOfPO = context.RequisitionTrendViews
@@ -157,6 +158,11 @@ public partial class Store_Supervisor_GenerateRequisitionTrend : System.Web.UI.P
                 .Where(x => x.DeptName == deptList)
                 .OrderBy(x => x.DateReviewed)
                 .ToList();
+
+        for(int q = 0; q < listOfPO.Count; q++)
+        {
+            checkIfEmpty.Add(listOfPO[q]);
+        }
 
             //another filter to group the first list by Month
             var listOfPO2 = listOfPO
@@ -265,15 +271,18 @@ public partial class Store_Supervisor_GenerateRequisitionTrend : System.Web.UI.P
             //series parameters
             Chart2.Series[seriesName].ChartType = SeriesChartType.Column;
             Chart2.Series[seriesName].IsValueShownAsLabel = true;
-            //Legend parameters
-            Chart2.Legends.Add(new Legend());
+        Chart2.Series[seriesName].LabelFormat = "##0;(); ";
+        //Legend parameters
+        Chart2.Legends.Add(new Legend());
             Chart2.Legends["Legend1"].Docking = Docking.Bottom;
             //chartarea parameters
             Chart2.ChartAreas["ChartArea2"].AxisX.MajorGrid.Enabled = false;
             Chart2.ChartAreas["ChartArea2"].AxisY.MajorGrid.Enabled = false;
             Chart2.ChartAreas["ChartArea2"].AxisX.Title = "Date";
             Chart2.ChartAreas["ChartArea2"].AxisY.Title = "Quantity";
-            Chart2.Series[seriesName].BorderWidth = 5;
+        Chart1.ChartAreas["ChartArea2"].AxisX.IntervalType = DateTimeIntervalType.Auto;
+        Chart1.ChartAreas["ChartArea2"].AxisX.Interval = 1;
+        //Chart2.Series[seriesName].BorderWidth = 5;
 
             for (int y = 0; y < listOfPO2.Count(); y++)
             {
@@ -297,11 +306,21 @@ public partial class Store_Supervisor_GenerateRequisitionTrend : System.Web.UI.P
             if (isAllValuesZero) // If all the values are zero for a series then hiding the legend..
                 s.IsVisibleInLegend = false;
         }
+
+        if (checkIfEmpty.Count == 0)
+        {
+            noDataLabel.Text = "There is no available data.";
+        }
+        else
+        {
+            noDataLabel.Text = "";
+        }
         //to TEST if the code/logic is working
 
-            //GridView4.DataSource = listOfPO2;
-            //GridView4.DataBind();
-        }
+        //GridView4.DataSource = listOfPO2;
+        //GridView4.DataBind();
+    }
+
     }
 
 //public class ReorderTrendItem
