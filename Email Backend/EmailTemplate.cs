@@ -169,5 +169,17 @@ namespace Email_Backend
 
             return message;
         }
+
+        public static string GenerateCompletedDisbursementEmail(string empName, int disbursementNo, DateTime? disbursementDate)
+        {
+            string message = "Dear " + empName + ",";
+            message += "<br/><br/>";
+            message += "Disbursement #" + disbursementNo + " was completed successfully on " + disbursementDate + ".";
+            message += "<br/><br/>";
+            message += "Thank you.";
+            message += "<br/><br/>[This is an automated Message. Please do not reply.]";
+
+            return message;
+        }
     }
 }
