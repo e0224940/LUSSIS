@@ -10,7 +10,7 @@ namespace Email_Backend
 {
     public class EmailBackend
     {
-        private static bool SendEmailForReal = false;
+        private static bool SendEmailForReal = true;
 
         private static string senderSmtpAddress = "smtp.sendgrid.net";
         private static int senderSmtpPort = 587;
