@@ -74,7 +74,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
-    <Compile Include="GenerateTrendController.cs" />
     <Compile Include="ItemList.cs" />
     <Compile Include="LoginController.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -218,6 +217,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="Database\Lussis.bak" />
     <None Include="DataSet1.xsc">
       <DependentUpon>DataSet1.xsd</DependentUpon>
