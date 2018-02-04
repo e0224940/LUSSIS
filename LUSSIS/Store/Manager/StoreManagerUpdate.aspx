@@ -14,25 +14,25 @@
         <div class="form-group">
             <asp:GridView ID="GridView1" GridLines="None" CssClass="table table-striped" Width="90%" runat="server" AutoGenerateColumns="False" DataKeyNames="SupplierCode" Height="118px" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnRowCancelingEdit="GridView1_RowCancelingEdit" Font-Size="Larger">
                 <Columns>
-                    <asp:BoundField DataField="SupplierCode" HeaderText="SupplierCode" ReadOnly="True" SortExpression="SupplierCode">
+                    <asp:BoundField DataField="SupplierCode" HeaderText="Supplier Code" ReadOnly="True" SortExpression="SupplierCode" ItemStyle-Width="130px">
                         <HeaderStyle BackColor="White" HorizontalAlign="Center" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="SupplierName" HeaderText="SupplierName" SortExpression="SupplierName">
+                    <asp:BoundField DataField="SupplierName" HeaderText="Supplier Name" SortExpression="SupplierName">
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="ContactName" HeaderText="ContactName" SortExpression="ContactName">
+                    <asp:BoundField DataField="ContactName" HeaderText="Contact" SortExpression="ContactName">
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="PhoneNo" HeaderText="PhoneNo" SortExpression="PhoneNo">
+                    <asp:BoundField DataField="PhoneNo" HeaderText="Phone" SortExpression="PhoneNo">
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="FaxNo" HeaderText="FaxNo" SortExpression="FaxNo">
+                    <asp:BoundField DataField="FaxNo" HeaderText="Fax" SortExpression="FaxNo">
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:BoundField>
                     <asp:BoundField DataField="Address" HeaderText="Address" SortExpression="Address">
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="GstNo" HeaderText="GstNo" SortExpression="GstNo">
+                    <asp:BoundField DataField="GstNo" HeaderText="GST Reg" SortExpression="GstNo">
                         <HeaderStyle HorizontalAlign="Center" />
                     </asp:BoundField>
                     <asp:CommandField ShowEditButton="True" />
