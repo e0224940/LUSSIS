@@ -14,7 +14,7 @@
     <asp:Label ID="Label1" runat="server" Text="Current Location:"></asp:Label>
         </div>
     <div class="col-xs-2">
-        <asp:TextBox ID="oldLocationText" runat="server" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False"></asp:TextBox>
+        <asp:TextBox ID="oldLocationText" runat="server" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False" Width="303px"></asp:TextBox>
     </div>
     </div>
     </div>

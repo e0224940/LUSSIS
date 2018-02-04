@@ -20,10 +20,10 @@ namespace Email_Backend
                 + "Your Stationery Request numbered " + requestNumber + " has been " + result + " by " + approver + "." + "<br/>"
                 + ((remark.Trim().Length > 0) ? "The following remark has been left for you: " + remark : "") + "<p/>"
                 + "Thank you.<br/>LUSSIS<p/>"
-                + "[This is an automated Message, do no reply]";
+                + "[This is an automated message, please do not reply]";
         }
 
-        public static String GenerateUpdateCollectionPointEmailSubject(string collectionpoint, string result)
+        public static String GenerateUpdateCollectionPointEmailSubject()
         {
             return "New Collection Point Changed";
         }
@@ -31,10 +31,10 @@ namespace Email_Backend
         public static String GenerateCollectionPointStatusChangedEmail(string applicant, string newPoint)
         {
             return
-                "Dear " + applicant + ",<p/>" + "There is a new Collection Point Change. The new Collection Point is at "
-                + newPoint
-                + "Thank you.<br/>LUSSIS<p/>"
-                + "[This is an automated Message, do no reply]";
+                "Dear " + applicant + ",<p/>" + "There is a change in Collection Point. The new Collection Point is at "
+                + newPoint + "."
+                + "<p/>Thank you.<br/>LUSSIS<p/>"
+                + "[This is an automated message, please do not reply]";
         }
 
         public static String GenerateOldRepresentativeRemovedSubject()
@@ -114,7 +114,7 @@ namespace Email_Backend
                 + "<p/>Adjustment Voucher #" + aVNo + " has been created and is pending your approval."
                 + "<p/>"
                 + "Thank you.<br/>LUSSIS<p/>"
-                + "[This is an automated Message. Please do not reply.]";
+                + "[This is an automated message. Please do not reply.]";
 
         }
 

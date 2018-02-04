@@ -57,12 +57,10 @@ namespace LUSSIS_Backend
                 // Send Email
                 EmailBackend.sendEmailStep(
                     currDepartment.EmployeeHead.Email,
-                    EmailTemplate.GenerateUpdateCollectionPointEmailSubject(
-                        currDepartment.CollectionPoint.ToString(),
-                        currDepartment.EmployeeHead.ToString()),
+                    EmailTemplate.GenerateUpdateCollectionPointEmailSubject(),
                     EmailTemplate.GenerateCollectionPointStatusChangedEmail(
-                        currDepartment.EmployeeHead.ToString(),
-                        currDepartment.CollectionPoint.ToString())
+                        currDepartment.EmployeeHead.EmpName.ToString(),
+                        currDepartment.CollectionPoint.CollectionPointDetails.ToString())
                     );
             }
         }
