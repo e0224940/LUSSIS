@@ -344,6 +344,22 @@ namespace LUSSIS_Backend
 
         }
 
+        public static List<StockTxnDetail> GetStockTxnDetails(string itemNo)
+        {
+            List<StockTxnDetail> result = new List<StockTxnDetail>();
+            try
+            {
+                LussisEntities context = new LussisEntities();
+                result = context.StockTxnDetails.Where(txn => txn.ItemNo.Equals(itemNo)).OrderByDescending(txn => txn.StockTxnNo).Take(20).ToList();
+            }
+            catch (Exception)
+            {
+                result = null;
+            }
+
+            return result;
+        }
+
         public static List<RequisitionDetail> GetRequisitionDetailsOf(int reqNo)
         {
             List<RequisitionDetail> result = new List<RequisitionDetail>();

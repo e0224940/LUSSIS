@@ -143,6 +143,10 @@ public interface IService
     [OperationContract]
     [WebInvoke(UriTemplate = "/MarkDisbursementAsCollected", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     bool MarkDisbursementAsCollected(int sessionID, int DisbursementNo, String Pin);
+
+    [OperationContract]
+    [WebInvoke(UriTemplate = "/StockTxnDetails", Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+    WCFTransactionDetail[] GetStockTxnDetails(int sessionID, String ItemNo);
 }
 
 public class WCFDisbursementDetail
@@ -242,5 +246,15 @@ public class WCFRetrievalDetail
     public int Needed;
     public int BacklogQty;
     public int Actual;
+}
+
+public class WCFTransactionDetail
+{
+    public int StockTxnNo;
+    public String ItemNo;
+    public String Date;
+    public int AdjustQty;
+    public int RecordedQty;
+    public String Remarks;
 }
 
