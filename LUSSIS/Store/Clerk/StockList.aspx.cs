@@ -49,7 +49,14 @@ public partial class Store_Clerk_StockList : System.Web.UI.Page
     {
         // Set StockList
         string searchString = SearchTextBox.Text;
-        stockList = StockController.GetStockListByDescriptionContain(searchString);
+        if (searchString.Equals(""))
+        {
+            stockList = StockController.GetAllStocks();
+        }
+        else
+        {
+            stockList = StockController.GetStockListByDescriptionContain(searchString);
+        }
 
         // Load StockList
         LoadStockList(stockList);
