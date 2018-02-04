@@ -207,6 +207,14 @@ public partial class Store_Clerk_OrderForm : System.Web.UI.Page
         List<OrderItem> sortedOrderList = orderList.OrderBy(x => x.ItemNo).ToList<OrderItem>();
         Repeater1.DataSource = sortedOrderList;
         Repeater1.DataBind();
+        if (orderList.Count == 0)
+        {
+            SubmitButton.Enabled = false;
+        }
+        else
+        {
+            SubmitButton.Enabled = true;
+        }
     }
 
     private void LoadStockList(List<StationeryCatalogue> stockList)
