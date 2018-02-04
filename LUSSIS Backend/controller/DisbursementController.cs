@@ -58,13 +58,29 @@ namespace LUSSIS_Backend.controller
                 // Create Backlogs
                 for (int i = 0; i < dDetails.Count; i++)
                 {
+                    String deptCode = dDetails[i].Disbursement.DeptCode;
+                    String itemCode = dDetails[i].ItemNo;
                     if (dDetails[i].Needed - dDetails[i].Received > 0)
                     {
-                        BackLog backlog = new BackLog();
-                        backlog.DeptCode = dDetails[i].Disbursement.DeptCode;
-                        backlog.ItemNo = dDetails[i].ItemNo;
-                        backlog.BackLogQty = dDetails[i].Needed - dDetails[i].Received;
-                        context.BackLogs.Add(backlog);
+                        BackLog backlog = context
+                            .BackLogs
+                            .Where(x => 
+                                x.DeptCode.Equals(deptCode)
+                                && x.ItemNo.Equals(itemCode))
+                            .FirstOrDefault();
+
+                        if (backlog == null)
+                        {
+                            backlog = new BackLog();
+                            backlog.DeptCode = dDetails[i].Disbursement.DeptCode;
+                            backlog.ItemNo = dDetails[i].ItemNo;
+                            backlog.BackLogQty = dDetails[i].Needed - dDetails[i].Received;
+                            context.BackLogs.Add(backlog);
+                        }
+                        else
+                        {
+                            backlog.BackLogQty += dDetails[i].Needed - dDetails[i].Received;
+                        }
                     }
                 }
 

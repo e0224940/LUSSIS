@@ -45,21 +45,31 @@ namespace LUSSIS_Backend
             LussisEntities context = new LussisEntities();
             var currentYear = DateTime.Now.Year;
             var currentMonth = DateTime.Now.Month;
+            try
+            {
+                var getRightSupplier = context.PurchaseOrders
+                    .Where(p => p.DateReviewed.Value.Month == currentMonth
+                    && p.DateReviewed.Value.Year == currentYear)
+                    .FirstOrDefault();
 
-            var getRightSupplier = context.PurchaseOrders
-                .Where(p => p.DateReviewed.Value.Month == currentMonth
-                && p.DateReviewed.Value.Year == currentYear)
-                .FirstOrDefault();
+                var result = context.PURCHASEORDERVIEWs
+                    .Where(p => p.DateReviewed.Value.Month == currentMonth
+                    && p.DateReviewed.Value.Year == currentYear
+                    && p.SupplierCode == getRightSupplier.SupplierCode
+                    && p.Status == "Approved")
+                    .OrderBy(p => p.ItemNo)
+                    .ToList();
 
-            var result = context.PURCHASEORDERVIEWs
-                .Where(p => p.DateReviewed.Value.Month == currentMonth
-                && p.DateReviewed.Value.Year == currentYear
-                && p.SupplierCode == getRightSupplier.SupplierCode
-                && p.Status == "Approved")
-                .OrderBy(p=>p.ItemNo)
-                .ToList();
+                return result;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
 
-            return result;
+
+
+
         }
 
         //get list of items for x Month
