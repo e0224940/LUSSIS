@@ -58,7 +58,8 @@
     <br />
     <asp:Button ID="generateReqReportBut" CssClass="btn btn-success" runat="server" Text="Generate Trend" OnClick="generateReportBut_Click" />
     <br />
-                <asp:GridView ID="GridView3" cssclass="table table-striped" runat="server"></asp:GridView>
+    <br />
+                <asp:GridView ID="GridView3" cssclass="table table-striped" GridLines="None" runat="server"></asp:GridView>
 <%--    <asp:GridView ID="GridView4" runat="server"></asp:GridView>--%>
     <br />
     <br />
