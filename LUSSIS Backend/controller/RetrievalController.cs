@@ -181,7 +181,7 @@ namespace LUSSIS_Backend.controller
                 txn = AddStockTxn(context, txn);
 
                 // Add Disbursement
-                Disbursement disbursement = GetDisbursement(context, deptCode, disbursementDate);
+                Disbursement disbursement = GetPendingDisbursement(context, deptCode, disbursementDate);
                 if (disbursement == null)
                 {
                     disbursement = new Disbursement();
@@ -265,9 +265,9 @@ namespace LUSSIS_Backend.controller
         {
             return context.Departments.Where(x => x.DeptCode.Equals(deptCode)).FirstOrDefault();
         }
-        public static Disbursement GetDisbursement(LussisEntities context, string deptCode, DateTime disbursementDate)
+        public static Disbursement GetPendingDisbursement(LussisEntities context, string deptCode, DateTime disbursementDate)
         {
-            return context.Disbursements.Where(x => x.DeptCode.Equals(deptCode) && x.DisbursementDate == disbursementDate).FirstOrDefault();
+            return context.Disbursements.Where(x => x.DeptCode.Equals(deptCode) && x.DisbursementDate == disbursementDate && x.Status.Equals("Pending")).FirstOrDefault();
         }
         public static StockTxnDetail AddStockTxn(LussisEntities context, StockTxnDetail txn)
         {
@@ -283,7 +283,24 @@ namespace LUSSIS_Backend.controller
         }
         public static DisbursementDetail AddDisbursementDetail(LussisEntities context, DisbursementDetail disbursementDetail)
         {
-            context.DisbursementDetails.Add(disbursementDetail);
+            // TODO : Put a filter for what kind of disbursement to edit
+            DisbursementDetail detail = context.DisbursementDetails
+                .Where(det => det.DisbursementNo.Equals(disbursementDetail.DisbursementNo) && det.ItemNo.Equals(disbursementDetail.ItemNo))
+                .FirstOrDefault();
+
+            if(detail != null)
+            {
+                // Append to existing if it already exists
+                detail.Needed += disbursementDetail.Needed;
+                detail.Promised += disbursementDetail.Promised;
+                detail.Received += disbursementDetail.Received;
+            }
+            else
+            {
+                // Add new detail
+                context.DisbursementDetails.Add(disbursementDetail);
+            }           
+            
             context.SaveChanges();
             return disbursementDetail;
         }

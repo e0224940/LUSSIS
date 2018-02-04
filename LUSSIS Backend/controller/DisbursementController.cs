@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LUSSIS_Backend.model;
+using Email_Backend;
+using System.Transactions;
 
 namespace LUSSIS_Backend.controller
 {
@@ -43,7 +45,6 @@ namespace LUSSIS_Backend.controller
 
         public static bool CompleteDisbursement(int dNo, decimal? pin)
         {
-            bool result = false;
             LussisEntities context = new LussisEntities();
             Disbursement d = context.Disbursements.Where(x => x.DisbursementNo == dNo).FirstOrDefault();
             List<DisbursementDetail> dDetails = d.DisbursementDetails.ToList();
@@ -69,17 +70,28 @@ namespace LUSSIS_Backend.controller
 
                 context.SaveChanges();
 
-                result = true;
-
                 // Send Email
+                Employee recipient = d.Employee;
+                var emailDetails = dDetails.Select(
+                    dD => new
+                    {
+                        ItemNo = dD.ItemNo,
+                        ItemDescription = dD.StationeryCatalogue.Description,
+                        Needed = dD.Needed,
+                        Delivered = dD.Received
+                    });
+
+                string recipientEmail = recipient.Email;
+                string emailSubject = EmailTemplate.GenerateCompletedDisbursementSubject(d.DisbursementNo);
+                string emailContent = EmailTemplate.GenerateCompletedDisbursementEmail(recipient.EmpName, d.DisbursementNo, d.DisbursementDate, emailDetails);
+                EmailBackend.sendEmailStep(recipientEmail, emailSubject, emailContent);
+
+                return true;
             }
             else
             {
-                throw new Exception("Invalid Pin");
-                result = false;
+                return false;
             }
-
-            return result;
         }
     }
 }

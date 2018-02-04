@@ -93,6 +93,24 @@ namespace Email_Backend
                 "Dear " + employee + "<br/>" + "Your new requisiton number is " + reqNo + ".";
         }
 
+        public static string GenerateAdjustmentVoucherSubject()
+        {
+            return "New Adjustment Vouchers Pending Approval";
+        }
+
+        public static string GenerateAdjustmentVoucherEmail(string recipient, int aVNo)
+        {
+            string message =
+                "Dear " + recipient + ","
+                + "<br/><br/>Adjustment Voucher #" + aVNo + " has been created and is pending your approval."
+                + "<br/>";
+
+            message += "<br/>Thank you."
+                + "<br/><br/>[This is an automated Message. Please do not reply.]";
+
+            return message;
+        }
+
         public static String GenerateOrderFormEmailSubject()
         {
             return "New Purchase Orders Pending Approval";
@@ -114,6 +132,40 @@ namespace Email_Backend
 
             message += "<br/><br/>Thank you."
                 + "<br/><br/>[This is an automated Message. Please do not reply.]";
+
+            return message;
+        }
+
+        public static string GenerateCompletedDisbursementSubject(int disbursementNo)
+        {
+            return "Disbursement #" + disbursementNo + " Success";
+        }
+
+        public static string GenerateCompletedDisbursementEmail(string empName, int disbursementNo, DateTime? disbursementDate, IEnumerable<dynamic> dDetailsList)
+        {
+            string message = "Dear " + empName + ",";
+            message += "<br/><br/>";
+            message += "Disbursement #" + disbursementNo + " was completed successfully on " + disbursementDate + ". Please refer below for more details:";
+            message += "<br/><br/>";
+            message += "<table><tr>";
+            message += "<th>Item No</th>";
+            message += "<th>Description</th>";
+            message += "<th>Needed</th>";
+            message += "<th>Delivered</th>";
+            message += "</tr>";
+
+            foreach (dynamic item in dDetailsList)
+            {
+                message += "<tr><td>" + item.ItemNo + "</td>";
+                message += "<td>" + item.ItemDescription + "</td>";
+                message += "<td>" + item.Needed + "</td>";
+                message += "<td>" + item.Delivered + "</td></tr>";
+            }
+
+            message += "</table>";
+            message += "<br/>";
+            message += "Thank you.";
+            message += "<br/><br/>[This is an automated Message. Please do not reply.]";
 
             return message;
         }
