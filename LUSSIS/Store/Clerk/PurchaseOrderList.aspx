@@ -36,7 +36,7 @@
                 OnRowDeleting="PendingPurchaseOrderGridView_Delete">
                 <Columns>
                     <asp:BoundField DataField="PONo" HeaderText="PO#" SortExpression="PONo" />
-                    <asp:BoundField DataField="DateIssued" HeaderText="Date" SortExpression="DateIssued" DataFormatString="{0:dd-MM-yyyy}" />
+                    <asp:BoundField DataField="DateIssued" HeaderText="Date" SortExpression="DateIssued" DataFormatString="{0:dd-MMM-yyyy}" />
                     <asp:BoundField DataField="Supplier" HeaderText="Supplier" SortExpression="Supplier" />
                     <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
                     <asp:TemplateField HeaderText="Details">
@@ -44,7 +44,7 @@
                             <asp:Button ID="PODetails_btn" CssClass="btn btn-primary" runat="server" Text="Details" CommandName="PODetails" CommandArgument='<%# Bind("PONo") %>' />
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:CommandField HeaderText="Action" ShowDeleteButton="true" />
+                    <asp:CommandField ShowDeleteButton="true" />
                 </Columns>
                 <EmptyDataTemplate>No Pending Purchase Orders Found</EmptyDataTemplate>
             </asp:GridView>

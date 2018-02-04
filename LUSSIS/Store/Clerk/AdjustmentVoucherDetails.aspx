@@ -29,7 +29,7 @@
                 Voucher#: <%= Session["AVNo"] %>
             </div>
             <div class="col-xs-4">
-                Date Issued: <%= ((DateTime)aV.DateIssued).ToString("dd-MM-yyyy") %>
+                Date Issued: <%= ((DateTime)aV.DateIssued).ToString("dd-MMM-yyyy") %>
             </div>
             <div class="col-xs-4">
                 Status: <%= aV.Status %>
@@ -89,7 +89,6 @@
                     <asp:BoundField DataField="Reason" HeaderText="Reason" SortExpression="Reason" />
 
                     <asp:CommandField
-                        HeaderText="Action"
                         ButtonType="Button"
                         ShowEditButton="True"
                         ShowDeleteButton="True" />

@@ -20,7 +20,7 @@
                 Supplier: <%= pO.Supplier.SupplierName %>
             </div>
             <div class="col-xs-3">
-                Date Issued: <%= ((DateTime)pO.DateIssued).ToString("dd-MM-yyyy") %>
+                Date Issued: <%= ((DateTime)pO.DateIssued).ToString("dd-MMM-yyyy") %>
             </div>
             <div class="col-xs-3">
                 Status: <%= pO.Status %>
@@ -81,7 +81,6 @@
                     </asp:TemplateField>
 
                     <asp:CommandField
-                        HeaderText="Action"
                         ButtonType="Button"
                         ShowEditButton="True"
                         ShowDeleteButton="True" />

@@ -39,7 +39,7 @@ public partial class Store_Clerk_StockDetails : System.Web.UI.Page
                     StockTxnNo = txn.StockTxnNo,
                     Date = String.Format("{0:dd/MMM/yyyy}", txn.Date),
                     DeptSupplier = txn.Remarks,
-                    QtyRemarks = txn.AdjustQty < 0 ? ("-" + txn.AdjustQty) : txn.AdjustQty.ToString(),
+                    QtyRemarks = txn.AdjustQty.ToString(),
                     Balance = txn.RecordedQty
                 });
 

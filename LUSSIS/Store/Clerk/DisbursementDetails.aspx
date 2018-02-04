@@ -86,7 +86,7 @@
                         </EditItemTemplate>
                     </asp:TemplateField>
 
-                    <asp:CommandField HeaderText="Action" ButtonType="Button" ShowEditButton="True" ControlStyle-CssClass="btn btn-primary"/>
+                    <asp:CommandField ButtonType="Button" ShowEditButton="True" ControlStyle-CssClass="btn btn-primary"/>
 
                 </Columns>
                 <EmptyDataTemplate>No Items in this Disbursement</EmptyDataTemplate>

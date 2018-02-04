@@ -46,7 +46,7 @@
                 <Columns>
 
                     <asp:BoundField DataField="AVNo" HeaderText="AV#" SortExpression="AVNo" />
-                    <asp:BoundField DataField="DateIssued" HeaderText="Date Issued" DataFormatString="{0:dd-MM-yyyy}" SortExpression="DateIssued" />
+                    <asp:BoundField DataField="DateIssued" HeaderText="Date Issued" DataFormatString="{0:dd-MMM-yyyy}" SortExpression="DateIssued" />
                     <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
 
                     <asp:TemplateField HeaderText="Details">
@@ -55,7 +55,7 @@
                         </ItemTemplate>
                     </asp:TemplateField>
 
-                    <asp:CommandField HeaderText="Action" ShowDeleteButton="true" />
+                    <asp:CommandField ShowDeleteButton="true" />
 
                 </Columns>
                 <EmptyDataTemplate>No Pending Adjustment Vouchers</EmptyDataTemplate>
