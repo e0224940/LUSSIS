@@ -50,7 +50,7 @@ public partial class _Default : System.Web.UI.Page
             .Select(
                 emp => new
                 {
-                    EmployeeDetails = emp.EmpName + "(" + emp.Email + ")",
+                    EmployeeDetails = emp.EmpName + " (" + emp.Email + ")",
                     EmpNo = emp.EmpNo
                 }
             ).ToList();
@@ -65,7 +65,7 @@ public partial class _Default : System.Web.UI.Page
         DepRepLabel.Text = "<span>"
             + representative.EmpName
             + "</span>"
-            + "<span>("
+            + "<span> ("
             + representative.Email
             + ")</span>";
     }

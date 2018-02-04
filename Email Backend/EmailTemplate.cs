@@ -83,12 +83,12 @@ namespace Email_Backend
 
         public static String GeneratePendingRequisitionSubject(string requestEmployee)
         {
-            return "A new Requisition has been raised by" + requestEmployee + ".";
+            return "A new Requisition has been raised by " + requestEmployee + ".";
         }
         public static String GeneratePendingRequisition(string manager, string requestEmployee)
         {
             return
-                "Dear " + manager + ",<p/>" + "A new requisition has been raised by" + requestEmployee + ", please log in to LUSSIS to approve."
+                "Dear " + manager + ",<p/>" + "A new requisition has been raised by " + requestEmployee + ". Please log in to LUSSIS to approve."
                 + "<p/>Thank you.<br/>LUSSIS";
         }
         public static String GenerateRaisedRequisitionSubject()
