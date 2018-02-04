@@ -81,7 +81,7 @@
                             <div>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBoxDelivered" ErrorMessage="Field cannot be empty" Display="Dynamic" Style="color: red;"></asp:RequiredFieldValidator>
                                 <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="TextBoxDelivered" Operator="DataTypeCheck" Type="Integer" ErrorMessage="Enter only integer" Display="Dynamic" Style="color: red;"></asp:CompareValidator>
-                                <asp:RangeValidator ID="range" runat="server" ControlToValidate="TextBoxDelivered" MaximumValue='<%# Eval("Qty") %>' MinimumValue="0" ErrorMessage="Value out of Range" Display="Dynamic" Style="color: red;"></asp:RangeValidator>
+                                <asp:RangeValidator ID="range" runat="server" ControlToValidate="TextBoxDelivered" Type="Integer" MaximumValue='<%# Eval("Qty") %>' MinimumValue="0" ErrorMessage="Value out of Range" Display="Dynamic" Style="color: red;"></asp:RangeValidator>
                             </div>
                         </EditItemTemplate>
                     </asp:TemplateField>
