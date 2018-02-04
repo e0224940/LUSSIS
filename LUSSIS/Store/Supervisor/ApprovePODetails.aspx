@@ -11,7 +11,7 @@
     <asp:Label ID="supplierLabel" runat="server" Text="Supplier: "></asp:Label>
     <asp:Label ID="suppliernameLabel" runat="server"></asp:Label>
     <br /> <br />
-                          <asp:GridView GridLines="None" cssclass="table table-striped" ID="ApprovePODetailsGridView" runat="server" AutoGenerateColumns="False">
+                          <asp:GridView ID="ApprovePODetailsGridView" runat="server" AutoGenerateColumns="False">
                 <Columns>
                     <asp:TemplateField HeaderText="S/N">
                         <ItemTemplate>
@@ -38,18 +38,14 @@
                             <asp:Label runat="server" Text='<%# Eval("UnitPrice") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-<%--                            <asp:TemplateField HeaderText="Amount" >
-                        <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# Eval("ReorderQty") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>--%>
                 </Columns>
             </asp:GridView>
     <br />
-    <asp:TextBox ID="approvePORemarksTB" runat="server" TextMode="MultiLine" CssClass="form-control" placeholder="Remarks"></asp:TextBox>
+    <asp:Label ID="approvePORemarksLabel" runat="server" Text="Remarks: "></asp:Label>
+    <asp:TextBox ID="approvePORemarksTB" runat="server"></asp:TextBox>
     <br /><br />
-    <asp:Button ID="approveButton" CssClass="btn btn-success" runat="server" Text="Approve" OnClick="approveButton_Click" />
-    <asp:Button ID="rejectButton" CssClass="btn btn-danger" runat="server" Text="Reject" OnClick="rejectButton_Click" />
-    <asp:Button ID="approvePOBackBut" CssClass="btn btn-primary" runat="server" Text="Back" OnClick="approvePOBackBut_Click" />
+    <asp:Button ID="approveButton" runat="server" Text="Approve" OnClick="approveButton_Click" />
+    <asp:Button ID="rejectButton" runat="server" Text="Reject" OnClick="rejectButton_Click" />
+    <asp:Button ID="approvePOBackBut" runat="server" Text="Back" OnClick="approvePOBackBut_Click" />
 </asp:Content>
 

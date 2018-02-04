@@ -39,20 +39,47 @@ namespace LUSSIS_Backend
             return dtList;
         }
 
-        public static List<PURCHASEORDERVIEW> showReorderReportDetails(int SNO, string supplierSelected)
+        //get list of items for Current Month
+        public static List<PURCHASEORDERVIEW> showReorderReportDetails()
         {
             LussisEntities context = new LussisEntities();
             var currentYear = DateTime.Now.Year;
             var currentMonth = DateTime.Now.Month;
-            int monthsToDeduct = SNO;
-            DateTime selectedDate = DateTime.Now.AddMonths(-monthsToDeduct);
-            int getSelectedMonth = selectedDate.Month;
-            int getSelectedYear = selectedDate.Year;
+
+            var getRightSupplier = context.PurchaseOrders
+                .Where(p => p.DateReviewed.Value.Month == currentMonth
+                && p.DateReviewed.Value.Year == currentYear)
+                .FirstOrDefault();
 
             var result = context.PURCHASEORDERVIEWs
-                .Where(p => p.DateIssued.Value.Month == getSelectedMonth 
-                && p.DateIssued.Value.Year == getSelectedYear && p.SupplierCode == supplierSelected)
+                .Where(p => p.DateReviewed.Value.Month == currentMonth
+                && p.DateReviewed.Value.Year == currentYear
+                && p.SupplierCode == getRightSupplier.SupplierCode
+                && p.Status == "Approved")
+                .OrderBy(p=>p.ItemNo)
                 .ToList();
+
+            return result;
+        }
+
+        //get list of items for x Month
+        public static List<PURCHASEORDERVIEW> showPurchaseOrderDetails(int SNO)
+        {
+            LussisEntities context = new LussisEntities();
+            var currentYear = DateTime.Now.Year;
+            var currentMonth = DateTime.Now.Month;
+
+            var getRightSupplier = context.PurchaseOrders
+                .Where(p => p.PONo == SNO)
+                .FirstOrDefault();
+
+            var result = context.PURCHASEORDERVIEWs
+    .Where(p => p.PONo == SNO
+    && p.SupplierCode == getRightSupplier.SupplierCode
+    && p.Status == "Approved")
+    .OrderBy(p => p.ItemNo)
+    .ToList();
+
             return result;
         }
 

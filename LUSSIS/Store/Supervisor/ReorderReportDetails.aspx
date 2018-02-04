@@ -3,19 +3,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
-    <div class="container">
-         <div class="alert alert-success">
-    <asp:Label ID="Label1" runat="server"></asp:Label>
-    <br /> <br />
     <asp:Label ID="Label2" font-size="Medium" runat="server"></asp:Label>
     <asp:Label ID="Label3" runat="server" font-size="Large"></asp:Label>
     <br /> <br />
-    <asp:Label ID="Label4" runat="server"></asp:Label>
-             </div>
-                      <asp:GridView ID="ReorderReportDetailsGridView" 
-                          runat="server" 
-                          cssclass="table table-striped" 
-                          AutoGenerateColumns="False">
+                      <asp:GridView ID="ReorderReportDetailsGridView" runat="server" AutoGenerateColumns="False" OnPreRender="ReorderReportDetailsGridView_PreRender">
                 <Columns>
                     <asp:TemplateField HeaderText="S/N">
                         <ItemTemplate>
@@ -37,25 +28,19 @@
                             <asp:Label runat="server" Text='<%# Eval("CurrentQty") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Reorder Level" >
+                    <asp:TemplateField HeaderText="Qty Ordered" >
                         <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# Eval("ReorderLevel") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Reorder Quantity" >
-                        <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# Eval("ReorderQty") %>'></asp:Label>
+                            <asp:Label runat="server" Text='<%# Eval("Qty") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                           <asp:TemplateField HeaderText="PO#" >
                         <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# Eval("PONo") %>'></asp:Label>
+                            <asp:Hyperlink ID="pOLink" runat="server" Text='<%# Bind("PONo") %>' 
+                            NavigateUrl='<%#"~/Store/Supervisor/PurchaseOrderDetails.aspx?SNO=" + Eval("PONo")%>'></asp:Hyperlink>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
-    <br /> 
-    <asp:Button ID="Button1" runat="server"  CssClass="btn btn-primary" Text="Return" OnClick="Button1_Click" />
-        </div>
+    <br />
 </asp:Content>
 

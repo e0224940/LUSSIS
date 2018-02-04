@@ -11,38 +11,31 @@ public partial class Store_Supervisor_ReorderReportDetails : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         LussisEntities context = new LussisEntities();
-        int SNO = (Convert.ToInt16(Request["SNO"]) - 1);
-        int SNOforSupplier = SNO + 1;
-        var query = ViewReorderReportController.checkForPO(SNO);
 
-        if (query != null)
-        {
-            var dateQuery = query.DateIssued;
-            Label1.Text = "Reorder Report";
-            Label2.Text = "Reorder Report as end of";
-            Label3.Text = dateQuery.Value.ToString("MMM yyyy");
-            Label4.Text = "The following items have fallen below re-order level.";
-            var supplierSelected = query.SupplierCode;
+            var reOrderReportDetails = ViewReorderReportController.showReorderReportDetails();
 
-            var reOrderReportDetails = ViewReorderReportController.showReorderReportDetails(SNO, supplierSelected);
+            Label2.Text = "Reorder Report for: ";
+            Label3.Text = DateTime.Now.ToString("MMM yyyy");
 
-            ReorderReportDetailsGridView.DataSource = reOrderReportDetails;
+        ReorderReportDetailsGridView.DataSource = reOrderReportDetails;
             ReorderReportDetailsGridView.DataBind();
 
-        }
-        else
-        {
-            DateTime currentMthYear = DateTime.Now.AddMonths(-SNO);
-            Label2.Text = "There is no Reorder Report for the month of";
-            Label3.Text = currentMthYear.ToString("MMM yyyy");
-        }
-
-
-
     }
 
-    protected void Button1_Click(object sender, EventArgs e)
+    protected void ReorderReportDetailsGridView_PreRender(object sender, EventArgs e)
     {
-        Response.Redirect("~/Store/Supervisor/ReorderReportList.aspx");
+        //for (int rowIndex = ReorderReportDetailsGridView.Rows.Count - 2; rowIndex >= 0; rowIndex--)
+        //{
+        //    GridViewRow row = ReorderReportDetailsGridView.Rows[rowIndex];
+        //    GridViewRow previousRow = ReorderReportDetailsGridView.Rows[rowIndex + 1];
+
+        //    if (row.Cells[3].Text == previousRow.Cells[3].Text)
+        //    {
+        //        row.Cells[3].RowSpan = previousRow.Cells[0].RowSpan < 2 ? 2 :
+        //                               previousRow.Cells[3].RowSpan + 1;
+        //        previousRow.Cells[3].Visible = false;
+        //    }
+        //}
     }
 }
+

@@ -21,5 +21,6 @@ namespace LUSSIS_Backend
         public string Description { get; set; }
         public string SupplierCode { get; set; }
         public string SupplierName { get; set; }
+        public string Category { get; set; }
     }
 }

@@ -1,50 +1,47 @@
-﻿ <%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="ApproveInventoryAdjustmentDetails.aspx.cs" Inherits="Store_Supervisor_ApproveInventoryAdjustmentDetails" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="ApproveInventoryAdjustmentDetails.aspx.cs" Inherits="Store_Supervisor_ApproveInventoryAdjustmentDetails" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
-    <div class="container">
+<div class="container">
     <asp:Label ID="approve" runat="server" Font-Bold="True" Font-Size="XX-Large" Text="Approve Inventory Adjustment"></asp:Label>
         <br />
         <br />
     <div class="row">
     <div class="form-inline">
-        <div class="col-xs-2">              
-            <asp:Label ID="approveInvAdjLabel" runat="server" Text="Adjustment Voucher# : "></asp:Label>
-        </div>
+        <div class="col-xs-2">
+    <asp:Label ID="approveInvAdjLabel" runat="server" Text="Adjustment Voucher# : "></asp:Label>
+                    </div>
         <div class="col-xs-2"> 
-            <asp:TextBox ID="invAdjLabel" runat="server" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False"></asp:TextBox>
-        </div>
+    <asp:Label ID="invAdjLabel" runat="server" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False"></asp:Label>
+                    </div>
         </div>
    </div>
-   
     <br /> <br />
-
-        <div class="row">
+     <div class="row">
             <div class="form-inline">
                 <div class="col-xs-2"> 
-                    <asp:Label ID="byLabel" runat="server" Text="By: " ></asp:Label>
-                </div>
+    <asp:Label ID="byLabel" runat="server" Text="By: "></asp:Label>
+                                    </div>
                 <div class="col-xs-2">
-                    <asp:TextBox ID="invAdjClerkLabel" runat="server" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False"></asp:TextBox>
-                </div>
+    <asp:Label ID="invAdjClerkLabel" runat="server"></asp:Label>
+                                    </div>
             </div>
         </div>
-
     <br /> <br />
-         <div class="row">
+     <div class="row">
             <div class="form-inline">
-                <div class="col-xs-2">      
+                <div class="col-xs-2">  
     <asp:Label ID="dateRaisedLabel" runat="server" Text="Date Raised: "></asp:Label>
-                 </div>
+                                     </div>
                  <div class="col-xs-2"> 
-                     <asp:TextBox ID="dateLabel" runat="server" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False">30-Dec-2017</asp:TextBox>
-<%--    <asp:Label ID="dateLabel" runat="server" Text="30-Dec-2017"></asp:Label>--%>
-                </div>
+                     <asp:TextBox ID="TextBox1" runat="server" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False">30-Dec-2017</asp:TextBox>
+    <asp:Label ID="dateLabel" runat="server" Text="30-Dec-2017"></asp:Label>
+                    </div>
              </div>
           </div>
-    <br /> <br />
-                <asp:GridView ID="ApproveInventoryAdjustmentDetailsGridView" 
+                     <br /> <br />
+                    <asp:GridView ID="ApproveInventoryAdjustmentDetailsGridView" 
                     runat="server" 
                     GridLines="None"
                     cssclass="table table-striped" 
@@ -73,14 +70,14 @@
                 </Columns>
             </asp:GridView>
     <br />
-        <div class="row">
+            <div class="row">
             <div class="form-inline">
-     <div class="col-xs-2">          
-    <asp:Button ID="approveAdjustmentButton" CssClass="btn btn-success" runat="server" Text="Approve" OnClick="approveAdjustmentButton_Click" />
+     <div class="col-xs-2">  
+    <asp:Button ID="approveAdjustmentButton"  CssClass="btn btn-success" runat="server" Text="Approve" OnClick="approveAdjustmentButton_Click" />     
      </div>
                 <div class="col-xs-2">    
     <asp:Button ID="rejectAdjustmentButton" CssClass="btn btn-danger" runat="server" Text="Reject" OnClick="rejectAdjustmentButton_Click" />
-      </div>
+                          </div>
                 <div class="col-xs-2"> 
     <asp:Button ID="approveAVBackBut" CssClass="btn btn-info" runat="server" Text="Back" OnClick="approveAVBackBut_Click" />
       </div> 

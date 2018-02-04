@@ -348,7 +348,7 @@
           <Property Name="UnitPrice" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Lussis.dbo.ApprovePurchaseOrderView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'LUSSIS.dbo.ApprovePurchaseOrderView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ApprovePurchaseOrderView">
           <Key>
             <PropertyRef Name="PONo" />
@@ -362,7 +362,7 @@ warning 6002: The table/view 'Lussis.dbo.ApprovePurchaseOrderView' does not have
           <Property Name="UnitPrice" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Lussis.dbo.PURCHASEORDERVIEW' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'LUSSIS.dbo.PURCHASEORDERVIEW' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PURCHASEORDERVIEW">
           <Key>
             <PropertyRef Name="PONo" />
@@ -387,7 +387,7 @@ warning 6002: The table/view 'Lussis.dbo.PURCHASEORDERVIEW' does not have a prim
           <Property Name="UnitPrice" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Lussis.dbo.ReorderTrendView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'LUSSIS.dbo.ReorderTrendView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ReorderTrendView">
           <Key>
             <PropertyRef Name="PONo" />
@@ -399,11 +399,12 @@ warning 6002: The table/view 'Lussis.dbo.ReorderTrendView' does not have a prima
           <Property Name="ItemNo" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Qty" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" />
           <Property Name="SupplierCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SupplierName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'Lussis.dbo.RequisitionTrendView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'LUSSIS.dbo.RequisitionTrendView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="RequisitionTrendView">
           <Key>
             <PropertyRef Name="ReqNo" />
@@ -421,7 +422,7 @@ warning 6002: The table/view 'Lussis.dbo.RequisitionTrendView' does not have a p
           <Property Name="DeptCode" Type="nvarchar" MaxLength="50" />
           <Property Name="DeptName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK__aspnet_Me__Appli__70DDC3D8">
+        <Association Name="FK__aspnet_Me__Appli__6E01572D">
           <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
           <End Role="aspnet_Membership" Type="Self.aspnet_Membership" Multiplicity="*" />
           <ReferentialConstraint>
@@ -433,7 +434,7 @@ warning 6002: The table/view 'Lussis.dbo.RequisitionTrendView' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Me__UserI__71D1E811">
+        <Association Name="FK__aspnet_Me__UserI__6EF57B66">
           <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
           <End Role="aspnet_Membership" Type="Self.aspnet_Membership" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -445,7 +446,7 @@ warning 6002: The table/view 'Lussis.dbo.RequisitionTrendView' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Pa__Appli__22751F6C">
+        <Association Name="FK__aspnet_Pa__Appli__1F98B2C1">
           <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
           <End Role="aspnet_Paths" Type="Self.aspnet_Paths" Multiplicity="*" />
           <ReferentialConstraint>
@@ -457,7 +458,7 @@ warning 6002: The table/view 'Lussis.dbo.RequisitionTrendView' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Pe__PathI__282DF8C2">
+        <Association Name="FK__aspnet_Pe__PathI__25518C17">
           <End Role="aspnet_Paths" Type="Self.aspnet_Paths" Multiplicity="1" />
           <End Role="aspnet_PersonalizationAllUsers" Type="Self.aspnet_PersonalizationAllUsers" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -469,7 +470,7 @@ warning 6002: The table/view 'Lussis.dbo.RequisitionTrendView' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Pe__PathI__2BFE89A6">
+        <Association Name="FK__aspnet_Pe__PathI__29221CFB">
           <End Role="aspnet_Paths" Type="Self.aspnet_Paths" Multiplicity="0..1" />
           <End Role="aspnet_PersonalizationPerUser" Type="Self.aspnet_PersonalizationPerUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -481,7 +482,7 @@ warning 6002: The table/view 'Lussis.dbo.RequisitionTrendView' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Pe__UserI__2CF2ADDF">
+        <Association Name="FK__aspnet_Pe__UserI__2A164134">
           <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="0..1" />
           <End Role="aspnet_PersonalizationPerUser" Type="Self.aspnet_PersonalizationPerUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -493,7 +494,7 @@ warning 6002: The table/view 'Lussis.dbo.RequisitionTrendView' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Pr__UserI__05D8E0BE">
+        <Association Name="FK__aspnet_Pr__UserI__02FC7413">
           <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
           <End Role="aspnet_Profile" Type="Self.aspnet_Profile" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -505,7 +506,7 @@ warning 6002: The table/view 'Lussis.dbo.RequisitionTrendView' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Ro__Appli__0F624AF8">
+        <Association Name="FK__aspnet_Ro__Appli__0C85DE4D">
           <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
           <End Role="aspnet_Roles" Type="Self.aspnet_Roles" Multiplicity="*" />
           <ReferentialConstraint>
@@ -517,7 +518,7 @@ warning 6002: The table/view 'Lussis.dbo.RequisitionTrendView' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Us__Appli__60A75C0F">
+        <Association Name="FK__aspnet_Us__Appli__5DCAEF64">
           <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
           <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="*" />
           <ReferentialConstraint>
@@ -529,7 +530,7 @@ warning 6002: The table/view 'Lussis.dbo.RequisitionTrendView' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Us__RoleI__14270015">
+        <Association Name="FK__aspnet_Us__RoleI__114A936A">
           <End Role="aspnet_Roles" Type="Self.aspnet_Roles" Multiplicity="1" />
           <End Role="aspnet_UsersInRoles" Type="Self.aspnet_UsersInRoles" Multiplicity="*" />
           <ReferentialConstraint>
@@ -541,7 +542,7 @@ warning 6002: The table/view 'Lussis.dbo.RequisitionTrendView' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__aspnet_Us__UserI__1332DBDC">
+        <Association Name="FK__aspnet_Us__UserI__10566F31">
           <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
           <End Role="aspnet_UsersInRoles" Type="Self.aspnet_UsersInRoles" Multiplicity="*" />
           <ReferentialConstraint>
@@ -553,7 +554,7 @@ warning 6002: The table/view 'Lussis.dbo.RequisitionTrendView' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StoreAssi__EmpNo__571DF1D5">
+        <Association Name="FK__StoreAssi__EmpNo__4F47C5E3">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
           <End Role="StoreAssignments" Type="Self.StoreAssignments" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -1066,6 +1067,7 @@ FROM [dbo].[PURCHASEORDERVIEW] AS [PURCHASEORDERVIEW]</DefiningQuery>
 [ReorderTrendView].[ItemNo] AS [ItemNo], 
 [ReorderTrendView].[Qty] AS [Qty], 
 [ReorderTrendView].[Description] AS [Description], 
+[ReorderTrendView].[Category] AS [Category], 
 [ReorderTrendView].[SupplierCode] AS [SupplierCode], 
 [ReorderTrendView].[SupplierName] AS [SupplierName]
 FROM [dbo].[ReorderTrendView] AS [ReorderTrendView]</DefiningQuery>
@@ -1083,51 +1085,51 @@ FROM [dbo].[ReorderTrendView] AS [ReorderTrendView]</DefiningQuery>
 [RequisitionTrendView].[DeptName] AS [DeptName]
 FROM [dbo].[RequisitionTrendView] AS [RequisitionTrendView]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__aspnet_Me__Appli__70DDC3D8" Association="Self.FK__aspnet_Me__Appli__70DDC3D8">
+          <AssociationSet Name="FK__aspnet_Me__Appli__6E01572D" Association="Self.FK__aspnet_Me__Appli__6E01572D">
             <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
             <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Me__UserI__71D1E811" Association="Self.FK__aspnet_Me__UserI__71D1E811">
+          <AssociationSet Name="FK__aspnet_Me__UserI__6EF57B66" Association="Self.FK__aspnet_Me__UserI__6EF57B66">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Pa__Appli__22751F6C" Association="Self.FK__aspnet_Pa__Appli__22751F6C">
+          <AssociationSet Name="FK__aspnet_Pa__Appli__1F98B2C1" Association="Self.FK__aspnet_Pa__Appli__1F98B2C1">
             <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
             <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Pe__PathI__282DF8C2" Association="Self.FK__aspnet_Pe__PathI__282DF8C2">
+          <AssociationSet Name="FK__aspnet_Pe__PathI__25518C17" Association="Self.FK__aspnet_Pe__PathI__25518C17">
             <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
             <End Role="aspnet_PersonalizationAllUsers" EntitySet="aspnet_PersonalizationAllUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Pe__PathI__2BFE89A6" Association="Self.FK__aspnet_Pe__PathI__2BFE89A6">
+          <AssociationSet Name="FK__aspnet_Pe__PathI__29221CFB" Association="Self.FK__aspnet_Pe__PathI__29221CFB">
             <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
             <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Pe__UserI__2CF2ADDF" Association="Self.FK__aspnet_Pe__UserI__2CF2ADDF">
+          <AssociationSet Name="FK__aspnet_Pe__UserI__2A164134" Association="Self.FK__aspnet_Pe__UserI__2A164134">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Pr__UserI__05D8E0BE" Association="Self.FK__aspnet_Pr__UserI__05D8E0BE">
+          <AssociationSet Name="FK__aspnet_Pr__UserI__02FC7413" Association="Self.FK__aspnet_Pr__UserI__02FC7413">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="aspnet_Profile" EntitySet="aspnet_Profile" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Ro__Appli__0F624AF8" Association="Self.FK__aspnet_Ro__Appli__0F624AF8">
+          <AssociationSet Name="FK__aspnet_Ro__Appli__0C85DE4D" Association="Self.FK__aspnet_Ro__Appli__0C85DE4D">
             <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
             <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Us__Appli__60A75C0F" Association="Self.FK__aspnet_Us__Appli__60A75C0F">
+          <AssociationSet Name="FK__aspnet_Us__Appli__5DCAEF64" Association="Self.FK__aspnet_Us__Appli__5DCAEF64">
             <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Us__RoleI__14270015" Association="Self.FK__aspnet_Us__RoleI__14270015">
+          <AssociationSet Name="FK__aspnet_Us__RoleI__114A936A" Association="Self.FK__aspnet_Us__RoleI__114A936A">
             <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
             <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK__aspnet_Us__UserI__1332DBDC" Association="Self.FK__aspnet_Us__UserI__1332DBDC">
+          <AssociationSet Name="FK__aspnet_Us__UserI__10566F31" Association="Self.FK__aspnet_Us__UserI__10566F31">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK__StoreAssi__EmpNo__571DF1D5" Association="Self.FK__StoreAssi__EmpNo__571DF1D5">
+          <AssociationSet Name="FK__StoreAssi__EmpNo__4F47C5E3" Association="Self.FK__StoreAssi__EmpNo__4F47C5E3">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="StoreAssignments" EntitySet="StoreAssignments" />
           </AssociationSet>
@@ -2535,6 +2537,7 @@ FROM [dbo].[RequisitionTrendView] AS [RequisitionTrendView]</DefiningQuery>
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SupplierCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SupplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="RequisitionTrendView">
           <Key>
@@ -2959,6 +2962,7 @@ FROM [dbo].[RequisitionTrendView] AS [RequisitionTrendView]</DefiningQuery>
           <EntitySetMapping Name="ReorderTrendViews">
             <EntityTypeMapping TypeName="LussisModel.ReorderTrendView">
               <MappingFragment StoreEntitySet="ReorderTrendView">
+                <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
                 <ScalarProperty Name="SupplierCode" ColumnName="SupplierCode" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
