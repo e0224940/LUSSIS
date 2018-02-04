@@ -41,6 +41,7 @@ namespace Email_Backend
                             MailMessage mm = new MailMessage(senderEmail, recipientEmail);
                             mm.Subject = emailSubject;
                             mm.Body = emailContent;
+                            mm.IsBodyHtml = true;
 
                             client.Send(mm);
 
