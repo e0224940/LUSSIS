@@ -16,9 +16,10 @@ namespace Email_Backend
         public static String GenerateRequisitonStatusChangedEmail(string applicant, string requestNumber, string approver, string result, string remark)
         {
             return
-                "Dear " + applicant + "<br/>"
+                "Dear " + applicant + ",<p/>"
                 + "Your Stationery Request numbered " + requestNumber + " has been " + result + " by " + approver + "." + "<br/>"
-                + ((remark.Trim().Length > 0) ? "The following Remark has been left for you: " + remark : "") + "<br/>"
+                + ((remark.Trim().Length > 0) ? "The following remark has been left for you: " + remark : "") + "<p/>"
+                + "Thank you.<br/>LUSSIS<p/>"
                 + "[This is an automated Message, do no reply]";
         }
 
@@ -30,8 +31,10 @@ namespace Email_Backend
         public static String GenerateCollectionPointStatusChangedEmail(string applicant, string newPoint)
         {
             return
-                "Dear " + applicant + "<br/>" + "There is a new Collection Point Change. Now New Location is "
-                + newPoint + "[This is an automated Message, do no reply]";
+                "Dear " + applicant + ",<p/>" + "There is a new Collection Point Change. The new Collection Point is at "
+                + newPoint
+                + "Thank you.<br/>LUSSIS<p/>"
+                + "[This is an automated Message, do no reply]";
         }
 
         public static String GenerateOldRepresentativeRemovedSubject()
@@ -41,7 +44,8 @@ namespace Email_Backend
 
         public static String GenerateOldRepresentativeRemovedEmail()
         {
-            return "Your Department Has Relieved you from Department Representative Duties. Have a Nice Day!";
+            return "Your Department Has relieved you from Department Representative duties. Have a nice day!"
+                + "<p/>Thank you.<br/>LUSSIS";
         }
 
         public static String GenerateNewRepresentativeRemovedSubject()
@@ -51,7 +55,8 @@ namespace Email_Backend
 
         public static String GenerateNewRepresentativeRemovedEmail()
         {
-            return "Your Department Has chosen you as the new Department Representative to collect the next disbursement. Upcoming disbursement details if present can be found when you login. Congrats!";
+            return "Your Department has chosen you as the new Department Representative to collect the next disbursement. Upcoming disbursement details if present can be found when you login."
+                + "<p/>Thank you.<br/>LUSSIS";
         }
 
         public static String GenerateOldDeputyAuthorityRemovedSubject()
@@ -61,7 +66,8 @@ namespace Email_Backend
 
         public static String GenerateOldDeputyAuthorityRemovedEmail(string empName, string deptName)
         {
-            return "Dear " + empName + ",<br/><br/>You have been removed as the approving authority of " + deptName + ".";
+            return "Dear " + empName + ",<p/>You have been removed as the approving authority of " + deptName + "."
+                + "<p/>Thank you.<br/>LUSSIS<p/>";
         }
 
         public static String GenerateNewDeputyAuthoritySubject()
@@ -71,7 +77,8 @@ namespace Email_Backend
 
         public static String GenerateNewDeputyAuthorityEmail(string empName, string deptName, string startDate, string endDate)
         {
-            return "Dear " + empName + ", <br/><br/>You have been appointed as the approving authority of " + deptName + ", starting at " + startDate + " and ending at " + endDate + ".";
+            return "Dear " + empName + ", <p/>You have been appointed as the approving authority of " + deptName + ", starting at " + startDate + " and ending at " + endDate + "."
+                + "<p/>Thank you.<br/>LUSSIS";
         }
 
         public static String GeneratePendingRequisitionSubject(string requestEmployee)
@@ -81,7 +88,8 @@ namespace Email_Backend
         public static String GeneratePendingRequisition(string manager, string requestEmployee)
         {
             return
-                "Dear " + manager + "<br/>" + "A new requisition has been raised by" + requestEmployee + ",please approve it soon.";
+                "Dear " + manager + ",<p/>" + "A new requisition has been raised by" + requestEmployee + ", please log in to LUSSIS to approve."
+                + "<p/>Thank you.<br/>LUSSIS";
         }
         public static String GenerateRaisedRequisitionSubject()
         {
@@ -90,7 +98,8 @@ namespace Email_Backend
         public static String GenerateRaisedRequisition(string employee, string reqNo)
         {
             return
-                "Dear " + employee + "<br/>" + "Your new requisiton number is " + reqNo + ".";
+                "Dear " + employee + ",<p/>" + "Your new requisiton number is " + reqNo + "."
+                + "<p/>Thank you.<br/>LUSSIS";
         }
 
         public static string GenerateAdjustmentVoucherSubject()
@@ -100,15 +109,13 @@ namespace Email_Backend
 
         public static string GenerateAdjustmentVoucherEmail(string recipient, int aVNo)
         {
-            string message =
+            return
                 "Dear " + recipient + ","
-                + "<br/><br/>Adjustment Voucher #" + aVNo + " has been created and is pending your approval."
-                + "<br/>";
+                + "<p/>Adjustment Voucher #" + aVNo + " has been created and is pending your approval."
+                + "<p/>"
+                + "Thank you.<br/>LUSSIS<p/>"
+                + "[This is an automated Message. Please do not reply.]";
 
-            message += "<br/>Thank you."
-                + "<br/><br/>[This is an automated Message. Please do not reply.]";
-
-            return message;
         }
 
         public static String GenerateOrderFormEmailSubject()
@@ -120,7 +127,7 @@ namespace Email_Backend
         {
             string message =
                 "Dear " + supervisor + ","
-                + "<br/><br/>The following Purchase Orders have been created and are pending your approval:"
+                + "<p/>The following Purchase Orders have been created and are pending your approval:"
                  + "<br/>";
 
             int count = 1;
@@ -130,8 +137,8 @@ namespace Email_Backend
                 count++;
             }
 
-            message += "<br/><br/>Thank you."
-                + "<br/><br/>[This is an automated Message. Please do not reply.]";
+            message += "<p/>Thank you.<br/>LUSSIS<p/>"
+                + "[This is an automated Message. Please do not reply.]";
 
             return message;
         }
@@ -144,7 +151,7 @@ namespace Email_Backend
         public static string GenerateCompletedDisbursementEmail(string empName, int disbursementNo, DateTime? disbursementDate, IEnumerable<dynamic> dDetailsList)
         {
             string message = "Dear " + empName + ",";
-            message += "<br/><br/>";
+            message += "<p/>";
             message += "Disbursement #" + disbursementNo + " was completed successfully on " + disbursementDate + ".";
             //message += "<br/><br/>";
             //message += "<table><tr>";
@@ -164,8 +171,8 @@ namespace Email_Backend
 
             //message += "</table>";
             //message += "<br/>";
-            message += "Thank you.";
-            message += "<br/><br/>[This is an automated Message. Please do not reply.]";
+            message += "<p/>Thank you.<br/>LUSSIS";
+            message += "<p/>[This is an automated message. Please do not reply.]";
 
             return message;
         }
@@ -173,11 +180,11 @@ namespace Email_Backend
         public static string GenerateCompletedDisbursementEmail(string empName, int disbursementNo, DateTime? disbursementDate)
         {
             string message = "Dear " + empName + ",";
-            message += "<br/><br/>";
+            message += "<p/>";
             message += "Disbursement #" + disbursementNo + " was completed successfully on " + disbursementDate + ".";
-            message += "<br/><br/>";
-            message += "Thank you.";
-            message += "<br/><br/>[This is an automated Message. Please do not reply.]";
+            message += "<p/>";
+            message += "Thank you.<br/>LUSSIS<p/>";
+            message += "[This is an automated message. Please do not reply.]";
 
             return message;
         }
