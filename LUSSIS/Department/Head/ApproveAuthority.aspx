@@ -50,7 +50,47 @@
     <asp:Button ID="button_appAuth_remove" runat="server" CssClass="btn btn-danger" Text="Remove Appointment" OnClick="button_appAuth_remove_Click" />
     </div>
             </div>
-    </div>
+                    </div>
+                <br />
+        <br />
+
+            <div class="row">
+                <div class="col-sm-4">
+            <asp:Label ID="lbl_currentFutureAppts" runat="server" Text="Current and Future Appointments" Visible="False"></asp:Label>
+                                
+                </div>
+                </div>
+        <br />
+            <div class ="row">
+                                <div class="col-sm-8">
+            <asp:GridView ID="gridView_AppAuthCurrFutAppts" runat="server" AutoGenerateColumns="False"
+                GridLines="None"
+                CssClass="table table-striped">
+                <Columns>
+                    <asp:TemplateField HeaderText="DeptCode">
+                        <ItemTemplate>
+                            <asp:Label ID="LabelDeptCode" runat="server" Text='<%# Bind("DeptCode") %>' />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Employee Delegated">
+                        <ItemTemplate>
+                            <asp:Label ID="LabelDepEmpName" runat="server" Text='<%# Bind("DeputyEmpName") %>' />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="From Date">
+                        <ItemTemplate>
+                            <asp:Label ID="LabelFromDate" runat="server" Text='<%# Bind("FromDate") %>' />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="To Date">
+                        <ItemTemplate>
+                            <asp:Label ID="LabelToDate" runat="server" Text='<%# Bind("ToDate") %>' />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+                </asp:GridView>
+            </div>
+                </div>
     </div>
 </asp:Content>
 

@@ -67,6 +67,13 @@ namespace LUSSIS_Backend
             return list_names;
         }
 
+        public static List<Deputy> getDeputyDetailsForDept(string deptCode)
+        
+        {
+            LussisEntities context = new LussisEntities();
+            return context.Deputies.Where(x => x.DeptCode.Equals(deptCode)).OrderBy(x => x.FromDate).ToList();
+        }
+
         public static int getEmpNoFromEmpName(string empName)
         {
             using (LussisEntities context = new LussisEntities())
@@ -77,7 +84,7 @@ namespace LUSSIS_Backend
 
         }
 
-        public static string removeAuthority(int profileEmpNo, string deptCode, int outgoingEmpNo)
+        public static void removeAuthority(int profileEmpNo, string deptCode, int outgoingEmpNo)
         {
 
             string recipientEmail;
@@ -90,15 +97,14 @@ namespace LUSSIS_Backend
                 context.Deputies.Remove(dep);
 
                 Department dept = context.Departments.Where(x => x.DeptCode.Equals(deptCode)).First();
-                dept.DeputyEmpNo = profileEmpNo;
+                dept.DeputyEmpNo = profileEmpNo; //setting back to HOD
                 deptName = dept.DeptName;
-
+               
                 context.SaveChanges();
 
                 RoleController.removeRoleFromEmployee(context, outgoingEmpNo, RoleController.LUSSISRoles.DepartmentDeputy);
 
                 Employee newDeputy = context.Employees.Where(x => x.EmpNo.Equals(dept.EmployeeDeputy.EmpNo)).First();
-                //txtBox_appAuth_currentHead.Text = newDeputy.EmpName;
                 newDeputyName = newDeputy.EmpName;
 
             }
@@ -113,7 +119,6 @@ namespace LUSSIS_Backend
                 EmailTemplate.GenerateOldDeputyAuthorityRemovedSubject(),
                 EmailTemplate.GenerateOldDeputyAuthorityRemovedEmail(recipientName, deptName));
 
-            return newDeputyName; //for display in view
         }
 
         public static string addAuthority(string deptCode, int empNo, DateTime start, DateTime end)
@@ -124,24 +129,28 @@ namespace LUSSIS_Backend
             d.FromDate = start;
             d.ToDate = end;
 
-            string empName;
+            string empName="";
             string deptName;
-            string recipientEmail;
+            string recipientEmail="";
 
             using (LussisEntities context = new LussisEntities())
             {
                 context.Deputies.Add(d);
                 Department dept = context.Departments.Where(x => x.DeptCode.Equals(deptCode)).First();
-                dept.DeputyEmpNo = empNo;
-                deptName = dept.DeptName;
+
+                deptName = dept.DeptName;       //for email
+
+
+                if (start.CompareTo(DateTime.Today)==0)
+                {
+                    dept.DeputyEmpNo = empNo;
+                    RoleController.addRoleToEmployee(context, empNo, RoleController.LUSSISRoles.DepartmentDeputy);
+                }
+                    Employee newDeputy = context.Employees.Where(x => x.EmpNo.Equals(empNo)).First();
+                    empName = newDeputy.EmpName;
+                    recipientEmail = newDeputy.Email;
+
                 context.SaveChanges();
-                RoleController.addRoleToEmployee(context, empNo, RoleController.LUSSISRoles.DepartmentDeputy);
-
-                Employee newDeputy = context.Employees.Where(x => x.EmpNo.Equals(empNo)).First();
-                empName = newDeputy.EmpName;
-                recipientEmail = newDeputy.Email;
-                //txtBox_appAuth_currentHead.Text = empName;
-
             }
 
             EmailBackend.sendEmailStep(recipientEmail,
@@ -149,6 +158,48 @@ namespace LUSSIS_Backend
             EmailTemplate.GenerateNewDeputyAuthorityEmail(empName, deptName, start.ToString(), end.ToString()));
 
             return empName;     //for display in view
+        }
+
+        public static void UpdateDeputy(Deputy d)
+        {
+            LussisEntities context = new LussisEntities();
+            Deputy updateDep = context.Deputies.Where(x => x.DeptCode.Equals(d.DeptCode))
+                .Where(x => x.DeputyEmpNo.Equals(d.DeputyEmpNo)).First();
+            updateDep.FromDate = d.FromDate;
+            updateDep.ToDate = d.ToDate;
+            context.SaveChanges();
+        }
+
+        public static void removeDeputy(string depCode, int depEmpNo)
+        {
+            LussisEntities context = new LussisEntities();
+
+            //int depEmpNo = context.Employees.Where(x => x.EmpName.Equals(depEmpName)).First().EmpNo;
+            Deputy removeDep = context.Deputies.Where(x => x.DeptCode.Equals(depCode)).First();
+            context.Deputies.Remove(removeDep);
+            context.SaveChanges();
+        }
+
+        public static void checkIfDeputyStartDateElapsed()
+        {
+            LussisEntities context = new LussisEntities();
+            
+                List<Deputy> listd = context.Deputies.ToList();
+
+            if (listd.Count != 0)
+            {
+                for (int i = 0; i < listd.Count; i++)
+                {
+                    Deputy d = listd[i];
+                    Department dept = context.Departments.Where(x => x.DeptCode.Equals(d.DeptCode)).First();
+                    if (d.FromDate.Equals(DateTime.Today))
+                    {
+                        dept.DeputyEmpNo = d.DeputyEmpNo;
+                        RoleController.addRoleToEmployee(context, (int)d.DeputyEmpNo, RoleController.LUSSISRoles.DepartmentDeputy);
+                    }
+                }
+            }
+            context.SaveChanges();
         }
 
         public static void checkIfDeputyEndDateElapsed()

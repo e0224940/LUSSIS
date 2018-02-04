@@ -23,6 +23,7 @@ namespace LussisScheduledTasks
                     previous = current;
                     {
                         ApproveAuthorityController.checkIfDeputyEndDateElapsed();
+                        ApproveAuthorityController.checkIfDeputyStartDateElapsed();
                     }
                 }
             }
