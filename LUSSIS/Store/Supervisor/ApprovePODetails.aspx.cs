@@ -34,6 +34,7 @@ public partial class Store_Supervisor_ApprovePODetails : System.Web.UI.Page
         ApprovePurchaseOrderController.updateApproveBy(poNO, empNo);
         ApprovePurchaseOrderController.updateDateReviewed(poNO);
         ApprovePurchaseOrderController.updateRemarks(poNO, remarks);
+        
         Response.Redirect("~/Store/Supervisor/ApprovePOList.aspx");
 
     }
@@ -48,6 +49,7 @@ public partial class Store_Supervisor_ApprovePODetails : System.Web.UI.Page
         ApprovePurchaseOrderController.updateApproveBy(poNO, empNo);
         ApprovePurchaseOrderController.updateDateReviewed(poNO);
         ApprovePurchaseOrderController.updateRemarks(poNO, remarks);
+
         Response.Redirect("~/Store/Supervisor/ApprovePOList.aspx");
     }
 

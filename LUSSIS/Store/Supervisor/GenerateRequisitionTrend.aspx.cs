@@ -131,11 +131,20 @@ public partial class Store_Supervisor_GenerateRequisitionTrend : System.Web.UI.P
                 reportListItemDept.Remove(reportListItemDept[y]);
             }
         }
-        reportListItemDept.OrderBy(x => x.DateReviewed);
+
+        //var shortList = reportListItemDept
+        //    .GroupBy(x => x.DateReviewed.Value.Month)
+        //    .Select(g => new RequisitionTrendItem()
+        //    {
+        //        Key = g.Key,
+        //        Qty = Convert.ToInt32(g.Sum(s => s.Qty)),
+        //        Date = g.First().DateReviewed.Value.Month + "/" + g.First().DateReviewed.Value.Year,
+        //        DeptName = g.First().DeptName
+        //    }).ToList();
+
         return reportListItemDept;
         //start to filter items
     }
-
 
     private void addItemSeriesToChart(Chart Chart1, string deptList, String itemSelect, DateTime startDate, DateTime endDate)
     {
@@ -310,4 +319,6 @@ public class RequisitionTrendItem
     public int Qty { get; set; }
     public DateTime StoredDate { get; set; }
     public string Date { get; set; }
+    public string DeptName { get; set; }
+    public DateTime DateReviewed { get; set;}
 }
