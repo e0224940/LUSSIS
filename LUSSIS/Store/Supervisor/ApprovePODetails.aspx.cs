@@ -1,4 +1,5 @@
 ﻿using LUSSIS_Backend;
+using Email_Backend;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,10 +31,21 @@ public partial class Store_Supervisor_ApprovePODetails : System.Web.UI.Page
         int poNO = Convert.ToInt32(Request["PO"]);
         var empNo = Profile.EmpNo;
         var remarks = approvePORemarksTB.Text;
+        
         ApprovePurchaseOrderController.setStatusApprove(poNO);
         ApprovePurchaseOrderController.updateApproveBy(poNO, empNo);
         ApprovePurchaseOrderController.updateDateReviewed(poNO);
         ApprovePurchaseOrderController.updateRemarks(poNO, remarks);
+
+        //send Email, will need to put in Controller
+        LussisEntities entity = new LussisEntities();
+        PurchaseOrder currentPO = entity.PurchaseOrders.Where(x => x.PONo == poNO).FirstOrDefault();
+        Employee recpt = entity.Employees.Where(x => x.EmpNo == currentPO.OrderedBy).FirstOrDefault();
+
+        EmailBackend.sendEmailStep(recpt.Email,
+            EmailTemplate.GeneratePOStatusChangedEmailSubject(poNO.ToString(), currentPO.Status),
+            EmailTemplate.GeneratePOStatusChangedEmail(recpt.EmpName, poNO.ToString(), empNo.ToString(), currentPO.Status, currentPO.Remarks));
+        
         
         Response.Redirect("~/Store/Supervisor/ApprovePOList.aspx");
 
@@ -49,6 +61,15 @@ public partial class Store_Supervisor_ApprovePODetails : System.Web.UI.Page
         ApprovePurchaseOrderController.updateApproveBy(poNO, empNo);
         ApprovePurchaseOrderController.updateDateReviewed(poNO);
         ApprovePurchaseOrderController.updateRemarks(poNO, remarks);
+
+        //send email, will need to put in controller
+        LussisEntities entity = new LussisEntities();
+        PurchaseOrder currentPO = entity.PurchaseOrders.Where(x => x.PONo == poNO).FirstOrDefault();
+        Employee recpt = entity.Employees.Where(x => x.EmpNo == currentPO.OrderedBy).FirstOrDefault();
+
+        EmailBackend.sendEmailStep(recpt.Email,
+            EmailTemplate.GeneratePOStatusChangedEmailSubject(poNO.ToString(), currentPO.Status),
+            EmailTemplate.GeneratePOStatusChangedEmail(recpt.EmpName, poNO.ToString(), empNo.ToString(), currentPO.Status, currentPO.Remarks));
 
         Response.Redirect("~/Store/Supervisor/ApprovePOList.aspx");
     }

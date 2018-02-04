@@ -188,5 +188,20 @@ namespace Email_Backend
 
             return message;
         }
+
+        public static String GeneratePOStatusChangedEmailSubject(string requestNumber, string result)
+        {
+            return "[Purchase Order] " + requestNumber + " has been " + result;
+        }
+
+        public static String GeneratePOStatusChangedEmail(string applicant, string requestNumber, string approver, string result, string remark)
+        {
+            return
+                "Dear " + applicant + ",<p/>"
+                + "Your Purchase Order #" + requestNumber + " has been " + result + " by " + approver + "." + "<br/>"
+                + ((remark.Trim().Length > 0) ? "The following remark has been left for you: " + remark : "") + "<p/>"
+                + "Thank you.<br/>LUSSIS<p/>"
+                + "[This is an automated message, please do not reply]";
+        }
     }
 }
