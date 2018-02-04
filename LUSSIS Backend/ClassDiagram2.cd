@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LUSSIS_Backend.AndroidAuthenticationController">
+    <Position X="3" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAIAAAAAAAAAACAAAEAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AndroidAuthenticationController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LUSSIS_Backend.AndroidController">
+    <Position X="3" Y="2.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>pAAQAQAJAAAAgEIAAAQIAwAAAIEAAIAACQAAAAABAAE=</HashCode>
+      <FileName>AndroidController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LUSSIS_Backend.ApproveAuthorityController">
+    <Position X="3" Y="8.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAEABAQAAAAEAAABAAAAEAgI=</HashCode>
+      <FileName>ApproveAuthorityController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LUSSIS_Backend.ApproveInventoryAdjustmentController">
+    <Position X="6" Y="0.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAwAAAAAAAAAAAAAAIAAQAAAAACAAAgAEAAAA=</HashCode>
+      <FileName>ApproveInventoryAdjustmentController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LUSSIS_Backend.ApprovePurchaseOrderController">
+    <Position X="9.75" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAoAAAAAAAAAAAAAIQAAAAAAAAiAAIAAAAAAA=</HashCode>
+      <FileName>ApprovePurchaseOrderController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LUSSIS_Backend.EmployeeController">
+    <Position X="0.5" Y="3" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAQAAAAgABACAAQhAAgAABAAAAAAABAA=</HashCode>
+      <FileName>EmployeeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LUSSIS_Backend.LoginController">
+    <Position X="6" Y="5.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LoginController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LUSSIS_Backend.RejectRequisitionController">
+    <Position X="13" Y="3" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>RejectRequisitionController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LUSSIS_Backend.RetrievalFormController">
+    <Position X="13" Y="8.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAQAAAAEAAAAAAAAECAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>RetrievalFormController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LUSSIS_Backend.RoleController">
+    <Position X="0.5" Y="7.75" Width="2" />
+    <NestedTypes>
+      <Enum Name="LUSSIS_Backend.RoleController.LUSSISRoles" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>RoleController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEwAAAAAAAAAAAAAAACAABEAAAAAAA=</HashCode>
+      <FileName>RoleController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LUSSIS_Backend.UpdateCollectionPoint">
+    <Position X="0.5" Y="6.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>UpdateCollectionPoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LUSSIS_Backend.UpdateRepresentativeController">
+    <Position X="6" Y="9.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>UpdateRepresentativeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LUSSIS_Backend.ViewPendingRequisitionsController">
+    <Position X="13" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewPendingRequisitionsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LUSSIS_Backend.ViewReorderReportController">
+    <Position X="13" Y="4.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAIAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewReorderReportController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LUSSIS_Backend.ViewRequisitionDetailsController">
+    <Position X="13" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewRequisitionDetailsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LUSSIS_Backend.controller.AVController">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAgAAAAABIAAAAIAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>controller\AVController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LUSSIS_Backend.controller.DisbursementController">
+    <Position X="6" Y="3" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAgAAAAAAEAAAAAAAEAAAAAw=</HashCode>
+      <FileName>controller\DisbursementController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LUSSIS_Backend.controller.OrderController">
+    <Position X="9.75" Y="3" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AgEEACAgAAABQAAKAAAAQCAACACAAAAAAEAAAEAAAAA=</HashCode>
+      <FileName>controller\OrderController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LUSSIS_Backend.controller.POController">
+    <Position X="13" Y="6" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACBQAAgAAAAAAAAEAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>controller\POController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LUSSIS_Backend.controller.RetrievalController">
+    <Position X="9.75" Y="7.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AEAiABAEAAAQACBAAIIJAAAACAAAAAIAAAAAAABAAAE=</HashCode>
+      <FileName>controller\RetrievalController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LUSSIS_Backend.controller.StockController">
+    <Position X="6" Y="6.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAABAAAgAAAAAEQEAACAAAIAAAAAAAAAAAAEE=</HashCode>
+      <FileName>controller\StockController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

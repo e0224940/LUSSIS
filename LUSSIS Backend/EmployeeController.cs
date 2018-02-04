@@ -46,15 +46,6 @@ namespace LUSSIS_Backend
         }
 
 
-        //Add data into database: requisitionDetails
-        public static void RaisedRequisitionDetails(string ItemNum, int qty)
-        {
-            using (LussisEntities entities = new LussisEntities())
-            {
-
-            }
-
-        }
         //Add data into database: requisition
         public static void RaisedRequisition(int issueBy, DateTime dateIssue, string status, List<RequisitionDetail> r)
         {

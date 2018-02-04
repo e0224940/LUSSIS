@@ -37,7 +37,7 @@
                         <asp:Label ID="Label1" runat="server" Text="Search"></asp:Label>
                               
                                 
-                        <asp:TextBox ID="SearchTextBox" CssClass="btn-default form-control" AutoPostBack="True" Enabled="False" runat="server" Placeholder="Search"></asp:TextBox>
+                        <asp:TextBox ID="SearchTextBox" CssClass="btn-default form-control" runat="server" Placeholder="Search"></asp:TextBox>
                         
                            
                         <asp:Button ID="SearchButton" CssClass="btn btn-primary" runat="server" Text="Search" OnClick="SearchButton_Click" />

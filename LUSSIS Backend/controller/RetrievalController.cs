@@ -190,7 +190,7 @@ namespace LUSSIS_Backend.controller
                     disbursement.DisbursementDate = disbursementDate;
                     disbursement.RepEmpNo = GetDepartment(context, deptCode).RepEmpNo;
                     disbursement.CollectionPointNo = GetDepartment(context, deptCode).CollectionPointNo;
-                    disbursement.Pin = new Random().Next(0, 100000);
+                    disbursement.Pin = new Random().Next(10000, 99999);
                     disbursement.Status = "Pending";
                     disbursement = AddDisbursement(context, disbursement);
                 }
