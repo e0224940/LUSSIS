@@ -23,7 +23,7 @@
                     </asp:TemplateField>
                             <asp:TemplateField HeaderText="Date">
                         <ItemTemplate>
-                            <asp:Label runat="server" Text='<%# Eval("DateIssued","{0:MMM-yyyy}") %>'></asp:Label>
+                            <asp:Label runat="server" Text='<%# Eval("DateIssued","{0:dd-MMM-yyyy}") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Purchase Order #" >

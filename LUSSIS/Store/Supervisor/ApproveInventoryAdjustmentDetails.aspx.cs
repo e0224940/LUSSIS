@@ -1,4 +1,5 @@
 ﻿using LUSSIS_Backend;
+using Email_Backend;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ public partial class Store_Supervisor_ApproveInventoryAdjustmentDetails : System
         var EmpName = context.AdjustmentVouchers.Where(x => x.AvNo == iAV).FirstOrDefault().Employee1.EmpName;
         invAdjClerkLabel.Text = EmpName;
         var dateRaised = context.AdjustmentVouchers.Where(x => x.AvNo == iAV).FirstOrDefault().DateIssued.Value;
-        dateRaisedText.Text = dateRaised.ToString("dd MMM yyyy");
+        dateRaisedText.Text = dateRaised.ToString("dd-MMM-yyyy");
         ApproveInventoryAdjustmentDetailsGridView.DataSource = getIAVDetails;
         ApproveInventoryAdjustmentDetailsGridView.DataBind();
 
@@ -35,6 +36,16 @@ public partial class Store_Supervisor_ApproveInventoryAdjustmentDetails : System
         ApproveInventoryAdjustmentController.setApprovedBy(iAV, empNo);
         updateStockTxn();
 
+        //send Email, will need to put in controller
+        LussisEntities entity = new LussisEntities();
+        AdjustmentVoucher currentAV = entity.AdjustmentVouchers.Where(x => x.AvNo == iAV).FirstOrDefault();
+        Employee recpt = entity.Employees.Where(x => x.EmpNo == currentAV.IssueEmpNo).FirstOrDefault();
+        Employee approver = entity.Employees.Where(x => x.EmpNo == empNo).FirstOrDefault();
+
+        EmailBackend.sendEmailStep(recpt.Email,
+            EmailTemplate.GenerateAdjVouchStatusChangedEmailSubject(iAV.ToString(), currentAV.Status),
+            EmailTemplate.GenerateAdjVouchStatusChangedEmail(recpt.EmpName, iAV.ToString(), approver.EmpName, currentAV.Status));
+
         Response.Redirect("~/Store/Supervisor/ApproveInventoryAdjustmentList.aspx");
 
     }
@@ -45,6 +56,18 @@ public partial class Store_Supervisor_ApproveInventoryAdjustmentDetails : System
         var empNo = Profile.EmpNo;
         ApproveInventoryAdjustmentController.setStatusReject(iAV);
         ApproveInventoryAdjustmentController.setApprovedBy(iAV, empNo);
+        
+
+        //send Email, will need to put in controller
+        LussisEntities entity = new LussisEntities();
+        AdjustmentVoucher currentAV = entity.AdjustmentVouchers.Where(x => x.AvNo == iAV).FirstOrDefault();
+        Employee recpt = entity.Employees.Where(x => x.EmpNo == currentAV.IssueEmpNo).FirstOrDefault();
+        Employee approver = entity.Employees.Where(x => x.EmpNo == empNo).FirstOrDefault();
+
+        EmailBackend.sendEmailStep(recpt.Email,
+            EmailTemplate.GenerateAdjVouchStatusChangedEmailSubject(iAV.ToString(), currentAV.Status),
+            EmailTemplate.GenerateAdjVouchStatusChangedEmail(recpt.EmpName, iAV.ToString(), approver.EmpName, currentAV.Status));
+
         Response.Redirect("~/Store/Supervisor/ApproveInventoryAdjustmentList.aspx");
     }
 

@@ -10,7 +10,7 @@ namespace Email_Backend
     {
         public static String GenerateRequisitionStatusChangedEmailSubject(string requestNumber, string result)
         {
-            return "[Requisition] " + requestNumber + " has been " + result;
+            return "[Requisition] #" + requestNumber + " has been " + result;
         }
 
         public static String GenerateRequisitonStatusChangedEmail(string applicant, string requestNumber, string approver, string result, string remark)
@@ -191,7 +191,7 @@ namespace Email_Backend
 
         public static String GeneratePOStatusChangedEmailSubject(string requestNumber, string result)
         {
-            return "[Purchase Order] " + requestNumber + " has been " + result;
+            return "[Purchase Order] #" + requestNumber + " has been " + result;
         }
 
         public static String GeneratePOStatusChangedEmail(string applicant, string requestNumber, string approver, string result, string remark)
@@ -201,6 +201,21 @@ namespace Email_Backend
                 + "Your Purchase Order #" + requestNumber + " has been " + result + " by " + approver + "." + "<br/>"
                 + ((remark.Trim().Length > 0) ? "The following remark has been left for you: " + remark : "") + "<p/>"
                 + "Thank you.<br/>LUSSIS<p/>"
+                + "[This is an automated message, please do not reply]";
+        }
+
+        public static String GenerateAdjVouchStatusChangedEmailSubject(string requestNumber, string result)
+        {
+            return "[Adjustment Voucher] #" + requestNumber + " has been " + result;
+        }
+
+        public static String GenerateAdjVouchStatusChangedEmail(string applicant, string requestNumber, string approver, string result)
+        {
+            return
+                "Dear " + applicant + ",<p/>"
+                + "Your Adjustment Voucher #" + requestNumber + " has been " + result + " by " + approver + "."
+                //+ "<br/>" + ((remark.Trim().Length > 0) ? "The following remark has been left for you: " + remark : "")
+                + "<p/>Thank you.<br/>LUSSIS<p/>"
                 + "[This is an automated message, please do not reply]";
         }
     }
