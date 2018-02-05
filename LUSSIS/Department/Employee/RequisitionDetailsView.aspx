@@ -32,10 +32,10 @@
         </div>
 
 
-    <br />
-    <br />
-    <br />
-  
+        <br />
+        <br />
+        <br />
+
         <div class="row">
             <div class="col-sm-6">
                 <asp:GridView GridLines="None"
@@ -62,38 +62,40 @@
                         </asp:TemplateField>
 
                         <asp:TemplateField HeaderText="Quantity" SortExpression="quantity">
-                            <EditItemTemplate >
+                            <EditItemTemplate>
                                 <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("quantity") %>'></asp:TextBox>
                                 <asp:CompareValidator ID="vali" runat="server" ControlToValidate="TextBox2" Type="Integer" Operator="DataTypeCheck" ErrorMessage="Enter only integer" Display="Dynamic" Style="color: red;"></asp:CompareValidator>
+                                <asp:RangeValidator ID="range" runat="server" ControlToValidate="TextBox2" Type="Integer" MinimumValue="0" MaximumValue="999999999" ErrorMessage="Value out of Range" Display="Dynamic" Style="color: red;"></asp:RangeValidator>
+
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label2" runat="server" Text='<%# Bind("quantity") %>'></asp:Label>
                             </ItemTemplate>
                             <ItemStyle Width="30%" />
                         </asp:TemplateField>
-                        <asp:TemplateField >
-                            <ItemTemplate >
+                        <asp:TemplateField>
+                            <ItemTemplate>
                                 <asp:Button ID="EditButton" Text="Edit" CssClass="btn btn-primary" runat="server" CommandName="Edit" Visible='<%# Bind("isEditable") %>' />
                                 <asp:Button ID="DeleteButton" Text="Delete" CssClass="btn btn-danger" runat="server" CommandName="Delete" Visible='<%# Bind("isEditable") %>' />
                             </ItemTemplate>
-                            
+
                             <EditItemTemplate>
-                                <asp:Button ID="UpdateButton" Text="Update" CssClass="btn btn-primary"  runat="server" CommandName="Update" />
-                                <asp:Button ID="CancelButton" Text="Cancel" CssClass="btn btn-primary"  runat="server" CommandName="Cancel" />
+                                <asp:Button ID="UpdateButton" Text="Update" CssClass="btn btn-primary" runat="server" CommandName="Update" />
+                                <asp:Button ID="CancelButton" Text="Cancel" CssClass="btn btn-primary" runat="server" CommandName="Cancel" />
                             </EditItemTemplate>
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
             </div>
         </div>
-  
-    <br />
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
-                <asp:Button ID="cancel" runat="server" Text="Back to History Page" CssClass="btn btn-primary" OnClick="cancel_Click" />
+
+        <br />
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <asp:Button ID="cancel" runat="server" Text="Back to History Page" CssClass="btn btn-primary" OnClick="cancel_Click" />
+                </div>
             </div>
         </div>
     </div>
-            </div>
 </asp:Content>
