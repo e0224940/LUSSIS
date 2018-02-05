@@ -56,7 +56,7 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
         
         int reqId = Convert.ToInt32(DetailGridView.DataKeys[e.RowIndex].Values[0]);
         Session["sessionID"] = reqId;
-        Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Are you sure want to delete the History?')</script>");
+       // Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Are you sure want to delete the History?')</script>");
         EmployeeController.DeleteReqHistory(reqId);
         DetailGridView.DataSource = EmployeeController.ViewRequisition(Profile.EmpNo);
         DetailGridView.DataBind();
@@ -76,7 +76,7 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
         Button b = (Button)sender;
         int reqId = Convert.ToInt32(b.CommandArgument);
         Session["sessionID"] = reqId;
-        Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Are you sure want to delete the History?')</script>");
+       // Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Are you sure want to delete the History?')</script>");
         EmployeeController.DeleteReqHistory(reqId);
         DetailGridView.DataSource = EmployeeController.ViewRequisition(Profile.EmpNo);
         DetailGridView.DataBind();
