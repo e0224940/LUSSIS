@@ -87,36 +87,40 @@ public partial class Store_Clerk_StockList : System.Web.UI.Page
         TextBox newQtyTextBox = ((Button)sender).FindControl("NewQtyTextBox") as TextBox;
         TextBox remarksTextBox = ((Button)sender).FindControl("RemarksTextBox") as TextBox;
 
-        // Get AdjustmentVoucher Data
-        string itemNo = ((Button)sender).CommandArgument;
-        DateTime dateIssued = DateTime.Today;
-        int qty = Int32.Parse(newQtyTextBox.Text) - Int32.Parse(qtyOnHandLabel.Text);
-        string reason = remarksTextBox.Text;
-        int issueEmpNo = Profile.EmpNo;
-        StationeryCatalogue stock = StockController.GetStock(itemNo);
-        decimal? amount = OrderController.GetUnitPrice(itemNo, stock.Supplier1) * qty;
-
-        try
+        int newQty;
+        if (Int32.TryParse(newQtyTextBox.Text, out newQty))
         {
-            // Submit AdjustmentVoucher
-            StockController.SubmitAdjustmentVoucher(itemNo, dateIssued, qty, reason, issueEmpNo);
+            // Get AdjustmentVoucher Data
+            string itemNo = ((Button)sender).CommandArgument;
+            DateTime dateIssued = DateTime.Today;
+            int qty = newQty - Int32.Parse(qtyOnHandLabel.Text);
+            string reason = remarksTextBox.Text;
+            int issueEmpNo = Profile.EmpNo;
+            StationeryCatalogue stock = StockController.GetStock(itemNo);
+            decimal? amount = OrderController.GetUnitPrice(itemNo, stock.Supplier1) * qty;
 
-            // Toggle Control Visibility
-            Button b = (Button)sender;
-            RepeaterItem rI = (RepeaterItem)b.Parent;
-            (rI.FindControl("AdjustmentVoucherButton") as Button).Visible = true;
-            (rI.FindControl("NewQtyTextBox") as TextBox).Visible = false;
-            (rI.FindControl("RemarksTextBox") as TextBox).Visible = false;
-            (rI.FindControl("SubmitAdjustmentVoucherButton") as Button).Visible = false;
-            (rI.FindControl("CancelAdjustmentVoucherButton") as Button).Visible = false;
+            try
+            {
+                // Submit AdjustmentVoucher
+                StockController.SubmitAdjustmentVoucher(itemNo, dateIssued, qty, reason, issueEmpNo);
 
-            // Show Success Message
-            Session["VoucherProcessed"] = itemNo;
-        }
-        catch (Exception exception)
-        {
-            // Show Error Message
-            Session["Error"] = "An Error Has Occured: " + exception.Message;
+                // Toggle Control Visibility
+                Button b = (Button)sender;
+                RepeaterItem rI = (RepeaterItem)b.Parent;
+                (rI.FindControl("AdjustmentVoucherButton") as Button).Visible = true;
+                (rI.FindControl("NewQtyTextBox") as TextBox).Visible = false;
+                (rI.FindControl("RemarksTextBox") as TextBox).Visible = false;
+                (rI.FindControl("SubmitAdjustmentVoucherButton") as Button).Visible = false;
+                (rI.FindControl("CancelAdjustmentVoucherButton") as Button).Visible = false;
+
+                // Show Success Message
+                Session["VoucherProcessed"] = itemNo;
+            }
+            catch (Exception exception)
+            {
+                // Show Error Message
+                Session["Error"] = "An Error Has Occured: " + exception.Message;
+            }
         }
     }
 

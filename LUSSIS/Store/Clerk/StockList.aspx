@@ -1,19 +1,19 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="StockList.aspx.cs" Inherits="Store_Clerk_StockList" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
     <div class="container">
 
         <div class="row">
             <div class="form-inline">
-           <asp:Label ID="lbl_header_appAuth" runat="server" Font-Bold="True" Font-Size="XX-Large" Text="Inventory"></asp:Label>
-        </div>
+                <asp:label id="lbl_header_appAuth" runat="server" font-bold="True" font-size="XX-Large" text="Inventory"></asp:label>
             </div>
+        </div>
 
-        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <asp:scriptmanager id="ScriptManager1" runat="server"></asp:scriptmanager>
+        <asp:updatepanel id="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <div>
                     <div class="row">
@@ -87,8 +87,10 @@
 
                                             <td style="vertical-align: middle;">
                                                 <asp:Button ID="AdjustmentVoucherButton" CssClass="btn btn-info" runat="server" Text="Adjustment Voucher" OnClick="AdjustmentVoucherButton_Click" CommandArgument='<%# Eval("ItemNo") %>' />
-                                                <asp:TextBox ID="NewQtyTextBox" runat="server" CssClass="btn-default form-control" Visible="false" EnableViewState="False" placeholder="Enter Correct Qty"></asp:TextBox>
-                                                <asp:TextBox ID="RemarksTextBox" runat="server" CssClass="btn-default form-control" Visible="false" EnableViewState="False" placeholder="Enter Reason"></asp:TextBox>
+                                                <asp:TextBox ID="NewQtyTextBox" runat="server" CssClass="btn-default form-control" Visible="false" placeholder="Enter Correct Qty"></asp:TextBox>
+                                <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="NewQtyTextBox" Operator="DataTypeCheck" Type="Integer" ErrorMessage="Enter only integer" Display="Dynamic" Style="color: red;"></asp:CompareValidator>
+                                <asp:RangeValidator ID="range" runat="server" ControlToValidate="NewQtyTextBox" Type="Integer" MaximumValue="9999999" MinimumValue="0" ErrorMessage="Value out of Range" Display="Dynamic" Style="color: red;"></asp:RangeValidator>
+                                                <asp:TextBox ID="RemarksTextBox" runat="server" CssClass="btn-default form-control" Visible="false" placeholder="Enter Reason"></asp:TextBox>
                                                 <asp:Button ID="SubmitAdjustmentVoucherButton" CssClass="btn btn-success" runat="server" Visible="false" Text="Submit" OnClick="SubmitAdjustmentVoucherButton_Click" CommandArgument='<%# Eval("ItemNo") %>' OnClientClick="$get('Dog').click();return false;" />
                                                 <asp:Button ID="CancelAdjustmentVoucherButton" CssClass="btn btn-warning" runat="server" Visible="false" Text="Cancel" OnClick="CancelAdjustmentVoucherButton_Click" />
                                             </td>
@@ -99,7 +101,7 @@
                     </div>
                 </div>
             </ContentTemplate>
-        </asp:UpdatePanel>
+        </asp:updatepanel>
     </div>
 </asp:Content>
 
