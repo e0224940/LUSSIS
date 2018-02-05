@@ -180,11 +180,11 @@ protected void toLB2_Click(object sender, EventArgs e)
 
                 for (int p = 0; p < catList.Count; p++)
                 {
-                    addItemSeriesToChartCat(Chart1, catList[p], supplierSelect, startDate, endDate);
+                    ChartController.addItemSeriesToChartCat(Chart1, catList[p], supplierSelect, startDate, endDate);
                 }
 
                 //generate report
-                var reportList = getReportCat(catList, supplierSelect, startDate, endDate).OrderBy(x => x.DateReviewed);
+                var reportList = ChartController.getReportCatReorderTrend(catList, supplierSelect, startDate, endDate).OrderBy(x => x.DateReviewed);
                 //generate the report
                 GridView1.DataSource = reportList;
                 GridView1.DataBind();
@@ -192,38 +192,38 @@ protected void toLB2_Click(object sender, EventArgs e)
         }
     }
 
-    public List<ReorderTrendView> getReportCat(List<string> catList, String supplierSelect, DateTime startDate, DateTime endDate)
-    {
-        var reportListItemCat = new List<ReorderTrendView>();
+    //public List<ReorderTrendView> getReportCat(List<string> catList, String supplierSelect, DateTime startDate, DateTime endDate)
+    //{
+    //    var reportListItemCat = new List<ReorderTrendView>();
 
-        //filter items to get list
-        for (int i = 0; i < catList.Count; i++)
-        {
-            var catName = catList[i];
-            var cat = context.ReorderTrendViews
-    .Where(x => x.DateReviewed >= startDate && x.DateReviewed <= endDate)
-    .Where(x => x.SupplierName == supplierSelect)
-    .Where(x => x.Category == catName)
-    .ToList();
+    //    //filter items to get list
+    //    for (int i = 0; i < catList.Count; i++)
+    //    {
+    //        var catName = catList[i];
+    //        var cat = context.ReorderTrendViews
+    //.Where(x => x.DateReviewed >= startDate && x.DateReviewed <= endDate)
+    //.Where(x => x.SupplierName == supplierSelect)
+    //.Where(x => x.Category == catName)
+    //.ToList();
 
-            //add items in list[i] into a bigger list to bind to gridview
-            for (int x = 0; x < cat.Count; x++)
-            {
-                reportListItemCat.Add(cat[x]);
-            }
-        }
+    //        //add items in list[i] into a bigger list to bind to gridview
+    //        for (int x = 0; x < cat.Count; x++)
+    //        {
+    //            reportListItemCat.Add(cat[x]);
+    //        }
+    //    }
 
-        //remove null items
-        for (int y = 0; y < reportListItemCat.Count; y++)
-        {
-            if (reportListItemCat[y] == null)
-            {
-                reportListItemCat.Remove(reportListItemCat[y]);
-            }
-        }
-        reportListItemCat.OrderBy(x => x.DateReviewed);
-        return reportListItemCat;
-    }
+    //    //remove null items
+    //    for (int y = 0; y < reportListItemCat.Count; y++)
+    //    {
+    //        if (reportListItemCat[y] == null)
+    //        {
+    //            reportListItemCat.Remove(reportListItemCat[y]);
+    //        }
+    //    }
+    //    reportListItemCat.OrderBy(x => x.DateReviewed);
+    //    return reportListItemCat;
+    //}
 
     public List<ReorderTrendView> getReport(List<string> itemList, String supplierSelect, DateTime startDate, DateTime endDate)
     {
@@ -430,182 +430,182 @@ protected void toLB2_Click(object sender, EventArgs e)
         }
     }
 
-    private void addItemSeriesToChartCat(Chart chart, string catList, String supplierSelect, DateTime startDate, DateTime endDate)
-    {
-        List<ReorderTrendView> checkForEmpty = new List<ReorderTrendView>();
-        //start to filter items
-        var listOfPO = context.ReorderTrendViews
-            .Where(x => x.DateReviewed >= startDate && x.DateReviewed <= endDate)
-            .Where(x => x.SupplierName == supplierSelect)
-            .Where(x => x.Category == catList)
-            .OrderBy(x => x.DateReviewed)
-            .ToList();
+    //private void addItemSeriesToChartCat(Chart chart, string catList, String supplierSelect, DateTime startDate, DateTime endDate)
+    //{
+    //    List<ReorderTrendView> checkForEmpty = new List<ReorderTrendView>();
+    //    //start to filter items
+    //    var listOfPO = context.ReorderTrendViews
+    //        .Where(x => x.DateReviewed >= startDate && x.DateReviewed <= endDate)
+    //        .Where(x => x.SupplierName == supplierSelect)
+    //        .Where(x => x.Category == catList)
+    //        .OrderBy(x => x.DateReviewed)
+    //        .ToList();
 
-        for (int q = 0; q < listOfPO.Count; q++)
-        {
-            checkForEmpty.Add(listOfPO[q]);
-        }
+    //    for (int q = 0; q < listOfPO.Count; q++)
+    //    {
+    //        checkForEmpty.Add(listOfPO[q]);
+    //    }
 
-        var listOfPO2 = listOfPO
-    .GroupBy(x => x.DateReviewed.Value.Month)
-    .Select(g => new ReorderTrendItem()
-    {
-        Key = g.Key,
-        ItemNo = g.First().ItemNo,
-        Category = g.First().Category,
-        Qty = Convert.ToInt32(g.Sum(s => s.Qty)),
-        Date = g.First().DateReviewed.Value.Month + "/" + g.First().DateReviewed.Value.Year,
-        StoredDate = new DateTime(g.First().DateReviewed.Value.Year, g.First().DateReviewed.Value.Month, 1)
-    })
-    .ToList();
+    //    var listOfPO2 = listOfPO
+    //.GroupBy(x => x.DateReviewed.Value.Month)
+    //.Select(g => new ReorderTrendItem()
+    //{
+    //    Key = g.Key,
+    //    ItemNo = g.First().ItemNo,
+    //    Category = g.First().Category,
+    //    Qty = Convert.ToInt32(g.Sum(s => s.Qty)),
+    //    Date = g.First().DateReviewed.Value.Month + "/" + g.First().DateReviewed.Value.Year,
+    //    StoredDate = new DateTime(g.First().DateReviewed.Value.Year, g.First().DateReviewed.Value.Month, 1)
+    //})
+    //.ToList();
 
-        // Fill in the missing Months starting from startDate till first date in list
-        {
-            var firstRecord = listOfPO2.FirstOrDefault();
-            if(firstRecord != null)
-            {
-                ReorderTrendItem curr = new ReorderTrendItem()
-                {
-                    Key = firstRecord.Key,
-                    ItemNo = firstRecord.ItemNo,
-                    Qty = 0,
-                    StoredDate = new DateTime(startDate.Year, startDate.Month, 1),
-                    Date = startDate.Month + "/" + startDate.Year,
-                    Category = firstRecord.Category,
-                };
+    //    // Fill in the missing Months starting from startDate till first date in list
+    //    {
+    //        var firstRecord = listOfPO2.FirstOrDefault();
+    //        if(firstRecord != null)
+    //        {
+    //            ReorderTrendItem curr = new ReorderTrendItem()
+    //            {
+    //                Key = firstRecord.Key,
+    //                ItemNo = firstRecord.ItemNo,
+    //                Qty = 0,
+    //                StoredDate = new DateTime(startDate.Year, startDate.Month, 1),
+    //                Date = startDate.Month + "/" + startDate.Year,
+    //                Category = firstRecord.Category,
+    //            };
 
-                int pos = 0;
-                while (!curr.StoredDate.Equals(firstRecord.StoredDate))
-                {
-                    listOfPO2.Insert(pos, curr);
-                    pos++;
-                    curr = new ReorderTrendItem()
-                    {
-                        Key = firstRecord.Key,
-                        ItemNo = firstRecord.ItemNo,
-                        Qty = 0,
-                        StoredDate = curr.StoredDate.AddMonths(1),
-                        Date = curr.StoredDate.AddMonths(1).Month + "/" + curr.StoredDate.AddMonths(1).Year,
-                        Category = firstRecord.Category,
-                    };
-                }
-            }
-        }
+    //            int pos = 0;
+    //            while (!curr.StoredDate.Equals(firstRecord.StoredDate))
+    //            {
+    //                listOfPO2.Insert(pos, curr);
+    //                pos++;
+    //                curr = new ReorderTrendItem()
+    //                {
+    //                    Key = firstRecord.Key,
+    //                    ItemNo = firstRecord.ItemNo,
+    //                    Qty = 0,
+    //                    StoredDate = curr.StoredDate.AddMonths(1),
+    //                    Date = curr.StoredDate.AddMonths(1).Month + "/" + curr.StoredDate.AddMonths(1).Year,
+    //                    Category = firstRecord.Category,
+    //                };
+    //            }
+    //        }
+    //    }
 
-        // Fill in the missing Months in between
-        for (int i = 0; i < listOfPO2.Count - 1; i++)
-        {
-            var curr = listOfPO2.ElementAtOrDefault(i);
-            var next = listOfPO2.ElementAtOrDefault(i + 1);
+    //    // Fill in the missing Months in between
+    //    for (int i = 0; i < listOfPO2.Count - 1; i++)
+    //    {
+    //        var curr = listOfPO2.ElementAtOrDefault(i);
+    //        var next = listOfPO2.ElementAtOrDefault(i + 1);
 
-            if (curr != null && next != null)
-            {
-                while (!curr.StoredDate.AddMonths(1).Equals(next.StoredDate))
-                {
-                    listOfPO2.Insert(i + 1, new ReorderTrendItem()
-                    {
-                        Key = curr.Key,
-                        ItemNo = curr.ItemNo,
-                        Qty = 0,
-                        StoredDate = curr.StoredDate.AddMonths(1),
-                        Date = curr.StoredDate.AddMonths(1).Month + "/" + curr.StoredDate.AddMonths(1).Year,
-                        Category = curr.Category,
-                    });
+    //        if (curr != null && next != null)
+    //        {
+    //            while (!curr.StoredDate.AddMonths(1).Equals(next.StoredDate))
+    //            {
+    //                listOfPO2.Insert(i + 1, new ReorderTrendItem()
+    //                {
+    //                    Key = curr.Key,
+    //                    ItemNo = curr.ItemNo,
+    //                    Qty = 0,
+    //                    StoredDate = curr.StoredDate.AddMonths(1),
+    //                    Date = curr.StoredDate.AddMonths(1).Month + "/" + curr.StoredDate.AddMonths(1).Year,
+    //                    Category = curr.Category,
+    //                });
 
-                    i = i + 1;
-                    curr = listOfPO2.ElementAtOrDefault(i);
-                }
-            }
-        }
+    //                i = i + 1;
+    //                curr = listOfPO2.ElementAtOrDefault(i);
+    //            }
+    //        }
+    //    }
 
-        // Fill in the missing Months starting from last in list till endDate
-        {
-            var lastRecord = listOfPO2.LastOrDefault();
-            if (lastRecord != null)
-            {
-                ReorderTrendItem curr = new ReorderTrendItem()
-                {
-                    Key = lastRecord.Key,
-                    ItemNo = lastRecord.ItemNo,
-                    Qty = 0,
-                    StoredDate = lastRecord.StoredDate.AddMonths(1),
-                    Date = lastRecord.StoredDate.AddMonths(1).Month + "/" + lastRecord.StoredDate.AddMonths(1).Year,
-                    Category = lastRecord.Category,
-                };
+    //    // Fill in the missing Months starting from last in list till endDate
+    //    {
+    //        var lastRecord = listOfPO2.LastOrDefault();
+    //        if (lastRecord != null)
+    //        {
+    //            ReorderTrendItem curr = new ReorderTrendItem()
+    //            {
+    //                Key = lastRecord.Key,
+    //                ItemNo = lastRecord.ItemNo,
+    //                Qty = 0,
+    //                StoredDate = lastRecord.StoredDate.AddMonths(1),
+    //                Date = lastRecord.StoredDate.AddMonths(1).Month + "/" + lastRecord.StoredDate.AddMonths(1).Year,
+    //                Category = lastRecord.Category,
+    //            };
 
-                DateTime finalDate = new DateTime(endDate.Year, endDate.Month, 1);
-                while (DateTime.Compare(curr.StoredDate, finalDate) < 0) // !curr.StoredDate.Equals(finalDate))
-                {
-                    listOfPO2.Add(curr);
-                    curr = new ReorderTrendItem()
-                    {
-                        Key = lastRecord.Key,
-                        ItemNo = lastRecord.ItemNo,
-                        Qty = 0,
-                        StoredDate = curr.StoredDate.AddMonths(1),
-                        Date = curr.StoredDate.AddMonths(1).Month + "/" + curr.StoredDate.AddMonths(1).Year,
-                        Category = curr.Category,
-                    };
-                }
-            }
-        }
+    //            DateTime finalDate = new DateTime(endDate.Year, endDate.Month, 1);
+    //            while (DateTime.Compare(curr.StoredDate, finalDate) < 0) // !curr.StoredDate.Equals(finalDate))
+    //            {
+    //                listOfPO2.Add(curr);
+    //                curr = new ReorderTrendItem()
+    //                {
+    //                    Key = lastRecord.Key,
+    //                    ItemNo = lastRecord.ItemNo,
+    //                    Qty = 0,
+    //                    StoredDate = curr.StoredDate.AddMonths(1),
+    //                    Date = curr.StoredDate.AddMonths(1).Month + "/" + curr.StoredDate.AddMonths(1).Year,
+    //                    Category = curr.Category,
+    //                };
+    //            }
+    //        }
+    //    }
 
-        //create series for chart + add points
-        Chart1.Width = 1000;
-        Chart1.Height = 450;
+    //    //create series for chart + add points
+    //    Chart1.Width = 1000;
+    //    Chart1.Height = 450;
 
-        string seriesName = catList;
-        Series newSeries = new Series(catList);
-        Chart1.Series.Add(seriesName);
+    //    string seriesName = catList;
+    //    Series newSeries = new Series(catList);
+    //    Chart1.Series.Add(seriesName);
 
-        //series parameters
-        Chart1.Series[seriesName].ChartType = SeriesChartType.Column;
-        Chart1.Series[seriesName].IsValueShownAsLabel = true;
-        chart.Series[seriesName].LabelFormat = "##0;(); ";
+    //    //series parameters
+    //    Chart1.Series[seriesName].ChartType = SeriesChartType.Column;
+    //    Chart1.Series[seriesName].IsValueShownAsLabel = true;
+    //    chart.Series[seriesName].LabelFormat = "##0;(); ";
 
-        //Legend parameters
-        Chart1.Legends.Add(new Legend());
-        Chart1.Legends["Legend1"].Docking = Docking.Bottom;
+    //    //Legend parameters
+    //    Chart1.Legends.Add(new Legend());
+    //    Chart1.Legends["Legend1"].Docking = Docking.Bottom;
 
-        //chartarea parameters
-        Chart1.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
-        Chart1.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
-        Chart1.ChartAreas["ChartArea1"].AxisX.Title = "Date";
-        Chart1.ChartAreas["ChartArea1"].AxisY.Title = "Quantity";
-        Chart1.ChartAreas["ChartArea1"].AxisX.IntervalType = DateTimeIntervalType.Auto;
-        Chart1.ChartAreas["ChartArea1"].AxisX.Interval = 1;
+    //    //chartarea parameters
+    //    Chart1.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
+    //    Chart1.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
+    //    Chart1.ChartAreas["ChartArea1"].AxisX.Title = "Date";
+    //    Chart1.ChartAreas["ChartArea1"].AxisY.Title = "Quantity";
+    //    Chart1.ChartAreas["ChartArea1"].AxisX.IntervalType = DateTimeIntervalType.Auto;
+    //    Chart1.ChartAreas["ChartArea1"].AxisX.Interval = 1;
 
-        for (int y = 0; y < listOfPO2.Count(); y++)
-        {
-            Chart1.Series[seriesName].Points.AddXY(listOfPO2.ElementAt(y).Date, listOfPO2.ElementAt(y).Qty);
-        }
+    //    for (int y = 0; y < listOfPO2.Count(); y++)
+    //    {
+    //        Chart1.Series[seriesName].Points.AddXY(listOfPO2.ElementAt(y).Date, listOfPO2.ElementAt(y).Qty);
+    //    }
 
-        //remove legend for 0 datapoints
-        foreach (Series s in Chart1.Series)
-        {
-            bool isAllValuesZero = true;
-            foreach (DataPoint p in s.Points)
-            {
-                for (int i = 0; i < p.YValues.Length; i++)
-                {
-                    if (p.YValues[i] == 0)
-                        p.Label = "";
-                    else
-                        isAllValuesZero = false;
-                }
-            }
-            if (isAllValuesZero) // If all the values are zero for a series then hiding the legend..
-                s.IsVisibleInLegend = false;
-        }
+    //    //remove legend for 0 datapoints
+    //    foreach (Series s in Chart1.Series)
+    //    {
+    //        bool isAllValuesZero = true;
+    //        foreach (DataPoint p in s.Points)
+    //        {
+    //            for (int i = 0; i < p.YValues.Length; i++)
+    //            {
+    //                if (p.YValues[i] == 0)
+    //                    p.Label = "";
+    //                else
+    //                    isAllValuesZero = false;
+    //            }
+    //        }
+    //        if (isAllValuesZero) // If all the values are zero for a series then hiding the legend..
+    //            s.IsVisibleInLegend = false;
+    //    }
 
-        if (checkForEmpty.Count == 0)
-        {
-            Label4.Text = "There is no available data.";
-        } else
-        {
-            Label4.Text = "";
-        }
-    }
+    //    if (checkForEmpty.Count == 0)
+    //    {
+    //        Label4.Text = "There is no available data.";
+    //    } else
+    //    {
+    //        Label4.Text = "";
+    //    }
+    //}
 
 
 
@@ -616,13 +616,13 @@ protected void toLB2_Click(object sender, EventArgs e)
 
 }
 
-public class ReorderTrendItem
-{
+//public class ReorderTrendItem
+//{
 
-    public int Key { get; set; }
-    public string ItemNo { get; set; }
-    public int Qty { get; set; }
-    public DateTime StoredDate { get; set; }
-    public string Date { get; set; }
-    public string Category { get; set; }
-}
+//    public int Key { get; set; }
+//    public string ItemNo { get; set; }
+//    public int Qty { get; set; }
+//    public DateTime StoredDate { get; set; }
+//    public string Date { get; set; }
+//    public string Category { get; set; }
+//}
