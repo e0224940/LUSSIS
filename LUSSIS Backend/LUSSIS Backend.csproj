@@ -45,6 +45,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -61,6 +62,7 @@
     <Compile Include="ApprovePurchaseOrderView.cs">
       <DependentUpon>LussisModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ChartController.cs" />
     <Compile Include="controller\AVController.cs" />
     <Compile Include="controller\DisbursementController.cs" />
     <Compile Include="controller\OrderController.cs" />
