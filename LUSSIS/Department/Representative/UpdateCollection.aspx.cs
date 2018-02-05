@@ -64,7 +64,6 @@ public partial class Department_Representative_UpdateCollection : System.Web.UI.
 
         string newloc = NewLocationDDL.SelectedItem.Text;
        
-
         int newPoint = Int32.Parse(NewLocationDDL.SelectedItem.Value);
         if (newPoint<0 || newPoint>6)
         {
@@ -114,11 +113,11 @@ public partial class Department_Representative_UpdateCollection : System.Web.UI.
                 newCollectionTimeText.Text = "11:00 AM";
                 Label5.Text = "University Hospital";
             }
-            else if (newPoint == 0)
-            {
-                newCollectionTimeText.Text = "9:30 AM";
-                Label5.Text = "Management Store";
-            }
+            //else if (newPoint == 0)
+            //{
+            //    newCollectionTimeText.Text = "9:30 AM";
+            //    Label5.Text = "Management Store";
+            //}
             else
             {
                 newCollectionTimeText.Text = "";

@@ -18,7 +18,7 @@ public partial class Store_Supervisor_ReorderReportDetails : System.Web.UI.Page
         if (query != null)
         {
             var dateQuery = query.DateIssued;
-            Label2.Text = "Reorder Report as end of";
+            Label2.Text = "Reorder Report as of";
             Label3.Text = dateQuery.Value.ToString("MMM yyyy");
             var supplierSelected = query.SupplierCode;
 
