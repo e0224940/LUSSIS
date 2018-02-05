@@ -3,9 +3,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
+    <div class="container">
         <h2 class="sub-header">View Reorder Report</h2>
 
-    <asp:GridView ID="reorderReportListGridView" runat="server" AutoGenerateColumns="False">
+    <asp:GridView ID="reorderReportListGridView" GridLines="None"
+                CssClass="table table-striped" runat="server" AutoGenerateColumns="False">
                 <Columns>
                     <asp:TemplateField HeaderText="S/N" >
                         <ItemTemplate>
@@ -20,7 +22,7 @@
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
-
+        </div>
 </asp:Content>
 
 

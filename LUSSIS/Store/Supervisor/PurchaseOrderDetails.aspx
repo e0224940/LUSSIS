@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
+    <div class="container">
     <asp:Label ID="logicUniversityTitle" runat="server" Text="LOGIC University"></asp:Label>
     <br />
     <asp:Label ID="stationeryPurchaseOrderTitle" runat="server" Text="Stationery Purchase Order"></asp:Label>
@@ -14,7 +15,8 @@
     <br />
     <br />
 
-    <asp:GridView ID="GridViewTest" runat="server" AutoGenerateColumns="false" OnRowDataBound="GridViewTest_DataBound1">
+    <asp:GridView ID="GridViewTest" GridLines="None"
+                CssClass="table table-striped" runat="server" AutoGenerateColumns="false" OnRowDataBound="GridViewTest_DataBound1">
         <Columns>
             <asp:BoundField DataField="ItemNo" HeaderText="Item No." />
             <asp:BoundField DataField="Description" HeaderText="Description" />
@@ -63,6 +65,7 @@
     <asp:Label ID="date2Label" runat="server" Text="Date: "></asp:Label>
     <asp:Label ID="dated2Label" runat="server" Text="Label"></asp:Label>
     <br />
-    <asp:Button ID="purchaseOrderDetailBut" runat="server" Text="Back" OnClick="purchaseOrderDetailBut_Click" />
+    <asp:Button ID="purchaseOrderDetailBut" CssClass="btn btn-info" runat="server" Text="Back" OnClick="purchaseOrderDetailBut_Click" />
+        </div>
 </asp:Content>
 
