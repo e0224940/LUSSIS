@@ -48,6 +48,7 @@ public partial class Department_Head_ApproveAuthority : System.Web.UI.Page
             lbl_currentFutureAppts.Visible = false;
 
         }
+        //populate gridview
         gridView_AppAuthCurrFutAppts.DataSource = ApproveAuthorityController.getDeputyDetailsForDept(ApproveAuthorityController.getDepartmentNoFromProfile(Profile.EmpNo).ToString());
         if (ApproveAuthorityController.getDeputyDetailsForDept(ApproveAuthorityController.getDepartmentNoFromProfile(Profile.EmpNo).ToString()).Count!=0)
         {
@@ -73,6 +74,7 @@ public partial class Department_Head_ApproveAuthority : System.Web.UI.Page
 
         ApproveAuthorityController.addAuthority(deptCode, empNo, dateStart, dateEnd);
 
+        //checking if the employee is taking over today or later
         if (dateStart.CompareTo(DateTime.Today) == 0)
         {
             Deputy d = ApproveAuthorityController.getDeputyDetails(ApproveAuthorityController.getDepartmentNoFromProfile(Profile.EmpNo));
@@ -92,7 +94,7 @@ public partial class Department_Head_ApproveAuthority : System.Web.UI.Page
 
         Employee me = ApproveAuthorityController.getHeadOfDepartment(ApproveAuthorityController.getDepartmentNoFromProfile(Profile.EmpNo));
 
-        txtBox_appAuth_currentHead.Text = me.EmpName; //getting new name from method
+        txtBox_appAuth_currentHead.Text = me.EmpName; //getting head from method
 
         button_appAuth_remove.Enabled = false;
 
