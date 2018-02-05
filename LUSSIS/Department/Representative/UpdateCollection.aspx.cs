@@ -46,10 +46,7 @@ public partial class Department_Representative_UpdateCollection : System.Web.UI.
         {
             newCollectionTimeText.Text = "11:00 AM";  
         }
-        else if(value == 0 )
-        {
-            newCollectionTimeText.Text = "9:30 AM";
-        }
+       
         else
         {
             newCollectionTimeText.Text = "";

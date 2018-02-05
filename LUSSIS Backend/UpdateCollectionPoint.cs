@@ -44,7 +44,7 @@ namespace LUSSIS_Backend
             {
                 using (LussisEntities entities = new LussisEntities())
                 {
-                    Employee currEmploy = entities.Employees.Where(emp => emp.EmpNo == empNo).First();
+                    Employee currEmploy = entities.Employees.Where(emp => emp.EmpNo == empNo).FirstOrDefault    ();
                     Department currDept = currEmploy.Department;
                     currDept.CollectionPointNo = collectionNewPoint;
                     entities.SaveChanges();

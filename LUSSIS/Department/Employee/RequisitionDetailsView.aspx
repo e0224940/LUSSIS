@@ -64,6 +64,7 @@
                         <asp:TemplateField HeaderText="Qty" SortExpression="quantity">
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("quantity") %>'></asp:TextBox>
+                                <asp:CompareValidator ID="vali" runat="server" ControlToValidate="TextBox2" Type="Integer" Operator="DataTypeCheck"></asp:CompareValidator>
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label2" runat="server" Text='<%# Bind("quantity") %>'></asp:Label>
