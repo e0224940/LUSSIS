@@ -26,7 +26,6 @@ namespace LUSSIS_Backend
                     ).ToList();
             }
 
-
             return result;
         }
     }

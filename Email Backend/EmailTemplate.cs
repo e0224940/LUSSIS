@@ -115,7 +115,6 @@ namespace Email_Backend
                 + "<p/>"
                 + "Thank you.<br/>LUSSIS<p/>"
                 + "[This is an automated message. Please do not reply.]";
-
         }
 
         public static String GenerateOrderFormEmailSubject()
@@ -153,24 +152,6 @@ namespace Email_Backend
             string message = "Dear " + empName + ",";
             message += "<p/>";
             message += "Disbursement #" + disbursementNo + " was completed successfully on " + disbursementDate + ".";
-            //message += "<br/><br/>";
-            //message += "<table><tr>";
-            //message += "<th>Item No</th>";
-            //message += "<th>Description</th>";
-            //message += "<th>Needed</th>";
-            //message += "<th>Delivered</th>";
-            //message += "</tr>";
-
-            //foreach (dynamic item in dDetailsList)
-            //{
-            //    message += "<tr><td>" + item.ItemNo + "</td>";
-            //    message += "<td>" + item.ItemDescription + "</td>";
-            //    message += "<td>" + item.Needed + "</td>";
-            //    message += "<td>" + item.Delivered + "</td></tr>";
-            //}
-
-            //message += "</table>";
-            //message += "<br/>";
             message += "<p/>Thank you.<br/>LUSSIS";
             message += "<p/>[This is an automated message. Please do not reply.]";
 
@@ -214,7 +195,6 @@ namespace Email_Backend
             return
                 "Dear " + applicant + ",<p/>"
                 + "Your Adjustment Voucher #" + requestNumber + " has been " + result + " by " + approver + "."
-                //+ "<br/>" + ((remark.Trim().Length > 0) ? "The following remark has been left for you: " + remark : "")
                 + "<p/>Thank you.<br/>LUSSIS<p/>"
                 + "[This is an automated message, please do not reply]";
         }

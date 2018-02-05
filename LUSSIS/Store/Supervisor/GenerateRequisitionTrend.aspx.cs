@@ -12,7 +12,8 @@ public partial class Store_Supervisor_GenerateRequisitionTrend : System.Web.UI.P
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
-        {   //populate DeptListBox
+        {  
+            //populate DeptListBox
             LussisEntities context = new LussisEntities();
             var populateDeptListBox = context.Departments.Select(x => x.DeptName).ToList();
             DeptListBox.DataSource = populateDeptListBox;
@@ -34,7 +35,6 @@ public partial class Store_Supervisor_GenerateRequisitionTrend : System.Web.UI.P
             EndDate.Attributes["min"] = firstDayOfMonth.ToString("yyyy-MM-dd");
             EndDate.Attributes["max"] = DateTime.Now.ToString("yyyy-MM-dd");
         }
-
     }
 
     //button to send item over to Listbox2 from Listbox
@@ -131,17 +131,6 @@ public partial class Store_Supervisor_GenerateRequisitionTrend : System.Web.UI.P
                 reportListItemDept.Remove(reportListItemDept[y]);
             }
         }
-
-        //var shortList = reportListItemDept
-        //    .GroupBy(x => x.DateReviewed.Value.Month)
-        //    .Select(g => new RequisitionTrendItem()
-        //    {
-        //        Key = g.Key,
-        //        Qty = Convert.ToInt32(g.Sum(s => s.Qty)),
-        //        Date = g.First().DateReviewed.Value.Month + "/" + g.First().DateReviewed.Value.Year,
-        //        DeptName = g.First().DeptName
-        //    }).ToList();
-
         return reportListItemDept;
         //start to filter items
     }
@@ -271,18 +260,17 @@ public partial class Store_Supervisor_GenerateRequisitionTrend : System.Web.UI.P
             //series parameters
             Chart2.Series[seriesName].ChartType = SeriesChartType.Column;
             Chart2.Series[seriesName].IsValueShownAsLabel = true;
-        Chart2.Series[seriesName].LabelFormat = "##0;(); ";
-        //Legend parameters
-        Chart2.Legends.Add(new Legend());
+            Chart2.Series[seriesName].LabelFormat = "##0;(); ";
+            //Legend parameters
+            Chart2.Legends.Add(new Legend());
             Chart2.Legends["Legend1"].Docking = Docking.Bottom;
             //chartarea parameters
             Chart2.ChartAreas["ChartArea2"].AxisX.MajorGrid.Enabled = false;
             Chart2.ChartAreas["ChartArea2"].AxisY.MajorGrid.Enabled = false;
             Chart2.ChartAreas["ChartArea2"].AxisX.Title = "Date";
             Chart2.ChartAreas["ChartArea2"].AxisY.Title = "Quantity";
-        Chart1.ChartAreas["ChartArea2"].AxisX.IntervalType = DateTimeIntervalType.Auto;
-        Chart1.ChartAreas["ChartArea2"].AxisX.Interval = 1;
-        //Chart2.Series[seriesName].BorderWidth = 5;
+            Chart1.ChartAreas["ChartArea2"].AxisX.IntervalType = DateTimeIntervalType.Auto;
+            Chart1.ChartAreas["ChartArea2"].AxisX.Interval = 1;
 
             for (int y = 0; y < listOfPO2.Count(); y++)
             {
@@ -297,7 +285,6 @@ public partial class Store_Supervisor_GenerateRequisitionTrend : System.Web.UI.P
                 for (int i = 0; i < p.YValues.Length; i++)
                 {
                     if (p.YValues[i] == 0)
-                        //p.Label = string.Empty;
                         p.Label = "";
                     else
                         isAllValuesZero = false;
@@ -315,21 +302,8 @@ public partial class Store_Supervisor_GenerateRequisitionTrend : System.Web.UI.P
         {
             noDataLabel.Text = "";
         }
-        //to TEST if the code/logic is working
-
-        //GridView4.DataSource = listOfPO2;
-        //GridView4.DataBind();
     }
-
     }
-
-//public class ReorderTrendItem
-//{
-//    private int Key { get; set; }
-//    private string ItemNo { get; set; }
-//    private int Qty { get; set; }
-//    private DateTime StoredDate { get; set; }
-//    private string Date { get; set; }
 
 public class RequisitionTrendItem
 {

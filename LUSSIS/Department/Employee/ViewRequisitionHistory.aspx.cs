@@ -15,26 +15,14 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
     protected void Page_Load(object sender, EventArgs e)
     {
         int empNo = Profile.EmpNo;
-
-            if (!IsPostBack)
-            {
-            //GridViewRow row = DetailGridView.Rows[DetailGridView.SelectedIndex];
-            // string check = (row.FindControl("Status") as Label).Text;\
-            //for (int i = 0; i < DetailGridView.Rows.Count; i++)
-            //{
-            //    string check = DetailGridView.Rows[i].Cells[3].Text.ToString();
-            //    if (check.Equals("Approved"))
-            //    {
-            //        DetailGridView.Rows[i].Cells[4].Visible = false;
-            //    }
-            //}
+        if (!IsPostBack)
+        {
             for (int i = 0; i < DetailGridView.Rows.Count; i++)
             {
                 string check = DetailGridView.Rows[i].Cells[3].Text.ToString();
                 if (check.Equals("Approved"))
                 {
                     DetailGridView.Rows[i].Cells[1].Visible = false;
-                    //DetailGridView.Rows[i]..Visible = false;
                 }
             }
 
@@ -43,25 +31,20 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
             DetailGridView.Visible = true;
             requsition = new List<Requisition>();
             reqhistory = new List<ReqHistory>();
-           
             DetailGridView.DataSource = EmployeeController.ViewRequisition(empNo);
             DetailGridView.DataBind();      
-               
         }
     }
 
     //Delete Requisition History
     protected void detailGridView_Delete(object sender, GridViewDeleteEventArgs e)
     {
-        
         int reqId = Convert.ToInt32(DetailGridView.DataKeys[e.RowIndex].Values[0]);
         Session["sessionID"] = reqId;
-       // Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Are you sure want to delete the History?')</script>");
         EmployeeController.DeleteReqHistory(reqId);
         DetailGridView.DataSource = EmployeeController.ViewRequisition(Profile.EmpNo);
         DetailGridView.DataBind();
     }
-
 
     //Go to detail Page
     protected void DetailGridView_SelectedIndexChanged(object sender, EventArgs e)
@@ -70,13 +53,11 @@ public partial class Department_Employee_ViewRequisitionHistory : System.Web.UI.
         Response.Redirect("RequisitionDetailsView.aspx?ReqNo=" + ReqNo);
     }
 
-
     protected void DeleteButton_Click(object sender, EventArgs e)
     {
         Button b = (Button)sender;
         int reqId = Convert.ToInt32(b.CommandArgument);
         Session["sessionID"] = reqId;
-       // Page.ClientScript.RegisterStartupScript(this.GetType(), "Scripts", "<script>alert('Are you sure want to delete the History?')</script>");
         EmployeeController.DeleteReqHistory(reqId);
         DetailGridView.DataSource = EmployeeController.ViewRequisition(Profile.EmpNo);
         DetailGridView.DataBind();

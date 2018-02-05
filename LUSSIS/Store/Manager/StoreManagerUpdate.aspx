@@ -1,6 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="StoreManagerUpdate.aspx.cs" Inherits="Store_Manager_StoreManagerUpdate" MasterPageFile="~/MasterPage.master" %>
 
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 
@@ -53,6 +52,5 @@
             <% Session.Remove("SupplierProcessed");
                 }%>
         </div>
-
     </form>
 </asp:Content>

@@ -69,6 +69,5 @@ namespace LUSSIS_Backend
             query.Remarks = remarks;
             context.SaveChanges();
         }
-
     }
 }

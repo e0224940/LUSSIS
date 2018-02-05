@@ -22,8 +22,6 @@
             %>
         </div>
 
-
-
         <%if (Session["DNo"] != null)
             { %>
 
@@ -119,8 +117,6 @@
             
 
         <% } %>
-
-
 
         <div class="row">
             <a href="DisbursementList.aspx">Back to Disbursement List Page</a>

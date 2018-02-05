@@ -11,7 +11,6 @@ public partial class Store_Supervisor_ApproveInventoryAdjustmentList : System.We
     protected void Page_Load(object sender, EventArgs e)
     {
         var pendingInvAdjList = ApproveInventoryAdjustmentController.getInvAdjList();
-
         approveInventoryAdjustmentListGridView.DataSource = pendingInvAdjList;
         approveInventoryAdjustmentListGridView.DataBind();
     }

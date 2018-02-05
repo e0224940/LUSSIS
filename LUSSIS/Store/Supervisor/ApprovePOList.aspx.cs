@@ -17,7 +17,5 @@ public partial class Store_Supervisor_ApprovePOList : System.Web.UI.Page
 
         ApprovePOListGridView.DataSource = pendingOrdersList;
         ApprovePOListGridView.DataBind();
-
-
     }
 }

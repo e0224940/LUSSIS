@@ -151,7 +151,6 @@ public class DisplayableStationeryCatalogue : StationeryCatalogue
     public DisplayableStationeryCatalogue(StationeryCatalogue cat)
     {
         this.AdjustmentVoucherDetails = cat.AdjustmentVoucherDetails;
-
     }
 
     public bool displayAlert;

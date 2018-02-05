@@ -149,15 +149,6 @@ namespace LUSSIS_Backend
             try
             {
                 LussisEntities context = new LussisEntities();
-                /*RequisitionDetail requisitionDetail = context.RequisitionDetails
-                    .Where(req => req.ReqNo.Equals(addRequisitionDetail.ReqNo))
-                    .FirstOrDefault();
-
-                if (requisitionDetail != null)
-                {
-                    requisitionDetail.ReqNo = addRequisitionDetail.ReqNo;
-                    requisitionDetail.ItemNo = addRequisitionDetail.ItemNo;
-                    requisitionDetail.Qty = addRequisitionDetail.Qty;*/
 
                 RequisitionDetail requisitionDetail = new RequisitionDetail();
                 requisitionDetail.ReqNo = addRequisitionDetail.ReqNo;
@@ -174,7 +165,6 @@ namespace LUSSIS_Backend
             {
                 result = false;
             }
-
             return result;
         }
 
@@ -190,10 +180,8 @@ namespace LUSSIS_Backend
 
                 if (requisitionDetail != null)
                 {
-
                     context.RequisitionDetails.Remove(requisitionDetail);
                     context.SaveChanges();
-
                     result = true;
                 }
             }
@@ -201,7 +189,6 @@ namespace LUSSIS_Backend
             {
                 result = false;
             }
-
             return result;
         }
 
@@ -252,7 +239,6 @@ namespace LUSSIS_Backend
             }
 
             return result;
-
         }
 
         public static List<Requisition> GetPendingRequisitions(int employeeCode)
@@ -372,7 +358,6 @@ namespace LUSSIS_Backend
             {
                 result = null;
             }
-
             return result;
         }
 

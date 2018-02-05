@@ -12,9 +12,7 @@
         <br />
         <br />
 
-
-
-          <div class="col-xs-6">
+        <div class="col-xs-6">
                 <asp:Label ID="Labelitem" Font-Bold="True" Font-Size="Large" runat="server" Text="All Items"></asp:Label>
              </div>
              <div class="col-xs-6">
@@ -43,8 +41,6 @@
             </div>
 </div>
         <br />
-<%--        <asp:Button ID="addAll1" CssClass="btn btn-success" runat="server" Text="Add All" OnClick="addAll1_Click" />   
-        <asp:Button ID="deleteAll1" CssClass="btn btn-danger" runat="server" Text="Delete All" OnClick="deleteAll1_Click" />--%>
         <div class="col-xs-6">
                 <asp:Label ID="allCategoryLabel" Font-Bold="True" Font-Size="Large" runat="server" Text="All Categories"></asp:Label>
              </div>
@@ -105,8 +101,11 @@
     <br />
         <asp:Label ID="Label4" runat="server"></asp:Label>
     <br />
-<%--    <asp:GridView ID="GridView1" cssclass="table table-striped"  runat="server"></asp:GridView>--%>
-                <asp:GridView ID="GridView1" GridLines="None" cssclass="table table-striped" runat="server" AutoGenerateColumns="False">
+            <asp:GridView ID="GridView1" 
+                GridLines="None" 
+                cssclass="table table-striped" 
+                runat="server" 
+                AutoGenerateColumns="False">
             <Columns>
                 <asp:BoundField DataField="PONo" HeaderText="PO.No" />
                 <asp:BoundField DataField="DateReviewed"  HeaderText="Date Reviewed" DataFormatString="{0:dd MMM yyyy}"/>

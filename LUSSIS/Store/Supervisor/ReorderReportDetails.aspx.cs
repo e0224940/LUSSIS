@@ -33,34 +33,12 @@ public partial class Store_Supervisor_ReorderReportDetails : System.Web.UI.Page
             DateTime currentMthYear = DateTime.Now.AddMonths(-SNO);
             Label2.Text = "There is no Reorder Report for the month of";
             Label3.Text = currentMthYear.ToString("MMM yyyy");
-
-            //var reOrderReportDetails = ViewReorderReportController.showReorderReportDetails(SNO);
-            ////LussisEntities context = new LussisEntities();
-            ////var reOrderReportDetails = ViewReorderReportController.showReorderReportDetails(SNO, supplierSelected);
-
-            ////    Label2.Text = "Reorder Report for: ";
-            ////    Label3.Text = DateTime.Now.ToString("MMM yyyy");
-
-            //ReorderReportDetailsGridView.DataSource = reOrderReportDetails;
-            //ReorderReportDetailsGridView.DataBind();
-
         }
     }
 
     protected void ReorderReportDetailsGridView_PreRender(object sender, EventArgs e)
     {
-        //for (int rowIndex = ReorderReportDetailsGridView.Rows.Count - 2; rowIndex >= 0; rowIndex--)
-        //{
-        //    GridViewRow row = ReorderReportDetailsGridView.Rows[rowIndex];
-        //    GridViewRow previousRow = ReorderReportDetailsGridView.Rows[rowIndex + 1];
-
-        //    if (row.Cells[3].Text == previousRow.Cells[3].Text)
-        //    {
-        //        row.Cells[3].RowSpan = previousRow.Cells[0].RowSpan < 2 ? 2 :
-        //                               previousRow.Cells[3].RowSpan + 1;
-        //        previousRow.Cells[3].Visible = false;
-        //    }
-        //}
+      
     }
 
     protected void Button1_Click(object sender, EventArgs e)

@@ -33,7 +33,6 @@ namespace LUSSIS_Backend
         {
             using (LussisEntities entities = new LussisEntities())
             {
-                
                 return entities.StationeryCatalogues.Where(p => p.Description.Contains(value.Trim())).ToList();
             }
         }
@@ -44,7 +43,6 @@ namespace LUSSIS_Backend
                 return entities.RequisitionDetails.Where(p => p.ReqNo.ToString().Contains(value.Trim())).ToList();
             }
         }
-
 
         //Add data into database: requisition
         public static void RaisedRequisition(int issueBy, DateTime dateIssue, string status, List<RequisitionDetail> r)
@@ -83,7 +81,6 @@ namespace LUSSIS_Backend
                    currEmployee.Email,
                    EmailTemplate.GenerateRaisedRequisitionSubject(),
                    EmailTemplate.GenerateRaisedRequisition(currEmployee.EmpName.ToString(), req.ReqNo.ToString()));
-
             }
         }
 
@@ -117,7 +114,6 @@ namespace LUSSIS_Backend
                     {
                         //delete from database
                         entities.RequisitionDetails.Remove(ff);
-
                     }
                     Requisition req = entities.Requisitions.Where(p => p.ReqNo == reqId).FirstOrDefault<Requisition>();
                     entities.Requisitions.Remove(req);
@@ -141,8 +137,6 @@ namespace LUSSIS_Backend
         public static void UpdateItem(int requisitionNo, string itemNo,int qty)
         {
             LussisEntities entity = new LussisEntities();
-            //RequisitionDetail rrdd = new RequisitionDetail();
-            //rrdd = entity.RequisitionDetails.Where(u => u.ItemNo.Equals(itemNo)).FirstOrDefault();
             RequisitionDetail rrdd = entity.RequisitionDetails
                .Where(u => u.ReqNo == requisitionNo && u.ItemNo.Equals(itemNo))
                .FirstOrDefault();
@@ -150,9 +144,6 @@ namespace LUSSIS_Backend
             rrdd.Qty = qty;
             entity.SaveChanges();
         }
-
-     
-
     }
 }
 

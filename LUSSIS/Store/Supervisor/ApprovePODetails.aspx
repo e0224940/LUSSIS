@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
     <div class="container">            
     <asp:Label ID="listt" runat="server" Font-Bold="True" Font-Size="XX-Large" Text="Approve Pending Purchase Orders"></asp:Label>
-        <br /> <br />
+    <br /> <br />
 
     <asp:Label ID="purchaseOrderDetailsLabel" runat="server" Text="PO Number:"></asp:Label>
     <asp:Label ID="poNumberLabel" runat="server"></asp:Label>
@@ -13,9 +13,11 @@
     <asp:Label ID="supplierLabel" runat="server" Text="Supplier: "></asp:Label>
     <asp:Label ID="suppliernameLabel" runat="server"></asp:Label>
     <br /> <br />
-                          <asp:GridView ID="ApprovePODetailsGridView"
-                               cssclass="table table-striped" GridLines="None"
-             runat="server" AutoGenerateColumns="False">
+        <asp:GridView ID="ApprovePODetailsGridView"
+            cssclass="table table-striped" 
+            GridLines="None"
+            runat="server" 
+            AutoGenerateColumns="False">
                 <Columns>
                     <asp:TemplateField HeaderText="S/N">
                         <ItemTemplate>
@@ -50,7 +52,7 @@
     <asp:Button ID="approveButton" CssClass="btn btn-success" runat="server" Text="Approve" OnClick="approveButton_Click" />
     <asp:Button ID="rejectButton" CssClass="btn btn-danger" runat="server" Text="Reject" OnClick="rejectButton_Click" />
     <asp:Button ID="approvePOBackBut" CssClass="btn btn-info" runat="server" Text="Back" OnClick="approvePOBackBut_Click" />
-        </div>
+</div>
 </asp:Content>
 
 

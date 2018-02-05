@@ -16,8 +16,6 @@ public partial class Store_Manager_StoreManagerUpdate : System.Web.UI.Page
             GridView1.DataSource = context.Suppliers.ToList();
             GridView1.DataBind();
         }
-
-
     }
 
     protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
@@ -33,7 +31,6 @@ public partial class Store_Manager_StoreManagerUpdate : System.Web.UI.Page
         Supplier deleteSupplier = context.Suppliers.Where(x => x.SupplierCode == code).First();
         context.Suppliers.Remove(deleteSupplier);
         context.SaveChanges();
-
         GridView1.DataSource = context.Suppliers.ToList();
         GridView1.DataBind();
     }
@@ -55,7 +52,6 @@ public partial class Store_Manager_StoreManagerUpdate : System.Web.UI.Page
         GridView1.DataSource = context.Suppliers.ToList();
         GridView1.DataBind();
         Response.Redirect("StoreManagerUpdate.aspx");
-
     }
 
     protected void Button1_Click(object sender, EventArgs e)

@@ -11,20 +11,16 @@ public partial class Department_Representative_UpdateCollection : System.Web.UI.
     protected void Page_Load(object sender, EventArgs e)
     {
         int empno = Profile.EmpNo;
-       
         string oldPoint =  UpdateCollectionPoint.SearchLocation(empno);
-        oldLocationText.Text = oldPoint;
-        
+        oldLocationText.Text = oldPoint;       
     }
     
     protected void ChooseLocation_DDList(object sender, EventArgs e)
     {
-
         int value = Int32.Parse(NewLocationDDL.SelectedItem.Value);
         if (value == 1 )
         {
             newCollectionTimeText.Text = "9:30 AM";
-           
         }
         else if(value == 2)
         {
@@ -46,18 +42,15 @@ public partial class Department_Representative_UpdateCollection : System.Web.UI.
         {
             newCollectionTimeText.Text = "11:00 AM";  
         }
-       
         else
         {
             newCollectionTimeText.Text = "";
         }
-       
     }
 
     
     protected void confirm_Click(object sender, EventArgs e)
     {
-        
         int empNo = Profile.EmpNo;
 
         string oldLoc = UpdateCollectionPoint.SearchLocation(empNo);
@@ -70,8 +63,7 @@ public partial class Department_Representative_UpdateCollection : System.Web.UI.
             Label4.Text = "Choose New Location.";
         }
         else
-        {
-           
+        {         
             if (oldLoc != newloc)
             {
                 UpdateCollectionPoint.UpdatePoint(empNo, newPoint);
@@ -113,11 +105,6 @@ public partial class Department_Representative_UpdateCollection : System.Web.UI.
                 newCollectionTimeText.Text = "11:00 AM";
                 Label5.Text = "University Hospital";
             }
-            //else if (newPoint == 0)
-            //{
-            //    newCollectionTimeText.Text = "9:30 AM";
-            //    Label5.Text = "Management Store";
-            //}
             else
             {
                 newCollectionTimeText.Text = "";

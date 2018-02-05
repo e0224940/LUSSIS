@@ -71,14 +71,12 @@
                         <asp:TemplateField HeaderText="Quantity">
                             <ItemTemplate>
                                 <asp:TextBox ID="Quantity" runat="server" TextMode="Number" cssclass="btn-default form-control" ></asp:TextBox>
-<%--                                <asp:CompareValidator runat="server" Id="validate" ControlToValidate="Quantity" Operator="DataTypeCheck" Type="Integer" ErrorMessage="The input number has to be integer (greater than 0). "></asp:CompareValidator>--%>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:CommandField ShowSelectButton="true" />
                     </Columns>
                 </asp:gridview>
                 <asp:label id="showerrorLb" runat="server" text=""></asp:label>
-<%--                <asp:Label ID="itemcheckText" runat="server" Text="Label"></asp:Label>--%>
             </div>
             <div class="col-sm-6">
                 <asp:gridview GridLines="None" datakeynames="ItemNo" runat="server" cssclass="table table-striped" id="Cart" autogeneratecolumns="False" onrowdeleting="Cart_GridViewDelete">

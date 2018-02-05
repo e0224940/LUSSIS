@@ -99,7 +99,6 @@ namespace LUSSIS_Backend.controller
 
                 string recipientEmail = recipient.Email;
                 string emailSubject = EmailTemplate.GenerateCompletedDisbursementSubject(d.DisbursementNo);
-                //string emailContent = EmailTemplate.GenerateCompletedDisbursementEmail(recipient.EmpName, d.DisbursementNo, d.DisbursementDate, emailDetails);
                 string emailContent = EmailTemplate.GenerateCompletedDisbursementEmail(recipient.EmpName, d.DisbursementNo, d.DisbursementDate);
                 EmailBackend.sendEmailStep(recipientEmail, emailSubject, emailContent);
 

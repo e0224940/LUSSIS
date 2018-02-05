@@ -141,13 +141,6 @@ namespace LUSSIS_Backend.controller
         public static bool SubmitRetrieval(int retrievalNo, List<string> deptCodeList, List<string> itemNoList, List<int> actualList)
         {
             LussisEntities context = new LussisEntities();
-
-            //// Creating Database Transaction
-            //using (var dbcxtransaction = context.Database.BeginTransaction())
-            //{
-            //    try
-            //    {
-            // Get DisbursementDate
             DateTime today = DateTime.Today;
             int daysUntilMonday = ((int)DayOfWeek.Monday - (int)today.DayOfWeek + 7) % 7;
             DateTime disbursementDate = today.Date.AddDays(daysUntilMonday);
@@ -206,28 +199,8 @@ namespace LUSSIS_Backend.controller
             }
 
             context.SaveChanges();
-            //}
-            //                catch
-            //                {
-            //                    // Rollback Transaction
-            //                    dbcxtransaction.Rollback();
-            //                    return false;
-            //                }
-            //}
-
-            // Send Email
-
             return true;
         }
-
-
-
-
-
-
-
-
-
 
         public static Retrieval AddRetrieval(LussisEntities context, Retrieval retrieval)
         {
@@ -237,7 +210,6 @@ namespace LUSSIS_Backend.controller
         }
         public static void Clear(LussisEntities context)
         {
-            //context.spClearBacklog();
             context.SaveChanges();
         }
         public static List<Requisition> GetApprovedRequisitions(LussisEntities context)

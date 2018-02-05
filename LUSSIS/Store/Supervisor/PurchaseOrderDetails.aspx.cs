@@ -24,8 +24,6 @@ public partial class Store_Supervisor_PurchaseOrderDetails : System.Web.UI.Page
             UnitPrice = x.UnitPrice
         });
 
-        //purchaseOrderDetailsGridView.DataSource = purchaseOrderDetails;
-        //purchaseOrderDetailsGridView.DataBind();
         GridViewTest.DataSource = abc;
         GridViewTest.DataBind();
 

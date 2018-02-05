@@ -19,26 +19,10 @@ namespace LUSSIS_Backend
             return currDepartment.CollectionPoint.CollectionPointDetails;
         }
 
-        //public static void AddCollectionPoint(string newPoint)
-        //{
-        //    using (LussisEntities entities = new LussisEntities())
-        //    {
-        //        CollectionPoint point = new CollectionPoint
-        //        {
-        //            CollectionPointDetails = newPoint,
-        //        };
-        //        entities.CollectionPoints.Add(point);
-        //        entities.SaveChanges();
-        //    }
-        //}
-
         public static void UpdatePoint(int empNo, int collectionNewPoint)
         {
            
             string dayofweek = DateTime.Today.DayOfWeek.ToString();
-            //string hour = DateTime.Today.Hour.ToString();
-            //string minute = DateTime.Now.Minute.ToString();
-
 
             if (dayofweek != "Saturday" || dayofweek != "Sunday")
             {
@@ -64,6 +48,5 @@ namespace LUSSIS_Backend
                     );
             }
         }
-
     }
 }

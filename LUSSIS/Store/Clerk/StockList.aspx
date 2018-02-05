@@ -16,12 +16,10 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <div>
-
                     <div class="row">
                         <div class="form-inline">
                         <asp:Label ID="lbl" runat="server" Text="Select Bin"></asp:Label>    
                         <asp:DropDownList ID="BinDropDownList" CssClass="btn btn-default dropdown-toggle" runat="server" OnSelectedIndexChanged="BinDropDownList_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
-                    
                         </div>
                     <br />
                         </div>
@@ -33,20 +31,13 @@
 
                     <div class="row">
                         <div class="form-inline">
-                           
                         <asp:Label ID="Label1" runat="server" Text="Search"></asp:Label>
-                              
-                                
                         <asp:TextBox ID="SearchTextBox" CssClass="btn-default form-control" runat="server" Placeholder="Search"></asp:TextBox>
-                        
-                           
                         <asp:Button ID="SearchButton" CssClass="btn btn-primary" runat="server" Text="Search" OnClick="SearchButton_Click" />
-                
                             </div>
                         </div>
 
                     <div class="row">
-
                         <% if (Session["Error"] != null)
                             { %>
                         <div class="alert alert-danger">

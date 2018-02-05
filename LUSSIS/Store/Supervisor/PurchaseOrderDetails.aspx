@@ -30,30 +30,6 @@
         </Columns>
     </asp:GridView>
 
-<%--    <asp:GridView ID="purchaseOrderDetailsGridView" runat="server" AutoGenerateColumns="False">
-                <Columns>
-                    <asp:TemplateField HeaderText="Item No." >
-                        <ItemTemplate>
-                            <asp:Label ID="itemNoText" runat="server" Text='<%# Eval("ItemNo") %>' ></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Description" >
-                        <ItemTemplate>
-                            <asp:Label ID="descriptionText" runat="server" Text='<%# Eval("Description") %>' ></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Quantity" >
-                        <ItemTemplate>
-                            <asp:Label ID="quantityText" runat="server" Text='<%# Eval("Qty") %>' ></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Price" >
-                        <ItemTemplate>
-                            <asp:Label ID="priceText" runat="server" Text='<%# Eval("UnitPrice") %>' ></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                </Columns>
-            </asp:GridView>--%>
     <br />
     <asp:Label ID="orderByLabel" runat="server" Text="Ordered by: "></asp:Label>
     <asp:Label ID="orderedByLabel" runat="server" Text="Label"></asp:Label>

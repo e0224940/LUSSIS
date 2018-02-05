@@ -79,7 +79,6 @@ public partial class Department_Employee_RequisitionDetailsView : System.Web.UI.
             foreach (RequisitionDetail r in reqHistory)
             {
                 Detail d = new Detail();
-
                 d.itemNo = r.ItemNo;
                 d.reqNo = r.ReqNo;
                 d.quantity = r.Qty;
@@ -118,12 +117,5 @@ public partial class Department_Employee_RequisitionDetailsView : System.Web.UI.
     {
         GridViewForDetail.EditIndex = -1;
         BindGrid();
-    }
-
-
-
-    protected void GridViewForDetail_RowCommand(object sender, GridViewCommandEventArgs e)
-    {
-
     }
 }

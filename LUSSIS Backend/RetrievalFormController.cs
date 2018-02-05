@@ -77,7 +77,6 @@ namespace LUSSIS_Backend
                 result = item.CurrentQty >= qty;
             }
 
-
             return result;
         }
 
@@ -94,7 +93,6 @@ namespace LUSSIS_Backend
             {
                 result = item.CurrentQty.Value;
             }
-
 
             return result;
         }

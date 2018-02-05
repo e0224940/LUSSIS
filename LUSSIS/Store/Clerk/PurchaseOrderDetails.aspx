@@ -40,7 +40,6 @@
                 OnRowUpdating="OnRowUpdating">
 
                 <Columns>
-
                     <asp:TemplateField HeaderText="Item No">
                         <ItemTemplate>
                             <asp:Label ID="LabelItemNo" runat="server" Text='<%# Bind("ItemNo") %>' />

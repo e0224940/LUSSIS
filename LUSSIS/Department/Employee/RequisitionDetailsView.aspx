@@ -47,7 +47,7 @@
                     OnRowUpdating="OnRowUpdating"
                     OnRowDeleting="detailGrid_Delete"
                     OnRowEditing="detailGrid_Edit"
-                    OnRowCommand="GridViewForDetail_RowCommand">
+                   >
                     <Columns>
                         <asp:TemplateField HeaderText="Item No" SortExpression="ItemNo">
                             <ItemTemplate>

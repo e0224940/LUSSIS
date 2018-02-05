@@ -147,10 +147,6 @@ public partial class Department_Employee_AddItemPage : System.Web.UI.Page
     }
     protected void Delete_Click(object sender, EventArgs e)
     {
-        //Session.Remove("session");
-        //Cart.Visible = false;
-        //Confirm.Visible = false;
-        //Delete.Visible = false;
         Response.Redirect("AddItemPage.aspx");
     }
 }

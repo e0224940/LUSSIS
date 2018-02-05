@@ -15,7 +15,8 @@ public partial class Store_Supervisor_GenerateReorderTrend : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
-        {         //populate ItemsInCatalogueListBox
+        {   
+            //populate ItemsInCatalogueListBox
             var populateItemsInCatalogueListBox = context.StationeryCatalogues.Select(x => x.Description).ToList();
             ItemsInCatalogueListBox.DataSource = populateItemsInCatalogueListBox;
             ItemsInCatalogueListBox.DataBind();
@@ -58,7 +59,7 @@ protected void toLB2_Click(object sender, EventArgs e)
             ItemsInCatalogueListBox.SelectedIndex = -1;
             SelectedItemsListBox.SelectedIndex = -1;
 
-                selectedCategoryListBox.Items.Clear();
+            selectedCategoryListBox.Items.Clear();
             GridView1.DataSource = null;
             GridView1.DataBind();
         }
@@ -187,13 +188,8 @@ protected void toLB2_Click(object sender, EventArgs e)
                 //generate the report
                 GridView1.DataSource = reportList;
                 GridView1.DataBind();
-
-                //GridView2.DataSource = reportList;
-                //GridView2.DataBind();
             }
-
         }
-
     }
 
     public List<ReorderTrendView> getReportCat(List<string> catList, String supplierSelect, DateTime startDate, DateTime endDate)
@@ -209,8 +205,6 @@ protected void toLB2_Click(object sender, EventArgs e)
     .Where(x => x.SupplierName == supplierSelect)
     .Where(x => x.Category == catName)
     .ToList();
-
-
 
             //add items in list[i] into a bigger list to bind to gridview
             for (int x = 0; x < cat.Count; x++)
@@ -322,7 +316,6 @@ protected void toLB2_Click(object sender, EventArgs e)
                     };
                 }
             }
-
         }
 
         // Fill in the missing Months in between
@@ -378,8 +371,6 @@ protected void toLB2_Click(object sender, EventArgs e)
                     };
                 }
             }
-
-
         }
 
         //create series for chart + add points
@@ -389,15 +380,16 @@ protected void toLB2_Click(object sender, EventArgs e)
         string seriesName = itemList;
         Series newSeries = new Series(itemList);
         Chart1.Series.Add(seriesName);
+
         //series parameters
         Chart1.Series[seriesName].ChartType = SeriesChartType.Column;
         Chart1.Series[seriesName].IsValueShownAsLabel = true;
         chart.Series[seriesName].LabelFormat = "##0;(); ";
-        //chart.Series[0].LabelFormat = "$#,##0.00;($#,##0.00); ";
-        //chart.Series[0].LabelFormat = "##0;(); ";
+
         //Legend parameters
         Chart1.Legends.Add(new Legend());
         Chart1.Legends["Legend1"].Docking = Docking.Bottom;
+
         //chartarea parameters
         Chart1.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
         Chart1.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
@@ -405,12 +397,10 @@ protected void toLB2_Click(object sender, EventArgs e)
         Chart1.ChartAreas["ChartArea1"].AxisY.Title = "Quantity";
         Chart1.ChartAreas["ChartArea1"].AxisX.IntervalType = DateTimeIntervalType.Auto;
         Chart1.ChartAreas["ChartArea1"].AxisX.Interval = 1;
-        //Chart1.Series[seriesName].BorderWidth = 5;
 
         for (int y = 0; y < listOfPO2.Count(); y++)
         {
             Chart1.Series[seriesName].Points.AddXY(listOfPO2.ElementAt(y).Date, listOfPO2.ElementAt(y).Qty);
-
         }
 
         //remove legend for 0 datapoints
@@ -422,7 +412,6 @@ protected void toLB2_Click(object sender, EventArgs e)
                 for (int i = 0; i < p.YValues.Length; i++)
                 {
                     if (p.YValues[i] == 0)
-                        //p.Label = string.Empty;
                         p.Label = "";
                     else
                         isAllValuesZero = false;
@@ -440,10 +429,6 @@ protected void toLB2_Click(object sender, EventArgs e)
             Label4.Text = "";
         }
     }
-
-
-        //GridView2.DataSource = listOfPO2;
-        //GridView2.DataBind();
 
     private void addItemSeriesToChartCat(Chart chart, string catList, String supplierSelect, DateTime startDate, DateTime endDate)
     {
@@ -505,7 +490,6 @@ protected void toLB2_Click(object sender, EventArgs e)
                     };
                 }
             }
-
         }
 
         // Fill in the missing Months in between
@@ -564,8 +548,6 @@ protected void toLB2_Click(object sender, EventArgs e)
                     };
                 }
             }
-            
-
         }
 
         //create series for chart + add points
@@ -575,15 +557,16 @@ protected void toLB2_Click(object sender, EventArgs e)
         string seriesName = catList;
         Series newSeries = new Series(catList);
         Chart1.Series.Add(seriesName);
+
         //series parameters
         Chart1.Series[seriesName].ChartType = SeriesChartType.Column;
         Chart1.Series[seriesName].IsValueShownAsLabel = true;
         chart.Series[seriesName].LabelFormat = "##0;(); ";
-        //chart.Series[0].LabelFormat = "$#,##0.00;($#,##0.00); ";
-        //chart.Series[0].LabelFormat = "##0;(); ";
+
         //Legend parameters
         Chart1.Legends.Add(new Legend());
         Chart1.Legends["Legend1"].Docking = Docking.Bottom;
+
         //chartarea parameters
         Chart1.ChartAreas["ChartArea1"].AxisX.MajorGrid.Enabled = false;
         Chart1.ChartAreas["ChartArea1"].AxisY.MajorGrid.Enabled = false;
@@ -591,12 +574,10 @@ protected void toLB2_Click(object sender, EventArgs e)
         Chart1.ChartAreas["ChartArea1"].AxisY.Title = "Quantity";
         Chart1.ChartAreas["ChartArea1"].AxisX.IntervalType = DateTimeIntervalType.Auto;
         Chart1.ChartAreas["ChartArea1"].AxisX.Interval = 1;
-        //Chart1.Series[seriesName].BorderWidth = 5;
 
         for (int y = 0; y < listOfPO2.Count(); y++)
         {
             Chart1.Series[seriesName].Points.AddXY(listOfPO2.ElementAt(y).Date, listOfPO2.ElementAt(y).Qty);
-
         }
 
         //remove legend for 0 datapoints
@@ -608,7 +589,6 @@ protected void toLB2_Click(object sender, EventArgs e)
                 for (int i = 0; i < p.YValues.Length; i++)
                 {
                     if (p.YValues[i] == 0)
-                        //p.Label = string.Empty;
                         p.Label = "";
                     else
                         isAllValuesZero = false;
@@ -625,8 +605,6 @@ protected void toLB2_Click(object sender, EventArgs e)
         {
             Label4.Text = "";
         }
-        //GridView2.DataSource = listOfPO2;
-        //GridView2.DataBind();
     }
 
 

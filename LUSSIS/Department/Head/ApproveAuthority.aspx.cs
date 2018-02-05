@@ -15,7 +15,6 @@ public partial class Department_Head_ApproveAuthority : System.Web.UI.Page
         if (!IsPostBack)
         {
             //get current Acting Head and print on webpage
-            //deputyHead = getDeputyHeadOfDepartment(getDepartmentNoFromProfile(Profile.EmpNo));
             Employee deputyHead = ApproveAuthorityController.getDeputyHeadOfDepartment(ApproveAuthorityController.getDepartmentNoFromProfile(Profile.EmpNo));
             Employee me = ApproveAuthorityController.getHeadOfDepartment(ApproveAuthorityController.getDepartmentNoFromProfile(Profile.EmpNo));
             txtBox_appAuth_currentHead.Text = deputyHead.EmpName;
@@ -45,14 +44,6 @@ public partial class Department_Head_ApproveAuthority : System.Web.UI.Page
                 txtbox_dateEnd.Text = DateTime.Now.ToString("yyyy-MM-dd");
             }
 
-            //if (deputyHead.EmpNo.Equals(Profile.EmpNo))
-            //{
-            //    button_appAuth_remove.Enabled = false;
-            //}
-            //else
-            //{
-            //    button_appAuth_remove.Enabled = true;
-            //}
             button_appAuth_remove.Enabled = false;
             lbl_currentFutureAppts.Visible = false;
 
@@ -91,45 +82,6 @@ public partial class Department_Head_ApproveAuthority : System.Web.UI.Page
         button_appAuth_remove.Enabled = true;
 
         BindGrid();
-
-        //try
-        //{
-        //    if (ApproveAuthorityController.getDeputyDetailsForDept(ApproveAuthorityController.getDepartmentNoFromProfile(Profile.EmpNo)) != null)
-        //    {
-        //        //collecting data from view
-        //        string empName = ddl_appAuth_deptEmps.SelectedItem.Value;
-        //        int empNo = ApproveAuthorityController.getEmpNoFromEmpName(empName);
-        //        DateTime dateStart = Convert.ToDateTime(txtbox_dateStart.Text);
-        //        DateTime dateEnd = Convert.ToDateTime(txtbox_dateEnd.Text);
-        ////        string deptCode = ApproveAuthorityController.getDepartmentNoFromProfile(Profile.EmpNo);
-
-        //        //remove authority 
-        //        if (ApproveAuthorityController.getDeputyHeadOfDepartment(deptCode).EmpNo != Profile.EmpNo)
-        //        {
-        //            ApproveAuthorityController.removeAuthority(Profile.EmpNo, deptCode, ApproveAuthorityController.getDeputyHeadOfDepartment(deptCode).EmpNo);
-        //        }
-
-        //        //add authority
-        //        if (ApproveAuthorityController.getDeputyDetailsForDept(ApproveAuthorityController.getDepartmentNoFromProfile(Profile.EmpNo)).Count == 0)
-        //        {
-        //            string newAuthorityName = ApproveAuthorityController.addAuthority(deptCode, empNo, dateStart, dateEnd);    //getting new name from method
-        //            Employee deputyHead = ApproveAuthorityController.getDeputyHeadOfDepartment(ApproveAuthorityController.getDepartmentNoFromProfile(Profile.EmpNo));
-        //            txtBox_appAuth_currentHead.Text = deputyHead.EmpName;
-        //            if (dateStart.Equals(DateTime.Today))
-        //            {
-        //                button_appAuth_remove.Enabled = true;
-        //            }
-
-        //            //lbl_currentFutureAppts.Visible = true;
-        //        }
-        //    }
-        //}
-        //catch (Exception exp)
-        //{
-        //    Session["Error"]="Only one delegation of authority is allowed. Please try again.";
-        //}
-
-        //BindGrid();
     }
 
     protected void button_appAuth_remove_Click(object sender, EventArgs e)
@@ -153,48 +105,7 @@ public partial class Department_Head_ApproveAuthority : System.Web.UI.Page
         txtbox_dateEnd.Attributes["min"] = txtbox_dateStart.Text;
     }
 
-    //protected void OnRowEditing(object sender, GridViewEditEventArgs e)
-    //{
-    //    gridView_AppAuthCurrFutAppts.EditIndex = e.NewEditIndex;
-    //    gridView_AppAuthCurrFutAppts.DataBind();
-    //}
-
-    //protected void OnRowUpdating(object sender, GridViewUpdateEventArgs e)
-    //{
-    //    // Get selected row
-    //    GridViewRow row = gridView_AppAuthCurrFutAppts.Rows[e.RowIndex];
-
-    //    try
-    //    {
-    //        Deputy d = (Deputy)row.DataItem;
-    //        ApproveAuthorityController.UpdateDeputy(d);
-    //        gridView_AppAuthCurrFutAppts.EditIndex = -1;
-    //        gridView_AppAuthCurrFutAppts.DataBind();
-    //    }
-    //    catch (Exception exception)
-    //    {
-    //        Session["Error"] = "An Error Has Occured: " + exception.Message;
-    //    }
-    //}
-
-    //protected void OnRowCancelingEdit(object sender, EventArgs e)
-    //{
-    //    gridView_AppAuthCurrFutAppts.EditIndex = -1;
-    //    gridView_AppAuthCurrFutAppts.DataBind();
-    //}
-
-
-    //protected void OnRowDeleting(object sender, GridViewDeleteEventArgs e)
-    //{
-    //    GridViewRow row = gridView_AppAuthCurrFutAppts.Rows[e.RowIndex];
-    //    string deptCode = (row.FindControl("LabelDeptCode") as Label).Text;
-    //    int deputyEmpNo = Convert.ToInt32((row.FindControl("LabelDepEmpNo") as Label).Text);
-    //    //ApproveAuthorityController.removeDeputy(deptCode,deputyEmpNo);
-    //    ApproveAuthorityController.removeAuthority(Profile.EmpNo, deptCode, deputyEmpNo);
-    //    button_appAuth_remove.Enabled = false;
-    //    BindGrid();
-    //}
-
+   
     private void BindGrid()
     {
         // Get PODetails
@@ -220,7 +131,5 @@ public partial class Department_Head_ApproveAuthority : System.Web.UI.Page
             lbl_currentFutureAppts.Visible = false;
             gridView_AppAuthCurrFutAppts.Visible = false;
         }
-
     }
-
 }

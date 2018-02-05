@@ -253,7 +253,6 @@ public partial class _Default : System.Web.UI.Page
 
                     // Check if sum is greater than stock cart value
                     result = RetrievalFormController.IsThereEnoughItemsInStock(sum, itemNo);
-
                     break;
                 }
             }

@@ -116,7 +116,6 @@ namespace LUSSIS_Backend.controller
         }
 
         // PRIVATE METHODS
-
         private static int? GetOrderQty(string itemNo, List<AdjustmentVoucher> aVList, List<PurchaseOrder> pOList)
         {
             // Find Stock

@@ -29,7 +29,6 @@
          <div class="col-xs-2">  
     <asp:DropDownList ID="NewLocationDDL" runat="server" CssClass="btn btn-default dropdown-toggle" OnSelectedIndexChanged="ChooseLocation_DDList" AutoPostBack="true">
         <asp:ListItem Value="-1">Choose New Location</asp:ListItem>
-<%--        <asp:ListItem Value="0">Management Store</asp:ListItem>--%>
         <asp:ListItem Value="1">Stationery Store - Administration Building</asp:ListItem>
         <asp:ListItem Value="2">Management School</asp:ListItem>
         <asp:ListItem Value="3">Medical School</asp:ListItem>

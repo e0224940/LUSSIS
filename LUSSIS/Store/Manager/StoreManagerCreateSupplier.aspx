@@ -14,15 +14,9 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
-   <%-- <form id="form1"></form>--%>
-   <%-- <div class="form-group"></div>--%>
-
-
 
     <div class="container">
         <div class="row">
-
-
             <div class="col-xs-9">
                 <asp:Label ID="Label1" runat="server" Text="Create New Supplier" Font-Bold="True" Font-Size="Large"></asp:Label>
                 <br />
@@ -130,9 +124,6 @@
                         <td></td>
 
                     </tr>
-
-
-
                 </table>
 
                 <% if (Session["SupplierProcessed"] != null)

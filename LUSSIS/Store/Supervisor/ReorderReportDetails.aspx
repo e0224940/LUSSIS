@@ -3,11 +3,16 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
-        <div class="container">
+    <div class="container">
     <asp:Label ID="Label2" font-size="Medium" runat="server"></asp:Label>
     <asp:Label ID="Label3" runat="server" font-size="Large"></asp:Label>
     <br /> <br />
-                      <asp:GridView ID="ReorderReportDetailsGridView" GridLines="None" cssclass="table table-striped"  runat="server" AutoGenerateColumns="False" OnPreRender="ReorderReportDetailsGridView_PreRender">
+                <asp:GridView ID="ReorderReportDetailsGridView" 
+                    GridLines="None" 
+                    cssclass="table table-striped"  
+                    runat="server" 
+                    AutoGenerateColumns="False" 
+                    OnPreRender="ReorderReportDetailsGridView_PreRender">
                 <Columns>
                     <asp:TemplateField HeaderText="S/N">
                         <ItemTemplate>

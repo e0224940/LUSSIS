@@ -22,8 +22,6 @@ public partial class Store_Supervisor_ApproveInventoryAdjustmentDetails : System
         dateRaisedText.Text = dateRaised.ToString("dd-MMM-yyyy");
         ApproveInventoryAdjustmentDetailsGridView.DataSource = getIAVDetails;
         ApproveInventoryAdjustmentDetailsGridView.DataBind();
-
-
     }
 
     protected void approveAdjustmentButton_Click(object sender, EventArgs e)
@@ -31,7 +29,6 @@ public partial class Store_Supervisor_ApproveInventoryAdjustmentDetails : System
         int iAV = Convert.ToInt32(Request["IAV"]);
         int empNo = Profile.EmpNo;
 
-        
         ApproveInventoryAdjustmentController.setStatusApprove(iAV);
         ApproveInventoryAdjustmentController.setApprovedBy(iAV, empNo);
         updateStockTxn();
@@ -57,7 +54,6 @@ public partial class Store_Supervisor_ApproveInventoryAdjustmentDetails : System
         ApproveInventoryAdjustmentController.setStatusReject(iAV);
         ApproveInventoryAdjustmentController.setApprovedBy(iAV, empNo);
         
-
         //send Email, will need to put in controller
         LussisEntities entity = new LussisEntities();
         AdjustmentVoucher currentAV = entity.AdjustmentVouchers.Where(x => x.AvNo == iAV).FirstOrDefault();
@@ -76,7 +72,6 @@ public partial class Store_Supervisor_ApproveInventoryAdjustmentDetails : System
         int iAV = Convert.ToInt32(Request["IAV"]);
         LussisEntities context = new LussisEntities();
         var getQty = context.AdjustmentVoucherDetails.Where(x => x.AvNo == iAV).FirstOrDefault().StationeryCatalogue.CurrentQty;
-
     }
 
     public void updateStockTxn()
@@ -120,8 +115,6 @@ public partial class Store_Supervisor_ApproveInventoryAdjustmentDetails : System
             ApproveInventoryAdjustmentController.updateStationeryCatalogue(itemNoText, qtyAmt);
         }
     }
-
-
 
     protected void approveAVBackBut_Click(object sender, EventArgs e)
     {

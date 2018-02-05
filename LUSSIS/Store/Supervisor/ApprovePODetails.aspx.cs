@@ -47,9 +47,7 @@ public partial class Store_Supervisor_ApprovePODetails : System.Web.UI.Page
             EmailTemplate.GeneratePOStatusChangedEmailSubject(poNO.ToString(), currentPO.Status),
             EmailTemplate.GeneratePOStatusChangedEmail(recpt.EmpName, poNO.ToString(), approver.EmpName, currentPO.Status, currentPO.Remarks));
         
-        
         Response.Redirect("~/Store/Supervisor/ApprovePOList.aspx");
-
     }
 
     //reject button

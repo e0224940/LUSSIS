@@ -36,7 +36,6 @@ public partial class Store_Manager_StoreManagerCreateSupplier : System.Web.UI.Pa
         databaseObject.Suppliers.Add(supplierObj);
         databaseObject.SaveChanges();
 
-        //Response.Write("<script type=\"text/javascript\">alert('New supplier added successfully!');</script>");
         Session["SupplierProcessed"] = code;
         Response.Redirect("StoreManagerUpdate.aspx");
 

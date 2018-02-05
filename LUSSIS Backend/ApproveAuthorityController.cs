@@ -9,7 +9,6 @@ namespace LUSSIS_Backend
 {
     public class ApproveAuthorityController
     {
-
         public static Employee getDeputyHeadOfDepartment(String deptCode)
         {
             using (LussisEntities context = new LussisEntities())
@@ -35,7 +34,6 @@ namespace LUSSIS_Backend
             Department d = context.Departments.Where(c => c.DeptCode.Equals(deptCode)).FirstOrDefault();
             int headEmpNo = Convert.ToInt32(d.HeadEmpNo);
             Employee emp = context.Employees.Where(x => x.EmpNo.Equals(headEmpNo)).FirstOrDefault();
-
             return emp;
         }
 
@@ -81,12 +79,10 @@ namespace LUSSIS_Backend
                 Employee dep = context.Employees.Where(x => x.EmpName.Equals(empName)).First();
                 return dep.EmpNo;
             }
-
         }
 
         public static void removeAuthority(int profileEmpNo, string deptCode, int outgoingEmpNo)
         {
-
             string recipientEmail;
             string recipientName;
             string deptName;
@@ -140,7 +136,6 @@ namespace LUSSIS_Backend
 
                 deptName = dept.DeptName;       //for email
 
-
                 if (start.CompareTo(DateTime.Today)==0)
                 {
                     dept.DeputyEmpNo = empNo;
@@ -173,8 +168,6 @@ namespace LUSSIS_Backend
         public static void removeDeputy(string depCode, int depEmpNo)
         {
             LussisEntities context = new LussisEntities();
-
-            //int depEmpNo = context.Employees.Where(x => x.EmpName.Equals(depEmpName)).First().EmpNo;
             Deputy removeDep = context.Deputies.Where(x => x.DeptCode.Equals(depCode)).First();
             context.Deputies.Remove(removeDep);
             context.SaveChanges();

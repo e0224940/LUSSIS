@@ -3,13 +3,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" Runat="Server">
-            <div class="container">
+    <div class="container">
         <asp:Label ID="approve" runat="server" Font-Bold="True" Font-Size="XX-Large" Text="Approve Purchase Order"></asp:Label>
         <br />
         <br />
         <asp:Label ID="pending" runat="server" Font-Bold="True" Font-Size="X-Large" Text="Pending Orders List"></asp:Label>
         <br />
-                <asp:Label ID="justApprovedLabel" runat="server" forecolor="ForestGreen"></asp:Label>
+        <asp:Label ID="justApprovedLabel" runat="server" forecolor="ForestGreen"></asp:Label>
         <asp:GridView ID="ApprovePOListGridView" 
             runat="server" 
             cssclass="table table-striped" 

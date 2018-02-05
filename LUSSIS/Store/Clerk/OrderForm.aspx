@@ -14,8 +14,6 @@
             </div>
         </div>
 
-
-
         <% if (Session["OProcessed"] == null)
             {  %>
 
@@ -23,7 +21,6 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <div>
-
                     <div class="row">
                         <% if (Session["Error"] != null)
                             { %>
@@ -152,7 +149,6 @@
         <asp:UpdatePanel ID="SupplierUpdatePanel" runat="server">
             <ContentTemplate>
                 <div>
-
                     <div class="row">
                         <asp:DropDownList ID="SupplierDropDownList" CssClass="btn btn-default dropdown-toggle" runat="server" OnSelectedIndexChanged="SupplierDropDownList_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                     </div>
@@ -175,7 +171,6 @@
                             </tr>
                         </table>
                     </div>
-
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
@@ -183,7 +178,6 @@
         <% }
             else
             { %>
-
         <div class="row">
             <div class="alert alert-success">
                 Order Sent for Approval.
